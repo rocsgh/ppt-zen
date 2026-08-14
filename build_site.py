@@ -23,21 +23,21 @@ IMG = os.path.join(DOCS, "img")
 BASE_URL = "https://pptzen.xyz"
 GH = "https://github.com/rocsgh/ppt-zen"
 
-SWITCHER = ["swiss-grid", "ink-wash", "stele-rubbing", "artdeco-gold", "blue-white-porcelain", "papercraft"]
-FEATURED = ["portolan", "cinema-wongkarwai", "davinci-copperplate", "swiss-grid",
-            "stele-rubbing", "kintsugi", "celestial-gold", "cinema-wesanderson"]
+SWITCHER = ["davinci-copperplate", "ink-wash", "stele-rubbing", "cinema-nolan", "kintsugi", "papercraft"]
+FEATURED = ["davinci-copperplate", "portolan", "cinema-wongkarwai", "cinema-nolan",
+            "cinema-wesanderson", "kintsugi", "stele-rubbing", "swiss-grid"]
 
-RB_PAGES = [  # slide file, role, density, device, text shown
- ("01-cover", "cover", "HEADLINE", "signal node, concentric rings", "Relayboard — Async standup that respects deep work."),
- ("02-problem", "problem", "HEADLINE", "a focus line that shatters", "Standups interrupt the people doing the work."),
- ("03-cost", "cost", "HEADLINE", "giant numeral + hourglass", "23 min to refocus after a single interruption."),
- ("04-product", "product", "HEADLINE", "a tile catching a signal", "The standup comes to you."),
- ("05-how", "how", "DETAIL", "three connected nodes", "1 Post async · 2 Blockers surface · 3 Only who's needed syncs"),
- ("06-traction", "traction", "DETAIL", "a rising line", "340 teams · $28k MRR · +22% MoM"),
- ("07-pricing", "pricing", "DETAIL", "three ascending blocks", "Free · Team $6/seat · Scale $12/seat"),
- ("08-competition", "competition", "DETAIL", "2×2 quadrant, one dot", "sync↔async · heavy↔lightweight"),
- ("09-roadmap", "roadmap", "DETAIL", "timeline, three milestones", "Now · Q3 · Q4"),
- ("10-ask", "ask", "HEADLINE", "an arrow to the horizon", "Raising $1.5M to give every team its focus back."),
+RB_PAGES = [  # slide file, role, density, device (portolan edition), text shown
+ ("01-cover", "cover", "HEADLINE", "a fleet departing toward a marked destination", "Relayboard — Async standup that respects deep work."),
+ ("02-problem", "problem", "HEADLINE", "a voyage route that snaps mid-sea", "Standups interrupt the people doing the work."),
+ ("03-cost", "cost", "HEADLINE", "giant numeral + navigator's dividers", "23 min to refocus after a single interruption."),
+ ("04-product", "product", "HEADLINE", "a courier boat drawing alongside", "The standup comes to you."),
+ ("05-how", "how", "DETAIL", "three islands on one dotted route", "1 Post async · 2 Blockers surface · 3 Only who's needed syncs"),
+ ("06-traction", "traction", "DETAIL", "a fleet climbing a rising sea-lane", "340 teams · $28k MRR · +22% MoM"),
+ ("07-pricing", "pricing", "DETAIL", "three ships of ascending size", "Free · Team $6/seat · Scale $12/seat"),
+ ("08-competition", "competition", "DETAIL", "2×2 chart quadrant, one red dot", "sync↔async · heavy↔lightweight"),
+ ("09-roadmap", "roadmap", "DETAIL", "a coastline route, three harbors", "Now · Q3 · Q4"),
+ ("10-ask", "ask", "HEADLINE", "one red route to the sunrise", "Raising $1.5M to give every team its focus back."),
 ]
 
 
@@ -153,7 +153,7 @@ p code,li code,td code{background:#ecead g}
 .hero-cta{display:flex;gap:10px;flex-wrap:wrap}
 .switcher .stage{border-radius:14px;overflow:hidden;border:1px solid var(--line2);background:var(--panel);
  box-shadow:0 2px 0 rgb(20 18 15/.03),0 26px 56px -26px rgb(20 18 15/.5)}
-.switcher .stage img{width:100%;aspect-ratio:16/10;object-fit:cover;display:block}
+.switcher .stage img{width:100%;aspect-ratio:16/9;object-fit:cover;display:block}
 .chips{display:flex;gap:7px;flex-wrap:wrap;margin-top:12px}
 .chips button{font:.74rem/1 var(--mono);letter-spacing:.03em;border:1px solid var(--line2);background:var(--panel);
  color:var(--ink2);border-radius:99px;padding:9px 13px;cursor:pointer;min-height:34px;transition:all .15s}
@@ -350,9 +350,9 @@ def page_home(packs):
 <div class="hero-cta"><a class="btn solid" href="install.html">Install</a><a class="btn" href="example.html">See a real deck</a></div>
 </div>
 <div class="switcher">
-<div class="stage"><img id="swimg" src="img/%s.jpg" alt="The same sentence rendered in different materials"/></div>
+<div class="stage"><img id="swimg" src="img/%s.jpg" alt="The same idea rendered in different materials"/></div>
 <div class="chips" id="swchips">%s</div>
-<div class="cap kick">The same sentence &mdash; pick a material. This is the whole idea.</div>
+<div class="cap kick">The same idea &mdash; pick a material. Each one is a different world.</div>
 </div>
 </section>
 %s
@@ -423,30 +423,37 @@ def page_method():
 def page_example():
     rows = []
     for f, role, dens, dev, tx in RB_PAGES:
-        rows.append(("""<div class="rb"><img loading="lazy" src="img/rb/%s.jpg" alt="%s"/>
+        rows.append(("""<div class="rb"><img loading="lazy" src="img/rbp/%s.jpg" alt="%s"/>
 <div class="meta"><span class="d%s">%s</span><b>%s</b><p>device: %s</p><div class="tx">%s</div></div></div>""") % (
             f, html.escape(role), " hd" if dens == "HEADLINE" else "", dens, html.escape(role), html.escape(dev), html.escape(tx)))
+    dark = "".join('<img loading="lazy" src="img/rb/%s.jpg" alt=""/>' % f
+                   for f, *_ in [RB_PAGES[0], RB_PAGES[2], RB_PAGES[6], RB_PAGES[9]])
     inner = ("""<div class="wrap">
 <section class="hero" style="display:block;padding-bottom:0">
 <div class="kick">Worked example &middot; fictional product, invented demo numbers</div>
 <h1 style="font-size:clamp(2.2rem,5vw,3.4rem);letter-spacing:-.035em;line-height:1.02;margin:12px 0 0">Relayboard —<br/>ten pages, one sentence.</h1>
 <p class="lede" style="max-width:62ch;font-size:1.1rem;color:var(--ink2);margin-top:16px">
-<b>In:</b> "Make me a 10-page pitch deck for Relayboard, an async-standup tool, in one premium dark-editorial material."
-<b>Out:</b> the pages below. The labels are the judgment log — the part you can't screenshot.
-Notice the rhythm: headline &rarr; a dense evidence block &rarr; one line to land on. Every number is rendered inside the image and comes out clean.</p>
+<b>In:</b> "Make me a 10-page pitch deck for Relayboard, an async-standup tool, in the Portolan sea-chart style."
+<b>Out:</b> the pages below — a growth story told as a voyage across a 16th-century chart.
+The labels are the judgment log, the part you can't screenshot. Notice the rhythm: headline &rarr; a dense
+evidence block &rarr; one line to land on. Every number is rendered inside the image and comes out clean.</p>
 </section>
 <section class="sec" style="border-top:none;margin-top:36px;padding-top:0">%s</section>
+<section class="sec"><div class="shead"><span class="num">&#8646;</span><h2>Same judgment, another world</h2></div>
+<p class="lede">The identical ten pages rendered in a premium dark-editorial material — the plan, densities and text
+didn't change; only the material did. That swap is the whole product.</p>
+<div class="strip">%s</div></section>
 <section class="sec"><div class="shead"><span class="num">&#8594;</span><h2>Reproduce it</h2></div>
-<p class="lede">The exact prompts live in <a href="https://github.com/rocsgh/ppt-zen/tree/master/examples/relayboard" style="text-decoration:underline">examples/relayboard/</a> — material + device + verbatim text + the anti-garble tail, then assembled with one command.</p>
-<pre>cd examples/relayboard
-cp ../../.env.example .env      # your image model key
-python3 gen.py                  # 10 pages -> slides/
+<p class="lede">The exact prompts live in <a href="https://github.com/rocsgh/ppt-zen/tree/master/examples" style="text-decoration:underline">examples/</a> (both editions) — material + device + verbatim text + the anti-garble tail, then assembled with one command.</p>
+<pre>cd examples/relayboard-portolan          # or examples/relayboard (dark edition)
+cp ../../.env.example .env               # your image model key
+python3 gen.py                           # 10 pages -> slides/
 python3 ../../scripts/assemble_pptx.py slides deck.pptx</pre>
 <p style="margin-top:14px"><i>Relayboard is fictional; every metric is invented demo content. In real use the skill never invents facts — unknowns become [TO CONFIRM] placeholders.</i></p>
-</section></div>""") % "".join(rows)
+</section></div>""") % ("".join(rows), dark)
     return shell("Example — a 10-page deck with its judgment log · PPT-Zen",
                  "A complete worked deck: ten full-image pages from one sentence, with the per-page judgment log (density, device, exact text).",
-                 "example.html", "rb/01-cover.jpg", inner, active="example")
+                 "example.html", "rbp/01-cover.jpg", inner, active="example")
 
 
 def page_gallery(packs):
@@ -572,11 +579,12 @@ def build():
         src = os.path.join(p["_dir"], samp)
         if os.path.exists(src):
             shutil.copyfile(src, os.path.join(IMG, p["slug"] + ".jpg"))
-    # sync example slides
-    rb = os.path.join(IMG, "rb")
-    os.makedirs(rb, exist_ok=True)
-    for f in glob.glob(os.path.join(ROOT, "examples", "relayboard", "slides", "*.jpg")):
-        shutil.copyfile(f, os.path.join(rb, os.path.basename(f)))
+    # sync example slides (both editions)
+    for sub, dirname in (("rb", "relayboard"), ("rbp", "relayboard-portolan")):
+        d = os.path.join(IMG, sub)
+        os.makedirs(d, exist_ok=True)
+        for f in glob.glob(os.path.join(ROOT, "examples", dirname, "slides", "*.jpg")):
+            shutil.copyfile(f, os.path.join(d, os.path.basename(f)))
     pages = {
         "index.html": page_home(packs),
         "method.html": page_method(),
