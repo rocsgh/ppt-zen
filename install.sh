@@ -35,6 +35,7 @@ install_skill_dir() {  # $1 = base dir that will contain SKILL.md
     if [ -d "$HERE/$b" ]; then rm -rf "$d/$b"; cp -R "$HERE/$b" "$d/"; else cp "$HERE/$b" "$d/"; fi
   done
   echo "installed skill -> $d"
+  echo "  image key: cp $d/.env.example $d/.env  (gen_image.py reads it there for global installs)"
 }
 
 inject_agents_md() {  # $1 = dest AGENTS.md (idempotent between PPTZEN markers)

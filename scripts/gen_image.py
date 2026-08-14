@@ -34,6 +34,11 @@ def load_env():
 def main():
     if len(sys.argv) == 2 and sys.argv[1] == "--check":
         c = load_env()
+        src = "environment only"
+        for name in (".env", os.path.join(os.path.dirname(__file__), "..", ".env")):
+            if os.path.exists(name):
+                src = os.path.abspath(name); break
+        print("config   :", src)
         base = c.get("IMAGE_API_BASE_URL", "https://api.openai.com/v1").rstrip("/")
         key = c.get("IMAGE_API_KEY", "")
         ok = bool(key) and not key.startswith("sk-your-key")
