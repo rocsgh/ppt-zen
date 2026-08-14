@@ -82,6 +82,24 @@ Then just say "make me a deck with ppt-zen."
 
 **Two things you bring:** your own **image tool / key** (engine-agnostic — write "your image tool"), and any **styles** you want (drop a pack into `styles/`).
 
+## Image generation (bring your own model)
+
+PPT-Zen ships **no image model** — that is what keeps it engine-agnostic. You wire up your own, one of two ways:
+
+- **Your agent already generates images** (Claude Code with an image tool, Hermes, etc.) — nothing to configure; the skill uses whatever the agent has.
+- **Point at your own image API.** Copy `.env.example` to `.env` and fill your key — any **OpenAI-compatible images endpoint** works (OpenAI ``gpt-image``, a relay, or a compatible gateway):
+  ```
+  IMAGE_API_BASE_URL=https://api.openai.com/v1
+  IMAGE_API_KEY=sk-...
+  IMAGE_MODEL=gpt-image-1
+  ```
+  The included ``scripts/gen_image.py`` reads ``.env`` and generates a page:
+  ```
+  python3 scripts/gen_image.py "your full-page prompt" out.jpg
+  ```
+
+> A model that renders text well (gpt-image class) matters for readable titles — plain diffusion models garble text. ``.env`` is gitignored; never commit your key.
+
 ## Usage — how to run it, how to pick a style
 
 Once installed, just describe the deck in chat:

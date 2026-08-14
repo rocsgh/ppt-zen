@@ -82,6 +82,24 @@ cp -r ppt-zen/SKILL.md ppt-zen/references ~/.claude/skills/ppt-zen/   # 或该 a
 
 **你自备两样：** 你自己的**图像工具 / key**（引擎无关——写"你的图像工具"），以及任何你想用的**风格**（把风格包丢进 `styles/`）。
 
+## 图像生成（自备模型）
+
+PPT-Zen **不带任何图像模型**——这正是它引擎无关的原因。你自己接，两条路任选：
+
+- **你的 agent 本身能生图**（带图像工具的 Claude Code、Hermes 等）——什么都不用配，技能用 agent 现有的能力。
+- **指向你自己的图像 API。** 复制 ``.env.example`` 为 ``.env`` 填入你的 key——任意 **OpenAI 兼容的图像接口**都行（OpenAI ``gpt-image``、中转、或兼容网关）：
+  ```
+  IMAGE_API_BASE_URL=https://api.openai.com/v1
+  IMAGE_API_KEY=sk-...
+  IMAGE_MODEL=gpt-image-1
+  ```
+  仓库自带的 ``scripts/gen_image.py`` 读 ``.env`` 出一页图：
+  ```
+  python3 scripts/gen_image.py "你的整页 prompt" out.jpg
+  ```
+
+> 会画字的模型（gpt-image 这类）对中文标题很关键——普通扩散模型会把字画糊。``.env`` 已被 gitignore，切勿提交 key。
+
 ## 使用 —— 怎么跑、怎么选材质/流派
 
 装好后，直接在对话里描述你要的 deck：
