@@ -331,7 +331,7 @@ def page_home(packs):
 <div class="step"><span class="n">STEP 3</span><b>Get the deck</b><p>Plan &rarr; one image per page &rarr; proofread &rarr; assembled .pptx.</p><pre>python3 scripts/assemble_pptx.py \\
   slides/ deck.pptx</pre></div>
 </div>"""
-    strip = "".join('<a href="example.html"><img loading="lazy" src="img/rb/%s.jpg" alt=""/></a>' % f
+    strip = "".join('<a href="example.html"><img loading="lazy" src="img/rbp/%s.jpg" alt=""/></a>' % f
                     for f, *_ in [RB_PAGES[0], RB_PAGES[2], RB_PAGES[5], RB_PAGES[7]])
     feat = []
     for s in FEATURED:
