@@ -5,35 +5,290 @@
 > Each style ships one reproducible prompt formula. Add your own: copy `styles/_template/` and open a PR (see CONTRIBUTING).
 
 
-## 电影 Cinema
+## 3D craft
+
+### Cream Clay 3D
+
+![Cream Clay 3D](styles/clay-3d/samples/01.jpg)
+
+Medium **3D craft** · [pack & prompt formula →](styles/clay-3d/STYLE.md)
+
+
+## African textile
+
+### Bogolan Mudcloth
+
+![Bogolan Mudcloth](styles/bogolanfini-mudcloth/samples/01.jpg)
+
+Medium **African textile** · [pack & prompt formula →](styles/bogolanfini-mudcloth/STYLE.md)
+
+### Kente Cloth
+
+![Kente Cloth](styles/kente-cloth/samples/01.jpg)
+
+Medium **African textile** · [pack & prompt formula →](styles/kente-cloth/STYLE.md)
+
+
+## Astronomical
+
+### Celestial Gold
+
+![Celestial Gold](styles/celestial-gold/samples/01.jpg)
+
+Medium **Astronomical** · [pack & prompt formula →](styles/celestial-gold/STYLE.md)
+
+
+## Bookbinding
+
+### Gilt Leather
+
+![Gilt Leather](styles/leather-gilt/samples/01.jpg)
+
+Medium **Bookbinding** · [pack & prompt formula →](styles/leather-gilt/STYLE.md)
+
+
+## Carving
+
+### Stone Relief
+
+![Stone Relief](styles/stone-relief/samples/01.jpg)
+
+Medium **Carving** · [pack & prompt formula →](styles/stone-relief/STYLE.md)
+
+
+## Ceramic
+
+### Blue & White Porcelain
+
+![Blue & White Porcelain](styles/blue-white-porcelain/samples/01.jpg)
+
+Medium **Ceramic** · [pack & prompt formula →](styles/blue-white-porcelain/STYLE.md)
+
+### Kintsugi
+
+![Kintsugi](styles/kintsugi/samples/01.jpg)
+
+Medium **Ceramic** · [pack & prompt formula →](styles/kintsugi/STYLE.md)
+
+### Porcelain & Indigo
+
+![Porcelain & Indigo](styles/porcelain-indigo/samples/01.jpg)
+
+Medium **Ceramic** · [pack & prompt formula →](styles/porcelain-indigo/STYLE.md)
+
+
+## Chinese ink
+
+### Ink Wash
+
+![Ink Wash](styles/ink-wash/samples/01.jpg)
+
+Medium **Chinese ink** · [pack & prompt formula →](styles/ink-wash/STYLE.md)
+
+
+## Cinema
 
 ### Cinema · Nolan hand · Christopher Nolan
 
 ![Cinema · Nolan hand](styles/cinema-nolan/samples/01.jpg)
 
-Medium **电影 Cinema** · hand **Christopher Nolan** · [pack & prompt formula →](styles/cinema-nolan/STYLE.md)
+Medium **Cinema** · hand **Christopher Nolan** · [pack & prompt formula →](styles/cinema-nolan/STYLE.md)
 
 ### Cinema · Villeneuve hand · Denis Villeneuve
 
 ![Cinema · Villeneuve hand](styles/cinema-villeneuve/samples/01.jpg)
 
-Medium **电影 Cinema** · hand **Denis Villeneuve** · [pack & prompt formula →](styles/cinema-villeneuve/STYLE.md)
+Medium **Cinema** · hand **Denis Villeneuve** · [pack & prompt formula →](styles/cinema-villeneuve/STYLE.md)
 
 
-## 航海图 Portolan chart
-
-### Portolan Sea Chart
-
-![Portolan Sea Chart](styles/portolan/samples/01.jpg)
-
-Medium **航海图 Portolan chart** · [pack & prompt formula →](styles/portolan/STYLE.md)
-
-
-## 达芬奇铜版 Da Vinci copperplate
+## Da Vinci copperplate
 
 ### Da Vinci Copperplate
 
 ![Da Vinci Copperplate](styles/davinci-copperplate/samples/01.jpg)
 
-Medium **达芬奇铜版 Da Vinci copperplate** · [pack & prompt formula →](styles/davinci-copperplate/STYLE.md)
+Medium **Da Vinci copperplate** · [pack & prompt formula →](styles/davinci-copperplate/STYLE.md)
+
+
+## Deco
+
+### Art Deco Black & Gold
+
+![Art Deco Black & Gold](styles/artdeco-gold/samples/01.jpg)
+
+Medium **Deco** · [pack & prompt formula →](styles/artdeco-gold/STYLE.md)
+
+
+## Diagram
+
+### Retro Science Cutaway
+
+![Retro Science Cutaway](styles/retro-science-cutaway/samples/01.jpg)
+
+Medium **Diagram** · [pack & prompt formula →](styles/retro-science-cutaway/STYLE.md)
+
+
+## Enamel
+
+### Cloisonné
+
+![Cloisonné](styles/cloisonne/samples/01.jpg)
+
+Medium **Enamel** · [pack & prompt formula →](styles/cloisonne/STYLE.md)
+
+
+## Fresco
+
+### Dunhuang Mural
+
+![Dunhuang Mural](styles/dunhuang-mural/samples/01.jpg)
+
+Medium **Fresco** · [pack & prompt formula →](styles/dunhuang-mural/STYLE.md)
+
+
+## Hand-drawn
+
+### Warm Pencil Sketch
+
+![Warm Pencil Sketch](styles/warm-sepia/samples/01.jpg)
+
+Medium **Hand-drawn** · [pack & prompt formula →](styles/warm-sepia/STYLE.md)
+
+
+## Industrial
+
+### Enamel Signage
+
+![Enamel Signage](styles/enamel-signage/samples/01.jpg)
+
+Medium **Industrial** · [pack & prompt formula →](styles/enamel-signage/STYLE.md)
+
+
+## Ink rubbing
+
+### Stele Rubbing
+
+![Stele Rubbing](styles/stele-rubbing/samples/01.jpg)
+
+Medium **Ink rubbing** · [pack & prompt formula →](styles/stele-rubbing/STYLE.md)
+
+
+## Islamic tile
+
+### Zellige Girih
+
+![Zellige Girih](styles/zellige-girih/samples/01.jpg)
+
+Medium **Islamic tile** · [pack & prompt formula →](styles/zellige-girih/STYLE.md)
+
+
+## Lacquer
+
+### Lacquer & Mother-of-Pearl
+
+![Lacquer & Mother-of-Pearl](styles/lacquer-mop-inlay/samples/01.jpg)
+
+Medium **Lacquer** · [pack & prompt formula →](styles/lacquer-mop-inlay/STYLE.md)
+
+
+## Modern
+
+### Swiss Grid
+
+![Swiss Grid](styles/swiss-grid/samples/01.jpg)
+
+Medium **Modern** · [pack & prompt formula →](styles/swiss-grid/STYLE.md)
+
+
+## Painterly
+
+### Watercolor Editorial
+
+![Watercolor Editorial](styles/watercolor-editorial/samples/01.jpg)
+
+Medium **Painterly** · [pack & prompt formula →](styles/watercolor-editorial/STYLE.md)
+
+
+## Paper craft
+
+### Paper Sculpture
+
+![Paper Sculpture](styles/papercraft/samples/01.jpg)
+
+Medium **Paper craft** · [pack & prompt formula →](styles/papercraft/STYLE.md)
+
+
+## Portolan chart
+
+### Portolan Sea Chart
+
+![Portolan Sea Chart](styles/portolan/samples/01.jpg)
+
+Medium **Portolan chart** · [pack & prompt formula →](styles/portolan/STYLE.md)
+
+
+## Print
+
+### Letterpress Broadsheet
+
+![Letterpress Broadsheet](styles/broadsheet-news/samples/01.jpg)
+
+Medium **Print** · [pack & prompt formula →](styles/broadsheet-news/STYLE.md)
+
+### Cyanotype
+
+![Cyanotype](styles/cyanotype-botanical/samples/01.jpg)
+
+Medium **Print** · [pack & prompt formula →](styles/cyanotype-botanical/STYLE.md)
+
+### Screenprint Poster
+
+![Screenprint Poster](styles/screenprint-poster/samples/01.jpg)
+
+Medium **Print** · [pack & prompt formula →](styles/screenprint-poster/STYLE.md)
+
+
+## Technical
+
+### Cyan Blueprint
+
+![Cyan Blueprint](styles/cyber-blueprint/samples/01.jpg)
+
+Medium **Technical** · [pack & prompt formula →](styles/cyber-blueprint/STYLE.md)
+
+
+## Textile
+
+### Batik Wax-Resist
+
+![Batik Wax-Resist](styles/batik-waxresist/samples/01.jpg)
+
+Medium **Textile** · [pack & prompt formula →](styles/batik-waxresist/STYLE.md)
+
+### Linen Embroidery
+
+![Linen Embroidery](styles/embroidery-tapestry/samples/01.jpg)
+
+Medium **Textile** · [pack & prompt formula →](styles/embroidery-tapestry/STYLE.md)
+
+### Kesi Silk Tapestry
+
+![Kesi Silk Tapestry](styles/kesi-tapestry/samples/01.jpg)
+
+Medium **Textile** · [pack & prompt formula →](styles/kesi-tapestry/STYLE.md)
+
+### Shu Brocade
+
+![Shu Brocade](styles/shu-brocade/samples/01.jpg)
+
+Medium **Textile** · [pack & prompt formula →](styles/shu-brocade/STYLE.md)
+
+
+## Woodblock
+
+### Ukiyo-e Woodblock
+
+![Ukiyo-e Woodblock](styles/ukiyoe-woodblock/samples/01.jpg)
+
+Medium **Woodblock** · [pack & prompt formula →](styles/ukiyoe-woodblock/STYLE.md)
 

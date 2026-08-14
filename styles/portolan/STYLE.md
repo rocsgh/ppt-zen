@@ -1,7 +1,7 @@
 ---
 name: Portolan Sea Chart
 slug: portolan
-medium: 航海图 Portolan chart
+medium: Portolan chart
 hand: ""
 world: A voyage across an uncharted sea toward a marked destination
 tags: [warm, parchment, watercolor, epic, exploration]
@@ -22,7 +22,7 @@ prompt_formula: |
   DEVICE:   draw the page's argument as a chart element (a growth curve = a fleet of ships
             climbing a rising sea-lane; scale = a distance measured on the chart)
   END:      Full-bleed 16:9, render DEVICE on the parchment SURFACE, DEVICE composition.
-  CRITICAL: title in exactly N Chinese characters (kaishu/serif), NEVER invent extra Chinese;
+  CRITICAL: title in clean legible English serif; NEVER invent extra words or glyphs;
             annotations only as compass marks / numbers / dotted rhumb lines; no UI, no cards, no captions.
 source: >
   Inspired by Renaissance portolan navigation charts and ink-wash seascapes. Our own artwork.
@@ -30,10 +30,8 @@ samples:
   - samples/01.jpg
 ---
 
-# Portolan Sea Chart · 航海图
+# Portolan Sea Chart
 
 **A voyage across an uncharted sea.** Warm, epic, exploratory — turns a "growth / going somewhere new" story into a fleet sailing a rising sea-lane toward a marked destination.
-
-**一片未知海域的航行。** 暖调、史诗、探索感——把"增长 / 走向新大陆"的叙事，画成一支沿着上扬航道驶向标记点的船队。
 
 ![sample](samples/01.jpg)
