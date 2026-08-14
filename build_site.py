@@ -127,8 +127,8 @@ img{max-width:100%}
 .btn.solid{background:var(--ink);color:var(--paper);border-color:var(--ink)}
 .btn.solid:hover{background:#000}
 nav{display:flex;justify-content:space-between;align-items:center;padding:20px 0;border-bottom:1px solid var(--line)}
-.mark{font-weight:800;letter-spacing:-.03em;font-size:1.18rem;display:inline-flex;align-items:center;gap:10px}
-.mark img.lg{height:30px;width:auto;display:block}
+.mark{display:inline-flex;align-items:center}
+.mark img.wm{height:40px;width:auto;display:block}
 .navlinks{display:flex;gap:4px;align-items:center;flex-wrap:wrap}
 .navlinks a.nl{padding:9px 13px;border-radius:9px;font:600 .92rem var(--disp);color:var(--ink2)}
 .navlinks a.nl:hover{color:var(--ink);background:var(--panel)}
@@ -275,7 +275,7 @@ FAVICON = ("data:image/svg+xml," +
 def shell(title, desc, path, ogimg, inner, js="", active=""):
     def on(k):
         return ' class="nl on"' if k == active else ' class="nl"'
-    nav = ("""<div class="wrap"><nav><a class="mark" href="index.html"><img class="lg" src="img/logo.png" alt=""/>PPT&#8209;Zen</a>
+    nav = ("""<div class="wrap"><nav><a class="mark" href="index.html"><img class="wm" src="img/logo-wordmark.png" alt="PPT-Zen"/></a>
 <div class="navlinks">
 <a%s href="method.html">Method</a>
 <a%s href="example.html">Example</a>
