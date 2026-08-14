@@ -216,6 +216,7 @@ def make_zh(html_s, page):
         html_s = html_s.replace(en, zh)
     # asset + canonical/og paths
     html_s = html_s.replace('src="img/', 'src="../img/')
+    html_s = html_s.replace('data-img="img/', 'data-img="../img/')
     html_s = html_s.replace('href="%s/%s">' % (BASE_URL, page), 'href="%s/zh/%s">' % (BASE_URL, page))
     html_s = html_s.replace('content="%s/%s">' % (BASE_URL, page), 'content="%s/zh/%s">' % (BASE_URL, page))
     html_s = html_s.replace('<html lang="en">', '<html lang="zh-CN">', 1)
