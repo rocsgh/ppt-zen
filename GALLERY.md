@@ -22,18 +22,18 @@ Medium **电影 Cinema** · hand **Denis Villeneuve** · [pack & prompt formula 
 
 ## 航海图 Portolan chart
 
-### Portolan Sea Chart · ""
+### Portolan Sea Chart
 
 ![Portolan Sea Chart](styles/portolan/samples/01.jpg)
 
-Medium **航海图 Portolan chart** · hand **""** · [pack & prompt formula →](styles/portolan/STYLE.md)
+Medium **航海图 Portolan chart** · [pack & prompt formula →](styles/portolan/STYLE.md)
 
 
 ## 达芬奇铜版 Da Vinci copperplate
 
-### Da Vinci Copperplate · ""
+### Da Vinci Copperplate
 
 ![Da Vinci Copperplate](styles/davinci-copperplate/samples/01.jpg)
 
-Medium **达芬奇铜版 Da Vinci copperplate** · hand **""** · [pack & prompt formula →](styles/davinci-copperplate/STYLE.md)
+Medium **达芬奇铜版 Da Vinci copperplate** · [pack & prompt formula →](styles/davinci-copperplate/STYLE.md)
 

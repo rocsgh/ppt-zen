@@ -25,7 +25,7 @@ def parse_front(path):
         mm = re.match(r"^([a-z_]+):\s?(.*)$", ln)
         if mm:
             key = mm.group(1)
-            d[key] = mm.group(2).strip()
+            d[key] = mm.group(2).strip().strip(chr(34))
         elif key == "samples" and ln.strip().startswith("- "):
             d.setdefault("_samples", []).append(ln.strip()[2:].strip())
     if "_samples" in d:
