@@ -520,9 +520,16 @@ cd ppt-zen
 <pre>cp .env.example .env                  # IMAGE_API_BASE_URL / IMAGE_API_KEY / IMAGE_MODEL / IMAGE_SIZE
 python3 scripts/gen_image.py --check  # verify before a long run</pre>
 <p>PPT-Zen ships <b>no key and no model</b> — the judgment is open source, the pixels are yours.</p>
-<h2><span class="num">3</span>Make a deck</h2>
-<pre>"Make me a 10-page pitch deck about &lt;your project&gt; with ppt-zen, in the Portolan style."</pre>
-<p>The agent plans (<code>plan.md</code>), generates one image per page into <code>slides/</code>, you proofread, then:</p>
+<h2><span class="num">3</span>Make a deck — what you actually say</h2>
+<p>Open your agent in any project and talk. One sentence starts it; the skill decides the rest and never quizzes you about layout:</p>
+<pre>"Make me a 10-page pitch deck about &lt;your project&gt; with ppt-zen, in the Portolan style."
+"Design a keynote about our Q3 results — pick a material that fits."   <span style="color:#8f8d97"># it chooses</span>
+"One slide only: '23 minutes to refocus', make it land."               <span style="color:#8f8d97"># single page</span></pre>
+<p>The agent writes <code>plan.md</code> (page &middot; density &middot; device &middot; exact text &middot; style) — review it if you like — then generates one image per page into <code>slides/</code>. Iterate by pointing at pages:</p>
+<pre>"Regenerate page 6 — the numbers feel cramped."
+"Swap the whole deck to the Kintsugi material."      <span style="color:#8f8d97"># same plan, new world</span>
+"Page 4's device isn't readable, try a funnel."</pre>
+<p><b>Feed it your facts.</b> Attach an outline / metrics / links — real numbers land on the slides; anything missing shows as <code>[TO CONFIRM]</code> rather than an invented figure. When the pages read clean:</p>
 <pre>pip install python-pptx
 python3 scripts/assemble_pptx.py slides/ deck.pptx</pre>
 <h2><span class="num">?</span>FAQ</h2>
