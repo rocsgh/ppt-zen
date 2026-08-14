@@ -1,14 +1,14 @@
 ---
-name: Cinema · Hou / Koreeda hand
+name: Quiet Realism
 slug: cinema-hou-koreeda
 medium: Cinema
-hand: Hou Hsiao-hsien · Koreeda
+hand: ""
 world: An ordinary domestic moment observed with tenderness
 tags: [gentle, naturalistic, quiet, domestic, tender]
 author: ppt-zen
 license: CC-BY-4.0
 prompt_formula: |
-  SURFACE:  A film frame in the manner of and — everyday warmth - late-afternoon sunlight through a home kitchen window, steam rising from a teapot, tangerines on a worn wooden table, gauzy curtain glow, a silhouetted figure passing in the hallway beyond, soft natural grade, gentle grain. Tender and unhurried; the shadowed wall carries the text.
+  SURFACE:  A film frame with everyday warmth - late-afternoon sunlight through a home kitchen window, steam rising from a teapot, tangerines on a worn wooden table, gauzy curtain glow, a silhouetted figure passing in the hallway beyond, soft natural grade, gentle grain. Tender and unhurried; the shadowed wall carries the text.
   SKELETON: auto (a calm dark / negative area reserved for the title)
   DEVICE:   the page's argument as one cinematic hero subject, staged in this director's signature composition
   END:      Full-bleed 16:9 — DEVICE in the SURFACE, cinematic composition.
@@ -20,7 +20,7 @@ samples:
   - samples/01.jpg
 ---
 
-# Cinema · Hou / Koreeda hand
+# Quiet Realism
 
 **Natural light, patient distance, tender everyday realism.**
 

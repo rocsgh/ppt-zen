@@ -1,14 +1,14 @@
 ---
-name: Cinema · Wong Kar-wai hand
+name: Neon Nocturne
 slug: cinema-wongkarwai
 medium: Cinema
-hand: Wong Kar-wai
+hand: ""
 world: A neon-soaked, rain-slicked memory of the 1960s
 tags: [warm, neon, saturated, melancholic, nostalgic]
 author: ppt-zen
 license: CC-BY-4.0
 prompt_formula: |
-  SURFACE:  A film frame in the manner of Wong Kar-wai — saturated nostalgic color - deep crimson and jade neon bleeding through smoke in a narrow 1960s Hong Kong corridor, wet reflective floor tiles, a slow ceiling fan blur, one silhouetted figure leaning far in the haze, tungsten lamps burning warm halos. Heavy atmosphere, romantic melancholy, film grain and slight motion smear. Rich but disciplined - the left half stays deep shadow as the text zone.
+  SURFACE:  A film frame with saturated nostalgic color - deep crimson and jade neon bleeding through smoke in a narrow 1960s Hong Kong corridor, wet reflective floor tiles, a slow ceiling fan blur, one silhouetted figure leaning far in the haze, tungsten lamps burning warm halos. Heavy atmosphere, romantic melancholy, film grain and slight motion smear. Rich but disciplined - the left half stays deep shadow as the text zone.
   SKELETON: auto (a calm dark / negative area reserved for the title)
   DEVICE:   the page's argument as one cinematic hero subject, staged in this director's signature composition
   END:      Full-bleed 16:9 — DEVICE in the SURFACE, cinematic composition.
@@ -20,7 +20,7 @@ samples:
   - samples/01.jpg
 ---
 
-# Cinema · Wong Kar-wai hand
+# Neon Nocturne
 
 **Saturated crimson-and-jade neon, smoke and slow motion, romantic melancholy.**
 

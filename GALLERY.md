@@ -88,71 +88,71 @@ Medium **Chinese ink** · [pack & prompt formula →](styles/ink-wash/STYLE.md)
 
 ## Cinema
 
-### Cinema · David Fincher hand · David Fincher
+### Sodium-Green Noir
 
-![Cinema · David Fincher hand](styles/cinema-fincher/samples/01.jpg)
+![Sodium-Green Noir](styles/cinema-fincher/samples/01.jpg)
 
-Medium **Cinema** · hand **David Fincher** · [pack & prompt formula →](styles/cinema-fincher/STYLE.md)
+Medium **Cinema** · [pack & prompt formula →](styles/cinema-fincher/STYLE.md)
 
-### Cinema · Alfred Hitchcock hand · Alfred Hitchcock
+### Suspense Staircase
 
-![Cinema · Alfred Hitchcock hand](styles/cinema-hitchcock/samples/01.jpg)
+![Suspense Staircase](styles/cinema-hitchcock/samples/01.jpg)
 
-Medium **Cinema** · hand **Alfred Hitchcock** · [pack & prompt formula →](styles/cinema-hitchcock/STYLE.md)
+Medium **Cinema** · [pack & prompt formula →](styles/cinema-hitchcock/STYLE.md)
 
-### Cinema · Hou / Koreeda hand · Hou Hsiao-hsien · Koreeda
+### Quiet Realism
 
-![Cinema · Hou / Koreeda hand](styles/cinema-hou-koreeda/samples/01.jpg)
+![Quiet Realism](styles/cinema-hou-koreeda/samples/01.jpg)
 
-Medium **Cinema** · hand **Hou Hsiao-hsien · Koreeda** · [pack & prompt formula →](styles/cinema-hou-koreeda/STYLE.md)
+Medium **Cinema** · [pack & prompt formula →](styles/cinema-hou-koreeda/STYLE.md)
 
-### Cinema · Stanley Kubrick hand · Stanley Kubrick
+### One-Point Cold
 
-![Cinema · Stanley Kubrick hand](styles/cinema-kubrick/samples/01.jpg)
+![One-Point Cold](styles/cinema-kubrick/samples/01.jpg)
 
-Medium **Cinema** · hand **Stanley Kubrick** · [pack & prompt formula →](styles/cinema-kubrick/STYLE.md)
+Medium **Cinema** · [pack & prompt formula →](styles/cinema-kubrick/STYLE.md)
 
-### Cinema · Akira Kurosawa hand · Akira Kurosawa
+### Wind & Motion
 
-![Cinema · Akira Kurosawa hand](styles/cinema-kurosawa/samples/01.jpg)
+![Wind & Motion](styles/cinema-kurosawa/samples/01.jpg)
 
-Medium **Cinema** · hand **Akira Kurosawa** · [pack & prompt formula →](styles/cinema-kurosawa/STYLE.md)
+Medium **Cinema** · [pack & prompt formula →](styles/cinema-kurosawa/STYLE.md)
 
-### Cinema · Nolan hand · Christopher Nolan
+### Cold Monument
 
-![Cinema · Nolan hand](styles/cinema-nolan/samples/01.jpg)
+![Cold Monument](styles/cinema-nolan/samples/01.jpg)
 
-Medium **Cinema** · hand **Christopher Nolan** · [pack & prompt formula →](styles/cinema-nolan/STYLE.md)
+Medium **Cinema** · [pack & prompt formula →](styles/cinema-nolan/STYLE.md)
 
-### Cinema · Andrei Tarkovsky hand · Andrei Tarkovsky
+### Misty Poetic
 
-![Cinema · Andrei Tarkovsky hand](styles/cinema-tarkovsky/samples/01.jpg)
+![Misty Poetic](styles/cinema-tarkovsky/samples/01.jpg)
 
-Medium **Cinema** · hand **Andrei Tarkovsky** · [pack & prompt formula →](styles/cinema-tarkovsky/STYLE.md)
+Medium **Cinema** · [pack & prompt formula →](styles/cinema-tarkovsky/STYLE.md)
 
-### Cinema · Villeneuve hand · Denis Villeneuve
+### Warm Monolith
 
-![Cinema · Villeneuve hand](styles/cinema-villeneuve/samples/01.jpg)
+![Warm Monolith](styles/cinema-villeneuve/samples/01.jpg)
 
-Medium **Cinema** · hand **Denis Villeneuve** · [pack & prompt formula →](styles/cinema-villeneuve/STYLE.md)
+Medium **Cinema** · [pack & prompt formula →](styles/cinema-villeneuve/STYLE.md)
 
-### Cinema · Wes Anderson hand · Wes Anderson
+### Symmetric Pastel
 
-![Cinema · Wes Anderson hand](styles/cinema-wesanderson/samples/01.jpg)
+![Symmetric Pastel](styles/cinema-wesanderson/samples/01.jpg)
 
-Medium **Cinema** · hand **Wes Anderson** · [pack & prompt formula →](styles/cinema-wesanderson/STYLE.md)
+Medium **Cinema** · [pack & prompt formula →](styles/cinema-wesanderson/STYLE.md)
 
-### Cinema · Wong Kar-wai hand · Wong Kar-wai
+### Neon Nocturne
 
-![Cinema · Wong Kar-wai hand](styles/cinema-wongkarwai/samples/01.jpg)
+![Neon Nocturne](styles/cinema-wongkarwai/samples/01.jpg)
 
-Medium **Cinema** · hand **Wong Kar-wai** · [pack & prompt formula →](styles/cinema-wongkarwai/STYLE.md)
+Medium **Cinema** · [pack & prompt formula →](styles/cinema-wongkarwai/STYLE.md)
 
-### Cinema · Zhang Yimou hand · Zhang Yimou
+### Massed Color
 
-![Cinema · Zhang Yimou hand](styles/cinema-zhangyimou/samples/01.jpg)
+![Massed Color](styles/cinema-zhangyimou/samples/01.jpg)
 
-Medium **Cinema** · hand **Zhang Yimou** · [pack & prompt formula →](styles/cinema-zhangyimou/STYLE.md)
+Medium **Cinema** · [pack & prompt formula →](styles/cinema-zhangyimou/STYLE.md)
 
 
 ## Da Vinci copperplate

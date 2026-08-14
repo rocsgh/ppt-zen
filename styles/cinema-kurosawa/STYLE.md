@@ -1,14 +1,14 @@
 ---
-name: Cinema · Akira Kurosawa hand
+name: Wind & Motion
 slug: cinema-kurosawa
 medium: Cinema
-hand: Akira Kurosawa
+hand: ""
 world: Wind, weather and motion sweeping across an epic frame
 tags: [weather, motion, epic, dynamic, elemental]
 author: ppt-zen
 license: CC-BY-4.0
 prompt_formula: |
-  SURFACE:  A film frame in the manner of Kurosawa — black-and-white epic motion - wind-driven rain slanting across a muddy field, a line of samurai silhouettes with banners (plain glyph-free cloth) braced against the storm, dramatic churning sky, deep blacks and silver highlights, dynamic diagonal composition. The storm sky carries the text in white.
+  SURFACE:  A film frame with black-and-white epic motion - wind-driven rain slanting across a muddy field, a line of samurai silhouettes with banners (plain glyph-free cloth) braced against the storm, dramatic churning sky, deep blacks and silver highlights, dynamic diagonal composition. The storm sky carries the text in white.
   SKELETON: auto (a calm dark / negative area reserved for the title)
   DEVICE:   the page's argument as one cinematic hero subject, staged in this director's signature composition
   END:      Full-bleed 16:9 — DEVICE in the SURFACE, cinematic composition.
@@ -20,7 +20,7 @@ samples:
   - samples/01.jpg
 ---
 
-# Cinema · Akira Kurosawa hand
+# Wind & Motion
 
 **Wind and rain, deep staging, kinetic epic scale.**
 
