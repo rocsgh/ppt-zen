@@ -4,8 +4,9 @@ description: >-
   Make a slide deck, slides, a presentation, a pitch, or a keynote — or design a single
   slide. Full-bleed image slides with a judgment layer: decides per page how much it should
   hold (headline vs. detail) and what to draw (the device), renders every page in ONE chosen
-  material. Also use when the user says "ppt-zen" or names a ppt-zen gallery style
-  (Portolan, Swiss grid, Ink wash, Neon Nocturne, ...).
+  material. Also use when the user says "ppt-zen", names a ppt-zen gallery style
+  (Portolan, Swiss grid, Ink wash, Neon Nocturne, ...), or asks in Chinese: 做PPT / 做一套
+  deck / 幻灯片 / 演示文稿 / 路演材料 / 宣传资料PPT.
 license: Apache-2.0
 metadata:
   homepage: https://pptzen.xyz
@@ -34,6 +35,10 @@ Every page is a generated image. You need exactly one way to make images. In ord
 
 **This skill ships NO image key and NO model.** It is the judgment + prompts; the pixels come from
 your model.
+
+> **Never build slides any other way.** No HTML/CSS pages, no pptxgenjs/text-box layouts, no
+> "themed template" tools — every page is ONE generated image, or it isn't a ppt-zen deck.
+> If no image path exists, stop and tell the user what to configure; don't silently fall back.
 
 > Aspect ratio: image models rarely emit native 16:9. Generate landscape (e.g. `1536x1024`, 3:2)
 > and let assembly **cover-crop to 16:9** — so keep every title and key element clear of the top
@@ -130,7 +135,10 @@ license to hallucinate content.
 
 Each page is one self-contained prompt. Always:
 1. **Density in layers** — background texture fills but recedes; one hero ~70%; foreground accents
-   limited; **no floating data cards / sidebars / widgets.**
+   limited; **no floating data cards / sidebars / widgets.** And no *themed-template* look: no
+   rounded card grids, numbered step boxes, or generic diagram shapes with a texture behind them.
+   The page is a scene in the material's world — if it would look at home in a generic template
+   gallery, it is off-style.
 2. **Never invent glyphs** — state the exact text to render and forbid any other words; decorative
    marks must be geometric only (ticks, numbers, dimension lines). Non-Latin scripts especially:
    spell out the exact characters and forbid additions.
@@ -139,15 +147,18 @@ Each page is one self-contained prompt. Always:
 4. **Pin exact text length** — "render exactly these N words/characters — no additions", or the model
    adds a stray word.
 
-Prompt skeleton (material × skeleton × device):
+**Compose every page prompt mechanically — do not improvise the material:**
 ```
-SURFACE:  <the chosen material's recipe — one per deck>
+SURFACE:  paste the chosen pack's prompt_formula SURFACE **verbatim** from
+          styles/<slug>/STYLE.md (or styles.json). Writing your own material
+          description instead is the #1 way decks come out off-style.
 SKELETON: <auto by page role; or "plain">
 DEVICE:   <this page's argument as an object; or "none">
 TEXT:     <exact words to render, and where>
 CRITICAL: render ONLY the text above; every letter correct; no invented glyphs; no other language;
           no structure words; keep key content clear of top/bottom ~8%.
 ```
+Worked reference: `examples/relayboard-portolan/gen.py` shows ten real page prompts built this way.
 Dense/text-heavy pages: generate at higher resolution than single-word pages.
 
 ## 7. If it's presented live (constraints you only learn from real rooms)
@@ -175,7 +186,10 @@ Dense/text-heavy pages: generate at higher resolution than single-word pages.
    from the repo root next to the script).
 3. **QC the images** — proofread every character of every title against the plan, confirm no
    invented glyphs and no cross-page contradiction, and check nothing important sits in the
-   top/bottom ~8% that assembly will crop. This gate is where the quality comes from.
+   top/bottom ~8% that assembly will crop. Then the **style check**: put your page next to
+   `styles/<slug>/samples/01.jpg` — same world? A business template with the material's texture
+   behind it FAILS; regenerate with the pack's SURFACE pasted verbatim. This gate is where the
+   quality comes from.
 4. **Assemble, then check the deck** — `python3 scripts/assemble_pptx.py slides/ deck.pptx`
    (16:9 full-bleed; non-16:9 images are center cover-cropped). Open the result: page order,
    crop, nothing eaten. Regenerate and reassemble single pages as needed. The output is an
