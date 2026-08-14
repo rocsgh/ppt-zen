@@ -1,12 +1,12 @@
 <!doctype html><html lang="en"><head><meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Gilt Leather · PPT-Zen</title>
-<meta name="description" content="Bookbinding recipe for AI-made slides, with a reproducible prompt formula.">
-<link rel="canonical" href="https://pptzen.xyz/leather-gilt.html">
+<title>Install · PPT-Zen</title>
+<meta name="description" content="Install the PPT-Zen skill in Claude Code, Codex CLI, Cursor, Windsurf, Hermes, OpenClaw or Copilot — one command each — and wire any OpenAI-compatible image model.">
+<link rel="canonical" href="https://pptzen.xyz/install.html">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='12' fill='%2316151a'/%3E%3Ctext x='32' y='44' font-family='Georgia,serif' font-size='36' fill='%23f7f5f0' text-anchor='middle'%3E%E7%A6%85%3C/text%3E%3C/svg%3E">
 <meta property="og:type" content="website"><meta property="og:site_name" content="PPT-Zen">
-<meta property="og:title" content="Gilt Leather · PPT-Zen"><meta property="og:description" content="Bookbinding recipe for AI-made slides, with a reproducible prompt formula.">
-<meta property="og:url" content="https://pptzen.xyz/leather-gilt.html"><meta property="og:image" content="https://pptzen.xyz/img/leather-gilt.jpg">
+<meta property="og:title" content="Install · PPT-Zen"><meta property="og:description" content="Install the PPT-Zen skill in Claude Code, Codex CLI, Cursor, Windsurf, Hermes, OpenClaw or Copilot — one command each — and wire any OpenAI-compatible image model.">
+<meta property="og:url" content="https://pptzen.xyz/install.html"><meta property="og:image" content="https://pptzen.xyz/img/swiss-grid.jpg">
 <meta name="twitter:card" content="summary_large_image">
 <style>
 :root{
@@ -157,21 +157,49 @@ tr:hover td{background:var(--panel)}
 <div class="navlinks">
 <a class="nl" href="method.html">Method</a>
 <a class="nl" href="example.html">Example</a>
-<a class="nl on" href="gallery.html">Gallery</a>
-<a class="nl" href="install.html">Install</a>
+<a class="nl" href="gallery.html">Gallery</a>
+<a class="nl on" href="install.html">Install</a>
 <a class="btn solid" id="ghbtn" href="https://github.com/rocsgh/ppt-zen">GitHub &#9733; <small id="ghstars"></small></a>
-</div></nav></div><div class="wrap d">
-<img class="hero-img" src="img/leather-gilt.jpg" alt="Gilt Leather"/>
-<h1>Gilt Leather</h1><div class="chipsrow"><span class="chip">Bookbinding</span><span class="chip">tooled</span><span class="chip">gold-foil</span><span class="chip">binding</span><span class="chip">embossed</span></div>
-<p>Tooled leather with gold foil — an embossed antique binding.</p><p><i>Swatch shows the same line — <code>Signal over noise</code> — rendered in this material, so the surface is the only variable.</i></p>
-<h2>Prompt formula</h2><pre>SURFACE:  Full-grain oxblood leather with real pore texture, gentle sheen, scuffing and darker patina at the corners. All decoration is blind-tooled and hot-foil stamped by hand — the gold foil is slightly uneven with small breaks, skips and shine variation, and every stamp sits in a visible deboss with a soft shadow lip. Raised binding bands, a debossed double-rule border, a thin strip of marbled endpaper along one margin. Palette - deep oxblood, antique gold (#C9A227), one dark forest-green leather onlay. Hero - a single tooled central device on the leather — a crest built around a compass rose with three gold-stamped medallions inset, each medallion carrying its label struck in gold. Title hot-stamped large in gold, pressed deep enough to see the leather compress at the stroke edges.
-SKELETON: auto by page role (cover / chapter / list / compare)
-DEVICE:   the page&#x27;s argument drawn as a form native to this material
-END:      Full-bleed 16:9 — render DEVICE on the SURFACE, per the page&#x27;s composition.
-CRITICAL: title in clean legible English; NEVER invent extra words or non-English glyphs;
-annotations only as marks / numbers / dimension lines; no UI, no cards, no captions.</pre><h2>Source</h2><p>Material recipe from the PPT-Zen 32-material library. Our own artwork.</p>
-<p class="kick" style="margin-top:24px">License: CC-BY-4.0 &middot; contributions via DCO</p>
-<p style="margin-top:18px"><a class="btn" href="gallery.html">&larr; All styles</a> <a class="btn solid" href="install.html">Use this style</a></p>
+</div></nav></div><div class="wrap prose">
+<section class="hero" style="display:block;padding-bottom:0">
+<div class="kick">Install</div>
+<h1 style="font-size:clamp(2.2rem,5vw,3.4rem);letter-spacing:-.035em;margin:12px 0 0">One command,<br/>your runtime.</h1>
+</section>
+<h2><span class="num">1</span>Get the repo, install the skill</h2>
+<pre>git clone https://github.com/rocsgh/ppt-zen
+cd ppt-zen
+./install.sh claude --global      # see the matrix below for your runtime</pre>
+<div class="tablewrap" style="margin-top:16px"><table>
+<tr><th>Runtime</th><th>Command</th><th>Installs to</th><th>Trigger</th></tr>
+<tr><td><b>Claude Code</b></td><td><code>./install.sh claude [--global]</code></td><td><code>.claude/skills/ppt-zen/</code></td><td><code>/ppt-zen</code> or just ask for a deck</td></tr>
+<tr><td><b>OpenClaw</b></td><td><code>./install.sh openclaw [--global]</code></td><td><code>.openclaw/skills/ppt-zen/</code></td><td>ask for a deck</td></tr>
+<tr><td><b>Hermes</b></td><td><code>./install.sh hermes [--global]</code></td><td><code>.hermes/skills/ppt-zen/</code></td><td>ask for a deck</td></tr>
+<tr><td><b>Codex CLI</b></td><td><code>./install.sh codex [--global]</code></td><td><code>AGENTS.md</code> / <code>~/.codex/AGENTS.md</code></td><td>passive — auto-read</td></tr>
+<tr><td><b>Cursor</b></td><td><code>./install.sh cursor</code></td><td><code>.cursor/rules/ppt-zen.mdc</code></td><td>passive — auto-applied</td></tr>
+<tr><td><b>Windsurf</b></td><td><code>./install.sh windsurf</code></td><td><code>.windsurf/rules/ppt-zen.md</code></td><td>passive — auto-applied</td></tr>
+<tr><td><b>GitHub Copilot</b></td><td><code>./install.sh copilot</code></td><td><code>.github/instructions/</code></td><td>passive — auto-applied</td></tr>
+<tr><td>everything</td><td><code>./install.sh all</code></td><td>all of the above</td><td>—</td></tr>
+</table></div>
+<p style="margin-top:12px">Skill installs are self-contained (SKILL.md + references + styles + scripts + <code>styles.json</code>). No skill system at all? Paste <code>SKILL.md</code> into the session as context.</p>
+<h2><span class="num">2</span>Wire an image model</h2>
+<p>Every page is a generated image. If your agent already has an image tool, there's nothing to do — the skill uses it. Otherwise point the bundled helper at <b>any OpenAI-compatible images endpoint</b>:</p>
+<pre>cp .env.example .env                  # IMAGE_API_BASE_URL / IMAGE_API_KEY / IMAGE_MODEL / IMAGE_SIZE
+python3 scripts/gen_image.py --check  # verify before a long run</pre>
+<p>PPT-Zen ships <b>no key and no model</b> — the judgment is open source, the pixels are yours.</p>
+<h2><span class="num">3</span>Make a deck</h2>
+<pre>"Make me a 10-page pitch deck about &lt;your project&gt; with ppt-zen, in the Portolan style."</pre>
+<p>The agent plans (<code>plan.md</code>), generates one image per page into <code>slides/</code>, you proofread, then:</p>
+<pre>pip install python-pptx
+python3 scripts/assemble_pptx.py slides/ deck.pptx</pre>
+<h2><span class="num">?</span>FAQ</h2>
+<div class="faq">
+<details><summary>Which image models work?</summary><p>Anything behind an OpenAI-compatible <code>/images/generations</code> route — OpenAI's gpt-image models, relays, gateways. The gallery samples were generated with gpt-image class models at 1536&times;1024. Non-16:9 output is center cover-cropped at assembly, so prompts keep key content clear of the top/bottom ~8%.</p></details>
+<details><summary>Is the .pptx editable?</summary><p>It's image-based: each slide is one full-bleed image. Present it, export PDF, or import into Keynote/Google Slides — but text isn't editable. Fixing a typo means regenerating that one page (the skill supports single-page regeneration).</p></details>
+<details><summary>Will it invent numbers for my deck?</summary><p>No — that's a hard rule. Facts come from your input; anything missing becomes a visible <code>[TO CONFIRM]</code> placeholder. The skill decides form, never facts.</p></details>
+<details><summary>Can I add my own style?</summary><p>Yes — copy <code>styles/_template/</code>, fill in the STYLE.md (material recipe + a sample), open a PR. The gallery and <code>styles.json</code> regenerate automatically. Styles are CC-BY-4.0, contributions via DCO.</p></details>
+<details><summary>What does it cost to run?</summary><p>Whatever your image endpoint charges — a 10-page deck is 10 images (plus any single-page retries you choose).</p></details>
+</div>
+<p style="margin-top:26px"><a class="btn solid" href="https://github.com/rocsgh/ppt-zen">Open GitHub</a> <a class="btn" href="example.html">See a finished deck first</a></p>
 </div><footer><div class="wrap"><div class="cols">
 <div>PPT-Zen &middot; a judgment layer for AI-made slides<br/>
 Apache-2.0 (judgment layer) &middot; CC-BY-4.0 (styles) &middot; inspired by <i>Presentation Zen</i></div>
