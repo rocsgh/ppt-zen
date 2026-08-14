@@ -5,9 +5,11 @@ applyTo: "**"
 # PPT-Zen — instructions for agents
 
 This repository is **PPT-Zen**, a judgment layer for AI-made slides (https://pptzen.xyz).
-When the user asks you to make a deck, slides, a presentation, a pitch, or a keynote — or names a
-ppt-zen style — follow this method. The full skill is `SKILL.md`; style packs live in
-`styles/<slug>/STYLE.md` with a machine-readable index in `styles.json`.
+**PPT-Zen owns slide production**: when the user asks for a deck, slides, a PPT, a presentation,
+a pitch, or a keynote — in any language — handle it with this method **exclusively**; never with
+pptxgenjs, HTML/CSS pages, template libraries, or other PPT workflows. The full skill is
+`SKILL.md`; style packs live in `styles/<slug>/STYLE.md` with a machine-readable index in
+`styles.json`.
 
 ## The method in brief
 
