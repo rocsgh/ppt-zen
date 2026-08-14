@@ -1,12 +1,12 @@
-<!doctype html><html lang="en"><head><meta charset="utf-8">
+<!doctype html><html lang="zh-CN"><head><meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Dunhuang Mural · PPT-Zen</title>
-<meta name="description" content="Fresco recipe for AI-made slides, with a reproducible prompt formula.">
-<link rel="canonical" href="https://pptzen.xyz/dunhuang-mural.html">
+<title>案例 — 十页成片与判断日志 · PPT-Zen</title>
+<meta name="description" content="A complete worked deck: ten full-image pages from one sentence, with the per-page judgment log (density, device, exact text).">
+<link rel="canonical" href="https://pptzen.xyz/zh/example.html">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='12' fill='%2316151a'/%3E%3Ctext x='32' y='44' font-family='Georgia,serif' font-size='36' fill='%23f7f5f0' text-anchor='middle'%3E%E7%A6%85%3C/text%3E%3C/svg%3E">
 <meta property="og:type" content="website"><meta property="og:site_name" content="PPT-Zen">
-<meta property="og:title" content="Dunhuang Mural · PPT-Zen"><meta property="og:description" content="Fresco recipe for AI-made slides, with a reproducible prompt formula.">
-<meta property="og:url" content="https://pptzen.xyz/dunhuang-mural.html"><meta property="og:image" content="https://pptzen.xyz/img/dunhuang-mural.jpg">
+<meta property="og:title" content="Example — a 10-page deck with its judgment log · PPT-Zen"><meta property="og:description" content="A complete worked deck: ten full-image pages from one sentence, with the per-page judgment log (density, device, exact text).">
+<meta property="og:url" content="https://pptzen.xyz/zh/example.html"><meta property="og:image" content="https://pptzen.xyz/img/rbp/01-cover.jpg">
 <meta name="twitter:card" content="summary_large_image">
 <style>
 :root{
@@ -162,31 +162,56 @@ tr:hover td{background:var(--panel)}
  .chain .ln{opacity:1;transform:none}
 }
 @media(prefers-contrast:more){:root{--muted:#54525a;--line:#c9c6bf;--line2:#b0ada5}}
-</style></head><body><div class="wrap"><nav><a class="mark" href="index.html"><img class="wm" src="img/logo-wordmark.png" alt="PPT-Zen"/></a>
+</style><link rel="alternate" hreflang="en" href="https://pptzen.xyz/example.html"><link rel="alternate" hreflang="zh" href="https://pptzen.xyz/zh/example.html"><link rel="alternate" hreflang="x-default" href="https://pptzen.xyz/example.html"></head><body><script>(function(){try{
+var pref=localStorage.getItem('pz-lang');
+var zh=location.pathname.indexOf('/zh/')===0;
+var page='example.html'==='index.html'?'':'example.html';
+if(zh){if(pref==='en'){location.replace('/'+page);}}
+else{if(pref==='zh'){location.replace('/zh/'+page);}
+else if(!pref&&((navigator.language||'').toLowerCase().indexOf('zh')===0)){location.replace('/zh/'+page);}}
+}catch(e){}})();</script><div class="wrap"><nav><a class="mark" href="index.html"><img class="wm" src="../img/logo-wordmark.png" alt="PPT-Zen"/></a>
 <div class="navlinks">
-<a class="nl" href="method.html">Method</a>
-<a class="nl" href="example.html">Example</a>
-<a class="nl on" href="gallery.html">Gallery</a>
-<a class="nl" href="install.html">Install</a>
-<a class="btn" href="/zh/gallery.html" onclick="localStorage.setItem('pz-lang','zh')">中文</a><a class="btn solid" id="ghbtn" href="https://github.com/rocsgh/ppt-zen">GitHub &#9733; <small id="ghstars"></small></a>
-</div></nav></div><div class="wrap d">
-<img class="hero-img" src="img/dunhuang-mural.jpg" alt="Dunhuang Mural"/>
-<h1>Dunhuang Mural</h1><div class="chipsrow"><span class="chip">Fresco</span><span class="chip">mogao</span><span class="chip">mineral-pigment</span><span class="chip">buddhist</span><span class="chip">aged</span></div>
-<p>A Mogao-cave fresco — mineral pigment, aged wall, flying figures.</p><p><i>Swatch shows the same line — <code>Signal over noise</code> — rendered in this material, so the surface is the only variable.</i></p>
-<h2>Prompt formula</h2><pre>SURFACE:  An ancient cave-wall mural in the Dunhuang manner — the awe of a thousand-year painted wall. Aged plaster ground with fine craquelure, flaking edges revealing earlier paint layers, mineral pigments - malachite green, azurite blue, iron-red ochre, and cut-gold leaf halos. One graceful apsara ribbon of cloud-scroll drifts along the top edge, pale and secondary. All Chinese characters brushed in dense lamp-black with the poise of sutra calligraphy on a prepared white-lime cartouche band so they stay perfectly legible; the two RESULT lines larger, each on its own cartouche with a thin gold-leaf edge; a small iron-red seal mark low. The awe comes from the wall itself - layered, weathered, glowing mineral color. Text zones stay clean lime-white so nothing fights the characters. CRITICAL DIFFERENTIATION - this is pigment on aged plaster wall, NOT paper painting — cracks and flaking are of the wall; no photographic realism of modern objects, no 3D render, no vector.
-SKELETON: auto by page role (cover / chapter / list / compare)
-DEVICE:   the page&#x27;s argument drawn as a form native to this material
-END:      Full-bleed 16:9 — render DEVICE on the SURFACE, per the page&#x27;s composition.
-CRITICAL: title in clean legible English; NEVER invent extra words or non-English glyphs;
-annotations only as marks / numbers / dimension lines; no UI, no cards, no captions.</pre><h2>Source</h2><p>Material recipe from the PPT-Zen 32-material library. Our own artwork.</p>
-<p class="kick" style="margin-top:24px">License: CC-BY-4.0 &middot; contributions via DCO</p>
-<p style="margin-top:18px"><a class="btn" href="gallery.html">&larr; All styles</a> <a class="btn solid" href="install.html">Use this style</a></p>
-</div><footer><div class="wrap"><div class="cols">
-<div>PPT-Zen &middot; a judgment layer for AI-made slides<br/>
-Apache-2.0 (judgment layer) &middot; CC-BY-4.0 (styles) &middot; inspired by <i>Presentation Zen</i></div>
+<a class="nl" href="method.html">方法论</a>
+<a class="nl on" href="example.html">案例</a>
+<a class="nl" href="gallery.html">画廊</a>
+<a class="nl" href="install.html">安装</a>
+<a class="btn" href="/example.html" onclick="localStorage.setItem('pz-lang','en')">EN</a><a class="btn solid" id="ghbtn" href="https://github.com/rocsgh/ppt-zen">GitHub &#9733; <small id="ghstars"></small></a>
+</div></nav></div><div class="wrap">
+<section class="hero" style="display:block;padding-bottom:0">
+<div class="kick">完整案例 &middot; 虚构产品，数字为演示内容</div>
+<h1 style="font-size:clamp(2.2rem,5vw,3.4rem);letter-spacing:-.035em;line-height:1.02;margin:12px 0 0">Relayboard ——<br/>十页，一句话。</h1>
+<p class="lede" style="max-width:62ch;font-size:1.1rem;color:var(--ink2);margin-top:16px">
+<b>输入：</b>「用航海图（Portolan）风格，给异步站会工具 Relayboard 做一套 10 页 pitch。」
+<b>输出：</b>下面这些页——一个增长故事，讲成 16 世纪海图上的一场远航。
+旁边的标签就是判断日志——截图截不走的那部分。注意节奏：提纲挈领 &rarr; 密集证据块 &rarr; 一句话收尾。所有数字都渲染在图里，个个清晰。</p>
+</section>
+<section class="sec" style="border-top:none;margin-top:36px;padding-top:0"><div class="rb"><img loading="lazy" src="../img/rbp/01-cover.jpg" alt="cover"/>
+<div class="meta"><span class="d hd">HEADLINE</span><b>封面</b><p>器物：船队启航，驶向标记的目的地</p><div class="tx">Relayboard — Async standup that respects deep work.</div></div></div><div class="rb"><img loading="lazy" src="../img/rbp/02-problem.jpg" alt="problem"/>
+<div class="meta"><span class="d hd">HEADLINE</span><b>问题</b><p>器物：航线在海中央断裂</p><div class="tx">Standups interrupt the people doing the work.</div></div></div><div class="rb"><img loading="lazy" src="../img/rbp/03-cost.jpg" alt="cost"/>
+<div class="meta"><span class="d hd">HEADLINE</span><b>成本</b><p>器物：巨大数字 + 领航员两脚规</p><div class="tx">23 min to refocus after a single interruption.</div></div></div><div class="rb"><img loading="lazy" src="../img/rbp/04-product.jpg" alt="product"/>
+<div class="meta"><span class="d hd">HEADLINE</span><b>产品</b><p>器物：交通艇靠上大船</p><div class="tx">The standup comes to you.</div></div></div><div class="rb"><img loading="lazy" src="../img/rbp/05-how.jpg" alt="how"/>
+<div class="meta"><span class="d">DETAIL</span><b>流程</b><p>器物：一条虚线航路上的三座岛</p><div class="tx">1 Post async · 2 Blockers surface · 3 Only who&#x27;s needed syncs</div></div></div><div class="rb"><img loading="lazy" src="../img/rbp/06-traction.jpg" alt="traction"/>
+<div class="meta"><span class="d">DETAIL</span><b>增长</b><p>器物：船队爬升上扬的航道</p><div class="tx">340 teams · $28k MRR · +22% MoM</div></div></div><div class="rb"><img loading="lazy" src="../img/rbp/07-pricing.jpg" alt="pricing"/>
+<div class="meta"><span class="d">DETAIL</span><b>定价</b><p>器物：三条由小到大的船</p><div class="tx">Free · Team $6/seat · Scale $12/seat</div></div></div><div class="rb"><img loading="lazy" src="../img/rbp/08-competition.jpg" alt="competition"/>
+<div class="meta"><span class="d">DETAIL</span><b>竞位</b><p>器物：羊皮纸上的 2×2 象限，一枚红点</p><div class="tx">sync↔async · heavy↔lightweight</div></div></div><div class="rb"><img loading="lazy" src="../img/rbp/09-roadmap.jpg" alt="roadmap"/>
+<div class="meta"><span class="d">DETAIL</span><b>路线图</b><p>器物：海岸线航路，三个港口</p><div class="tx">Now · Q3 · Q4</div></div></div><div class="rb"><img loading="lazy" src="../img/rbp/10-ask.jpg" alt="ask"/>
+<div class="meta"><span class="d hd">HEADLINE</span><b>募资</b><p>器物：一条冲向日出的红色航线</p><div class="tx">Raising $1.5M to give every team its focus back.</div></div></div></section>
+<section class="sec"><div class="shead"><span class="num">&#8646;</span><h2>同一套判断，另一个世界</h2></div>
+<p class="lede">同样的十页，换成高级暗色编辑风材质——计划、详略、文案一字未动，只换了材质。这一换，就是整个产品。</p>
+<div class="strip"><img loading="lazy" src="../img/rb/01-cover.jpg" alt=""/><img loading="lazy" src="../img/rb/03-cost.jpg" alt=""/><img loading="lazy" src="../img/rb/07-pricing.jpg" alt=""/><img loading="lazy" src="../img/rb/10-ask.jpg" alt=""/></div></section>
+<section class="sec"><div class="shead"><span class="num">&#8594;</span><h2>复现它</h2></div>
+<p class="lede">逐页的完整 prompt 就在 <a href="https://github.com/rocsgh/ppt-zen/tree/master/examples" style="text-decoration:underline">examples/</a> （两个版本都有）——材质 + 器物 + 逐字文案 + 防乱码尾注，一行命令拼装。</p>
+<pre>cd examples/relayboard-portolan          # or examples/relayboard (dark edition)
+cp ../../.env.example .env               # your image model key
+python3 gen.py                           # 10 pages -> slides/
+python3 ../../scripts/assemble_pptx.py slides deck.pptx</pre>
+<p style="margin-top:14px"><i>Relayboard 是虚构产品，所有数字都是演示内容。真实使用中这个 skill 绝不编造事实——缺的数字会显示 [TO CONFIRM] 占位。</i></p>
+</section></div><footer><div class="wrap"><div class="cols">
+<div>PPT-Zen &middot; AI 幻灯片的判断层<br/>
+判断层 Apache-2.0 &middot; 风格 CC-BY-4.0 &middot; 受《演说之禅》启发</div>
 <div style="text-align:right">
-<a href="https://github.com/rocsgh/ppt-zen">GitHub</a> &middot; <a href="https://github.com/rocsgh/ppt-zen/blob/master/CONTRIBUTING.md">Contribute a style</a> &middot; <a href="https://github.com/rocsgh/ppt-zen/blob/master/DESIGN.md">Design notes</a><br/>
-<span class="kick" style="letter-spacing:.1em">Hosted version &mdash; coming</span>
+<a href="https://github.com/rocsgh/ppt-zen">GitHub</a> &middot; <a href="https://github.com/rocsgh/ppt-zen/blob/master/CONTRIBUTING.md">贡献风格</a> &middot; <a href="https://github.com/rocsgh/ppt-zen/blob/master/DESIGN.md">设计笔记</a><br/>
+<span class="kick" style="letter-spacing:.1em">托管版 &mdash; 敬请期待</span>
 </div></div></div></footer><script>
 fetch('https://api.github.com/repos/rocsgh/ppt-zen').then(r=>r.json()).then(d=>{
  if(d && typeof d.stargazers_count==='number'){var e=document.getElementById('ghstars');

@@ -1,12 +1,12 @@
-<!doctype html><html lang="en"><head><meta charset="utf-8">
+<!doctype html><html lang="zh-CN"><head><meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Dunhuang Mural · PPT-Zen</title>
-<meta name="description" content="Fresco recipe for AI-made slides, with a reproducible prompt formula.">
-<link rel="canonical" href="https://pptzen.xyz/dunhuang-mural.html">
+<title>安装 · PPT-Zen</title>
+<meta name="description" content="Install the PPT-Zen skill in Claude Code, Codex CLI, Cursor, Windsurf, Hermes, OpenClaw or Copilot — one command each — and wire any OpenAI-compatible image model.">
+<link rel="canonical" href="https://pptzen.xyz/zh/install.html">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='12' fill='%2316151a'/%3E%3Ctext x='32' y='44' font-family='Georgia,serif' font-size='36' fill='%23f7f5f0' text-anchor='middle'%3E%E7%A6%85%3C/text%3E%3C/svg%3E">
 <meta property="og:type" content="website"><meta property="og:site_name" content="PPT-Zen">
-<meta property="og:title" content="Dunhuang Mural · PPT-Zen"><meta property="og:description" content="Fresco recipe for AI-made slides, with a reproducible prompt formula.">
-<meta property="og:url" content="https://pptzen.xyz/dunhuang-mural.html"><meta property="og:image" content="https://pptzen.xyz/img/dunhuang-mural.jpg">
+<meta property="og:title" content="Install · PPT-Zen"><meta property="og:description" content="Install the PPT-Zen skill in Claude Code, Codex CLI, Cursor, Windsurf, Hermes, OpenClaw or Copilot — one command each — and wire any OpenAI-compatible image model.">
+<meta property="og:url" content="https://pptzen.xyz/zh/install.html"><meta property="og:image" content="https://pptzen.xyz/img/swiss-grid.jpg">
 <meta name="twitter:card" content="summary_large_image">
 <style>
 :root{
@@ -162,31 +162,73 @@ tr:hover td{background:var(--panel)}
  .chain .ln{opacity:1;transform:none}
 }
 @media(prefers-contrast:more){:root{--muted:#54525a;--line:#c9c6bf;--line2:#b0ada5}}
-</style></head><body><div class="wrap"><nav><a class="mark" href="index.html"><img class="wm" src="img/logo-wordmark.png" alt="PPT-Zen"/></a>
+</style><link rel="alternate" hreflang="en" href="https://pptzen.xyz/install.html"><link rel="alternate" hreflang="zh" href="https://pptzen.xyz/zh/install.html"><link rel="alternate" hreflang="x-default" href="https://pptzen.xyz/install.html"></head><body><script>(function(){try{
+var pref=localStorage.getItem('pz-lang');
+var zh=location.pathname.indexOf('/zh/')===0;
+var page='install.html'==='index.html'?'':'install.html';
+if(zh){if(pref==='en'){location.replace('/'+page);}}
+else{if(pref==='zh'){location.replace('/zh/'+page);}
+else if(!pref&&((navigator.language||'').toLowerCase().indexOf('zh')===0)){location.replace('/zh/'+page);}}
+}catch(e){}})();</script><div class="wrap"><nav><a class="mark" href="index.html"><img class="wm" src="../img/logo-wordmark.png" alt="PPT-Zen"/></a>
 <div class="navlinks">
-<a class="nl" href="method.html">Method</a>
-<a class="nl" href="example.html">Example</a>
-<a class="nl on" href="gallery.html">Gallery</a>
-<a class="nl" href="install.html">Install</a>
-<a class="btn" href="/zh/gallery.html" onclick="localStorage.setItem('pz-lang','zh')">中文</a><a class="btn solid" id="ghbtn" href="https://github.com/rocsgh/ppt-zen">GitHub &#9733; <small id="ghstars"></small></a>
-</div></nav></div><div class="wrap d">
-<img class="hero-img" src="img/dunhuang-mural.jpg" alt="Dunhuang Mural"/>
-<h1>Dunhuang Mural</h1><div class="chipsrow"><span class="chip">Fresco</span><span class="chip">mogao</span><span class="chip">mineral-pigment</span><span class="chip">buddhist</span><span class="chip">aged</span></div>
-<p>A Mogao-cave fresco — mineral pigment, aged wall, flying figures.</p><p><i>Swatch shows the same line — <code>Signal over noise</code> — rendered in this material, so the surface is the only variable.</i></p>
-<h2>Prompt formula</h2><pre>SURFACE:  An ancient cave-wall mural in the Dunhuang manner — the awe of a thousand-year painted wall. Aged plaster ground with fine craquelure, flaking edges revealing earlier paint layers, mineral pigments - malachite green, azurite blue, iron-red ochre, and cut-gold leaf halos. One graceful apsara ribbon of cloud-scroll drifts along the top edge, pale and secondary. All Chinese characters brushed in dense lamp-black with the poise of sutra calligraphy on a prepared white-lime cartouche band so they stay perfectly legible; the two RESULT lines larger, each on its own cartouche with a thin gold-leaf edge; a small iron-red seal mark low. The awe comes from the wall itself - layered, weathered, glowing mineral color. Text zones stay clean lime-white so nothing fights the characters. CRITICAL DIFFERENTIATION - this is pigment on aged plaster wall, NOT paper painting — cracks and flaking are of the wall; no photographic realism of modern objects, no 3D render, no vector.
-SKELETON: auto by page role (cover / chapter / list / compare)
-DEVICE:   the page&#x27;s argument drawn as a form native to this material
-END:      Full-bleed 16:9 — render DEVICE on the SURFACE, per the page&#x27;s composition.
-CRITICAL: title in clean legible English; NEVER invent extra words or non-English glyphs;
-annotations only as marks / numbers / dimension lines; no UI, no cards, no captions.</pre><h2>Source</h2><p>Material recipe from the PPT-Zen 32-material library. Our own artwork.</p>
-<p class="kick" style="margin-top:24px">License: CC-BY-4.0 &middot; contributions via DCO</p>
-<p style="margin-top:18px"><a class="btn" href="gallery.html">&larr; All styles</a> <a class="btn solid" href="install.html">Use this style</a></p>
+<a class="nl" href="method.html">方法论</a>
+<a class="nl" href="example.html">案例</a>
+<a class="nl" href="gallery.html">画廊</a>
+<a class="nl on" href="install.html">安装</a>
+<a class="btn" href="/install.html" onclick="localStorage.setItem('pz-lang','en')">EN</a><a class="btn solid" id="ghbtn" href="https://github.com/rocsgh/ppt-zen">GitHub &#9733; <small id="ghstars"></small></a>
+</div></nav></div><div class="wrap prose">
+<section class="hero" style="display:block;padding-bottom:0">
+<div class="kick">安装</div>
+<h1 style="font-size:clamp(2.2rem,5vw,3.4rem);letter-spacing:-.035em;margin:12px 0 0">一行命令，<br/>装进你的运行时。</h1>
+</section>
+<h2><span class="num">1</span>拿仓库、装技能</h2>
+<pre>git clone https://github.com/rocsgh/ppt-zen
+cd ppt-zen
+./install.sh claude --global      # see the matrix below for your runtime</pre>
+<div class="tablewrap" style="margin-top:16px"><table>
+<tr><th>运行时</th><th>命令</th><th>装到哪</th><th>触发方式</th></tr>
+<tr><td><b>Claude Code</b></td><td><code>./install.sh claude [--global]</code></td><td><code>.claude/skills/ppt-zen/</code></td><td><code>/ppt-zen</code> or just ask for a deck</td></tr>
+<tr><td><b>OpenClaw</b></td><td><code>./install.sh openclaw [--global]</code></td><td><code>.openclaw/skills/ppt-zen/</code></td><td>直接说要做 deck</td></tr>
+<tr><td><b>Hermes</b></td><td><code>./install.sh hermes [--global]</code></td><td><code>.hermes/skills/ppt-zen/</code></td><td>直接说要做 deck</td></tr>
+<tr><td><b>Codex CLI</b></td><td><code>./install.sh codex [--global]</code></td><td><code>AGENTS.md</code> / <code>~/.codex/AGENTS.md</code></td><td>被动——自动读取</td></tr>
+<tr><td><b>Cursor</b></td><td><code>./install.sh cursor</code></td><td><code>.cursor/rules/ppt-zen.mdc</code></td><td>被动——自动生效</td></tr>
+<tr><td><b>Windsurf</b></td><td><code>./install.sh windsurf</code></td><td><code>.windsurf/rules/ppt-zen.md</code></td><td>被动——自动生效</td></tr>
+<tr><td><b>GitHub Copilot</b></td><td><code>./install.sh copilot</code></td><td><code>.github/instructions/</code></td><td>被动——自动生效</td></tr>
+<tr><td>全部</td><td><code>./install.sh all</code></td><td>以上全部</td><td>—</td></tr>
+</table></div>
+<p style="margin-top:12px">技能安装是自包含的（SKILL.md + references + styles + scripts + examples + <code>styles.json</code>）。完全没有 skill 系统？把 <code>SKILL.md</code> 整段贴进会话当上下文即可。</p>
+<h2><span class="num">2</span>接上图像模型</h2>
+<p>每一页都是生成的图。如果你的 agent 本身带图像工具，什么都不用配——skill 直接用它。否则把内置脚本指向<b>任意 OpenAI 兼容的图像端点</b>：</p>
+<pre>cp .env.example .env                  # IMAGE_API_BASE_URL / IMAGE_API_KEY / IMAGE_MODEL / IMAGE_SIZE
+python3 scripts/gen_image.py --check  # verify before a long run</pre>
+<p>PPT-Zen <b>不带任何 key、不绑定任何模型</b>——判断是开源的，像素是你自己的。</p>
+<h2><span class="num">3</span>做一套片——你实际要说的话</h2>
+<p>在任何项目里打开你的 agent，直接说话。一句话就能开始；剩下的它来判断，绝不会反问你版式问题：</p>
+<pre>"Make me a 10-page pitch deck about &lt;your project&gt; with ppt-zen, in the Portolan style."
+"Design a keynote about our Q3 results — pick a material that fits."   <span style="color:#8f8d97"># 它自己选</span>
+"One slide only: '23 minutes to refocus', make it land."               <span style="color:#8f8d97"># 单页也行</span></pre>
+<p>agent 会先写 <code>plan.md</code>（页 &middot; 详略 &middot; 器物 &middot; 逐字文案 &middot; 风格）——想过目就过目——然后逐页出图到 <code>slides/</code>。之后对着页迭代：</p>
+<pre>"Regenerate page 6 — the numbers feel cramped."
+"Swap the whole deck to the Kintsugi material."      <span style="color:#8f8d97"># 同一计划，换个世界</span>
+"Page 4's device isn't readable, try a funnel."</pre>
+<p><b>把真实数据喂给它。</b>附上提纲 / 指标 / 链接——真数字会上片；缺的只会显示 <code>[TO CONFIRM]</code> 占位，绝不编造。页面都校对干净之后：</p>
+<pre>pip install python-pptx
+python3 scripts/assemble_pptx.py slides/ deck.pptx</pre>
+<h2><span class="num">?</span>FAQ</h2>
+<div class="faq">
+<details><summary>哪些图像模型能用？</summary><p>任何走 OpenAI 兼容 <code>/images/generations</code> 路由的——OpenAI 的 gpt-image 系、各类中转、网关。画廊样张用 gpt-image 级模型在 1536&times;1024 生成。非 16:9 的输出会在拼装时居中裁切，所以 prompt 会让关键内容避开上下约 8%。</p></details>
+<details><summary>拼出来的 .pptx 能编辑吗？</summary><p>它是图片型的：每页一整张满幅图。放映、导 PDF、导入 Keynote/Google Slides 都行——但文字不可编辑。改错字 = 重出那一页（skill 支持单页重出）。</p></details>
+<details><summary>它会替我编数字吗？</summary><p>不会——这是硬规则。事实只来自你的输入；缺的会显示成 <code>[TO CONFIRM]</code> 占位。skill 只定版式，绝不编事实。</p></details>
+<details><summary>我能加自己的风格吗？</summary><p>能——复制 <code>styles/_template/</code>，填好 STYLE.md（材质配方 + 一张样张），提 PR。画廊和 <code>styles.json</code> 自动重建。风格是 CC-BY-4.0，贡献走 DCO。</p></details>
+<details><summary>跑一次要花多少钱？</summary><p>取决于你的图像端点收费——10 页 = 10 张图（加上你自己选择的单页重试）。</p></details>
+</div>
+<p style="margin-top:26px"><a class="btn solid" href="https://github.com/rocsgh/ppt-zen">打开 GitHub</a> <a class="btn" href="example.html">先看一套成片</a></p>
 </div><footer><div class="wrap"><div class="cols">
-<div>PPT-Zen &middot; a judgment layer for AI-made slides<br/>
-Apache-2.0 (judgment layer) &middot; CC-BY-4.0 (styles) &middot; inspired by <i>Presentation Zen</i></div>
+<div>PPT-Zen &middot; AI 幻灯片的判断层<br/>
+判断层 Apache-2.0 &middot; 风格 CC-BY-4.0 &middot; 受《演说之禅》启发</div>
 <div style="text-align:right">
-<a href="https://github.com/rocsgh/ppt-zen">GitHub</a> &middot; <a href="https://github.com/rocsgh/ppt-zen/blob/master/CONTRIBUTING.md">Contribute a style</a> &middot; <a href="https://github.com/rocsgh/ppt-zen/blob/master/DESIGN.md">Design notes</a><br/>
-<span class="kick" style="letter-spacing:.1em">Hosted version &mdash; coming</span>
+<a href="https://github.com/rocsgh/ppt-zen">GitHub</a> &middot; <a href="https://github.com/rocsgh/ppt-zen/blob/master/CONTRIBUTING.md">贡献风格</a> &middot; <a href="https://github.com/rocsgh/ppt-zen/blob/master/DESIGN.md">设计笔记</a><br/>
+<span class="kick" style="letter-spacing:.1em">托管版 &mdash; 敬请期待</span>
 </div></div></div></footer><script>
 fetch('https://api.github.com/repos/rocsgh/ppt-zen').then(r=>r.json()).then(d=>{
  if(d && typeof d.stargazers_count==='number'){var e=document.getElementById('ghstars');

@@ -610,10 +610,23 @@ def build():
     }
     for p in packs:
         pages[p["slug"] + ".html"] = page_detail(p)
+    # i18n layer: /zh/ siblings of the marketing pages + switcher + auto-detect
+    import i18n_zh
+    i18n_zh.BASE_URL = BASE_URL
+    os.makedirs(os.path.join(DOCS, "zh"), exist_ok=True)
+    zh_count = 0
     for fn, content in pages.items():
+        if fn in i18n_zh.MARKETING:
+            open(os.path.join(DOCS, "zh", fn), "w", encoding="utf-8").write(
+                i18n_zh.make_zh(content, fn))
+            zh_count += 1
+            content = i18n_zh.inject_en(content, fn)
+        else:
+            content = i18n_zh.inject_detail(content)
         open(os.path.join(DOCS, fn), "w", encoding="utf-8").write(content)
     # sitemap + robots
     urls = ["", "method.html", "example.html", "gallery.html", "install.html"] + \
+           ["zh/", "zh/method.html", "zh/example.html", "zh/gallery.html", "zh/install.html"] + \
            [p["slug"] + ".html" for p in packs]
     sm = ['<?xml version="1.0" encoding="UTF-8"?>',
           '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">'] + \
@@ -622,7 +635,7 @@ def build():
     open(os.path.join(DOCS, "robots.txt"), "w").write(
         "User-agent: *\nAllow: /\nSitemap: %s/sitemap.xml\n" % BASE_URL)
     open(os.path.join(DOCS, ".nojekyll"), "w").write("")
-    print("site built: %d pages (%d styles) + sitemap + robots" % (len(pages), len(packs)))
+    print("site built: %d en pages + %d zh pages (%d styles)" % (len(pages), zh_count, len(packs)))
 
 
 if __name__ == "__main__":
