@@ -24,7 +24,7 @@ while [ $# -gt 0 ]; do
   esac; shift
 done
 
-BUNDLE="references styles scripts styles.json .env.example"
+BUNDLE="references styles scripts examples styles.json .env.example"
 
 install_skill_dir() {  # $1 = base dir that will contain SKILL.md
   local d="$1"

@@ -114,8 +114,8 @@ python3 scripts/assemble_pptx.py slides/ deck.pptx
 | **GitHub Copilot** | `./install.sh copilot` | `.github/instructions/` | passive — auto-applied |
 | everything | `./install.sh all` | all of the above | — |
 
-Skill installs are **self-contained** (SKILL.md + references + styles + scripts + `styles.json`,
-the machine-readable style index). `AGENTS.md` installs update in place between idempotent markers.
+Skill installs are **self-contained** (SKILL.md + references + styles + scripts + examples +
+`styles.json`, the machine-readable style index). `AGENTS.md` installs update in place between idempotent markers.
 The full mapping lives in [`install/targets.json`](install/targets.json); passive-runtime files are
 generated from `AGENTS.md` by `scripts/gen_adapters.py`.
 

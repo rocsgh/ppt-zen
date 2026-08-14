@@ -114,7 +114,7 @@ python3 scripts/assemble_pptx.py slides/ deck.pptx
 | **GitHub Copilot** | `./install.sh copilot` | `.github/instructions/` | 被动——自动生效 |
 | 全部 | `./install.sh all` | 以上全部 | — |
 
-技能安装是**自包含**的（SKILL.md + references + styles + scripts + `styles.json` 机器可读风格索引）；
+技能安装是**自包含**的（SKILL.md + references + styles + scripts + examples + `styles.json` 机器可读风格索引）；
 `AGENTS.md` 安装带幂等标记、重装原地更新。完整映射见 [`install/targets.json`](install/targets.json)；
 被动运行时的文件由 `scripts/gen_adapters.py` 从 `AGENTS.md` 生成。
 

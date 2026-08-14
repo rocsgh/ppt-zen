@@ -7,7 +7,6 @@ description: >-
   material. Also use when the user says "ppt-zen" or names a ppt-zen gallery style
   (Portolan, Swiss grid, Ink wash, Neon Nocturne, ...).
 license: Apache-2.0
-allowed-tools: Read Write Edit Bash
 metadata:
   homepage: https://pptzen.xyz
   version: "1.0"
@@ -53,7 +52,9 @@ sit side by side"?** Because **hearing is linear; seeing is simultaneous.**
 Two rules that run automatically:
 - **Evidence pages must be DETAIL** — right after "AI already names competitors", show the names.
   Evidence you can't see doesn't count.
-- **A DETAIL page is followed by a breathing page** — two dense pages in a row loses the room.
+- **Dense stretches need relief** — never stack two *visually heavy* treatments back-to-back.
+  A run of DETAIL pages is fine when each stays light (three labels, one chart, a 2×2 — see the
+  example's evidence block), but land on a breathing HEADLINE page after the block.
 
 You decide the knob per page. You do **not** ask the user.
 
@@ -116,6 +117,15 @@ Use only facts the user supplied. For any number/claim you don't have, write a v
 factual claims each page will show and confirm every one traces to the user's input. A deck is
 presented as true; a beautiful slide with a made-up "$28k MRR" is a liability, not a feature.
 
+**How facts get in — two modes** (this is how "one sentence in" and "never invent" coexist):
+- **Source-backed (default):** the sentence sets the deck; facts come from whatever material the
+  user attached or the conversation already contains. If a data page has no source, it ships with
+  placeholders — a complete *structural* draft the user fills in, not a fact-ready deck.
+- **Research mode (only if your runtime can browse and the user asked for it):** you may gather
+  facts, but every claim gets its source recorded in `plan.md` next to the page that uses it.
+The one-sentence promise is about *form* — the user never answers layout questions. It is not a
+license to hallucinate content.
+
 ## 6. Full-image generation — four hard rules
 
 Each page is one self-contained prompt. Always:
@@ -157,11 +167,16 @@ Dense/text-heavy pages: generate at higher resolution than single-word pages.
    This is the judgment log (the part nobody can screenshot). Decide material once, up front.
 2. **Generate** — one image per page into `slides/NN.jpg`, using the agent's image tool or
    `scripts/gen_image.py`. Use deterministic filenames; regenerate a single page in isolation.
-3. **QC every page** — proofread every character of every title against the plan, check the crop
-   didn't eat content, confirm no invented glyphs and no cross-page contradiction. This human/agent
-   gate is where the quality comes from — don't skip it.
-4. **Assemble** — `python3 scripts/assemble_pptx.py slides/ deck.pptx` (16:9, full-bleed). The result
-   is an **image-based** `.pptx`: great to present, but text isn't editable — fixing a typo means
+   Work in the user's project directory; call the helpers by their full path under the repo or the
+   installed skill directory (`gen_image.py` reads `.env` from the current directory first, then
+   from the repo root next to the script).
+3. **QC the images** — proofread every character of every title against the plan, confirm no
+   invented glyphs and no cross-page contradiction, and check nothing important sits in the
+   top/bottom ~8% that assembly will crop. This gate is where the quality comes from.
+4. **Assemble, then check the deck** — `python3 scripts/assemble_pptx.py slides/ deck.pptx`
+   (16:9 full-bleed; non-16:9 images are center cover-cropped). Open the result: page order,
+   crop, nothing eaten. Regenerate and reassemble single pages as needed. The output is an
+   **image-based** `.pptx`: great to present, but text isn't editable — fixing a typo means
    regenerating that one page. PDF / Keynote / Google Slides import the same images.
 
 See `examples/relayboard/` for a full ten-page worked deck plus its judgment log.
@@ -170,7 +185,7 @@ delivery coaching — currently in Chinese; load them when you need the underlyi
 
 ## Delivery self-check
 
-- [ ] Density set per page? Evidence pages detailed, detail pages followed by a breathing page?
+- [ ] Density set per page? Evidence pages detailed, dense blocks landing on a breathing page?
 - [ ] Each page: a device that reads (or a deliberate "none"), one main device only?
 - [ ] Material fixed across the whole deck? Style resolved to a real slug?
 - [ ] **Every factual claim traces to the user's input? No invented numbers/quotes/prices/dates?**

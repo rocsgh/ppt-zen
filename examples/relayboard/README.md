@@ -30,7 +30,7 @@ This file is the **judgment log** — the part you can't screenshot. In PPT-Zen 
 | 09 | roadmap | **detail** — a sequence you scan | timeline, three milestone dots | `Roadmap` · Now · Q3 · Q4 |
 | 10 | ask | **headline** — one line to land on | an arrow sweeping to a horizon | *Raising $1.5M to give every team its focus back.* |
 
-**The shape is the point.** Pages 1–4 are single-idea (headline). Pages 5–8 are the dense evidence block (detail) — steps, metrics, tiers, a competitive map, things that *only hold up when several items sit side by side*. Page 10 returns to a single line to land on. That **headline → detail → headline** rhythm is the judgment layer at work, not decoration: hearing is linear, seeing is simultaneous, so a claim gets a headline and evidence gets a grid.
+**The shape is the point.** Pages 1–4 are single-idea (headline). Pages 5–8 are the dense evidence block (detail) — steps, metrics, tiers, a competitive map, things that *only hold up when several items sit side by side*. Page 10 returns to a single line to land on. That **headline → detail → headline** rhythm is the judgment layer at work, not decoration: hearing is linear, seeing is simultaneous, so a claim gets a headline and evidence gets a grid. (Pages 5–9 are deliberately a *run* of DETAIL pages — the block works because each keeps a light treatment: three labels, one line, one 2×2. The rule the skill enforces is to land on a breathing page after a dense block, which page 10 does.)
 
 It also doubles as a text-fidelity check: every number, label, axis and price above is rendered *inside the image* — `23 min`, `$28k MRR`, `+22% MoM`, `$6 / seat`, the quadrant labels — and comes out clean. Full-image slides are not limited to one big word.
 

@@ -507,7 +507,7 @@ cd ppt-zen
 <tr><td><b>GitHub Copilot</b></td><td><code>./install.sh copilot</code></td><td><code>.github/instructions/</code></td><td>passive — auto-applied</td></tr>
 <tr><td>everything</td><td><code>./install.sh all</code></td><td>all of the above</td><td>—</td></tr>
 </table></div>
-<p style="margin-top:12px">Skill installs are self-contained (SKILL.md + references + styles + scripts + <code>styles.json</code>). No skill system at all? Paste <code>SKILL.md</code> into the session as context.</p>
+<p style="margin-top:12px">Skill installs are self-contained (SKILL.md + references + styles + scripts + examples + <code>styles.json</code>). No skill system at all? Paste <code>SKILL.md</code> into the session as context.</p>
 <h2><span class="num">2</span>Wire an image model</h2>
 <p>Every page is a generated image. If your agent already has an image tool, there's nothing to do — the skill uses it. Otherwise point the bundled helper at <b>any OpenAI-compatible images endpoint</b>:</p>
 <pre>cp .env.example .env                  # IMAGE_API_BASE_URL / IMAGE_API_KEY / IMAGE_MODEL / IMAGE_SIZE
