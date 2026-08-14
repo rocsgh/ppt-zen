@@ -198,7 +198,7 @@ cd ppt-zen
 </table></div>
 <p style="margin-top:12px">Skill installs are self-contained (SKILL.md + references + styles + scripts + examples + <code>styles.json</code>). No skill system at all? Paste <code>SKILL.md</code> into the session as context.</p>
 <h2><span class="num">2</span>Wire an image model</h2>
-<p>Every page is a generated image. If your agent already has an image tool, there's nothing to do — the skill uses it. Otherwise point the bundled helper at <b>any OpenAI-compatible images endpoint</b>:</p>
+<p>Every page is a generated image. If your agent already has an image tool, there's nothing to do — the skill uses it. Otherwise point the bundled helper at <b>any endpoint that implements the OpenAI <code>/images/generations</code> API</b> (accepts <code>{model, prompt, size, n}</code>, returns <code>b64_json</code> or <code>url</code> — chat-only "compatible" gateways don't count):</p>
 <pre>cp .env.example .env                  # IMAGE_API_BASE_URL / IMAGE_API_KEY / IMAGE_MODEL / IMAGE_SIZE
 python3 scripts/gen_image.py --check  # verify before a long run</pre>
 <p>PPT-Zen ships <b>no key and no model</b> — the judgment is open source, the pixels are yours.</p>
@@ -220,7 +220,7 @@ python3 scripts/assemble_pptx.py slides/ deck.pptx</pre>
 <details><summary>Is the .pptx editable?</summary><p>It's image-based: each slide is one full-bleed image. Present it, export PDF, or import into Keynote/Google Slides — but text isn't editable. Fixing a typo means regenerating that one page (the skill supports single-page regeneration).</p></details>
 <details><summary>Will it invent numbers for my deck?</summary><p>No — that's a hard rule. Facts come from your input; anything missing becomes a visible <code>[TO CONFIRM]</code> placeholder. The skill decides form, never facts.</p></details>
 <details><summary>Can I add my own style?</summary><p>Yes — copy <code>styles/_template/</code>, fill in the STYLE.md (material recipe + a sample), open a PR. The gallery and <code>styles.json</code> regenerate automatically. Styles are CC-BY-4.0, contributions via DCO.</p></details>
-<details><summary>What does it cost to run?</summary><p>Whatever your image endpoint charges — a 10-page deck is 10 images (plus any single-page retries you choose).</p></details>
+<details><summary>What does it cost to run?</summary><p>Whatever your image endpoint charges — a 10-page deck is 10 images plus any single-page retries. Order of magnitude (OpenAI gpt-image list prices, mid-2026): roughly $0.06–0.25 per 1536&times;1024 image depending on quality tier, so a first pass is about $1–3; budget 20–40 minutes including proofreading. Check your own endpoint's pricing.</p></details>
 </div>
 <p style="margin-top:26px"><a class="btn solid" href="https://github.com/rocsgh/ppt-zen">Open GitHub</a> <a class="btn" href="example.html">See a finished deck first</a></p>
 </div><footer><div class="wrap"><div class="cols">

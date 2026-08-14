@@ -31,11 +31,11 @@ ZH = [
  ("Per page it sets the density (headline vs. detail), picks the device — the argument drawn as a thing — and holds one material across the whole deck.",
   "它逐页决定详略（提纲挈领还是细化）、想出器物——把这页的论点画成一个东西——并且全片只用一种材质。"),
  ("Full-image pages that hold up", "整页出图，经得起看"),
- ("Every slide is one designed image — typography, texture and illustration in the material you chose. English and dense data render clean.",
-  "每一页都是一整张设计好的图——排印、质感、插画都长在你选的材质里。英文与密集数据都渲染得干干净净。"),
+ ("Every slide is one designed image — typography, texture and illustration in the material you chose. English and dense data render clean; you proofread each page, and a miss regenerates in one command.",
+  "每一页都是一整张设计好的图——排印、质感、插画都长在你选的材质里。英文与密集数据渲染得干净；每页你都要校对一遍，出错的页一行命令单独重出。"),
  ("Open source, your image model", "开源，图像模型你自带"),
  ("Apache-2.0 judgment layer + CC-BY styles. Works with any agent that generates images, or any OpenAI-compatible endpoint. No key ships in the repo.",
-  "判断层 Apache-2.0 + 风格 CC-BY。任何能生图的 agent 或任何 OpenAI 兼容端点都能用。仓库不带任何 key。"),
+  "判断层 Apache-2.0 + 风格 CC-BY。任何能生图的 agent，或任何实现 OpenAI 图像接口的端点都能用。仓库不带任何 key。"),
  # home sections
  ("Judgment, not generation", "判断，而不是生成"),
  ("Every AI PPT tool turns content into pages. PPT-Zen open-sources the part nobody else does: <b>for each page — how much should it hold, what should it look like, and on what grounds?</b> The finished deck is copyable; the chain of decisions is not.",
@@ -102,8 +102,8 @@ ZH = [
  ("Skill installs are self-contained (SKILL.md + references + styles + scripts + examples + <code>styles.json</code>). No skill system at all? Paste <code>SKILL.md</code> into the session as context.",
   "技能安装是自包含的（SKILL.md + references + styles + scripts + examples + <code>styles.json</code>）。完全没有 skill 系统？把 <code>SKILL.md</code> 整段贴进会话当上下文即可。"),
  ("Wire an image model", "接上图像模型"),
- ("Every page is a generated image. If your agent already has an image tool, there's nothing to do — the skill uses it. Otherwise point the bundled helper at <b>any OpenAI-compatible images endpoint</b>:",
-  "每一页都是生成的图。如果你的 agent 本身带图像工具，什么都不用配——skill 直接用它。否则把内置脚本指向<b>任意 OpenAI 兼容的图像端点</b>："),
+ ("Every page is a generated image. If your agent already has an image tool, there's nothing to do — the skill uses it. Otherwise point the bundled helper at <b>any endpoint that implements the OpenAI <code>/images/generations</code> API</b> (accepts <code>{model, prompt, size, n}</code>, returns <code>b64_json</code> or <code>url</code> — chat-only \"compatible\" gateways don't count):",
+  "每一页都是生成的图。如果你的 agent 本身带图像工具，什么都不用配——skill 直接用它。否则把内置脚本指向<b>实现了 OpenAI <code>/images/generations</code> 接口的任意端点</b>（接受 <code>{model, prompt, size, n}</code>、返回 <code>b64_json</code> 或 <code>url</code>——只兼容 chat 的\"兼容\"网关不算）："),
  ("PPT-Zen ships <b>no key and no model</b> — the judgment is open source, the pixels are yours.",
   "PPT-Zen <b>不带任何 key、不绑定任何模型</b>——判断是开源的，像素是你自己的。"),
  ("Make a deck — what you actually say", "做一套片——你实际要说的话"),
@@ -129,8 +129,8 @@ ZH = [
  ("Yes — copy <code>styles/_template/</code>, fill in the STYLE.md (material recipe + a sample), open a PR. The gallery and <code>styles.json</code> regenerate automatically. Styles are CC-BY-4.0, contributions via DCO.",
   "能——复制 <code>styles/_template/</code>，填好 STYLE.md（材质配方 + 一张样张），提 PR。画廊和 <code>styles.json</code> 自动重建。风格是 CC-BY-4.0，贡献走 DCO。"),
  ("What does it cost to run?", "跑一次要花多少钱？"),
- ("Whatever your image endpoint charges — a 10-page deck is 10 images (plus any single-page retries you choose).",
-  "取决于你的图像端点收费——10 页 = 10 张图（加上你自己选择的单页重试）。"),
+ ("Whatever your image endpoint charges — a 10-page deck is 10 images plus any single-page retries. Order of magnitude (OpenAI gpt-image list prices, mid-2026): roughly $0.06–0.25 per 1536&times;1024 image depending on quality tier, so a first pass is about $1–3; budget 20–40 minutes including proofreading. Check your own endpoint's pricing.",
+  "取决于你的图像端点收费——10 页 = 10 张图，外加你选择的单页重试。量级参考（OpenAI gpt-image 官方价，2026 年中）：1536&times;1024 每张约 $0.06–0.25（看质量档），首轮 10 页约 $1–3；含逐页校对预留 20–40 分钟。以你自己端点的价格为准。"),
  ("See a finished deck first", "先看一套成片"),
  # method page
  (">The method<", ">方法论<"),
@@ -273,4 +273,13 @@ def make_zh(html_s, page):  # noqa: F811 — extend the base translator
         html_s = html_s.replace(">%s</button>" % en, ">%s</button>" % zh)      # filter buttons (data-f untouched)
         html_s = html_s.replace('class="sub">%s<' % en, 'class="sub">%s<' % zh)  # card sublabel, no hand
         html_s = html_s.replace('class="sub">%s &middot;' % en, 'class="sub">%s &middot;' % zh)  # with hand
+    # zh journey: main GitHub links land on the Chinese README (deep links untouched)
+    html_s = html_s.replace('href="https://github.com/rocsgh/ppt-zen">',
+                            'href="https://github.com/rocsgh/ppt-zen/blob/master/README.zh-CN.md">')
+    html_s = html_s.replace('href="https://github.com/rocsgh/ppt-zen#quick-start">',
+                            'href="https://github.com/rocsgh/ppt-zen/blob/master/README.zh-CN.md#%E5%BF%AB%E9%80%9F%E5%BC%80%E5%A7%8B">')
+    # method-term glosses on first-contact labels
+    html_s = html_s.replace('>HEADLINE</span>', '>提纲 HEADLINE</span>')
+    html_s = html_s.replace('>DETAIL</span>', '>细化 DETAIL</span>')
     return html_s
+

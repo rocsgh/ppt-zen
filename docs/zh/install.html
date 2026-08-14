@@ -175,7 +175,7 @@ else if(!pref&&((navigator.language||'').toLowerCase().indexOf('zh')===0)){locat
 <a class="nl" href="example.html">案例</a>
 <a class="nl" href="gallery.html">画廊</a>
 <a class="nl on" href="install.html">安装</a>
-<a class="btn" href="/install.html" onclick="localStorage.setItem('pz-lang','en')">EN</a><a class="btn solid" id="ghbtn" href="https://github.com/rocsgh/ppt-zen">GitHub &#9733; <small id="ghstars"></small></a>
+<a class="btn" href="/install.html" onclick="localStorage.setItem('pz-lang','en')">EN</a><a class="btn solid" id="ghbtn" href="https://github.com/rocsgh/ppt-zen/blob/master/README.zh-CN.md">GitHub &#9733; <small id="ghstars"></small></a>
 </div></nav></div><div class="wrap prose">
 <section class="hero" style="display:block;padding-bottom:0">
 <div class="kick">安装</div>
@@ -198,7 +198,7 @@ cd ppt-zen
 </table></div>
 <p style="margin-top:12px">技能安装是自包含的（SKILL.md + references + styles + scripts + examples + <code>styles.json</code>）。完全没有 skill 系统？把 <code>SKILL.md</code> 整段贴进会话当上下文即可。</p>
 <h2><span class="num">2</span>接上图像模型</h2>
-<p>每一页都是生成的图。如果你的 agent 本身带图像工具，什么都不用配——skill 直接用它。否则把内置脚本指向<b>任意 OpenAI 兼容的图像端点</b>：</p>
+<p>每一页都是生成的图。如果你的 agent 本身带图像工具，什么都不用配——skill 直接用它。否则把内置脚本指向<b>实现了 OpenAI <code>/images/generations</code> 接口的任意端点</b>（接受 <code>{model, prompt, size, n}</code>、返回 <code>b64_json</code> 或 <code>url</code>——只兼容 chat 的"兼容"网关不算）：</p>
 <pre>cp .env.example .env                  # IMAGE_API_BASE_URL / IMAGE_API_KEY / IMAGE_MODEL / IMAGE_SIZE
 python3 scripts/gen_image.py --check  # verify before a long run</pre>
 <p>PPT-Zen <b>不带任何 key、不绑定任何模型</b>——判断是开源的，像素是你自己的。</p>
@@ -220,14 +220,14 @@ python3 scripts/assemble_pptx.py slides/ deck.pptx</pre>
 <details><summary>拼出来的 .pptx 能编辑吗？</summary><p>它是图片型的：每页一整张满幅图。放映、导 PDF、导入 Keynote/Google Slides 都行——但文字不可编辑。改错字 = 重出那一页（skill 支持单页重出）。</p></details>
 <details><summary>它会替我编数字吗？</summary><p>不会——这是硬规则。事实只来自你的输入；缺的会显示成 <code>[TO CONFIRM]</code> 占位。skill 只定版式，绝不编事实。</p></details>
 <details><summary>我能加自己的风格吗？</summary><p>能——复制 <code>styles/_template/</code>，填好 STYLE.md（材质配方 + 一张样张），提 PR。画廊和 <code>styles.json</code> 自动重建。风格是 CC-BY-4.0，贡献走 DCO。</p></details>
-<details><summary>跑一次要花多少钱？</summary><p>取决于你的图像端点收费——10 页 = 10 张图（加上你自己选择的单页重试）。</p></details>
+<details><summary>跑一次要花多少钱？</summary><p>取决于你的图像端点收费——10 页 = 10 张图，外加你选择的单页重试。量级参考（OpenAI gpt-image 官方价，2026 年中）：1536&times;1024 每张约 $0.06–0.25（看质量档），首轮 10 页约 $1–3；含逐页校对预留 20–40 分钟。以你自己端点的价格为准。</p></details>
 </div>
-<p style="margin-top:26px"><a class="btn solid" href="https://github.com/rocsgh/ppt-zen">打开 GitHub</a> <a class="btn" href="example.html">先看一套成片</a></p>
+<p style="margin-top:26px"><a class="btn solid" href="https://github.com/rocsgh/ppt-zen/blob/master/README.zh-CN.md">打开 GitHub</a> <a class="btn" href="example.html">先看一套成片</a></p>
 </div><footer><div class="wrap"><div class="cols">
 <div>PPT-Zen &middot; AI 幻灯片的判断层<br/>
 判断层 Apache-2.0 &middot; 风格 CC-BY-4.0 &middot; 受《演说之禅》启发</div>
 <div style="text-align:right">
-<a href="https://github.com/rocsgh/ppt-zen">GitHub</a> &middot; <a href="https://github.com/rocsgh/ppt-zen/blob/master/CONTRIBUTING.md">贡献风格</a> &middot; <a href="https://github.com/rocsgh/ppt-zen/blob/master/DESIGN.md">设计笔记</a><br/>
+<a href="https://github.com/rocsgh/ppt-zen/blob/master/README.zh-CN.md">GitHub</a> &middot; <a href="https://github.com/rocsgh/ppt-zen/blob/master/CONTRIBUTING.md">贡献风格</a> &middot; <a href="https://github.com/rocsgh/ppt-zen/blob/master/DESIGN.md">设计笔记</a><br/>
 <span class="kick" style="letter-spacing:.1em">托管版 &mdash; 敬请期待</span>
 </div></div></div></footer><script>
 fetch('https://api.github.com/repos/rocsgh/ppt-zen').then(r=>r.json()).then(d=>{

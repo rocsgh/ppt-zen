@@ -163,8 +163,11 @@ Dense/text-heavy pages: generate at higher resolution than single-word pages.
 
 ## 8. Workflow (one sentence in → a deck out)
 
-1. **Plan** — write `plan.md`: one row per page with `role · density · device · exact text · style_slug`.
-   This is the judgment log (the part nobody can screenshot). Decide material once, up front.
+1. **Plan** — write `plan.md`: one row per page with `role · density · device · exact text · style_slug`,
+   plus a header `language:` line. **On-slide text defaults to the language the user is working in** —
+   a Chinese conversation gets a Chinese deck unless they ask otherwise (the demo decks being English
+   does not make English the default). This is the judgment log (the part nobody can screenshot).
+   Decide material once, up front.
 2. **Generate** — one image per page into `slides/NN.jpg`, using the agent's image tool or
    `scripts/gen_image.py`. Use deterministic filenames; regenerate a single page in isolation.
    Work in the user's project directory; call the helpers by their full path under the repo or the
