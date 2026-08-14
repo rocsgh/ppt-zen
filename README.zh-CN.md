@@ -85,25 +85,41 @@ PPT-Zen 判断并生成每一页；你最终拿到：
 git clone https://github.com/rocsgh/ppt-zen
 cd ppt-zen
 
-# 1. 装技能（以 Claude Code 为例；或你 agent 的技能目录）
-mkdir -p ~/.claude/skills/ppt-zen
-cp SKILL.md ~/.claude/skills/ppt-zen/
-cp -R references ~/.claude/skills/ppt-zen/
+# 1. 按你的运行时装技能（矩阵见下）
+./install.sh claude --global          # Claude Code -> ~/.claude/skills/ppt-zen/
 
 # 2. 给它一个图像模型（agent 本身能生图就跳过）
-cp .env.example .env        # 然后把你的 key 填进 .env
+cp .env.example .env                  # 把你的 key 填进 .env
+python3 scripts/gen_image.py --check  # 跑长任务前先验证
 
-# 3. 在你的 agent 里，一句话描述这份 deck：
+# 3. 在你的 agent 里，一句话：
 #    "用 ppt-zen 帮我做一个关于 <你的项目> 的 10 页 pitch，用航海图风格。"
-#    -> 它规划每一页，然后逐页把图生成到 slides/
+#    -> 它先出页面计划（plan.md），再逐页把图生成到 slides/
 
-# 4. 把这些图拼成一份真正的 .pptx
+# 4. 拼成图片型 .pptx（非 16:9 的图会居中裁切到 16:9）
 pip install python-pptx
 python3 scripts/assemble_pptx.py slides/ deck.pptx
 ```
 
-**不支持 skill 的 agent？** 把 `SKILL.md` 整段贴进会话当上下文。
-**依赖：** `gen_image.py` 和构建脚本都是纯标准库；只有 `assemble_pptx.py` 需要 `python-pptx`。
+### 安装矩阵——按运行时选
+
+| 运行时 | 命令 | 装到哪 | 触发方式 |
+|---|---|---|---|
+| **Claude Code** | `./install.sh claude [--global]` | `.claude/skills/ppt-zen/` | `/ppt-zen` 或直接说要做 deck |
+| **OpenClaw** | `./install.sh openclaw [--global]` | `.openclaw/skills/ppt-zen/` | 直接说要做 deck |
+| **Hermes** | `./install.sh hermes [--global]` | `.hermes/skills/ppt-zen/` | 直接说要做 deck |
+| **Codex CLI** | `./install.sh codex [--global]` | `AGENTS.md` / `~/.codex/AGENTS.md` | 被动——自动读取 |
+| **Cursor** | `./install.sh cursor` | `.cursor/rules/ppt-zen.mdc` | 被动——自动生效 |
+| **Windsurf** | `./install.sh windsurf` | `.windsurf/rules/ppt-zen.md` | 被动——自动生效 |
+| **GitHub Copilot** | `./install.sh copilot` | `.github/instructions/` | 被动——自动生效 |
+| 全部 | `./install.sh all` | 以上全部 | — |
+
+技能安装是**自包含**的（SKILL.md + references + styles + scripts + `styles.json` 机器可读风格索引）；
+`AGENTS.md` 安装带幂等标记、重装原地更新。完整映射见 [`install/targets.json`](install/targets.json)；
+被动运行时的文件由 `scripts/gen_adapters.py` 从 `AGENTS.md` 生成。
+
+**完全没有 skill 系统？** 把 `SKILL.md` 整段贴进会话当上下文。
+**依赖：** 辅助脚本纯标准库；只有 `assemble_pptx.py` 需要 `python-pptx`（自带 Pillow，用于 16:9 裁切）。
 
 ## 图像生成（自备模型）
 

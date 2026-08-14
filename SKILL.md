@@ -1,433 +1,179 @@
 ---
-name: pt-ppt
-description: PT 的幻灯片/演说设计标准（做 PPT 的统一入口 · v2 全书蒸馏版）。用户说「做个 PPT / 出一套 deck / 用 pt-ppt / 按我们的 PPT 标准」或涉及演讲辅导时必须加载。《演说之禅》315 页全书已蒸馏进本 skill 的 references/ 六件（地图/准备/设计法则/视觉模式库/呈现/金句），按任务路由按需加载。五层：⓪逐页定详略（线性说得完→提纲挈领；必须并置→细化，由 Claude 判断不问用户）①创意（核心命题闸门+一页一职能+故事骨架）②纯设计法则地板（信噪比/CRAP/图片证据门槛）③出图＝材质×骨架两轴相乘（32 材质母版 × 5 大师骨架，骨架按页面职能自动派）④呈现（演讲执行）⑤品味（引用 pt-ui 老板档案，不复制）。与 pt-ui 并列：pt-ui 管交互屏幕，pt-ppt 管幻灯片与演说。
+name: ppt-zen
+description: >-
+  Make a slide deck, slides, a presentation, a pitch, or a keynote — or design a single
+  slide. Full-bleed image slides with a judgment layer: decides per page how much it should
+  hold (headline vs. detail) and what to draw (the device), renders every page in ONE chosen
+  material. Also use when the user says "ppt-zen" or names a ppt-zen gallery style
+  (Portolan, Swiss grid, Ink wash, Neon Nocturne, ...).
+license: Apache-2.0
+allowed-tools: Read Write Edit Bash
+metadata:
+  homepage: https://pptzen.xyz
+  version: "1.0"
 ---
 
-# PT-PPT · 幻灯片 / 演说设计标准（统一入口 · v3）
+# PPT-Zen — a judgment layer for AI-made slides
 
-工作台**做 PPT / deck / 演讲**的单一入口。与 [[pt-ui]] 并列——pt-ui 管交互屏幕，pt-ppt 管幻灯片与演说，**共享同一份「老板品味档案」**（品味通用，工艺分介质）。
+You already turn content into pages. This skill is the layer most tools skip: **for each page,
+how much should it hold, what should it look like, and on what grounds?** The user gives one
+sentence ("make me a deck about X"); you decide everything else and render each page full-image.
 
-理论根基：《演说之禅》(Presentation Zen 2nd ed, Garr Reynolds) **全书已蒸馏进本 skill 的 `references/`**（2026-07-22，315 页逐页精读 + GPT 独立复核纠错 20 条），按下面路由表按需加载；不再依赖外部摘要。全图出图规则见 brain [[工作台-全图PPT出图与风格库]]。
+## 0. What this needs — image generation (engine-agnostic)
 
----
+Every page is a generated image. You need exactly one way to make images. In order of preference:
 
-## 📖 路由表（先判任务，再读对应参考——别全加载）
+1. **The agent already has an image-generation tool.** Use it. The contract this skill assumes is
+   minimal: `generate(prompt: str, size: str) -> image bytes/file`, landscape, ≥1.3 MP. If your
+   runtime's tool has a different signature, adapt — you only ever need "prompt in, one landscape
+   image out."
+2. **No image tool? Use the bundled helper.** `scripts/gen_image.py "<full-page prompt>" out.jpg`
+   calls any OpenAI-compatible images endpoint. Copy `.env.example` to `.env`, set
+   `IMAGE_API_BASE_URL`, `IMAGE_API_KEY`, `IMAGE_MODEL`, `IMAGE_SIZE`. It POSTs
+   `{model, prompt, size, n:1}` to `{BASE}/images/generations` and reads `data[0].b64_json`
+   (or `data[0].url`). Run `python3 scripts/gen_image.py --check` first to verify the endpoint.
 
-| 任务 | 必读 references/ |
-|---|---|
-| 出大纲 / 内容策划 / 讲什么 | `zen-prepare.md`（核心命题闸门/三层分流/SUCCESs/故事板） |
-| 设计幻灯片（任何形式） | `zen-design.md`（七原则法则书,每条带数字与边界）+ `zen-visual-patterns.md` |
-| 全图式出图（你的图像生成工具 整页） | `zen-visual-patterns.md`（模式名直接进 COMPOSITION）+ 全图四硬规则（下文） |
-| 选骨架 / 大师构图 / 材质×骨架相乘 | `skeletons.md`（**五个大师骨架 + 按职能派表 + 相乘 prompt 结构 + 失败模式**）|
-| 选材质母版 / "Maya 那种" / 密集布局配方 | `deck-modes.md`（32 材质母版 + 两种版面配方；**已按第零步的一根旋钮改写**：留白/密集不再是两种产物，而是逐页拧的两种配方） |
-| 演讲辅导 / 彩排 / 现场执行 | `zen-delivery.md`（开场/节奏/乔布斯13条/TED十诫） |
-| 写 deck 文案 / 需要引用原文 | `zen-quotes.md`（金句库,逐字带页码） |
-| 术语拿不准 / 怕引错概念 | `zen-map.md`（全书地图+易错表——20 条已固化,别再犯） |
+**This skill ships NO image key and NO model.** It is the judgment + prompts; the pixels come from
+your model.
 
----
+> Aspect ratio: image models rarely emit native 16:9. Generate landscape (e.g. `1536x1024`, 3:2)
+> and let assembly **cover-crop to 16:9** — so keep every title and key element clear of the top
+> and bottom ~8% of the frame (say so in each prompt). `scripts/assemble_pptx.py` does the crop.
 
-## 🔱 第零步 · 逐页定详略（最重要，决定每页放多少）
+## 1. The one rule of density (this is the whole method in one line)
 
-**不再分「Ⓐ 演讲背景图 / Ⓑ 信息 deck」两种产物**（PT 2026-08-07 拍板推翻）。
-理由：PT 的片子几乎都是有人讲的，纯"无人讲"极少；而且他不要"带备注版"——**现场只投幻灯片，观众看不到备注**。
-所以正确的模型是**一份片子、逐页拧的一个旋钮**，而且**这个判断由 Claude 做，不问用户**。
+For every page ask: **is this "sayable in a line", or does it "only hold up when several things
+sit side by side"?** Because **hearing is linear; seeing is simultaneous.**
 
-### 判据只有一条
+| the page is… | → knob | put on screen |
+|---|---|---|
+| one claim / one number / a chapter beat | **HEADLINE** | one word, one number, one sentence |
+| steps, a comparison, a list, a matrix | **DETAIL** | lay the things out so they can be scanned |
 
-> **这页的内容，是"线性说得完"的，还是"必须并置才成立"的？**
-> 因为**听觉是线性的，视觉是并置的**。
+Two rules that run automatically:
+- **Evidence pages must be DETAIL** — right after "AI already names competitors", show the names.
+  Evidence you can't see doesn't count.
+- **A DETAIL page is followed by a breathing page** — two dense pages in a row loses the room.
 
-| 旋钮位置 | 什么内容 | 页面放什么 | 例 |
-|---|---|---|---|
-| **提纲挈领** | 一句话/一个数说得完 | 一个词、一个数、一句主张 | 「2%」「货架变了」章节页、结尾页 |
-| **细化** | 要同时看到好几样才明白 | 把东西摆出来，可扫读 | 八条长尾问句墙、5→3→2 收敛、六件事清单 |
+You decide the knob per page. You do **not** ask the user.
 
-**两条自动执行的次级规则：**
-1. **证据页必须细化**——刚说完"AI 已经在点名了"，下一页就得把名字摆出来。**证据看不见就不成立。**
-2. **细化页后面接一页疏的**——连着两页密的听众会掉线；密→疏是节奏，也是把眼睛还给讲者。
+## 2. The four axes (independent — don't merge them)
 
-### 地板跟着旋钮连续变（不是二选一）
+| axis | what | who decides |
+|---|---|---|
+| **Density** | headline ↔ detail | you, per page (rule §1) |
+| **Skeleton** | how the frame is cut (grid / light-band / flowline / color-field / standoff… or none) | auto, by the page's job |
+| **Device** | **the page's argument, drawn as a thing** | you, per page — the highest-value axis |
+| **Material** | what it's made of (ink wash / copperplate / cinematic / Swiss grid…) | **chosen once, whole deck** |
 
-- **越靠提纲挈领** → 越归《演说之禅》管：留白、一页一义、屏幕文字≠讲稿
-- **越靠细化** → 越归**信息设计**管：①单一入口（先看哪儿要明确）②密度靠分层不靠堆砌 ③每个元素都有信息职能，纯装饰删掉 ④离线也读得懂
+## 3. Device — draw the argument (most-skipped axis)
 
-> ⚠️ 别拿禅的尺子量细化页。Reynolds 反对的是 slideument（既当幻灯片又当文档），
-> 不是反对信息密度本身——复杂框架图不归禅管，归信息设计管。
+Material is "made of what"; skeleton is "how the frame is cut" — **neither says what to draw.**
+The device is the gap between them: **this page's meaning, drawn as an object.**
+- "a score" → a measuring stick; "70% at work, 30% at home" → a balance scale; "asking once is
+  luck" → dots scattering then converging (that *is* sampling); "AI names only 1–2 brands" → a funnel.
+- Test: **looking at the object, can you guess what the page is about?** If not, change it.
+- **One main device per page.** Two competing illustrations = no illustration.
+- Some pages have none (a pure comparison, a list, a single number). Forcing a device there loses.
 
-### 四根轴（相互独立，别混）
+**How to find it (don't skip to drawing):** ① keyword the page in 2–3 words → ② map each to a
+visible thing → ③ sketch 2–3 candidates → ④ pick the simplest that reads, not the cleverest.
 
-| 轴 | 是什么 | 怎么定 | 作用范围 |
-|---|---|---|---|
-| **详略** | 提纲挈领 ↔ 细化 | **Claude 按上面判据逐页判** | 逐页 |
-| **骨架** | 画面怎么被切分（网格/光带/流线/色域/对峙…**可以不派**） | **按页面职能自动派**（见 `skeletons.md`） | 逐页 |
-| **器物** | **这一页的论点，画成什么东西** | **逐页想，最费脑子也最值钱**（见下） | 逐页 |
-| **材质** | 用什么做的（水墨/达芬奇铜版/铅笔手绘…32 母版） | 全片选一次；不说就用 PT 口味默认 | **全片统一** |
+**Illustration has levels, not on/off** — and good pages stack them:
+`L0` material+type only · `L1` faint margin studies (credibility, no info) · `L2` typography IS the
+image (a chapter word) · `L3` a small mark that replaces a sentence (a red ✗ = "this one's false")
+· `L4` a main device that owns the page. "No main device" ≠ blank — it still gets L1/L2 or L3.
 
-#### 🔧 第三根轴 · 器物（PT 2026-08-08 提出，**最容易被漏掉的一根**）
+**Cross-page consistency (single-page checks miss this):** for any recurring character or concept,
+write its identity down and put it (and its bans) into *every* page's prompt — a model doesn't know
+what the other pages drew. (e.g. "Maya = a person, never a robot/gears/circuitry.")
 
-> PT 原话：「我觉得很多页面除了骨架、材质，还需要细节。细节是新版 PPT 最忽略的部分。」
+## 4. Material — chosen once; pick from the gallery
 
-**材质管"用什么笔触做的"，骨架管"画面怎么切分"——它们俩都不管"画什么"。**
-中间这个空档就是器物：**这一页的意思，用什么东西把它画出来。**
+Material is the deck's identity: change skeleton and device per page, but **hold material fixed** so
+ten pages read as one artifact. (Only break it if the material *change itself* is the argument, once,
+at a real turning point.)
 
-保险 deck 57 页两版对照实证（旧版有器物、新版只有几何，PT 一眼看出新版"差了很多意思"）：
+Browse `styles/<slug>/STYLE.md` (or the live gallery at https://pptzen.xyz, and `styles.json` for a
+machine-readable index of slug → name / medium / hand / prompt_formula). Each pack ships a reusable
+`prompt_formula` (SURFACE / SKELETON / DEVICE / END / CRITICAL). Resolve a user's named style to its
+slug via `styles.json` (match `name`, `slug`, or `aliases`) and record the resolved slug in the plan.
 
-| 这页在说 | 器物 |
-|---|---|
-| 分数怎么看 | 一把**刻度尺** |
-| 70 分嘴上 + 30 分家里 | 一杆**天平** |
-| 问一次纯属运气 | **点阵散开又收敛成一点**（这就是采样本身） |
-| AI 只报 1-2 个名字 | 一个**漏斗** |
-| 这套流程 Maya 替你跑 | 一台**齿轮机器**，名字嵌在中心轴 |
-| 你的客户在见你之前 | 一只**举起的手** |
-| 这是一门新学问 | 一本**摊开的古书**，会议名写在书页上 |
+**Three-layer selection** — medium → hand → world:
+- **medium** = the craft (cinema, ink, copperplate, tile…). **hand** = whose treatment within it
+  (a cold monumental hand vs. a warm hazy hand are the same medium, different eyes). **world** = the
+  scene the deck lives in. If the user only gives a vibe, pick a medium that fits the subject's own
+  materials; ask one question only if genuinely stuck.
 
-**器物不是装饰，是论证。** 达芬奇的方法本来就是把一个想法画成一台机器；水墨的方法是把它化成一个物象。
-**把器物层留空 = 一张有质感的纸上摆了个几何图，谁的手稿都不像。**
+## 5. Facts vs. form — decide the FORM, never invent FACTS
 
-**三条纪律：**
-1. **插画必须是这页论点的可视化**，不能是"跟主题沾边的好看东西"。
-   问一句：**看着这个东西，能不能猜出这页在说什么？** 猜不出就换。
-2. **一页一件主插画**（其余降级为点缀与边饰），不是堆一屋子道具。
-3. **有些页本来就没有主插画**——纯对比（5 家 vs 3 家）、纯清单、纯一个数。
-   这类页**硬塞主插画反而输**（实证：PT 点名新版更好的三页，全是这类）。
+The judgment layer owns **how a page looks**, not **what it claims**. Hard rule:
 
-### 🎚 插画有量级，不是有/无（PT 2026-08-08 指出，修正我原来的二值模型）
+> **Never invent metrics, quotations, prices, dates, company names, or fundraising asks.**
 
-> PT 原话：「不是每个页面都有大幅插画，也可以有很多**点缀插画**。」
+Use only facts the user supplied. For any number/claim you don't have, write a visible placeholder
+(`[TO CONFIRM]`, `<your metric>`) — never a plausible-looking fabrication. Before generating, list the
+factual claims each page will show and confirm every one traces to the user's input. A deck is
+presented as true; a beautiful slide with a made-up "$28k MRR" is a liability, not a feature.
 
-**我原来把插画做成了开关**：一页要么有 DEVICE，要么标 NO_DEVICE。
-结果 NO_DEVICE 被执行成"什么都不画"——章节页和六连快切页因此出得光秃秃，
-后来只能打补丁（"排印本身可以是插画""一个记号也可以是插画"）。
-**那些补丁其实在说同一件事：插画是连续量，不是布尔值。**
+## 6. Full-image generation — four hard rules
 
-| 量级 | 是什么 | 有无信息职能 | 例（保险 deck 实证） |
-|---|---|---|---|
-| **L0 真·无** | 只有材质和字 | — | 极少数呼吸页 |
-| **L1 边饰研究稿** | 外边距上的淡草图 | **无**，只负责"这确实是达芬奇的一页纸"的材质可信度 | 四角的飞行器、螺旋、手部习作 |
-| **L2 排印即插画** | 没画东西，但排印就是画面 | 有 | 章节页竖排大字；高桥法整屏一词 |
-| **L3 点缀插画** | 小、不抢主体，但替代了一句话 | **有** | 六连快切右下的蓝色 ✗（判假）；四张交付物上的羽毛笔/扳手/信封/图表 |
-| **L4 主插画** | 占画面主要面积，论点就是它 | 有 | 齿轮机器、刻度尺、天平、举起的手、漏斗 |
+Each page is one self-contained prompt. Always:
+1. **Density in layers** — background texture fills but recedes; one hero ~70%; foreground accents
+   limited; **no floating data cards / sidebars / widgets.**
+2. **Never invent glyphs** — state the exact text to render and forbid any other words; decorative
+   marks must be geometric only (ticks, numbers, dimension lines). Non-Latin scripts especially:
+   spell out the exact characters and forbid additions.
+3. **Suppress structural words** — end every prompt with a CRITICAL line forbidding prompt-structure
+   words (STYLE / SURFACE / DEVICE / VERBATIM / label / caption…) from appearing in the image.
+4. **Pin exact text length** — "render exactly these N words/characters — no additions", or the model
+   adds a stray word.
 
-**关键：五级可以叠加，而且好页通常是叠出来的。**
-六连快切那六页 = **L2 大字 + L3 蓝叉 + L1 四角草图** —— 它成立正是因为三级都在，
-而我第一版只给了 L2，所以它输给了旧版。
-
-### 点缀插画（L3）的四条纪律
-
-1. **有信息职能才叫点缀，否则是装饰。**
-   判据：**它替代了一句话吗？** 蓝色 ✗ 等于"这条是假的"，省掉一行字 → 是点缀。
-   一个跟主题沾边的小图案，什么都没替代 → 是装饰，删。
-2. **就近，不撒。** 点缀必须**挂在它修饰的东西旁边**（CRAP 的"就近"）。
-   撒在空白处的一律是装饰——**我最初写"边饰纪律"就是被乱撒逼出来的，但当时修过头，把 L4 一起禁了。**
-3. **同概念同形。** 同一个概念在全片的点缀必须长一样（六页的 ✗ 必须是同一个 ✗、同一个位置）。
-4. **密度预算**（一页最多几个）：**有主插画的页 0–2 个；无主插画的页 3–6 个；快切页 1 个。**
-   超了就是在堆道具。
-
-### ⚠️ 能力缺口：点缀图元还没有资产化
-
-**现状**：每个点缀都是在整页 prompt 里用文字描述的，一次性。同一个 ✗ 在六页里靠**同一段描述**复现——
-**能用，但会漂移**（形状、粗细、位置每次都略有不同）。
-
-**该怎么做**：一次生成**一张同材质的点缀网格图**，用 `ppt-master/scripts/slice_images.py --grid RxC --trim --alpha`
-切成独立的透明图元，存进这份 deck 的点缀库，之后各页复用同一份文件。
-
-⚠️ **全图 deck 绝不能用内置的 SVG 图标库**（11,600 个）——那些图标**自带风格**，
-和当前材质（水墨/达芬奇铜版/铅笔）会当场打架，违反材质锁定。**必须自产同材质图元。**
-
-🔗 **但真正的复用要等图层能力**：现在流水线是"整页烧成一张图"，图元没法合成上去。
-**这是「文字层分离」那条路线的第二个理由**——文字层和点缀层需要的是同一个能力（图层合成）。
-在那之前，点缀只能靠写死的复用描述，并接受漂移。
-
-⚠️ **防乱画的规则要写成"禁在该空的地方乱填"，不能写成"禁画东西"**——
-后者会连器物一起掐死（我 2026-08-08 就是这么把整份 deck 做薄的）。
-
-#### 器物 = 这一页的插画（PT 2026-08-08 的定义，比"器物"更准）
-
-> PT 原话：「不管是器物也好、细节也好，它就类似于**一本书内容的插画**。
-> 这个插画怎么**紧扣这一页的主题**，同时又**通过插画的方式来吸引用户的注意**，我觉得这就是原则。」
-
-这句话本身就是验收闸——**两个条件必须同时成立**：
-**①紧扣主题**（不是"跟主题沾边的好看东西"）＋**②抓住注意**（不是安静地待在角落当装饰）。
-只满足①是图解，只满足②是插图噪音，**两个都要**。
-
-**从编辑插画(editorial illustration)行业规范借来的五条**（2026-08-08 查证，来源见文末）：
-
-1. **不是装饰，是加一层意思**——插画的价值在于**给文字加上文字本身没有的一层含义**，
-   不是把文字再画一遍。判据：**把这张图删掉，这页会不会变弱？**不会就说明它是装饰。
-2. **隐喻优先于字面直译**——好的编辑插画是对文章的**概念回应**，不是内容的literal描摹。
-   「问一次纯属运气」不该画一个人在问 AI，该画**点阵散开又收敛成一条线**（那就是采样本身）。
-3. **聪明但别烧脑**（clever but not confusing）——**清晰度压倒巧妙度**。
-   行业原话：illustration should **communicate, not enigmatise**。观众要在两秒内读懂，不是解谜。
-4. **克制**——再繁复的风格也要做减法，删掉一切不服务于那个主意的元素。
-   （与我们的信噪比法则同源，但这里针对的是**图内**：一页一件主插画，不是堆一屋子道具。）
-   ⚠️ **反面教材（我写完这条转头就犯，2026-08-08）**：「这套流程 Maya 替你跑」那页，
-   我同时放了**齿轮机器**和**一圈闭环坡道带六个阶段名**——信息看着更全，实际两件插画在互相抢，
-   PT 一眼判旧版（只有机器）更好。**两件插画 = 没有插画。**
-   自查法：这页如果只能留一件，留哪件？留不下的那件就该删。
-5. **不混风格**——GitHub Primer 的两条硬规则是「不要改动插画本身」「不要把不同风格的图混在一起」。
-   我们的对应物就是**材质全片锁死**：所有插画必须出自同一套笔触。
-
-**怎么想出这一页的插画（行业标准四步，别跳步直接画）**：
+Prompt skeleton (material × skeleton × device):
 ```
-① 抓关键词  —— 这页的核心主张写成 2-3 个词（"采样""噪声""平均"）
-② 隐喻映射  —— 每个关键词能对应到什么可见的东西?(噪声→散开的墨点;平均→一条稳定的线)
-③ 多个缩略  —— 至少想 2-3 个候选,别拿第一个就走(行业做法:thumbnail sketches)
-④ 挑最简单能读懂的那个 —— 不是最巧的那个
+SURFACE:  <the chosen material's recipe — one per deck>
+SKELETON: <auto by page role; or "plain">
+DEVICE:   <this page's argument as an object; or "none">
+TEXT:     <exact words to render, and where>
+CRITICAL: render ONLY the text above; every letter correct; no invented glyphs; no other language;
+          no structure words; keep key content clear of top/bottom ~8%.
 ```
-
-⚠️ **我 2026-08-07 的错就是跳过了①②③④**：直接把骨架的纯几何当成了插画。
-纯几何满足不了"吸引注意"，也谈不上"加一层意思"——它连图解都不算。
-
-#### ⚠️ 第四道闸：跨页一致性（2026-08-08 补，前三道闸都是单页的，漏了这个）
-
-前三道闸——材质锁定、排印层级、插画覆盖——**全是单页判定**。
-它们答不了这一问：**这页画的东西，会不会跟另一页的论点打架？**
-
-**真实事故**：保险 deck 里，p36 立的论点是「不是工具，是**雇人**」，Maya 画成一个当代职业女性；
-两页之后 p52 讲她怎么工作，模型自作主张画了一台**齿轮自动机在写字**——画面漂亮、材质也对、
-单页三道闸全过，但**它把 p36 的论点当场拆了**。同一份 deck 前脚说她是人，后脚画成机器。
-
-**闸**：deck 里凡是**跨页反复出现的角色或概念**，先写下它的**身份约定**，然后
-**把约定和禁令写进每一页的 prompt**——不能只写在有她的那一页。
-
-```
-角色约定（示例）
-  Maya = 你雇的一个人。当代职业女性。
-  永远不画成：机器人 / 自动机 / 齿轮机构 / 金属皮肤 / 电路 / 发光眼睛
-  科技感只允许出现在：她的装束、她身边的仪器 —— 绝不进她的身体
-```
-
-**为什么必须写进每一页**：模型不知道别的页画了什么。材质会把它往它自己的老路上带
-（达芬奇材质天然想画自动机、水墨天然想画山水），**你不明确禁，它就按材质的惯性走**。
-
-**自查**：出完图后，把同一个角色/概念出现的所有页并排看一次——
-它在每一页是同一种东西吗？（这一步只能靠看图，读 prompt 看不出来。）
-
-#### 由此定下的工序：**逐页打磨是一道独立工序，不是出图的副产品**
-
-> PT 2026-08-08：「每个页面的细节打磨，比如应该配什么图、这个页面的具体内容和表现形式等等，
-> 我觉得这都是**非常核心的东西**。」
-
-所以出图之前必须**单独走一遍逐页打磨**，一页一页过这三问，**写下来**再进 prompt：
-
-1. **配什么图** —— 这页的器物是什么？（看着它猜得出这页在说什么吗？真没有就明写"无"）
-2. **具体内容** —— 这页到底放哪几行字？一个字一个字定，不是把大纲抄上去
-3. **表现形式** —— 这页是提纲挈领还是细化？派不派骨架？派哪个？
-
-**必须有一道覆盖闸**：每一页要么写了器物，要么被明确标成"无器物"，
-**漏判要报错**——否则整层会像 2026-08-07 那样被静默丢掉，而且成片之前看不出来。
-
-⚠️ **能系统化的和不能系统化的，要分清楚**：
-详略判据、骨架派发、材质锁定、排印层级——这些是**规则**，该系统化，写死了就别再想。
-**器物不是规则，是逐页的手艺**——它只能一页一页想。
-把它也系统化掉，产出就是"一张有质感的纸上摆了个几何图"。
-**这是 2026-08-08 最贵的一次教训：我把"系统化"当成了目标，系统化掉的正是最值钱的那部分。**
-
-> **材质为什么必须锁死**：两根轴要一根固定一根自由——材质固定＝这份 deck 的身份底色（翻十页都认得是同一份东西），
-> 骨架自由＝每页结构跟着内容走。**两根都变就散了**，观众会去想"为什么这页不一样"而不是看内容（＝ CRAP 的"重复"）。
-> 也因此**材质统一不会单调**：变化已经由骨架和详略旋钮承担了。
->
-> **唯一例外（至今一次没用过，留口子不是常规动作）**：**当材质变化本身就是论证时**——
-> 例如用材质的破碎与修复讲"过去与现在"（㉘金继就是这个定位：构图与材质可以承担论证，不只是装饰）。
-> 要换必须同时满足两条：**①这个变化本身在说事，不是为了好看；②只换一次，且落在明确的转折点上。**
-> 不满足就是全片统一。
-
-**用户的输入依然只有一句「做个 PPT」**——三根轴里只有材质可能需要他表态，其余都是规则在跑。
-拿不准的页（该摆三条还是只留标题）单独问一句，别自作主张埋进去。
-
-## 第一层 · 创意（先跑，定方向）
-
-1. **核心命题闸门**（准备篇）：动手前必须写出「一句话核心 + 观众为何在乎(So what?) + 希望观众做什么」；过不了电梯测试（30-45 秒说清）就回炉。整套 deck 收敛到这一句，每页服务它。**别一上来就开 你的图像生成工具 填格子。**
-2. **一页一职能**：每页只干一件可复述的事——提出问题 / 给出结论 / 展示证据 / 制造转折 / 分隔章节。一页里不塞两个同等重量的主体。
-3. **故事骨架**：长 deck 按「现实—冲突—解决」推进，逐项过 SUCCESs（简单/意外/具体/可信/情感/故事）。构思先离开电脑（纸笔/白板/报事贴），再进软件。
-4. **签名元素 + 反模板**（继承 pt-ui）：每套 deck 一个别人做不出的记忆点；问「换个 AI 会不会做出同样的东西」，会就推翻。
-5. **数字给参照系**：「400 万台」换算成「每天卖 2 万台」；裸数字不上片。
-
-## 第二层 · 工艺 · 纯设计法则地板（两类产物都适用）
-
-完整法则书在 `zen-design.md`（每条带[规则][数字][边界]，哪些是铁律哪些只是经验建议都标了）。**常开地板**：
-
-1. **信噪比最大化**：能删则删——边框/装饰色块/无数据图标阵列/3D/常驻 logo 默认禁；审图问「删掉它核心会变弱吗」。图表：结论式标题+直接标签+二维+单一强调色。
-2. **图片证据门槛**：图必须提供 证据/具体化/情绪/隐喻 至少一项，否则不配上片；满版出血优先，禁低质剪贴画。
-3. **留白当形状**：留白是主动设计材料不是没填满；八分饱上限。
-4. **三等分 + 非对称**：主体落九宫格交点，别居中（庄重页除外）。
-5. **面孔/视线朝内**：画面人物的脸、视线、运动方向必须朝标题/核心信息——它们会把观众目光拽过去。
-6. **CRAP 四问验收**：对比(一眼看到主角?)/重复(全套语言一致?)/对齐(无形的线贯穿?)/就近(相关的靠在一起?)。
-7. **屏幕文字 ≠ 讲稿**：**拧向提纲挈领的页**严禁把口述内容逐句上屏（同通道争夺，认知负荷）；口述配图优于口述配字。
-
-## 第三层 · 工艺 · 全图式出图（你的图像生成工具 整页出图）
-
-四条硬规则（违反必翻车）：①**密度分层**（背景淡满/主体~70%/前景点缀限量/禁浮动数据卡）②**禁自创中文**（prompt 写明 NEVER invent additional Chinese words）③**结构词抑制**（结尾 CRITICAL 段列禁画词）④**中文写死字数**（exactly these N characters）。
-**v3.1·三轴相乘（2026-08-08，器物槽是补上的）**：出图前定**材质 × 骨架 × 器物**三个槽：
-```
-SURFACE:  材质配方（32 母版之一，管所有笔触与介质）
-          ⚠️ 若骨架来自大师，必须显式禁掉其原材质：NO concrete / NO photographic / NO 3D
-SKELETON: 纯几何构图（见 skeletons.md，管版式，不出现任何材质词；可以是"素面/不派"）
-DEVICE:   这页论点的器物（逐页写死那件东西：一把尺 / 一杆天平 / 一台齿轮机 / 一只手）
-          ⚠️ 这一槽留空 = 画面只剩几何，材质白选了。没有合适器物就明写 NO DEVICE
-END:      用 SURFACE 的材质，按 SKELETON 的构图，画出 DEVICE
-```
-⚠️ **只写 SURFACE + SKELETON 是 2026-08-07 版的做法，已被实证做薄**（PT：「细节是新版最忽略的部分」）。
-**骨架按页面职能自动派，不问用户**（封面→流线 / 章节金句→光带或色域 / 清单矩阵→网格 / 对比→对峙）。
-实证：五张骨架样张 + 一张「水墨×安藤」全部一次成图；材质会改变骨架的**性格**但不改变其**结构**。
-
-**v2**：写 COMPOSITION 前先翻 `zen-visual-patterns.md` 选模式——满版图+文字压角 / 唯一焦点单色高亮 / 视线引导 / 高桥大字 / 同载体时间对比 / 惊人数字+悬念翻转……模式名+书中构图描述直接化进 prompt，比凭空想构图稳得多。
-风格库 32 个见 brain [[工作台-全图PPT出图与风格库]]；同族工艺必须在 prompt 里写死区别。出厂三步：大纲 → 每页自含 prompt → 批量出图+逐张 Read 质检。
-
-> 🔜 **已定方向·尚未落地（PT 2026-08-07 拍板"这是对的"）：文字层与图层分离。**
-> 图只出材质×骨架（背景/构图/留白），标题与正文改用**真 PPTX 文本框**叠上去——
-> 改字不必重出图，且上面第 ②④ 两条硬规则自然消失（图里本来就没字）。
-> 骨架里「文字住在哪」那一栏变成**归一化坐标**，出图 prompt 与排版共用同一份。
-> **例外**：封面大字 / 高桥法整屏一词 / 书法感标题这类"文字即图形"的页仍可烧进图里，**但必须逐字校对**。
-> ⚠️ 现有流水线**还是烧字的**，落地前本节按原样执行。开源版规格见 brain [[PPT-Skills-开源-mega-prompt]]。
-
-## 第三层附则 · 从开源同类项目借来的五条工程做法（2026-08-08 调研 codex-ppt-skill 4.3k★ / ppt-image-first 679★ / image-to-editable 1.6k★）
-
-**1. 样张先行 + 从样张反推锁定（最值得抄的一条）**
-现在是「大纲 → 每页 prompt → 批量出图」，**一旦风格没对，整批重来**。
-改：先出 **2–3 张样张覆盖不同骨架**（封面/流线、章节/光带、证据/网格），用户确认后，
-**从被认可的样张反推出稳定特征并写成 spec 锁住**（ppt-image-first 的 `spec_lock` 做法），其余页一律受这份锁约束。
-→ 治的是长 deck 的**风格漂移**：声明式的风格描述压不住 20 页，从实际成图反推的才压得住。
-
-**2. 单页返修，不整份重来**
-标记某页 → 只重出那一页（内容/版式/配色/措辞四类改动分开说）。省钱省时，也避免"改一页毁一版"。
-
-**3. 用户风格库放 skill 目录之外，同名覆盖内置**
-他们放 `~/.<skill>/references/`，**更新和重装都不丢**，且用户自存风格与内置同名时**用户的优先**。
-→ 这正是"空的品味层接口"的落地形态：内置 32 母版是默认，用户自己的档案覆盖它。
-⚠️ 我们现在 32 母版在 skill 里，用户改了会被更新覆盖——**开源版必须改成外置**。
-
-**4. 出第一张图之前先声明用的哪个出图后端**
-诚实性设计：告诉用户这批图是哪个模型/端点出的，出了问题知道找谁。
-
-**5. 文字密集的页用更高分辨率**
-文字少的页 2K 够，**文字密集页要 4K**——否则小字糊。按详略旋钮的位置自动决定分辨率。
-
-> 🔎 顺带一条格局判断（写在这里防止以后重复调研）：
-> `codex-ppt-skill`（生成把字烧进图的 deck）与 `image-to-editable-ppt-skill`（把这种 deck 转回可编辑）
-> **是同一个作者的两个项目**，另有至少两个独立项目做同一件"转回可编辑"的事。
-> **整个生态在事后补救"图片式 PPT 不能编辑"，没有人在生成时就避免它**——这正是我们文字层分离的位置。
-
-## 第三层附则二 · 现场约束（2026-08-08，从 PT 拍的四张大屏演讲现场照提炼）
-
-**设计稿上看不见、只有现场照片能教的东西。我们此前的规则全是按"看设计稿"写的，这是补上的一层。**
-
-### 1. 画布可能不是 16:9
-
-大型场合的主屏常是**超宽 LED 墙**（3:1 甚至更宽）。按 16:9 做完再拉宽 = 两侧留死白或主体被裁。
-**开工前先问一句屏是什么比例**——这是少数必须问用户的事之一（比材质更该问）。
-超宽屏的组织方式是**横向三段带**：一侧主体、一侧文字、中间那段留空。
-
-### 2. 讲者站在画面里 —— 给他留一条走廊
-
-大屏演讲里**人是站在屏幕前面的**，等于站在你的版面里。四张现场照全都有这个特征：
-主体和文字各占一侧，**讲者恰好走在中间那段空里**。
-
-**规则**：
-- **画面下三分之一不放关键信息**（近处观众的视线会被讲者挡住）
-- **超宽屏在中段留一条"人的走廊"**，主体推到两侧
-- 讲者穿深色、屏是亮色时人会成剪影——**亮色场反而让讲者更清楚**，不必担心
-
-### 3. 论断胶囊（最值得抄的一条机制）
-
-现场那套 deck 每一页都有**一个蓝底白字的小胶囊**，位置固定（右下或右上），里面永远是**这页的一句结论**：
-「迷因」的随机性力量 · 「观看」本身成为可被消费的场景。
-
-**为什么强**：观众在任何一页都**知道去哪儿找"所以呢"**。这是 CRAP 的"重复"用在了信息职能上，
-不是用在装饰上。**细化页尤其需要它**——东西摆了一屏，得有个地方告诉观众该得出什么结论。
-
-**做法**：全片同一个容器（同色块、同字号、同位置），每页一句，**只写论断不写事实**。
-事实归正文与墙签，判断归胶囊。
-
-### 4. 双层排印（有边界，别乱用）
-
-现场有一页用了**背景巨型英文字当纹理 + 前景中文字才是内容**，层次很好看。
-⚠️ **但那一页恰恰是四张里最难读的**：背景大字对比度太高，跟前景标题打架。
-
-**边界**：双层排印成立的唯一条件是**背景层必须弱到接近纹理**（压到 15% 以下不透明度那种弱）。
-背景层一旦"看得清"，它就不是纹理，是竞争者。**读不出主标题就是失败，再好看也删。**
-
-### 5. 中外双语引用的排印规范
-
-引用外国作品/人物时，现场那套的处理很干净，可直接沿用：
-- **作品名**：`《中文名》（English Title）` —— 中文书名号 + 英文括注
-- **人名**：中文译名在上、英文原名在下，**英文小一号、字重更轻**
-- **作者与机构同行**：`James Turrell  丹麦奥胡斯 ARoS 美术馆`
-- 三者都**只写事实，不带形容词**
-
-## 第四层 · 呈现（**只要有人讲就适用**——deck 只是演讲的一半）
-
-给 PT 做演讲项目时，deck 之外主动过一遍 `zen-delivery.md`：开场禁目录/道歉/寒暄（PUNCH 钩子直入）、蜜月期头 2-3 分钟放最强内容、复杂图逐步揭示、讨论节点用 B 键黑屏、时长只排到上限的 90-95%、结尾留行动号召。乔布斯 13 条与 TED 十诫是彩排对照单。
-
-## 第五层 · 品味（共享 pt-ui，不复制）
-
-直接引用 [[pt-ui]] 第三层「老板品味档案」，单一事实源。要点回指：背景要有质感（侘寂式朴素材质，非塑料光泽）· 密度有主次 · 金色纪律（小面积/加深古金）· 朱砂/印章中式语言 · 浅色优先（营销/成品锁浅色）· 品牌层服从既有系统 · 中文项目按中文校准 · 文案即设计。
-
-## 🎎 东方美学层（与我们中式风格库同一审美源头）
-
-简素 kanso=信噪比与减法 · 侘寂 wabi-sabi（注意：不是「宅寂」）=朴素/不完美/自然材质之美 · 自然 shizen=反模板的本质，**但「自然」不等于不准备——书中恰恰强调大量操练后才呈现不露痕迹的自然** · 空/间 ma=留白是积极的形状 · 水墨 sumi-e=约束下的一次成型。中日格言资产（八分饱/千里之行）可作中式 deck 文案。
-
-## 交付自检（出片前最后一遍）
-
-- [ ] **每页定了详略**（线性说得完→提纲挈领；必须并置→细化）？证据页细化了？细化页后面接了疏页？
-- [ ] 一句话核心过了 So what? 电梯测试？每页服务它？每页一职能？
-- [ ] 信噪比：删得只剩信号？图片过了证据门槛？留白是有意的形状？八分饱？
-- [ ] 三等分（不居中）？面孔/视线/运动方向朝内？CRAP 四问过了？
-- [ ] 屏幕文字没在复读讲稿（提纲挈领的页尤其）？数字都给了参照系？
-- [ ] 全图四硬规则守了？COMPOSITION 用了 visual-patterns 模式？逐张质检了伪汉字？
-- [ ] **现场约束**：屏幕比例确认了吗（不一定是 16:9）？给讲者留了走廊、下三分之一没放关键信息？
-- [ ] **论断胶囊**：每页有没有一个固定位置告诉观众"所以呢"（细化页必须有）？
-- [ ] **跨页一致性**：反复出现的角色/概念，在每一页都是同一种东西吗（并排看图，不是读 prompt）？身份约定写进每一页 prompt 了吗？
-- [ ] **每页的插画量级定了吗**（L0 真无 / L1 边饰 / L2 排印即插画 / L3 点缀 / L4 主插画，**可叠加**）？
-      没有主插画 ≠ 什么都不画——那页至少该有 L1+L2 或 L3。
-- [ ] **主插画**：看着它猜得出这页在说什么吗？一页只有一件吗？
-- [ ] **点缀**：每个都替代了一句话吗（否则是装饰）？就近挂着而不是撒着？同概念同形？没超密度预算？
-- [ ] **骨架按职能派了**（没让用户选）？该素面的呼吸页留素面了吗？单个骨架没超过总页数 15%？材质全片统一（**换过材质的话，那个变化本身在说事吗？只换了一次吗？**）？相乘时禁掉了大师原材质词？
-- [ ] 品味层引 pt-ui 档案（没另写一套）？质感侘寂式非塑料光泽？
-- [ ] 术语对照过 zen-map 易错表（slideument 非 SlideDoc / 1-7-7 是 7 词非 7 汉字 / 30秒图效非放映时长…）？
-
-> 维护：全书蒸馏正本=本目录 `references/` 六件（zen-map/prepare/design/visual-patterns/delivery/quotes）；原始逐章笔记与 GPT 复核存 brain raw。新的 PT 拍板偏好追加进对应层。brain [[工作台-演说之禅提炼]] 已降级为指向本 skill 的指针页。
-
----
-### 来源（插画原则一节，2026-08-08 查证）
-- 编辑插画的"非装饰/概念驱动/隐喻/克制/communicate not enigmatise"：
-  [kreafolk · The Art of Editorial Illustration](https://kreafolk.com/blogs/inspirations/art-of-editorial-illustration) ·
-  [linearity · Editorial illustration styles](https://www.linearity.io/blog/editorial-illustration/) ·
-  [udit · What is editorial illustration](https://www.udit.es/en/ilustracion-editorial-que-es-formatos-y-ejemplos/)
-- 概念开发四步（关键词→隐喻映射→缩略草图→选一个）：
-  [Harriet Lee-Merrion · An introduction to conceptual and editorial illustration](https://harrietleemerrion.substack.com/p/an-introduction-to-conceptual-and) ·
-  [RMCAD · Visual Metaphor Command](https://www.rmcad.edu/blog/visual-metaphor-command-illustrating-complex-ideas-with-clarity/)
-- 不改动插画 / 不混风格 / 抽象克制时 spot 图才好用：
-  [GitHub Primer · Icons and illustrations](https://primer.style/presentations/design-guidelines/icons-and-illustrations/) ·
-  [Primer · Desktop illustrations](https://primer.style/desktop/foundations/illustrations/)
-
----
-
-## 🆕 v3.1 增量（2026-08-11 · 三套 70 页 deck 一夜实战沉淀；全览见 flowalpha /doc/pt-ppt-v31-2026-08-11-S7a5Xcbk2u）
-
-1. **材质选择的真判据 = 世界观设定**：达芬奇的震撼不是羊皮纸，是"我在翻天才的秘密笔记"这个身份设定。单纯华丽不触发。选材质先问：给观众什么设定？
-2. **换材质必须换骨架**：只换 SURFACE 不换构图=换皮，全片"和上一版一个模子"（Escher 版被 PT 判死实证）。换世界=按新世界自己的语言逐页重构。
-3. **「世界重构」工序**：一个 Python 规格表（页名→SCENE/REGION+SKELETON+DEVICE 逐页写死）驱动全部 prompt 生成——世界统一且根治重复病。范例：ppt-master/projects/geo-keynote-2026 的 cinema_scenes.py / portolan_pages.py。
-4. **三条出图工艺铁则（QC 实证）**：①暗底/古典材质必带简体锁+点名易错字（厂≠广、公≠去）②高密材质写死 projector legibility beats material delicacy（铅笔字投影必糊）③场景道具默认想写字——吊牌/信纸/招牌/仪器全要显式 glyph-free（"reserved tag"两词让 11 页吊牌被写字）。
-5. **隐藏符号=标配可选项**：小元素贯穿全场、末页点破（空座位空白牌/虚线无名岛+朱砂圈）。成本极低、完整作品感极高。
-6. **下一代：Presentation Universe 六层**（世界观/物理材质/信息语法/空间镜头/时间演进/隐藏符号），目标 5-8 套固定演讲宇宙。红线：**宇宙感不得压倒演说之禅**——皮拉内西版被否即因建筑吞字（正本思考存 brain raw/2026-08-11-PPT材质大探索与演讲宇宙方向.md）。
-
-## 🧭 三层选型模型（PT 2026-08-11 问出，就此定型）
-
-**介质 → 手笔 → 世界**：
-- **介质**（44 材质母版）：这页是什么做的——羊皮纸/青花瓷/剪纸/胶片。四轴里的"材质"根。
-- **手笔**（大师流派子库）：这个介质里是谁的手——一个流派=调色+布光+构图习惯+场景母题+情绪的**成套 DNA 包**（比材质厚，会伸进骨架轴：库布里克一点透视、安德森对称即构图）。电影介质已铺 14 位导演（专辑 45-58）；"达芬奇铜版/建筑师手稿"本质是手稿介质下的两位大师；水墨等介质将来同样可铺子库。
-- **世界**（演讲宇宙）：观众进入什么设定——带信息语法/镜头运动/时间演进/隐藏符号的完整世界观。
-
-选型顺序：定世界 → 选介质 → 有子库再选手笔 → 骨架按职能自动派 → 器物逐页想。
-
-## 🏛 流派体系（Next Generation 骨架 · PT 2026-08-11 拍板；登记册=flowalpha /doc/pt-ppt-next-generation-KUlE0xXl6R）
-
-**族是介质的世界，流派是打出来的名分，散件是原料。**
-- **流派**=可命名核心锚+四轴齐（材质/布局语法/器物词汇表/信息语法）+打过整仗可复产；一派挂多套产品。已开宗：🗺未知海域(制图师)/🎬看不见的货架(电影,14导演手笔可插拔)/✍️达芬奇手稿。Escher/皮拉内西=降格特调先例。
-- **候选核**=有锚有样张、四轴不齐或未实战（现 40 个,9 族）；打一场整仗即开宗立派。
-- **散件**=无锚纯技法（~16 个）：单页特调/组包原料/单图产出。
-- **流转**：散件→(配锚+补四轴+样张组)→候选核→(整仗)→流派→(每仗回写新器物/新语法)。升格失败降回散件,不硬撑。
-- **做新 deck 的顺序**：翻流派池命中→直接编译（大纲×流派包→逐页规格表→出图→QC→合成）；不命中→从候选核升格（≈一晚）；单页特殊需求→散件池特调。
-- **编译器管线**（已三次实战固化）：规格表 py（页名→REGION/SCENE+SKELETON+DEVICE）驱动 prompt 生成→3 并发出图→QC 子代理逐张对 VERBATIM→单页返修→python-pptx 合成（JPEG q90 控体积）。范本：geo-keynote-2026/portolan_pages.py、cinema_scenes.py。
+Dense/text-heavy pages: generate at higher resolution than single-word pages.
+
+## 7. If it's presented live (constraints you only learn from real rooms)
+
+- **Confirm the screen aspect first** — big venues are often ultra-wide, not 16:9. This is one of the
+  few things worth asking the user.
+- **Leave a presenter corridor** — keep key info out of the bottom third; on ultra-wide, push subjects
+  to the sides and keep the middle open (the speaker stands there).
+- **Assertion capsule** — a fixed-position one-line conclusion on every page ("so what?"); detail
+  pages especially need a place that states what to conclude.
+- **Bilingual citations** — `Local Title (English Title)`; person name localized on top, original
+  smaller/lighter below; facts only, no adjectives.
+
+## 8. Workflow (one sentence in → a deck out)
+
+1. **Plan** — write `plan.md`: one row per page with `role · density · device · exact text · style_slug`.
+   This is the judgment log (the part nobody can screenshot). Decide material once, up front.
+2. **Generate** — one image per page into `slides/NN.jpg`, using the agent's image tool or
+   `scripts/gen_image.py`. Use deterministic filenames; regenerate a single page in isolation.
+3. **QC every page** — proofread every character of every title against the plan, check the crop
+   didn't eat content, confirm no invented glyphs and no cross-page contradiction. This human/agent
+   gate is where the quality comes from — don't skip it.
+4. **Assemble** — `python3 scripts/assemble_pptx.py slides/ deck.pptx` (16:9, full-bleed). The result
+   is an **image-based** `.pptx`: great to present, but text isn't editable — fixing a typo means
+   regenerating that one page. PDF / Keynote / Google Slides import the same images.
+
+See `examples/relayboard/` for a full ten-page worked deck plus its judgment log.
+Optional deep-dives ship in `references/` (design laws, skeleton library, visual patterns,
+delivery coaching — currently in Chinese; load them when you need the underlying reasoning).
+
+## Delivery self-check
+
+- [ ] Density set per page? Evidence pages detailed, detail pages followed by a breathing page?
+- [ ] Each page: a device that reads (or a deliberate "none"), one main device only?
+- [ ] Material fixed across the whole deck? Style resolved to a real slug?
+- [ ] **Every factual claim traces to the user's input? No invented numbers/quotes/prices/dates?**
+- [ ] Four hard rules on every prompt? Key content clear of the crop zone?
+- [ ] Recurring characters/concepts pinned identically in every prompt?
+- [ ] Proofread every character after generation? Assembled and opened the `.pptx`?

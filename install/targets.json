@@ -1,0 +1,13 @@
+{
+  "skill": "ppt-zen",
+  "comment": "agent-id -> where the skill goes. 'bundle' dirs ship with SKILL.md so the install is self-contained. Used by install.sh; the README install matrix mirrors this file.",
+  "targets": {
+    "claude":   { "src": "SKILL.md",                    "dest": ".claude/skills/ppt-zen/SKILL.md",   "global_dest": "~/.claude/skills/ppt-zen/SKILL.md",   "bundle": ["references", "styles", "scripts", "styles.json", ".env.example"] },
+    "openclaw": { "src": "SKILL.md",                    "dest": ".openclaw/skills/ppt-zen/SKILL.md", "global_dest": "~/.openclaw/skills/ppt-zen/SKILL.md", "bundle": ["references", "styles", "scripts", "styles.json", ".env.example"] },
+    "hermes":   { "src": "SKILL.md",                    "dest": ".hermes/skills/ppt-zen/SKILL.md",   "global_dest": "~/.hermes/skills/ppt-zen/SKILL.md",   "bundle": ["references", "styles", "scripts", "styles.json", ".env.example"] },
+    "codex":    { "src": "AGENTS.md",                   "dest": "AGENTS.md",                          "global_dest": "~/.codex/AGENTS.md",                  "inject": true },
+    "cursor":   { "src": "adapters/cursor/ppt-zen.mdc", "dest": ".cursor/rules/ppt-zen.mdc" },
+    "windsurf": { "src": "adapters/windsurf/ppt-zen.md","dest": ".windsurf/rules/ppt-zen.md" },
+    "copilot":  { "src": "adapters/copilot/ppt-zen.instructions.md", "dest": ".github/instructions/ppt-zen.instructions.md" }
+  }
+}

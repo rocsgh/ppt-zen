@@ -28,6 +28,8 @@ def parse_front(path):
             d[key] = mm.group(2).strip().strip(chr(34))
         elif key == "samples" and ln.strip().startswith("- "):
             d.setdefault("_samples", []).append(ln.strip()[2:].strip())
+        elif key == "prompt_formula" and (ln.startswith("  ") or ln.startswith("\t")):
+            d["prompt_formula"] = (d.get("prompt_formula", "") + "\n" + ln.strip()).strip()
     if "_samples" in d:
         d["samples"] = d["_samples"]
     elif d.get("samples"):
@@ -82,6 +84,28 @@ def build():
             out.append("Medium **%s**%s · [pack & prompt formula →](%s/STYLE.md)\n"
                        % (p.get("medium"), (" · hand **%s**" % p["hand"]) if p.get("hand") else "", p["_dir"]))
     open(os.path.join(ROOT, "GALLERY.md"), "w", encoding="utf-8").write("\n".join(out) + "\n")
+    # machine-readable manifest so agents can resolve a named style -> pack + formula
+    import json as _json
+    manifest = []
+    for p in packs:
+        pf = p.get("prompt_formula", "")
+        if pf[:1] in ("|", ">"):
+            pf = pf[1:].strip()
+        p = dict(p, prompt_formula=pf)
+        manifest.append({
+            "slug": p.get("slug"),
+            "name": p.get("name"),
+            "medium": p.get("medium"),
+            "hand": p.get("hand", ""),
+            "tags": [t for t in re.findall(r"[\w-]+", p.get("tags", ""))],
+            "aliases": [p.get("name", ""), p.get("slug", "").replace("-", " ")],
+            "pack": p.get("_dir"),
+            "prompt_formula": p.get("prompt_formula", ""),
+            "license": p.get("license", "CC-BY-4.0"),
+        })
+    open(os.path.join(ROOT, "styles.json"), "w", encoding="utf-8").write(
+        _json.dumps({"skill": "ppt-zen", "styles": manifest}, ensure_ascii=False, indent=1))
+    print("styles.json: %d styles" % len(manifest))
     return len(packs)
 
 

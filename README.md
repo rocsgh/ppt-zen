@@ -85,25 +85,43 @@ It is **not** a hosted button. It is a skill your agent runs, plus two small hel
 git clone https://github.com/rocsgh/ppt-zen
 cd ppt-zen
 
-# 1. install the skill (Claude Code shown; or your agent's skills dir)
-mkdir -p ~/.claude/skills/ppt-zen
-cp SKILL.md ~/.claude/skills/ppt-zen/
-cp -R references ~/.claude/skills/ppt-zen/
+# 1. install the skill for YOUR runtime (matrix below)
+./install.sh claude --global          # Claude Code -> ~/.claude/skills/ppt-zen/
 
 # 2. give it an image model (skip if your agent already generates images)
-cp .env.example .env        # then put your key in .env
+cp .env.example .env                  # put your key in .env
+python3 scripts/gen_image.py --check  # verify before a long run
 
-# 3. in your agent, describe the deck — one sentence:
+# 3. in your agent, one sentence:
 #    "Make me a 10-page pitch deck about <your project> with ppt-zen, in the Portolan style."
-#    -> it plans the pages, then generates one image per page into slides/
+#    -> it plans the pages (plan.md), then generates one image per page into slides/
 
-# 4. assemble the images into a real .pptx
+# 4. assemble into an image-based .pptx (non-16:9 images are center cover-cropped)
 pip install python-pptx
 python3 scripts/assemble_pptx.py slides/ deck.pptx
 ```
 
-**No skill system?** Paste `SKILL.md` into the session as context.
-**Dependencies:** `gen_image.py` and the build scripts are pure standard library; only `assemble_pptx.py` needs `python-pptx`.
+### Install matrix — pick your runtime
+
+| Runtime | Command | Installs to | Trigger |
+|---|---|---|---|
+| **Claude Code** | `./install.sh claude [--global]` | `.claude/skills/ppt-zen/` | `/ppt-zen`, or just ask for a deck |
+| **OpenClaw** | `./install.sh openclaw [--global]` | `.openclaw/skills/ppt-zen/` | ask for a deck |
+| **Hermes** | `./install.sh hermes [--global]` | `.hermes/skills/ppt-zen/` | ask for a deck |
+| **Codex CLI** | `./install.sh codex [--global]` | `AGENTS.md` / `~/.codex/AGENTS.md` | passive — auto-read |
+| **Cursor** | `./install.sh cursor` | `.cursor/rules/ppt-zen.mdc` | passive — auto-applied |
+| **Windsurf** | `./install.sh windsurf` | `.windsurf/rules/ppt-zen.md` | passive — auto-applied |
+| **GitHub Copilot** | `./install.sh copilot` | `.github/instructions/` | passive — auto-applied |
+| everything | `./install.sh all` | all of the above | — |
+
+Skill installs are **self-contained** (SKILL.md + references + styles + scripts + `styles.json`,
+the machine-readable style index). `AGENTS.md` installs update in place between idempotent markers.
+The full mapping lives in [`install/targets.json`](install/targets.json); passive-runtime files are
+generated from `AGENTS.md` by `scripts/gen_adapters.py`.
+
+**No skill system at all?** Paste `SKILL.md` into the session as context.
+**Dependencies:** the helpers are pure standard library; only `assemble_pptx.py` needs
+`python-pptx` (which bundles Pillow — used for the 16:9 cover-crop).
 
 ## Image generation (bring your own model)
 

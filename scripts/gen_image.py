@@ -8,6 +8,13 @@ freely — OpenAI, a relay, or any compatible gateway.
 
 Usage:
   python3 scripts/gen_image.py "your full-page prompt" out.jpg
+  python3 scripts/gen_image.py --check          # verify config before a long run
+
+Config lookup order: real environment variables first, then ./.env (current
+directory), then <repo>/.env next to this script's parent. Keys: IMAGE_API_BASE_URL,
+IMAGE_API_KEY, IMAGE_MODEL, IMAGE_SIZE. The endpoint must accept
+POST {BASE}/images/generations with {model,prompt,size,n} and return
+data[0].b64_json or data[0].url (the OpenAI images API shape).
 """
 import base64, json, os, sys, urllib.request
 
@@ -25,8 +32,18 @@ def load_env():
 
 
 def main():
+    if len(sys.argv) == 2 and sys.argv[1] == "--check":
+        c = load_env()
+        base = c.get("IMAGE_API_BASE_URL", "https://api.openai.com/v1").rstrip("/")
+        key = c.get("IMAGE_API_KEY", "")
+        ok = bool(key) and not key.startswith("sk-your-key")
+        print("endpoint :", base + "/images/generations")
+        print("model    :", c.get("IMAGE_MODEL", "gpt-image-1"))
+        print("size     :", c.get("IMAGE_SIZE", "1536x1024"), "(assembly cover-crops to 16:9)")
+        print("api key  :", "set" if ok else "MISSING - copy .env.example to .env and fill it in")
+        sys.exit(0 if ok else 1)
     if len(sys.argv) < 3:
-        sys.exit("usage: gen_image.py \"<prompt>\" <out.jpg>")
+        sys.exit("usage: gen_image.py \"<prompt>\" <out.jpg>   |   gen_image.py --check")
     prompt, out = sys.argv[1], sys.argv[2]
     c = load_env()
     base = c.get("IMAGE_API_BASE_URL", "https://api.openai.com/v1").rstrip("/")

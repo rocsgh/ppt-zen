@@ -2,7 +2,9 @@
 
 **One sentence in:** *"Make me a 10-page pitch deck for Relayboard, an async-standup tool, in one premium dark-editorial material."*
 
-**Out:** the ten slides in [`slides/`](slides/), assembled into [`deck.pptx`](deck.pptx).
+**Out:** the ten slides in [`slides/`](slides/), assembled into [`deck.pptx`](deck.pptx) (image-based — text isn't editable afterwards).
+
+> **Relayboard is fictional, and every metric on these slides (340 teams, $28k MRR, the prices, the ask) is invented demo content** — this example only demonstrates form. In real use the skill's hard rule applies: it decides the FORM and never invents FACTS; numbers come from your input or become `[TO CONFIRM]` placeholders (see SKILL.md §5).
 
 <p align="center">
   <img src="slides/01-cover.jpg" width="49%"/>
