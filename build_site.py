@@ -397,7 +397,7 @@ else{var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.is
 """
     return shell("PPT-Zen — a judgment layer for AI-made slides",
                  "One sentence in, many worlds out. An open-source skill that decides how each slide should be, then renders it full-image in the material you choose.",
-                 "", "portolan.jpg", inner, js, active="")
+                 "", "og-banner.png", inner, js, active="")
 
 
 def page_method():
