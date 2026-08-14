@@ -10,7 +10,7 @@
   <a href="https://github.com/rocsgh/ppt-zen/stargazers"><img src="https://img.shields.io/github/stars/rocsgh/ppt-zen?style=social" alt="stars"></a>
 </p>
 
-<p align="center"><b>🖼 <a href="https://rocsgh.github.io/ppt-zen/">在线画廊 →</a></b></p>
+<p align="center"><b>🖼 <a href="https://pptzen.xyz">在线画廊 →</a></b></p>
 
 <p align="center">
   <img src="assets/hero-portolan.jpg" width="32%"/>
@@ -134,7 +134,7 @@ PPT-Zen **不带任何图像模型**——这正是它引擎无关的原因。�
 这就是全部交互。**详略和骨架逐页自动定——你不用回答任何问题。** 你唯一能主导的是**材质 / 风格**：
 
 - **让它自己选。** 什么都不说，它给全片选一个统一的材质。
-- **点名一个风格。** 从[画廊](https://rocsgh.github.io/ppt-zen/)挑一个，说它的名字：
+- **点名一个风格。** 从[画廊](https://pptzen.xyz)挑一个，说它的名字：
   ```
   ……用航海图风格。
   ……电影，诺兰手笔。
@@ -156,7 +156,7 @@ PPT-Zen **不带任何图像模型**——这正是它引擎无关的原因。�
 
 | | |
 |---|---|
-| 🖼 [在线画廊](https://rocsgh.github.io/ppt-zen/) | 翻每个风格 + 它的 prompt 配方 |
+| 🖼 [在线画廊](https://pptzen.xyz) | 翻每个风格 + 它的 prompt 配方 |
 | 🎨 [GALLERY.md](GALLERY.md) | 同一个画廊，仓库内 |
 | 🏗️ [DESIGN.zh-CN.md](DESIGN.zh-CN.md) | 架构、由来、被推翻的模型 |
 | 🤝 [CONTRIBUTING.zh-CN.md](CONTRIBUTING.zh-CN.md) | 用一个文件夹贡献你的风格 |

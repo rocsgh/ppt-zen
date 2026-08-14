@@ -10,7 +10,7 @@
   <a href="https://github.com/rocsgh/ppt-zen/stargazers"><img src="https://img.shields.io/github/stars/rocsgh/ppt-zen?style=social" alt="stars"></a>
 </p>
 
-<p align="center"><b>🖼 <a href="https://rocsgh.github.io/ppt-zen/">Live gallery →</a></b></p>
+<p align="center"><b>🖼 <a href="https://pptzen.xyz">Live gallery →</a></b></p>
 
 <p align="center">
   <img src="assets/hero-portolan.jpg" width="32%"/>
@@ -134,7 +134,7 @@ Make me a deck about <your topic> with ppt-zen.
 That is the whole interface. **Density and skeleton are decided per page — you do not answer questions.** The one thing you can steer is the **material / style**:
 
 - **Let it pick.** Say nothing about looks; it chooses one coherent material for the whole deck.
-- **Name a style.** Pick one from the [gallery](https://rocsgh.github.io/ppt-zen/) and say its name:
+- **Name a style.** Pick one from the [gallery](https://pptzen.xyz) and say its name:
   ```
   ...in the Portolan sea-chart style.
   ...cinema, Nolan hand.
@@ -156,7 +156,7 @@ The skill is free and self-serve. A hosted version that runs the full generate �
 
 | | |
 |---|---|
-| 🖼 [Live gallery](https://rocsgh.github.io/ppt-zen/) | browse every style + its prompt formula |
+| 🖼 [Live gallery](https://pptzen.xyz) | browse every style + its prompt formula |
 | 🎨 [GALLERY.md](GALLERY.md) | the same gallery, in-repo |
 | 🏗️ [DESIGN.md](DESIGN.md) | architecture, origin, and the models we overturned |
 | 🤝 [CONTRIBUTING.md](CONTRIBUTING.md) | add your own style in one folder |
