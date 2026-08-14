@@ -5,6 +5,14 @@
 <p align="center"><b>A judgment layer for AI-made slides — not another PPT generator.</b></p>
 
 <p align="center">
+  <a href="LICENSE"><img src="https://img.shields.io/badge/judgment%20layer-Apache--2.0-blue.svg" alt="Apache-2.0"></a>
+  <a href="LICENSE-STYLES"><img src="https://img.shields.io/badge/styles-CC--BY--4.0-lightgrey.svg" alt="CC-BY-4.0"></a>
+  <a href="https://github.com/rocsgh/ppt-zen/stargazers"><img src="https://img.shields.io/github/stars/rocsgh/ppt-zen?style=social" alt="stars"></a>
+</p>
+
+<p align="center"><b>🖼 <a href="https://rocsgh.github.io/ppt-zen/">Live gallery →</a></b></p>
+
+<p align="center">
   <img src="assets/hero-portolan.jpg" width="32%"/>
   <img src="assets/hero-nolan.jpg" width="32%"/>
   <img src="assets/hero-davinci.jpg" width="32%"/>
@@ -59,7 +67,7 @@ The full architecture, the reasoning, and the models we've overturned along the 
 
 ## Honest about the human gates
 
-This is **not** "one click to a professional deck." Full-image work means ~2 min per page to regenerate, screenshot QC, and proofread every character of a title. **These human gates are where the quality comes from** — we write them down instead of promising magic.
+> **Note — a tool, not a wishing well.** Full-image work means ~2 min per page to regenerate, screenshot QC, and proofread every character of a title. **These human gates are where the quality comes from** — we write them down instead of promising magic.
 
 ## Install
 
@@ -81,6 +89,16 @@ Browse every style — each with a reproducible prompt formula — in **[GALLERY
 ## Want it done for you?
 
 The skill is free and self-serve. A hosted version that runs the full generate → QC → assemble pipeline for you is coming separately.
+
+## Docs
+
+| | |
+|---|---|
+| 🖼 [Live gallery](https://rocsgh.github.io/ppt-zen/) | browse every style + its prompt formula |
+| 🎨 [GALLERY.md](GALLERY.md) | the same gallery, in-repo |
+| 🏗️ [DESIGN.md](DESIGN.md) | architecture, origin, and the models we overturned |
+| 🤝 [CONTRIBUTING.md](CONTRIBUTING.md) | add your own style in one folder |
+| 🔒 [BOUNDARY.md](BOUNDARY.md) | what's open vs. what stays private |
 
 ## License
 

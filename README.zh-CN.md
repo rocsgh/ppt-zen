@@ -5,6 +5,14 @@
 <p align="center"><b>一层让 AI 做幻灯片时"知道该怎么决定"的判断——不是又一个 PPT 生成器。</b></p>
 
 <p align="center">
+  <a href="LICENSE"><img src="https://img.shields.io/badge/judgment%20layer-Apache--2.0-blue.svg" alt="Apache-2.0"></a>
+  <a href="LICENSE-STYLES"><img src="https://img.shields.io/badge/styles-CC--BY--4.0-lightgrey.svg" alt="CC-BY-4.0"></a>
+  <a href="https://github.com/rocsgh/ppt-zen/stargazers"><img src="https://img.shields.io/github/stars/rocsgh/ppt-zen?style=social" alt="stars"></a>
+</p>
+
+<p align="center"><b>🖼 <a href="https://rocsgh.github.io/ppt-zen/">在线画廊 →</a></b></p>
+
+<p align="center">
   <img src="assets/hero-portolan.jpg" width="32%"/>
   <img src="assets/hero-nolan.jpg" width="32%"/>
   <img src="assets/hero-davinci.jpg" width="32%"/>
@@ -59,7 +67,7 @@
 
 ## 如实写明人类闸门
 
-这**不是**"一键出专业 PPT"。全图单页重出约 2 分钟、逐张截图质检、标题逐字校对。**这些人类闸门正是质量的来源**——我们如实写下来，而不是吹一键。
+> **注意——这是工具，不是许愿池。** 全图单页重出约 2 分钟、逐张截图质检、标题逐字校对。**这些人类闸门正是质量的来源**——我们如实写下来，而不是吹一键。
 
 ## 安装
 
@@ -81,6 +89,16 @@ cp -r ppt-zen/SKILL.md ppt-zen/references ~/.claude/skills/ppt-zen/   # 或该 a
 ## 想让它替你做？
 
 判断层免费自助。帮你跑完整"出图 → 质检 → 拼片"流水线的托管版，另行推出。
+
+## 文档
+
+| | |
+|---|---|
+| 🖼 [在线画廊](https://rocsgh.github.io/ppt-zen/) | 翻每个风格 + 它的 prompt 配方 |
+| 🎨 [GALLERY.md](GALLERY.md) | 同一个画廊，仓库内 |
+| 🏗️ [DESIGN.zh-CN.md](DESIGN.zh-CN.md) | 架构、由来、被推翻的模型 |
+| 🤝 [CONTRIBUTING.zh-CN.md](CONTRIBUTING.zh-CN.md) | 用一个文件夹贡献你的风格 |
+| 🔒 [BOUNDARY.zh-CN.md](BOUNDARY.zh-CN.md) | 哪些开源、哪些私有 |
 
 ## 许可（两层）
 
