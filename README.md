@@ -69,18 +69,41 @@ The full architecture, the reasoning, and the models we've overturned along the 
 
 > **Note — a tool, not a wishing well.** Full-image work means ~2 min per page to regenerate, screenshot QC, and proofread every character of a title. **These human gates are where the quality comes from** — we write them down instead of promising magic.
 
-## Install
+## What you get
 
-**Claude Code / skill-based agents:**
+PPT-Zen decides and generates the pages; you end up with:
+
+- `slides/01.jpg … NN.jpg` — one full-image, 16:9 slide per page
+- a short **page plan** — what each page is (headline / detail) and its device: the judgment log
+- `deck.pptx` — assembled from the images with `scripts/assemble_pptx.py`
+
+It is **not** a hosted button. It is a skill your agent runs, plus two small helper scripts. Assembling into `.pptx` is included; PDF / Keynote / Google Slides import the same full-bleed images.
+
+## Quick start
+
 ```bash
 git clone https://github.com/rocsgh/ppt-zen
-cp -r ppt-zen/SKILL.md ppt-zen/references ~/.claude/skills/ppt-zen/   # or the agent's skills dir
+cd ppt-zen
+
+# 1. install the skill (Claude Code shown; or your agent's skills dir)
+mkdir -p ~/.claude/skills/ppt-zen
+cp SKILL.md ~/.claude/skills/ppt-zen/
+cp -R references ~/.claude/skills/ppt-zen/
+
+# 2. give it an image model (skip if your agent already generates images)
+cp .env.example .env        # then put your key in .env
+
+# 3. in your agent, describe the deck — one sentence:
+#    "Make me a 10-page pitch deck about <your project> with ppt-zen, in the Portolan style."
+#    -> it plans the pages, then generates one image per page into slides/
+
+# 4. assemble the images into a real .pptx
+pip install python-pptx
+python3 scripts/assemble_pptx.py slides/ deck.pptx
 ```
-Then just say "make me a deck with ppt-zen."
 
-**Any agent (no skill system):** paste `SKILL.md` into the session as context.
-
-**Two things you bring:** your own **image tool / key** (engine-agnostic — write "your image tool"), and any **styles** you want (drop a pack into `styles/`).
+**No skill system?** Paste `SKILL.md` into the session as context.
+**Dependencies:** `gen_image.py` and the build scripts are pure standard library; only `assemble_pptx.py` needs `python-pptx`.
 
 ## Image generation (bring your own model)
 

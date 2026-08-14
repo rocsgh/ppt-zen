@@ -1,0 +1,3 @@
+# Only scripts/assemble_pptx.py needs a dependency.
+# gen_image.py, build_gallery.py, build_site.py are pure standard library.
+python-pptx>=0.6.23

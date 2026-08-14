@@ -69,18 +69,41 @@
 
 > **注意——这是工具，不是许愿池。** 全图单页重出约 2 分钟、逐张截图质检、标题逐字校对。**这些人类闸门正是质量的来源**——我们如实写下来，而不是吹一键。
 
-## 安装
+## 你会得到什么
 
-**Claude Code / 支持 skill 的 agent：**
+PPT-Zen 判断并生成每一页；你最终拿到：
+
+- `slides/01.jpg … NN.jpg` —— 每页一张整图、16:9 的幻灯片
+- 一份简短的**页面计划** —— 每页是什么（提纲挈领 / 细化）+ 它的器物：判断日志
+- `deck.pptx` —— 用 `scripts/assemble_pptx.py` 从这些图拼出来
+
+它**不是**一个托管按钮。它是你的 agent 加载的一个技能 + 两个小脚本。拼成 `.pptx` 已内置；PDF / Keynote / Google Slides 用同一批满幅图导入即可。
+
+## 快速开始
+
 ```bash
 git clone https://github.com/rocsgh/ppt-zen
-cp -r ppt-zen/SKILL.md ppt-zen/references ~/.claude/skills/ppt-zen/   # 或该 agent 的技能目录
+cd ppt-zen
+
+# 1. 装技能（以 Claude Code 为例；或你 agent 的技能目录）
+mkdir -p ~/.claude/skills/ppt-zen
+cp SKILL.md ~/.claude/skills/ppt-zen/
+cp -R references ~/.claude/skills/ppt-zen/
+
+# 2. 给它一个图像模型（agent 本身能生图就跳过）
+cp .env.example .env        # 然后把你的 key 填进 .env
+
+# 3. 在你的 agent 里，一句话描述这份 deck：
+#    "用 ppt-zen 帮我做一个关于 <你的项目> 的 10 页 pitch，用航海图风格。"
+#    -> 它规划每一页，然后逐页把图生成到 slides/
+
+# 4. 把这些图拼成一份真正的 .pptx
+pip install python-pptx
+python3 scripts/assemble_pptx.py slides/ deck.pptx
 ```
-之后说"用 ppt-zen 做个 PPT"即可。
 
-**不支持 skill 的 agent：** 把 `SKILL.md` 整段贴进会话当上下文。
-
-**你自备两样：** 你自己的**图像工具 / key**（引擎无关——写"你的图像工具"），以及任何你想用的**风格**（把风格包丢进 `styles/`）。
+**不支持 skill 的 agent？** 把 `SKILL.md` 整段贴进会话当上下文。
+**依赖：** `gen_image.py` 和构建脚本都是纯标准库；只有 `assemble_pptx.py` 需要 `python-pptx`。
 
 ## 图像生成（自备模型）
 
