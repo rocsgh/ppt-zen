@@ -14,7 +14,9 @@
    ],
    "aliases": [
     "Art Deco Black & Gold",
-    "artdeco gold"
+    "artdeco gold",
+    "装饰艺术",
+    "黑金"
    ],
    "pack": "styles/artdeco-gold",
    "prompt_formula": "SURFACE:  Deep charcoal-black background with symmetric gold-foil geometric framework — sunburst rays, stepped ziggurat motifs, fine double-line borders in gold leaf (#CBA135) with real metallic foil texture. The hero - a symmetric deco emblem at center — a stylized rising tower flanked by two wings, three vertical panels within the composition each carrying one label in an elegant gold cartouche. Small ivory and emerald-free jade-free muted teal enamel inlays as second accent. Title in classic Art Deco display lettering (Broadway/Gatsby style, but Chinese characters given the same geometric elegance). Luxurious, theatrical, perfectly symmetric.\nSKELETON: auto by page role (cover / chapter / list / compare)\nDEVICE:   the page's argument drawn as a form native to this material\nEND:      Full-bleed 16:9 — render DEVICE on the SURFACE, per the page's composition.\nCRITICAL: title in clean legible English; NEVER invent extra words or non-English glyphs;\nannotations only as marks / numbers / dimension lines; no UI, no cards, no captions.",
@@ -33,7 +35,8 @@
    ],
    "aliases": [
     "Batik Wax-Resist",
-    "batik waxresist"
+    "batik waxresist",
+    "蜡染"
    ],
    "pack": "styles/batik-waxresist",
    "prompt_formula": "SURFACE:  Handwoven cotton/hemp cloth with clearly visible warp-and-weft weave, slightly uneven slubs, one hand-hemmed selvedge edge. The image is made by wax resist - deep indigo dyed ground with the design left as undyed off-white cloth. The signature of real batik must be everywhere — CRACKLE VEINING (冰纹) - a fine irregular web of thin indigo lines where the hardened wax cracked and dye seeped into the fractures, denser in the large indigo fields. All drawn lines are hand-pulled with a copper wax-knife - slightly wobbling, varying in thickness, with tiny wax blobs and skips where the tool lifted. Motif vocabulary is folk-geometric - concentric spirals, whorl rosettes, banded borders, stylised birds and butterflies, sawtooth and dot-row fills. Palette strictly limited - deep indigo blue, undyed off-white cloth, and a small amount of madder red as the ONLY warm accent. Soft even daylight, cloth lying flat with very slight fabric undulation.\nSKELETON: auto by page role (cover / chapter / list / compare)\nDEVICE:   the page's argument drawn as a form native to this material\nEND:      Full-bleed 16:9 — render DEVICE on the SURFACE, per the page's composition.\nCRITICAL: title in clean legible English; NEVER invent extra words or non-English glyphs;\nannotations only as marks / numbers / dimension lines; no UI, no cards, no captions.",
@@ -52,7 +55,9 @@
    ],
    "aliases": [
     "Blue & White Porcelain",
-    "blue white porcelain"
+    "blue white porcelain",
+    "青花",
+    "青花瓷"
    ],
    "pack": "styles/blue-white-porcelain",
    "prompt_formula": "SURFACE:  A hand-painted porcelain surface, photographed close so the glaze itself is the material. Cobalt blue applied with a brush UNDER a clear glaze - outline strokes (勾线) with visible brush entry and lift, filled by 分水 tonal washes in three or four distinct depths of blue, with soft feathering where the pigment spread into the wet body. Authentic kiln evidence must be present - glaze pooling darker in the recesses, faint orange-peel glaze texture, a few iron-spot flecks (铁锈斑) where the cobalt burned through, one or two hairline crackle lines, and a slightly uneven glaze edge near the foot. The white is warm porcelain white, never paper white; the blue ranges from pale grey-blue to deep sapphire. Gentle raking light so the glaze shows a wet, glassy depth and the vessel's curvature is felt.\nSKELETON: auto by page role (cover / chapter / list / compare)\nDEVICE:   the page's argument drawn as a form native to this material\nEND:      Full-bleed 16:9 — render DEVICE on the SURFACE, per the page's composition.\nCRITICAL: title in clean legible English; NEVER invent extra words or non-English glyphs;\nannotations only as marks / numbers / dimension lines; no UI, no cards, no captions.",
@@ -71,7 +76,8 @@
    ],
    "aliases": [
     "Bogolan Mudcloth",
-    "bogolanfini mudcloth"
+    "bogolanfini mudcloth",
+    "泥布"
    ],
    "pack": "styles/bogolanfini-mudcloth",
    "prompt_formula": "SURFACE:  Narrow strips of hand-loomed cotton sewn edge to edge — the STRIP SEAMS must be clearly visible as slightly puckered vertical joins crossing the whole cloth, with tiny alignment mismatches between strips. The cloth was painted with fermented mud over a yellow n'gallama dye bath, so the ground is a deep blackish-brown and the motifs are the undyed off-white cloth reserved between them, with soft bleeding at every edge, faint brush hesitation marks and uneven dye density where the mud sat thicker. Palette strictly earth - blackish-brown, rust-brown, undyed cream, and a little ochre — NO blue at all. Motif vocabulary is strictly rectilinear and symbolic - grids, checkerboards, zigzag rows, concentric squares, arrow rows, short dashes and dot fields, arranged in bands. Cotton weave and slubs clearly visible; one frayed edge.\nSKELETON: auto by page role (cover / chapter / list / compare)\nDEVICE:   the page's argument drawn as a form native to this material\nEND:      Full-bleed 16:9 — render DEVICE on the SURFACE, per the page's composition.\nCRITICAL: title in clean legible English; NEVER invent extra words or non-English glyphs;\nannotations only as marks / numbers / dimension lines; no UI, no cards, no captions.",
@@ -90,7 +96,9 @@
    ],
    "aliases": [
     "Letterpress Broadsheet",
-    "broadsheet news"
+    "broadsheet news",
+    "凸版报纸",
+    "铅字报纸"
    ],
    "pack": "styles/broadsheet-news",
    "prompt_formula": "SURFACE:  Aged off-white newsprint with visible paper tooth, yellowing toward the edges and one soft horizontal fold crease. Letterpress ink with faint impression bite and a few ink-starved letters. Black ink plus ONE spot red, nothing else. Structure - a heavy masthead rule, thin hairline column rules, and one large duotone documentary photograph reproduced in a coarse, clearly visible halftone dot screen. Hero - that halftone photograph, about 70% of the canvas — one wide documentary shot of a single machine-organism with three visible sections, each section marked by a small printed red caption plate carrying its label. Title set as the masthead in a heavy news display face. IMPORTANT - the surrounding column areas contain NO text of any kind — suggest them with thin rules and soft even grey tone bands only, with zero letterforms, zero dots-as-words, zero invented characters.\nSKELETON: auto by page role (cover / chapter / list / compare)\nDEVICE:   the page's argument drawn as a form native to this material\nEND:      Full-bleed 16:9 — render DEVICE on the SURFACE, per the page's composition.\nCRITICAL: title in clean legible English; NEVER invent extra words or non-English glyphs;\nannotations only as marks / numbers / dimension lines; no UI, no cards, no captions.",
@@ -109,7 +117,9 @@
    ],
    "aliases": [
     "Celestial Gold",
-    "celestial gold"
+    "celestial gold",
+    "深空鎏金",
+    "星图"
    ],
    "pack": "styles/celestial-gold",
    "prompt_formula": "SURFACE:  Deep midnight-navy background (#0B1533) like a night sky, fine gold-foil constellation lines and tiny stars across the canvas. The hero is an ornate brass-and-gold orrery (mechanical solar system model) with three orbiting spheres, each sphere engraved and carrying one label on a small gold cartouche. Thin engraved zodiac-style ring frames the scene. Title in refined gold serif with letterpress foil texture. Champagne-gold (#D4AF6A) + pale starlight blue accents. Feels like a luxury watchmaker's celestial complication advertisement — precise, glowing, opulent but restrained.\nSKELETON: auto by page role (cover / chapter / list / compare)\nDEVICE:   the page's argument drawn as a form native to this material\nEND:      Full-bleed 16:9 — render DEVICE on the SURFACE, per the page's composition.\nCRITICAL: title in clean legible English; NEVER invent extra words or non-English glyphs;\nannotations only as marks / numbers / dimension lines; no UI, no cards, no captions.",
@@ -129,7 +139,8 @@
    ],
    "aliases": [
     "Sodium-Green Noir",
-    "cinema fincher"
+    "cinema fincher",
+    "芬奇"
    ],
    "pack": "styles/cinema-fincher",
    "prompt_formula": "SURFACE:  A film frame with a dim forensic office at night - cold green-gray grade, a desk lamp pooling light over spread blank files and photographs (all glyph-free), venetian-blind shadows raking the wall, one silhouetted figure standing back to camera by the window, meticulous crisp shadows, quiet menace. The dark wall zone carries the text.\nSKELETON: auto (a calm dark / negative area reserved for the title)\nDEVICE:   the page's argument as one cinematic hero subject, staged in this director's signature composition\nEND:      Full-bleed 16:9 — DEVICE in the SURFACE, cinematic composition.\nCRITICAL: title in clean English serif in the reserved area; NEVER invent extra words or non-English glyphs;\nno other text, no UI, no cards, no captions.",
@@ -149,7 +160,8 @@
    ],
    "aliases": [
     "Suspense Staircase",
-    "cinema hitchcock"
+    "cinema hitchcock",
+    "希区柯克"
    ],
    "pack": "styles/cinema-hitchcock",
    "prompt_formula": "SURFACE:  A film frame with suspense geometry - a steep spiral staircase shot from directly ABOVE, one lone silhouetted figure descending, long expressionist shadows thrown across the steps, cold noir lighting with a single warm pool from a hanging lamp, vertigo depth. The dark outer spiral carries the text.\nSKELETON: auto (a calm dark / negative area reserved for the title)\nDEVICE:   the page's argument as one cinematic hero subject, staged in this director's signature composition\nEND:      Full-bleed 16:9 — DEVICE in the SURFACE, cinematic composition.\nCRITICAL: title in clean English serif in the reserved area; NEVER invent extra words or non-English glyphs;\nno other text, no UI, no cards, no captions.",
@@ -169,7 +181,9 @@
    ],
    "aliases": [
     "Quiet Realism",
-    "cinema hou koreeda"
+    "cinema hou koreeda",
+    "侯孝贤",
+    "是枝裕和"
    ],
    "pack": "styles/cinema-hou-koreeda",
    "prompt_formula": "SURFACE:  A film frame with everyday warmth - late-afternoon sunlight through a home kitchen window, steam rising from a teapot, tangerines on a worn wooden table, gauzy curtain glow, a silhouetted figure passing in the hallway beyond, soft natural grade, gentle grain. Tender and unhurried; the shadowed wall carries the text.\nSKELETON: auto (a calm dark / negative area reserved for the title)\nDEVICE:   the page's argument as one cinematic hero subject, staged in this director's signature composition\nEND:      Full-bleed 16:9 — DEVICE in the SURFACE, cinematic composition.\nCRITICAL: title in clean English serif in the reserved area; NEVER invent extra words or non-English glyphs;\nno other text, no UI, no cards, no captions.",
@@ -189,7 +203,8 @@
    ],
    "aliases": [
     "One-Point Cold",
-    "cinema kubrick"
+    "cinema kubrick",
+    "库布里克"
    ],
    "pack": "styles/cinema-kubrick",
    "prompt_formula": "SURFACE:  A film frame with ONE-POINT PERSPECTIVE corridor - a long symmetric institutional hallway with cold fluorescent panels receding to a single vanishing point, glossy floor reflections, unsettling stillness, one distant silhouetted figure centered at the end. Sterile whites and icy blues with one deep red door accent. The upper symmetric zone carries the text.\nSKELETON: auto (a calm dark / negative area reserved for the title)\nDEVICE:   the page's argument as one cinematic hero subject, staged in this director's signature composition\nEND:      Full-bleed 16:9 — DEVICE in the SURFACE, cinematic composition.\nCRITICAL: title in clean English serif in the reserved area; NEVER invent extra words or non-English glyphs;\nno other text, no UI, no cards, no captions.",
@@ -209,7 +224,8 @@
    ],
    "aliases": [
     "Wind & Motion",
-    "cinema kurosawa"
+    "cinema kurosawa",
+    "黑泽明"
    ],
    "pack": "styles/cinema-kurosawa",
    "prompt_formula": "SURFACE:  A film frame with black-and-white epic motion - wind-driven rain slanting across a muddy field, a line of samurai silhouettes with banners (plain glyph-free cloth) braced against the storm, dramatic churning sky, deep blacks and silver highlights, dynamic diagonal composition. The storm sky carries the text in white.\nSKELETON: auto (a calm dark / negative area reserved for the title)\nDEVICE:   the page's argument as one cinematic hero subject, staged in this director's signature composition\nEND:      Full-bleed 16:9 — DEVICE in the SURFACE, cinematic composition.\nCRITICAL: title in clean English serif in the reserved area; NEVER invent extra words or non-English glyphs;\nno other text, no UI, no cards, no captions.",
@@ -229,7 +245,8 @@
    ],
    "aliases": [
     "Cold Monument",
-    "cinema nolan"
+    "cinema nolan",
+    "诺兰"
    ],
    "pack": "styles/cinema-nolan",
    "prompt_formula": "SURFACE:  cinematic film still with cold desaturated\nsteel-blue/slate-grey, hard directional light, high contrast, anamorphic, film grain. NO 3D-render look.\nSKELETON: auto (left-third dark reserved for text; subject monument to the right)\nDEVICE:   the page's argument as a monumental cold structure/vista + a tiny human for scale\nEND:      Full-bleed 16:9, DEVICE in the cold Nolan SURFACE, awe-and-tension composition.\nCRITICAL: title in clean English serif in the dark left area; NEVER invent extra words or glyphs;\nno other text, no UI, no cards, no captions.",
@@ -249,7 +266,8 @@
    ],
    "aliases": [
     "Misty Poetic",
-    "cinema tarkovsky"
+    "cinema tarkovsky",
+    "塔可夫斯基"
    ],
    "pack": "styles/cinema-tarkovsky",
    "prompt_formula": "SURFACE:  A film frame with poetic long-take stillness - an abandoned room with water pooling on the floorboards, moss-green and sepia patina, rain falling INSIDE through a broken roof, one shaft of divine pale light, a silhouetted figure standing far in the doorway, mist and dust motes. Spiritual melancholy; the dark half carries the text.\nSKELETON: auto (a calm dark / negative area reserved for the title)\nDEVICE:   the page's argument as one cinematic hero subject, staged in this director's signature composition\nEND:      Full-bleed 16:9 — DEVICE in the SURFACE, cinematic composition.\nCRITICAL: title in clean English serif in the reserved area; NEVER invent extra words or non-English glyphs;\nno other text, no UI, no cards, no captions.",
@@ -269,7 +287,8 @@
    ],
    "aliases": [
     "Warm Monolith",
-    "cinema villeneuve"
+    "cinema villeneuve",
+    "维伦纽瓦"
    ],
    "pack": "styles/cinema-villeneuve",
    "prompt_formula": "SURFACE:  cinematic film still with warm amber/ochre haze, monumental minimalism, soft backlight, muted earth tones. NO 3D-render look.\nSKELETON: auto (left area hazy-dark reserved for text; monolith to the right)\nDEVICE:   the page's argument as a colossal hazy monolith + a tiny dwarfed silhouette\nEND:      Full-bleed 16:9, DEVICE in the warm Villeneuve SURFACE, contemplative composition.\nCRITICAL: title in clean English serif in the left area; NEVER invent extra words or glyphs;\nno other text, no UI, no cards, no captions.",
@@ -289,7 +308,9 @@
    ],
    "aliases": [
     "Symmetric Pastel",
-    "cinema wesanderson"
+    "cinema wesanderson",
+    "韦斯安德森",
+    "韦斯·安德森"
    ],
    "pack": "styles/cinema-wesanderson",
    "prompt_formula": "SURFACE:  A film frame with STRICT central symmetry - a flat-front pastel facade (dusty pink, mint, butter yellow) with perfectly symmetric windows and doors, one tiny figure standing dead-center far away seen from behind, whip-flat perspective, candy-box color blocking, meticulous vintage props at mirrored positions. Deadpan charm, storybook lighting. The symmetric sky band carries the text; the palette may recolor the accent lines to deep plum.\nSKELETON: auto (a calm dark / negative area reserved for the title)\nDEVICE:   the page's argument as one cinematic hero subject, staged in this director's signature composition\nEND:      Full-bleed 16:9 — DEVICE in the SURFACE, cinematic composition.\nCRITICAL: title in clean English serif in the reserved area; NEVER invent extra words or non-English glyphs;\nno other text, no UI, no cards, no captions.",
@@ -309,7 +330,8 @@
    ],
    "aliases": [
     "Neon Nocturne",
-    "cinema wongkarwai"
+    "cinema wongkarwai",
+    "王家卫"
    ],
    "pack": "styles/cinema-wongkarwai",
    "prompt_formula": "SURFACE:  A film frame with saturated nostalgic color - deep crimson and jade neon bleeding through smoke in a narrow 1960s Hong Kong corridor, wet reflective floor tiles, a slow ceiling fan blur, one silhouetted figure leaning far in the haze, tungsten lamps burning warm halos. Heavy atmosphere, romantic melancholy, film grain and slight motion smear. Rich but disciplined - the left half stays deep shadow as the text zone.\nSKELETON: auto (a calm dark / negative area reserved for the title)\nDEVICE:   the page's argument as one cinematic hero subject, staged in this director's signature composition\nEND:      Full-bleed 16:9 — DEVICE in the SURFACE, cinematic composition.\nCRITICAL: title in clean English serif in the reserved area; NEVER invent extra words or non-English glyphs;\nno other text, no UI, no cards, no captions.",
@@ -329,7 +351,8 @@
    ],
    "aliases": [
     "Massed Color",
-    "cinema zhangyimou"
+    "cinema zhangyimou",
+    "张艺谋"
    ],
    "pack": "styles/cinema-zhangyimou",
    "prompt_formula": "SURFACE:  A film frame with a vast field of saturated single color - hundreds of red banners (glyph-free plain red cloth) rippling in formation under dramatic sky, tiny drummer silhouettes in perfect array beneath them, one shaft of golden light. Bold monochrome-red pageantry, human-sea geometry, epic depth. The sky zone carries the text in ivory-gold.\nSKELETON: auto (a calm dark / negative area reserved for the title)\nDEVICE:   the page's argument as one cinematic hero subject, staged in this director's signature composition\nEND:      Full-bleed 16:9 — DEVICE in the SURFACE, cinematic composition.\nCRITICAL: title in clean English serif in the reserved area; NEVER invent extra words or non-English glyphs;\nno other text, no UI, no cards, no captions.",
@@ -348,7 +371,9 @@
    ],
    "aliases": [
     "Cream Clay 3D",
-    "clay 3d"
+    "clay 3d",
+    "粘土",
+    "黏土"
    ],
    "pack": "styles/clay-3d",
    "prompt_formula": "SURFACE:  Everything sculpted from smooth matte modeling clay with subtle fingerprint texture and soft studio lighting — rounded edges, squishy charm, shallow depth of field. Palette - warm cream background, coral, butter yellow, soft sky blue, one deep plum accent. The hero is a cute clay machine - three rounded clay pods connected by clay tubes on a clay base, each pod carrying one label on a small clay signboard; a tiny clay figurine character stands beside it smiling. Title rendered as extruded rounded clay letters. Playful yet polished, Pixar-short-film quality render.\nSKELETON: auto by page role (cover / chapter / list / compare)\nDEVICE:   the page's argument drawn as a form native to this material\nEND:      Full-bleed 16:9 — render DEVICE on the SURFACE, per the page's composition.\nCRITICAL: title in clean legible English; NEVER invent extra words or non-English glyphs;\nannotations only as marks / numbers / dimension lines; no UI, no cards, no captions.",
@@ -367,7 +392,8 @@
    ],
    "aliases": [
     "Cloisonné",
-    "cloisonne"
+    "cloisonne",
+    "景泰蓝"
    ],
    "pack": "styles/cloisonne",
    "prompt_formula": "SURFACE:  Every single outline in the image is a BENT BRASS WIRE (掐丝) standing proud of the surface — thin gilded ribbons set on edge, forming closed cells, with visible wire joins and tiny irregularities where the wire was pinched around a curve. Ground enamel is packed into those cells and fired - slightly granular, with a few small pinholes and bubble pits, and micro-variation in colour density within a single cell. Surface polished flush then buffed, so wires read as continuous gold lines and the enamel between them is glassy with soft depth. Gilded copper rims and a gilt base band. Palette - the classic 景泰 turquoise-blue ground with lapis blue, coral red, aubergine, white and moss green enamels, all separated by gold wire. Motif vocabulary - 缠枝莲 scrolling lotus, cloud scrolls, ruyi heads, a lotus-petal band at the bottom edge. Raking light so the wire relief casts hairline shadows and the enamel shows glassy depth.\nSKELETON: auto by page role (cover / chapter / list / compare)\nDEVICE:   the page's argument drawn as a form native to this material\nEND:      Full-bleed 16:9 — render DEVICE on the SURFACE, per the page's composition.\nCRITICAL: title in clean legible English; NEVER invent extra words or non-English glyphs;\nannotations only as marks / numbers / dimension lines; no UI, no cards, no captions.",
@@ -386,7 +412,9 @@
    ],
    "aliases": [
     "Cyanotype",
-    "cyanotype botanical"
+    "cyanotype botanical",
+    "氰版",
+    "蓝晒"
    ],
    "pack": "styles/cyanotype-botanical",
    "prompt_formula": "SURFACE:  Deep Prussian blue field (#1B3E6F to #0E2647) with pure paper-white silhouettes. Hand-brushed emulsion edge — visible uneven brush strokes, streaks and a ragged coated border with raw white paper showing outside it. Paper fibre and tooth read through the blue; a few pale bleach-out blooms and small warm sepia foxing spots as the ONLY non-blue accent. Everything is a contact silhouette - soft-edged, flat, slightly ghosted, no modelling, no gloss, no glow — this is wet chemistry on paper, not a digital or neon blueprint. Hero - one large botanical specimen whose single stem branches into three seed-pods, each pod a crisp white silhouette with its label hand-lettered on a small specimen card pinned beside it. Title reversed out in clean white silhouette lettering. Feels like an 1843 Anna Atkins cyanotype plate.\nSKELETON: auto by page role (cover / chapter / list / compare)\nDEVICE:   the page's argument drawn as a form native to this material\nEND:      Full-bleed 16:9 — render DEVICE on the SURFACE, per the page's composition.\nCRITICAL: title in clean legible English; NEVER invent extra words or non-English glyphs;\nannotations only as marks / numbers / dimension lines; no UI, no cards, no captions.",
@@ -405,7 +433,9 @@
    ],
    "aliases": [
     "Cyan Blueprint",
-    "cyber blueprint"
+    "cyber blueprint",
+    "赛博蓝图",
+    "蓝图线框"
    ],
    "pack": "styles/cyber-blueprint",
    "prompt_formula": "SURFACE:  Dark blueprint-blue background (#0A1A3F) with precise white drafting grid, dimension lines and small annotation marks. The hero is a holographic 3D wireframe machine projected above a drafting table — three glowing cyan wireframe modules connected by light conduits, each module tagged with one label on a glowing HUD chip. Fine electric-cyan (#3FD8FF) glow lines, tiny technical callouts that are ONLY geometric marks, dimension lines and digits — NEVER invent any additional Chinese words or characters beyond the quoted text below, one warm amber accent node. Title in clean futuristic type with subtle glow. Feels like a starship engineer's live hologram console — precise, high-tech, cinematic.\nSKELETON: auto by page role (cover / chapter / list / compare)\nDEVICE:   the page's argument drawn as a form native to this material\nEND:      Full-bleed 16:9 — render DEVICE on the SURFACE, per the page's composition.\nCRITICAL: title in clean legible English; NEVER invent extra words or non-English glyphs;\nannotations only as marks / numbers / dimension lines; no UI, no cards, no captions.",
@@ -425,7 +455,9 @@
    ],
    "aliases": [
     "Da Vinci Copperplate",
-    "davinci copperplate"
+    "davinci copperplate",
+    "达芬奇铜版",
+    "达芬奇"
    ],
    "pack": "styles/davinci-copperplate",
    "prompt_formula": "SURFACE:  Leonardo da Vinci copperplate etching on aged sepia parchment — brown-ink cross-hatching,\nRenaissance manuscript, faint margin studies, aged paper texture. NO photographic, NO 3D.\nSKELETON: auto (dense hero object ~70% centre; lighter parchment left reserved for text)\nDEVICE:   the page's argument as an intricate mechanical apparatus (gears/cams/dials) — density\nlives inside the machine, margins stay light\nEND:      Full-bleed 16:9, DEVICE in the copperplate SURFACE, manuscript composition.\nCRITICAL: title in elegant English serif; NEVER invent extra words — decorative marks stay glyph-free\n(numbers and dimension lines only); no UI, no cards, no captions.",
@@ -444,7 +476,9 @@
    ],
    "aliases": [
     "Dunhuang Mural",
-    "dunhuang mural"
+    "dunhuang mural",
+    "敦煌",
+    "敦煌壁画"
    ],
    "pack": "styles/dunhuang-mural",
    "prompt_formula": "SURFACE:  An ancient cave-wall mural in the Dunhuang manner — the awe of a thousand-year painted wall. Aged plaster ground with fine craquelure, flaking edges revealing earlier paint layers, mineral pigments - malachite green, azurite blue, iron-red ochre, and cut-gold leaf halos. One graceful apsara ribbon of cloud-scroll drifts along the top edge, pale and secondary. All Chinese characters brushed in dense lamp-black with the poise of sutra calligraphy on a prepared white-lime cartouche band so they stay perfectly legible; the two RESULT lines larger, each on its own cartouche with a thin gold-leaf edge; a small iron-red seal mark low. The awe comes from the wall itself - layered, weathered, glowing mineral color. Text zones stay clean lime-white so nothing fights the characters. CRITICAL DIFFERENTIATION - this is pigment on aged plaster wall, NOT paper painting — cracks and flaking are of the wall; no photographic realism of modern objects, no 3D render, no vector.\nSKELETON: auto by page role (cover / chapter / list / compare)\nDEVICE:   the page's argument drawn as a form native to this material\nEND:      Full-bleed 16:9 — render DEVICE on the SURFACE, per the page's composition.\nCRITICAL: title in clean legible English; NEVER invent extra words or non-English glyphs;\nannotations only as marks / numbers / dimension lines; no UI, no cards, no captions.",
@@ -463,7 +497,8 @@
    ],
    "aliases": [
     "Linen Embroidery",
-    "embroidery tapestry"
+    "embroidery tapestry",
+    "刺绣"
    ],
    "pack": "styles/embroidery-tapestry",
    "prompt_formula": "SURFACE:  Natural linen ground with clearly visible warp-and-weft weave and a slightly irregular hand-hemmed edge. Every form is real thread - satin-stitch fills with directional sheen, chain-stitch outlines, French knots, couched metallic gold thread, visible needle holes, slight fabric puckering where the stitching pulls, a couple of loose thread ends. Palette - undyed linen, indigo, madder red, olive, ochre, one metallic gold thread. Soft raking light so thread relief casts micro-shadows. Hero - one embroidered emblem — a tree-of-life / loom structure with three stitched roundels worked into it, each roundel carrying its label embroidered in dark thread. Title worked in bold satin stitch with individual stitches clearly readable. Warm, tactile, William Morris sampler meets folk textile.\nSKELETON: auto by page role (cover / chapter / list / compare)\nDEVICE:   the page's argument drawn as a form native to this material\nEND:      Full-bleed 16:9 — render DEVICE on the SURFACE, per the page's composition.\nCRITICAL: title in clean legible English; NEVER invent extra words or non-English glyphs;\nannotations only as marks / numbers / dimension lines; no UI, no cards, no captions.",
@@ -482,7 +517,8 @@
    ],
    "aliases": [
     "Enamel Signage",
-    "enamel signage"
+    "enamel signage",
+    "搪瓷"
    ],
    "pack": "styles/enamel-signage",
    "prompt_formula": "SURFACE:  Glass fused to steel — glossy fired surface with soft broad reflections, each colour a separately fired layer so tiny ridges show at every colour boundary. Authentic ageing - chipping along the edges revealing dark steel and small rust blooms, faint speckle, rounded corners, four bolt holes with real rivets casting small shadows. Palette - deep cobalt blue field, cream-white lettering, one signal-red band. Hero - a single large enamel plaque bolted to a weathered riveted steel wall (the wall stays quiet background). The plaque is divided into three stacked enamel bands, each band carrying one label in fired cream lettering; a small enamel roundel badge sits at the top of the plaque. Title fired in bold grotesque cream letters across the plaque head. Heavy, official, built to last 50 years outdoors.\nSKELETON: auto by page role (cover / chapter / list / compare)\nDEVICE:   the page's argument drawn as a form native to this material\nEND:      Full-bleed 16:9 — render DEVICE on the SURFACE, per the page's composition.\nCRITICAL: title in clean legible English; NEVER invent extra words or non-English glyphs;\nannotations only as marks / numbers / dimension lines; no UI, no cards, no captions.",
@@ -501,7 +537,9 @@
    ],
    "aliases": [
     "Ink Wash",
-    "ink wash"
+    "ink wash",
+    "水墨",
+    "水墨画"
    ],
    "pack": "styles/ink-wash",
    "prompt_formula": "SURFACE:  Xuan rice-paper background with visible fiber grain and subtle mottling. Monochrome ink washes — misty mountains and clouds in graded ink tones, a winding river of pale ink connecting three small ink-painted pavilions (each pavilion carries one label on a small calligraphy tablet). One single accent color - vermilion red (#C3272B) used ONLY for one square seal stamp near the title and tiny highlights. Title in large hand-brushed calligraphy, vertical brush energy, dry-brush texture. Elegant, scholarly, vast negative space like a Song-dynasty landscape.\nSKELETON: auto by page role (cover / chapter / list / compare)\nDEVICE:   the page's argument drawn as a form native to this material\nEND:      Full-bleed 16:9 — render DEVICE on the SURFACE, per the page's composition.\nCRITICAL: title in clean legible English; NEVER invent extra words or non-English glyphs;\nannotations only as marks / numbers / dimension lines; no UI, no cards, no captions.",
@@ -520,7 +558,8 @@
    ],
    "aliases": [
     "Kente Cloth",
-    "kente cloth"
+    "kente cloth",
+    "肯特布"
    ],
    "pack": "styles/kente-cloth",
    "prompt_formula": "SURFACE:  Narrow woven strips, each about a hand's width, sewn side by side into one cloth — the SEAMS between strips are clearly visible and the patterns of adjacent strips are deliberately offset rather than aligned. Within each strip the weave alternates between warp-faced bands of pure colour and weft-faced blocks of dense supplementary-weft geometry (babadua ladders, chevrons, stacked rectangles, comb motifs). Silk and cotton threads give a slight sheen on the coloured floats; the weave grid is visible in every motif edge so all shapes are subtly stepped. Palette - royal Asante — gold yellow, deep green, crimson red, black, with small blue and white accents; colours are bold, flat and saturated, blocked not blended. Slight cloth undulation and a fringed lower edge.\nSKELETON: auto by page role (cover / chapter / list / compare)\nDEVICE:   the page's argument drawn as a form native to this material\nEND:      Full-bleed 16:9 — render DEVICE on the SURFACE, per the page's composition.\nCRITICAL: title in clean legible English; NEVER invent extra words or non-English glyphs;\nannotations only as marks / numbers / dimension lines; no UI, no cards, no captions.",
@@ -539,7 +578,8 @@
    ],
    "aliases": [
     "Kesi Silk Tapestry",
-    "kesi tapestry"
+    "kesi tapestry",
+    "缂丝"
    ],
    "pack": "styles/kesi-tapestry",
    "prompt_formula": "SURFACE:  Fine plain-weave silk tapestry made by the 通经断纬 method — the warp runs continuously but each colour weft turns back within its own area instead of crossing the full width. The signature must be unmistakable - SLITS (缂) — tiny open gaps and hairline seams along every vertical colour boundary, so the design looks carved out of the cloth (\"雕镂之象\"). Tonal shading is achieved by interlocking comb-tooth transitions (长短戗) between adjacent colours, never by blending or airbrush. The silk is thin, matte and slightly translucent with light glowing through the slits. No long floating threads anywhere. Palette - ivory and pale celadon ground with soft indigo, moss green, apricot, dusty rose and one restrained pale gold — refined and quiet, a scholar's object rather than a ceremonial one. Even soft light; the cloth held flat with delicate rippling; one edge shows loose warp fringe.\nSKELETON: auto by page role (cover / chapter / list / compare)\nDEVICE:   the page's argument drawn as a form native to this material\nEND:      Full-bleed 16:9 — render DEVICE on the SURFACE, per the page's composition.\nCRITICAL: title in clean legible English; NEVER invent extra words or non-English glyphs;\nannotations only as marks / numbers / dimension lines; no UI, no cards, no captions.",
@@ -558,7 +598,9 @@
    ],
    "aliases": [
     "Kintsugi",
-    "kintsugi"
+    "kintsugi",
+    "金继",
+    "金缮"
    ],
    "pack": "styles/kintsugi",
    "prompt_formula": "SURFACE:  A once-broken bowl or plate, put back together. The break lines are the design - irregular, branching, unrepeatable seams filled with urushi lacquer and dusted with real gold powder, standing very slightly proud of the glaze with a soft rounded profile and a warm metallic gleam that varies along its length — thicker where the gap was wider, hairline where the fit was close. The ceramic itself is quiet and undecorated so the gold seams carry everything - a matte crackled celadon / warm greyish-white glaze with subtle pooling, a few kiln specks, an unglazed foot showing raw clay. Some seams end in small gold-filled fill patches where a chip was lost. Soft directional light, deep shadow beneath, dark textured tabletop.\nSKELETON: auto by page role (cover / chapter / list / compare)\nDEVICE:   the page's argument drawn as a form native to this material\nEND:      Full-bleed 16:9 — render DEVICE on the SURFACE, per the page's composition.\nCRITICAL: title in clean legible English; NEVER invent extra words or non-English glyphs;\nannotations only as marks / numbers / dimension lines; no UI, no cards, no captions.",
@@ -577,7 +619,9 @@
    ],
    "aliases": [
     "Lacquer & Mother-of-Pearl",
-    "lacquer mop inlay"
+    "lacquer mop inlay",
+    "漆器螺钿",
+    "螺钿"
    ],
    "pack": "styles/lacquer-mop-inlay",
    "prompt_formula": "SURFACE:  A deep black lacquer surface built from many polished coats — it reads as having depth, like looking into dark water, with a soft broad reflection sweeping across it and a few faint polishing swirls. Every motif is INLAID SHELL - thin cut pieces of iridescent mother-of-pearl set flush into the lacquer, each piece with a visible cut edge and a hairline dark seam around it, and the shell flashing different colours across its surface — cyan, violet, rose, pale green — depending on angle, with the natural growth striations of the nacre visible inside each piece. Larger forms are assembled from many small shell tesserae, not one continuous sheet. Fine 描金 gold-powder line work adds tendrils and hairline detail between the shell pieces. A restrained cinnabar-red lacquer accent appears in one or two small areas only. Raking light so the shell iridescence ignites and the lacquer stays deep and dark.\nSKELETON: auto by page role (cover / chapter / list / compare)\nDEVICE:   the page's argument drawn as a form native to this material\nEND:      Full-bleed 16:9 — render DEVICE on the SURFACE, per the page's composition.\nCRITICAL: title in clean legible English; NEVER invent extra words or non-English glyphs;\nannotations only as marks / numbers / dimension lines; no UI, no cards, no captions.",
@@ -596,7 +640,8 @@
    ],
    "aliases": [
     "Gilt Leather",
-    "leather gilt"
+    "leather gilt",
+    "皮革烫金"
    ],
    "pack": "styles/leather-gilt",
    "prompt_formula": "SURFACE:  Full-grain oxblood leather with real pore texture, gentle sheen, scuffing and darker patina at the corners. All decoration is blind-tooled and hot-foil stamped by hand — the gold foil is slightly uneven with small breaks, skips and shine variation, and every stamp sits in a visible deboss with a soft shadow lip. Raised binding bands, a debossed double-rule border, a thin strip of marbled endpaper along one margin. Palette - deep oxblood, antique gold (#C9A227), one dark forest-green leather onlay. Hero - a single tooled central device on the leather — a crest built around a compass rose with three gold-stamped medallions inset, each medallion carrying its label struck in gold. Title hot-stamped large in gold, pressed deep enough to see the leather compress at the stroke edges.\nSKELETON: auto by page role (cover / chapter / list / compare)\nDEVICE:   the page's argument drawn as a form native to this material\nEND:      Full-bleed 16:9 — render DEVICE on the SURFACE, per the page's composition.\nCRITICAL: title in clean legible English; NEVER invent extra words or non-English glyphs;\nannotations only as marks / numbers / dimension lines; no UI, no cards, no captions.",
@@ -615,7 +660,9 @@
    ],
    "aliases": [
     "Paper Sculpture",
-    "papercraft"
+    "papercraft",
+    "纸雕",
+    "纸艺"
    ],
    "pack": "styles/papercraft",
    "prompt_formula": "SURFACE:  Entire scene built from cut and layered colored paper with soft real drop-shadows between layers — 5-6 depth layers. Palette - cream base, dusty blue, sage-free soft teal avoided — use cream, powder blue, blush coral, and one deep indigo layer. The hero is a paper diorama landscape - three paper towers rising from layered paper hills, each tower with one label on a folded paper flag; paper clouds and a paper sun with radiating cut rays. Title cut out as crisp paper letters casting subtle shadow. Handcrafted, tactile, warm gallery-lighting feel.\nSKELETON: auto by page role (cover / chapter / list / compare)\nDEVICE:   the page's argument drawn as a form native to this material\nEND:      Full-bleed 16:9 — render DEVICE on the SURFACE, per the page's composition.\nCRITICAL: title in clean legible English; NEVER invent extra words or non-English glyphs;\nannotations only as marks / numbers / dimension lines; no UI, no cards, no captions.",
@@ -633,7 +680,8 @@
    ],
    "aliases": [
     "Porcelain & Indigo",
-    "porcelain indigo"
+    "porcelain indigo",
+    "瓷白靛青"
    ],
    "pack": "styles/porcelain-indigo",
    "prompt_formula": "SURFACE:  Pristine bone-white porcelain as the canvas with an exquisitely precise indigo/cobalt miniature world (tiny buildings, gears, small figures) rendered in fine isometric relief as if glazed into the porcelain; cool indigo linework on warm white, subtle glaze sheen, high-craft precision, NOT plastic, NOT 3D-render.\nSKELETON: auto by page role (cover / chapter / list / compare)\nDEVICE:   the page's argument drawn as a form native to this material\nEND:      Full-bleed 16:9 — render DEVICE on the SURFACE, per the page's composition.\nCRITICAL: title in clean legible English; NEVER invent extra words or non-English glyphs;\nannotations only as marks / numbers / dimension lines; no UI, no cards, no captions.",
@@ -653,7 +701,9 @@
    ],
    "aliases": [
     "Portolan Sea Chart",
-    "portolan"
+    "portolan",
+    "航海图",
+    "海图"
    ],
    "pack": "styles/portolan",
    "prompt_formula": "SURFACE:  16th-century portolan sea chart on aged sepia parchment, muted watercolor\nocean, fine ink coastlines, compass roses, faint rhumb lines. NO photographic, NO 3D.\nSKELETON: auto by page role (cover=flowline, chapter=color-field, list=grid)\nDEVICE:   draw the page's argument as a chart element (a growth curve = a fleet of ships\nclimbing a rising sea-lane; scale = a distance measured on the chart)\nEND:      Full-bleed 16:9, render DEVICE on the parchment SURFACE, DEVICE composition.\nCRITICAL: title in clean legible English serif; NEVER invent extra words or glyphs;\nannotations only as compass marks / numbers / dotted rhumb lines; no UI, no cards, no captions.",
@@ -672,7 +722,8 @@
    ],
    "aliases": [
     "Retro Science Cutaway",
-    "retro science cutaway"
+    "retro science cutaway",
+    "复古科普"
    ],
    "pack": "styles/retro-science-cutaway",
    "prompt_formula": "SURFACE:  Aged cream plate paper with light foxing and slightly soft colour registration. Limited flat litho palette - brick red, teal, mustard, warm grey, over confident black line work. Visible screen-tint textures and one colour plate printed a hair off register. Hero - one large technical cutaway — a single machine-building shown in cross-section with its interior exposed as three colour-coded chambers, drawn in crisp black outline with flat tints and cross-hatched shading. Each chamber connects by a thin leader line to its label. Any other annotation must be geometric only - leader lines, arrows, scale bars, arabic numerals — nothing else. Feels exactly like a vintage encyclopedia How-It-Works plate.\nSKELETON: auto by page role (cover / chapter / list / compare)\nDEVICE:   the page's argument drawn as a form native to this material\nEND:      Full-bleed 16:9 — render DEVICE on the SURFACE, per the page's composition.\nCRITICAL: title in clean legible English; NEVER invent extra words or non-English glyphs;\nannotations only as marks / numbers / dimension lines; no UI, no cards, no captions.",
@@ -691,7 +742,9 @@
    ],
    "aliases": [
     "Screenprint Poster",
-    "screenprint poster"
+    "screenprint poster",
+    "丝网印刷",
+    "丝网"
    ],
    "pack": "styles/screenprint-poster",
    "prompt_formula": "SURFACE:  Coarse uncoated poster stock. Only three spot inks — warm brick red (#D8402F), deep teal-navy (#143C4C), mustard (#E3A72C) — overprinting into darker mixed tones where they cross. Deliberate 1–2 mm misregistration between the plates, visible ink grain, coarse halftone dot fields, faint squeegee streaks, small pinholes and mesh texture, ink slightly thicker at edges. Flat shapes only - no gradients, no photorealism, no shadows. Hero - one bold graphic emblem — a single stylised machine-organism drawn in thick flat cut shapes, with three limbs, each limb ending in a solid ink block carrying its label knocked out in white. Title in heavy condensed poster lettering, slightly overprinted so a red fringe shows. Energy of a Constructivist rally poster crossed with a modern gig poster — punchy, handmade, loud.\nSKELETON: auto by page role (cover / chapter / list / compare)\nDEVICE:   the page's argument drawn as a form native to this material\nEND:      Full-bleed 16:9 — render DEVICE on the SURFACE, per the page's composition.\nCRITICAL: title in clean legible English; NEVER invent extra words or non-English glyphs;\nannotations only as marks / numbers / dimension lines; no UI, no cards, no captions.",
@@ -710,7 +763,8 @@
    ],
    "aliases": [
     "Shu Brocade",
-    "shu brocade"
+    "shu brocade",
+    "蜀锦"
    ],
    "pack": "styles/shu-brocade",
    "prompt_formula": "SURFACE:  Warp-faced polychrome silk brocade woven on a drawloom. The pattern is WOVEN INTO the cloth structure, not stitched on top and not printed - every motif is built from tiny interlacing warp and weft floats, so all curves are subtly stepped/pixelated by the weave grid, and the silk floats catch light with a directional lustre that shifts between figure and ground. Couched gold-wrapped and silver-wrapped thread runs through the main motifs with visible metallic wrap. Selvedge with fine striped border bands at one edge; a few weft floats slightly loose. Motif vocabulary is classical Shu - 团花 medallion rosettes, pearl-roundel (联珠纹) chains, scrolling 卷草 vines, paired phoenixes, cloud bands, key-fret borders. Palette - crimson-vermilion ground with azurite blue, malachite green, apricot yellow, ivory, and gold thread — rich but disciplined, five colours plus gold. Raking light so the silk sheen and thread relief are unmistakable.\nSKELETON: auto by page role (cover / chapter / list / compare)\nDEVICE:   the page's argument drawn as a form native to this material\nEND:      Full-bleed 16:9 — render DEVICE on the SURFACE, per the page's composition.\nCRITICAL: title in clean legible English; NEVER invent extra words or non-English glyphs;\nannotations only as marks / numbers / dimension lines; no UI, no cards, no captions.",
@@ -729,7 +783,9 @@
    ],
    "aliases": [
     "Stele Rubbing",
-    "stele rubbing"
+    "stele rubbing",
+    "拓片",
+    "碑拓"
    ],
    "pack": "styles/stele-rubbing",
    "prompt_formula": "SURFACE:  A hand-taken ink rubbing - damp paper was pressed onto a carved stone stele and tamped with an ink pad, so the carved recesses stay PAPER-WHITE and everything else is a dense charcoal-black field. The tell of a real rubbing must be everywhere — the ink is not flat - it is built from countless tiny tamping dabs, denser in the middle and thinning toward the edges; the stone's natural pitting, weathering scars and a crack or two come through as pale mottling and irregular white speckles; the paper shows soft creases, fibre texture, slightly torn deckle edges and one dog-eared corner. Characters are stone-carved forms — clerical/seal script energy with blunt chiselled terminals, NOT brush-written. Palette strictly monochrome - charcoal-black ink, warm off-white paper, and one small vermilion collector's seal as the ONLY colour in the image.\nSKELETON: auto by page role (cover / chapter / list / compare)\nDEVICE:   the page's argument drawn as a form native to this material\nEND:      Full-bleed 16:9 — render DEVICE on the SURFACE, per the page's composition.\nCRITICAL: title in clean legible English; NEVER invent extra words or non-English glyphs;\nannotations only as marks / numbers / dimension lines; no UI, no cards, no captions.",
@@ -748,7 +804,9 @@
    ],
    "aliases": [
     "Stone Relief",
-    "stone relief"
+    "stone relief",
+    "石雕",
+    "浮雕"
    ],
    "pack": "styles/stone-relief",
    "prompt_formula": "SURFACE:  Warm limestone / travertine slab with natural veining, pitting and small weathered chips. All forms carved in shallow relief with true cast shadows and soft ambient occlusion; claw-chisel and point marks visible across the surface; dust in the recesses. Essentially monochrome stone with ONE accent — traces of ancient faded ochre-red pigment surviving in the carved hollows, plus thin worn gilding inside the incised title strokes. Hero - a single continuous carved frieze panel — one temple-machine with three carved niches, each niche holding a small relief figure with its label incised in a rectangular cartouche beneath. Title deeply V-cut into the stone, one edge catching the light, the other in shadow. Monumental, ancient, weighty.\nSKELETON: auto by page role (cover / chapter / list / compare)\nDEVICE:   the page's argument drawn as a form native to this material\nEND:      Full-bleed 16:9 — render DEVICE on the SURFACE, per the page's composition.\nCRITICAL: title in clean legible English; NEVER invent extra words or non-English glyphs;\nannotations only as marks / numbers / dimension lines; no UI, no cards, no captions.",
@@ -767,7 +825,9 @@
    ],
    "aliases": [
     "Swiss Grid",
-    "swiss grid"
+    "swiss grid",
+    "瑞士网格",
+    "瑞士极简"
    ],
    "pack": "styles/swiss-grid",
    "prompt_formula": "SURFACE:  Warm white uncoated stock with only a faint offset ink grain. Two inks - black and one signal red (#E1261C). Strict mathematical grid, generous white space, flush-left asymmetric alignment, thin black hairline rules, absolutely no ornament, no illustration, no gradient, no shadow, no texture beyond paper grain. Restraint is the entire point. Hero - one precise geometric construction occupying the right two-thirds — three concentric rings of graduated weight around a common centre, cut by a fan of radiating hairlines, with exactly ONE segment filled solid red. Each of the three rings carries its own label, set small and flush-left at the end of its own thin horizontal leader rule, the three leader rules stacked on a shared left alignment so they read as one tidy stack. Title set very large with tight tracking, flush left in the upper-left quadrant, anchoring the whole composition against the construction. Every element sits on the same modular grid; nothing floats. Cool, exact, Müller-Brockmann discipline.\nSKELETON: auto by page role (cover / chapter / list / compare)\nDEVICE:   the page's argument drawn as a form native to this material\nEND:      Full-bleed 16:9 — render DEVICE on the SURFACE, per the page's composition.\nCRITICAL: title in clean legible English; NEVER invent extra words or non-English glyphs;\nannotations only as marks / numbers / dimension lines; no UI, no cards, no captions.",
@@ -786,7 +846,8 @@
    ],
    "aliases": [
     "Ukiyo-e Woodblock",
-    "ukiyoe woodblock"
+    "ukiyoe woodblock",
+    "浮世绘"
    ],
    "pack": "styles/ukiyoe-woodblock",
    "prompt_formula": "SURFACE:  Carved and printed, NOT painted — hard-edged flat colour areas with hand-cut key-block outlines that show slight chatter, faint wood grain printed into the broad colour fields, bokashi gradient wipes in sky and water, one or two colour plates printed a hair off register. Mulberry paper fibre visible. Muted natural pigments - indigo, tan, persimmon orange, sumi black, one soft sage. Explicitly not a soft Chinese ink wash — no bleeding, no wet blending, no misty gradients. Hero - one great cresting wave carrying three carved pavilion-boats, each boat bearing its label on a small carved cartouche. Title cut as bold hand-carved characters inside an inked vertical block at one side, like a printed title cartouche.\nSKELETON: auto by page role (cover / chapter / list / compare)\nDEVICE:   the page's argument drawn as a form native to this material\nEND:      Full-bleed 16:9 — render DEVICE on the SURFACE, per the page's composition.\nCRITICAL: title in clean legible English; NEVER invent extra words or non-English glyphs;\nannotations only as marks / numbers / dimension lines; no UI, no cards, no captions.",
@@ -805,7 +866,9 @@
    ],
    "aliases": [
     "Warm Pencil Sketch",
-    "warm sepia"
+    "warm sepia",
+    "暖棕手绘",
+    "铅笔手绘"
    ],
    "pack": "styles/warm-sepia",
    "prompt_formula": "SURFACE:  Warm hand-drawn pencil-and-light-ink illustration on aged cream/ivory sketchbook paper, soft graphite shading, gentle sepia, like a page from a warm illustrated notebook; never flat vector, never photographic, never glossy. Monochrome warm sepia/graphite; ONE single soft accent colour on exactly one small element; hand-lettered feel.\nSKELETON: auto by page role (cover / chapter / list / compare)\nDEVICE:   the page's argument drawn as a form native to this material\nEND:      Full-bleed 16:9 — render DEVICE on the SURFACE, per the page's composition.\nCRITICAL: title in clean legible English; NEVER invent extra words or non-English glyphs;\nannotations only as marks / numbers / dimension lines; no UI, no cards, no captions.",
@@ -824,7 +887,8 @@
    ],
    "aliases": [
     "Watercolor Editorial",
-    "watercolor editorial"
+    "watercolor editorial",
+    "水彩"
    ],
    "pack": "styles/watercolor-editorial",
    "prompt_formula": "SURFACE:  Warm off-white cotton-paper background. The hero is a loose, confident watercolor illustration — a landscape of three softly-painted hills/islands connected by a winding watercolor path, pigment blooms and granulation visible, colors bleeding naturally at edges - dusty rose, ochre, slate blue with generous white paper reserved. Each island holds a tiny painted landmark with its label in refined small serif. Asymmetric editorial layout - title set in large elegant thin serif on the left third with lots of air, a thin hairline rule, subtitle letter-spaced. Feels like a premium lifestyle magazine opening spread — artistic, breathing, sophisticated.\nSKELETON: auto by page role (cover / chapter / list / compare)\nDEVICE:   the page's argument drawn as a form native to this material\nEND:      Full-bleed 16:9 — render DEVICE on the SURFACE, per the page's composition.\nCRITICAL: title in clean legible English; NEVER invent extra words or non-English glyphs;\nannotations only as marks / numbers / dimension lines; no UI, no cards, no captions.",
@@ -843,7 +907,8 @@
    ],
    "aliases": [
     "Zellige Girih",
-    "zellige girih"
+    "zellige girih",
+    "摩洛哥瓷砖"
    ],
    "pack": "styles/zellige-girih",
    "prompt_formula": "SURFACE:  Hand-cut glazed terracotta tesserae assembled into a girih pattern. Every single piece is chiselled by hand, so edges are slightly irregular, no two tiles are identical, and the white lime grout lines between them wander a fraction. Glaze is thick and uneven — pooling darker at edges, with crazing, pinholes and gentle colour variation within one nominal colour, and a wet reflective sheen catching a soft window light. The geometry is authentic girih - an interlaced star-and-polygon system radiating from a central 16-point star rosette, with strapwork bands weaving over and under, and a plain border band of alternating tiles. Palette - the classic Fez range — deep zellige blue, turquoise, white, saffron yellow, terracotta and a little olive green. Slight tile-surface undulation across the panel.\nSKELETON: auto by page role (cover / chapter / list / compare)\nDEVICE:   the page's argument drawn as a form native to this material\nEND:      Full-bleed 16:9 — render DEVICE on the SURFACE, per the page's composition.\nCRITICAL: title in clean legible English; NEVER invent extra words or non-English glyphs;\nannotations only as marks / numbers / dimension lines; no UI, no cards, no captions.",

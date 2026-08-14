@@ -86,6 +86,31 @@ def build():
     open(os.path.join(ROOT, "GALLERY.md"), "w", encoding="utf-8").write("\n".join(out) + "\n")
     # machine-readable manifest so agents can resolve a named style -> pack + formula
     import json as _json
+    # Chinese aliases so zh style names resolve deterministically (not just via LLM knowledge)
+    ALIAS_ZH = {
+        "ink-wash": ["水墨", "水墨画"], "kintsugi": ["金继", "金缮"], "stele-rubbing": ["拓片", "碑拓"],
+        "portolan": ["航海图", "海图"], "davinci-copperplate": ["达芬奇铜版", "达芬奇"],
+        "swiss-grid": ["瑞士网格", "瑞士极简"], "blue-white-porcelain": ["青花", "青花瓷"],
+        "porcelain-indigo": ["瓷白靛青"], "warm-sepia": ["暖棕手绘", "铅笔手绘"],
+        "dunhuang-mural": ["敦煌", "敦煌壁画"], "ukiyoe-woodblock": ["浮世绘"],
+        "cyanotype-botanical": ["氰版", "蓝晒"], "papercraft": ["纸雕", "纸艺"],
+        "clay-3d": ["粘土", "黏土"], "artdeco-gold": ["装饰艺术", "黑金"],
+        "celestial-gold": ["深空鎏金", "星图"], "batik-waxresist": ["蜡染"],
+        "shu-brocade": ["蜀锦"], "kesi-tapestry": ["缂丝"], "cloisonne": ["景泰蓝"],
+        "lacquer-mop-inlay": ["漆器螺钿", "螺钿"], "zellige-girih": ["摩洛哥瓷砖"],
+        "kente-cloth": ["肯特布"], "bogolanfini-mudcloth": ["泥布"],
+        "cinema-nolan": ["诺兰"], "cinema-villeneuve": ["维伦纽瓦"],
+        "cinema-wongkarwai": ["王家卫"], "cinema-wesanderson": ["韦斯安德森", "韦斯·安德森"],
+        "cinema-kubrick": ["库布里克"], "cinema-zhangyimou": ["张艺谋"],
+        "cinema-fincher": ["芬奇"], "cinema-tarkovsky": ["塔可夫斯基"],
+        "cinema-hou-koreeda": ["侯孝贤", "是枝裕和"], "cinema-hitchcock": ["希区柯克"],
+        "cinema-kurosawa": ["黑泽明"], "swiss- grid": [],
+        "embroidery-tapestry": ["刺绣"], "stone-relief": ["石雕", "浮雕"],
+        "leather-gilt": ["皮革烫金"], "broadsheet-news": ["凸版报纸", "铅字报纸"],
+        "screenprint-poster": ["丝网印刷", "丝网"], "enamel-signage": ["搪瓷"],
+        "watercolor-editorial": ["水彩"], "cyber-blueprint": ["赛博蓝图", "蓝图线框"],
+        "retro-science-cutaway": ["复古科普"],
+    }
     manifest = []
     for p in packs:
         pf = p.get("prompt_formula", "")
@@ -98,7 +123,7 @@ def build():
             "medium": p.get("medium"),
             "hand": p.get("hand", ""),
             "tags": [t for t in re.findall(r"[\w-]+", p.get("tags", ""))],
-            "aliases": [p.get("name", ""), p.get("slug", "").replace("-", " ")],
+            "aliases": [p.get("name", ""), p.get("slug", "").replace("-", " ")] + ALIAS_ZH.get(p.get("slug", ""), []),
             "pack": p.get("_dir"),
             "prompt_formula": p.get("prompt_formula", ""),
             "license": p.get("license", "CC-BY-4.0"),
