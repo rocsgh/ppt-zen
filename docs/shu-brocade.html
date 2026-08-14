@@ -1,59 +1,117 @@
 <!doctype html><html lang="en"><head><meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Shu Brocade · PPT-Zen</title><meta name="description" content="Textile material recipe for AI-made slides.">
+<title>Shu Brocade · PPT-Zen</title><meta name="description" content="Textile recipe for AI-made slides.">
 <style>
-:root{--bg:#faf8f4;--fg:#181414;--muted:#6b6460;--card:#fff;--line:#e7e0d6;--accent:#b23b2e;--code:#2a2320}
-@media(prefers-color-scheme:dark){:root:not([data-theme=light]){--bg:#151210;--fg:#f3efe9;--muted:#9a9088;--card:#1f1b18;--line:#332c26;--accent:#e0654f;--code:#0f0c0a}}
-:root[data-theme=dark]{--bg:#151210;--fg:#f3efe9;--muted:#9a9088;--card:#1f1b18;--line:#332c26;--accent:#e0654f;--code:#0f0c0a}
-*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--fg);font:16px/1.6 -apple-system,BlinkMacSystemFont,"Segoe UI","Noto Sans SC",sans-serif}
-a{color:inherit}
-.wrap{max-width:1120px;margin:0 auto;padding:0 20px}
-header{text-align:center;padding:56px 20px 24px}
-header h1{font-size:clamp(2rem,5vw,3.2rem);margin:0 0 8px;letter-spacing:-.02em}
-header p{color:var(--muted);font-size:1.1rem;margin:0 auto;max-width:640px}
-.links{margin-top:18px;display:flex;gap:10px;justify-content:center;flex-wrap:wrap}
-.links a{color:var(--fg);text-decoration:none;border:1px solid var(--line);padding:8px 16px;border-radius:99px;font-size:.9rem;font-weight:600}
-.links a.primary{background:var(--accent);color:#fff;border-color:var(--accent)}
-.filters{display:flex;gap:8px;justify-content:center;flex-wrap:wrap;margin:28px 0 8px}
-.filters button{background:var(--card);border:1px solid var(--line);color:var(--fg);padding:6px 14px;border-radius:99px;cursor:pointer;font-size:.86rem}
-.filters button.on{background:var(--accent);color:#fff;border-color:var(--accent)}
-.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:20px;padding:24px 0 60px}
-.card{background:var(--card);border:1px solid var(--line);border-radius:14px;overflow:hidden;text-decoration:none;color:inherit;display:block;transition:transform .12s ease,border-color .12s ease}
-.card:hover{transform:translateY(-3px);border-color:var(--accent)}
-.card img{width:100%;display:block;aspect-ratio:16/9;object-fit:cover}
-.card .body{padding:14px 16px}
-.card .nm{font-weight:700;font-size:1.05rem}
-.card .meta{color:var(--muted);font-size:.82rem;margin:4px 0 8px}
-.card .tag{display:inline-block;font-size:.7rem;color:var(--muted);border:1px solid var(--line);border-radius:99px;padding:1px 8px;margin:0 4px 4px 0}
-.card .more{color:var(--accent);font-size:.82rem;font-weight:600;margin-top:6px}
-footer{text-align:center;color:var(--muted);font-size:.85rem;padding:30px 20px 50px;border-top:1px solid var(--line)}
+:root{
+ --bg:#f3f2ef; --panel:#fbfbf9; --ink:#17161b; --ink2:#3b3a41; --muted:#78767f;
+ --line:#e2e0da; --line2:#d3d0c8; --shadow:20 18 15;
+ --disp:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",system-ui,sans-serif;
+ --mono:"SF Mono",ui-monospace,"JetBrains Mono",Menlo,Consolas,monospace;
+}
+@media(prefers-color-scheme:dark){:root:not([data-theme=light]){
+ --bg:#0e0e11; --panel:#17171b; --ink:#f4f3ef; --ink2:#c9c7cf; --muted:#8f8d97;
+ --line:#26262c; --line2:#33333a; --shadow:0 0 0;
+}}
+:root[data-theme=dark]{
+ --bg:#0e0e11; --panel:#17171b; --ink:#f4f3ef; --ink2:#c9c7cf; --muted:#8f8d97;
+ --line:#26262c; --line2:#33333a; --shadow:0 0 0;
+}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;color:var(--ink);font:1.0625rem/1.6 var(--disp);
+ background:var(--bg);
+ background-image:radial-gradient(var(--line) .6px,transparent .6px);
+ background-size:24px 24px;background-position:-12px -12px;}
+a{color:inherit;text-decoration:none}
+.wrap{max-width:1180px;margin:0 auto;padding:0 24px}
+.kick{font:.72rem/1.4 var(--mono);letter-spacing:.16em;text-transform:uppercase;color:var(--muted)}
+
+/* nav */
+nav{display:flex;justify-content:space-between;align-items:center;padding:22px 0;border-bottom:1px solid var(--line)}
+.mark{font-weight:800;letter-spacing:-.03em;font-size:1.15rem}
+.mark b{color:var(--ink)}
+.nav-links{display:flex;gap:6px;align-items:center}
+.btn{display:inline-flex;align-items:center;min-height:40px;padding:0 16px;border-radius:10px;
+ font:600 .9rem var(--disp);border:1px solid var(--line2);color:var(--ink);background:var(--panel)}
+.btn.solid{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+
+/* hero */
+.hero{display:grid;grid-template-columns:1.05fr .95fr;gap:48px;align-items:center;padding:72px 0 40px}
+.hero h1{font-size:clamp(2.6rem,6.2vw,4.6rem);line-height:.98;letter-spacing:-.04em;font-weight:800;margin:14px 0 0}
+.hero .lede{font-size:1.2rem;line-height:1.5;color:var(--ink2);margin:20px 0 6px;max-width:30ch}
+.hero .thesis{font-size:1.05rem;color:var(--muted);margin:0 0 26px}
+.hero .thesis b{color:var(--ink);font-weight:700}
+.hero-cta{display:flex;gap:10px;flex-wrap:wrap}
+.hero-cta .btn{min-height:46px;padding:0 20px}
+.trio{position:relative}
+.trio .row{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px}
+.trio figure{margin:0;border-radius:12px;overflow:hidden;border:1px solid var(--line2);
+ box-shadow:0 1px 0 rgb(var(--shadow)/.04),0 14px 34px -18px rgb(var(--shadow)/.5)}
+.trio img{width:100%;display:block;aspect-ratio:3/4;object-fit:cover}
+.trio .cap{margin-top:12px;text-align:center}
+
+/* section head */
+.shead{display:flex;justify-content:space-between;align-items:baseline;border-top:1px solid var(--line);
+ padding-top:26px;margin-top:26px}
+.shead h2{font-size:1.5rem;letter-spacing:-.02em;margin:0}
+.filters{display:flex;gap:8px;flex-wrap:wrap;margin:20px 0 6px}
+.filters button{background:transparent;border:1px solid var(--line2);color:var(--ink2);min-height:36px;
+ padding:0 13px;border-radius:99px;cursor:pointer;font:.75rem/1 var(--mono);letter-spacing:.04em}
+.filters button:hover{border-color:var(--ink)}
+.filters button.on{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+
+/* card wall */
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(310px,1fr));gap:22px;padding:22px 0 64px}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:16px;overflow:hidden;display:block;
+ transition:transform .18s cubic-bezier(.2,.7,.2,1),box-shadow .18s,border-color .18s}
+.card .ph{overflow:hidden;aspect-ratio:16/10;background:var(--line)}
+.card img{width:100%;height:100%;display:block;object-fit:cover;transition:transform .35s cubic-bezier(.2,.7,.2,1)}
+.card:hover{transform:translateY(-4px);border-color:var(--line2);
+ box-shadow:0 2px 0 rgb(var(--shadow)/.03),0 24px 46px -24px rgb(var(--shadow)/.55)}
+.card:hover img{transform:scale(1.035)}
+.card .body{padding:15px 17px 17px}
+.card .nm{font-weight:700;font-size:1.06rem;letter-spacing:-.01em}
+.card .sub{font:.7rem/1.4 var(--mono);letter-spacing:.08em;text-transform:uppercase;color:var(--muted);margin:5px 0 10px}
+.card .tags{display:flex;flex-wrap:wrap;gap:5px}
+.card .tag{font:.66rem/1 var(--mono);letter-spacing:.03em;color:var(--muted);border:1px solid var(--line);border-radius:99px;padding:4px 8px}
+.card .more{font:.7rem/1 var(--mono);letter-spacing:.1em;text-transform:uppercase;color:var(--ink);margin-top:12px}
+
+footer{border-top:1px solid var(--line);padding:34px 0 60px;color:var(--muted);font-size:.86rem;text-align:center}
+footer a{color:var(--ink2);text-decoration:underline;text-underline-offset:2px}
+
 /* detail */
-.top{display:flex;justify-content:space-between;align-items:center;padding:20px 0}
-.top a{text-decoration:none;font-weight:600;font-size:.92rem}
-.hero{width:100%;border-radius:16px;border:1px solid var(--line);display:block;margin:6px 0 26px}
-.d h1{font-size:clamp(1.8rem,4vw,2.6rem);margin:0 0 10px;letter-spacing:-.02em}
-.chips{margin:0 0 18px}
-.chip{display:inline-block;font-size:.78rem;border:1px solid var(--line);border-radius:99px;padding:3px 11px;margin:0 6px 6px 0;color:var(--muted)}
-.chip.k{color:var(--accent);border-color:var(--accent)}
-.world{font-style:italic;color:var(--muted);font-size:1.05rem;margin:0 0 20px;padding-left:14px;border-left:3px solid var(--accent)}
-.d p{max-width:70ch}
-.d h2{font-size:.8rem;text-transform:uppercase;letter-spacing:.08em;color:var(--muted);margin:34px 0 8px}
-pre{background:var(--code);color:#e8e2da;padding:16px;border-radius:10px;overflow:auto;font-size:.8rem;line-height:1.5;white-space:pre-wrap}
-code{background:var(--code);color:#e8e2da;padding:1px 5px;border-radius:4px;font-size:.85em}
-.src{color:var(--muted);font-size:.86rem;margin-top:22px}
-</style></head><body><div class="wrap d">
-<div class="top"><a href="index.html">&larr; All styles</a><a href="https://github.com/rocsgh/ppt-zen">GitHub &#9733;</a></div>
-<img class="hero" src="img/shu-brocade.jpg" alt="Shu Brocade"/>
-<h1>Shu Brocade</h1>
-<div class="chips"><span class="chip">Textile</span><span class="chip">gold-weave</span><span class="chip">opulent</span><span class="chip">silk</span><span class="chip">pattern</span></div>
+.top{display:flex;justify-content:space-between;align-items:center;padding:22px 0;border-bottom:1px solid var(--line)}
+.top a{font:600 .9rem var(--disp)}
+.d{max-width:900px}
+.hero-img{width:100%;border-radius:18px;border:1px solid var(--line2);display:block;margin:30px 0 30px;
+ box-shadow:0 2px 0 rgb(var(--shadow)/.03),0 30px 60px -30px rgb(var(--shadow)/.5)}
+.d h1{font-size:clamp(2rem,4.6vw,3rem);letter-spacing:-.03em;font-weight:800;margin:0 0 12px;line-height:1.02}
+.chips{margin:0 0 22px;display:flex;flex-wrap:wrap;gap:7px}
+.chip{font:.72rem/1 var(--mono);letter-spacing:.05em;border:1px solid var(--line2);border-radius:99px;padding:6px 11px;color:var(--muted)}
+.chip.k{color:var(--bg);background:var(--ink);border-color:var(--ink)}
+.world{font-size:1.2rem;line-height:1.45;color:var(--ink2);margin:0 0 24px;padding-left:16px;border-left:3px solid var(--ink)}
+.d p{max-width:68ch;color:var(--ink2)}
+.d p b{color:var(--ink)}
+.d h2{font:.72rem/1 var(--mono);letter-spacing:.14em;text-transform:uppercase;color:var(--muted);margin:38px 0 10px}
+pre{background:#141319;color:#e9e6df;padding:18px;border-radius:12px;overflow:auto;font:.8rem/1.55 var(--mono);white-space:pre-wrap;border:1px solid #24232b}
+code{font-family:var(--mono);font-size:.86em}
+.src{color:var(--muted);font-size:.86rem;margin-top:24px}
+
+@media(max-width:820px){.hero{grid-template-columns:1fr;gap:30px;padding:44px 0 24px}.trio img{aspect-ratio:16/11}}
+@media(prefers-reduced-motion:reduce){*{transition:none!important}.card:hover{transform:none}.card:hover img{transform:none}}
+@media(prefers-contrast:more){:root{--muted:#54525a;--line:#c9c6bf;--line2:#b3b0a8}}
+</style></head><body><div class="wrap"><nav><a class="mark" href="index.html">PPT&#8209;<b>Zen</b></a>
+<div class="nav-links"><a class="btn" href="https://github.com/rocsgh/ppt-zen#quick-start">Install</a>
+<a class="btn" href="https://github.com/rocsgh/ppt-zen/blob/master/CONTRIBUTING.md">Contribute</a>
+<a class="btn solid" href="https://github.com/rocsgh/ppt-zen">GitHub &#9733;</a></div></nav></div><div class="wrap d">
+<img class="hero-img" src="img/shu-brocade.jpg" alt="Shu Brocade"/>
+<h1>Shu Brocade</h1><div class="chips"><span class="chip">Textile</span><span class="chip">gold-weave</span><span class="chip">opulent</span><span class="chip">silk</span><span class="chip">pattern</span></div>
 <p>Opulent Shu brocade — gold weft threaded through patterned silk.</p><p><i>Swatch shows the same line — <code>Signal over noise</code> — rendered in this material, so the surface is the only variable.</i></p>
 <h2>Prompt formula</h2><pre>SURFACE:  Warp-faced polychrome silk brocade woven on a drawloom. The pattern is WOVEN INTO the cloth structure, not stitched on top and not printed - every motif is built from tiny interlacing warp and weft floats, so all curves are subtly stepped/pixelated by the weave grid, and the silk floats catch light with a directional lustre that shifts between figure and ground. Couched gold-wrapped and silver-wrapped thread runs through the main motifs with visible metallic wrap. Selvedge with fine striped border bands at one edge; a few weft floats slightly loose. Motif vocabulary is classical Shu - 团花 medallion rosettes, pearl-roundel (联珠纹) chains, scrolling 卷草 vines, paired phoenixes, cloud bands, key-fret borders. Palette - crimson-vermilion ground with azurite blue, malachite green, apricot yellow, ivory, and gold thread — rich but disciplined, five colours plus gold. Raking light so the silk sheen and thread relief are unmistakable.
 SKELETON: auto by page role (cover / chapter / list / compare)
 DEVICE:   the page&#x27;s argument drawn as a form native to this material
 END:      Full-bleed 16:9 — render DEVICE on the SURFACE, per the page&#x27;s composition.
 CRITICAL: title in clean legible English; NEVER invent extra words or non-English glyphs;
-annotations only as marks / numbers / dimension lines; no UI, no cards, no captions.</pre>
-<h2>Source</h2><p>Material recipe from the PPT-Zen 32-material library. Our own artwork.</p>
-<p class="src">License: CC-BY-4.0 &middot; contributions via DCO. Inspired discipline from <i>Presentation Zen</i>.</p>
-<footer>PPT-Zen &middot; a judgment layer for AI-made slides &middot; <a href="index.html">back to the gallery</a></footer>
-</div></body></html>
+annotations only as marks / numbers / dimension lines; no UI, no cards, no captions.</pre><h2>Source</h2><p>Material recipe from the PPT-Zen 32-material library. Our own artwork.</p>
+<p class="src">License: CC-BY-4.0 &middot; contributions via DCO &middot; inspired discipline from <i>Presentation Zen</i>.</p>
+</div><footer><div class="wrap">PPT-Zen &middot; a judgment layer for AI-made slides &middot; <a href="index.html">&larr; back to the gallery</a></div></footer></body></html>
