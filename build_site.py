@@ -206,7 +206,9 @@ th,td{text-align:left;padding:11px 14px;border-bottom:1px solid var(--line);vert
 th{font:.72rem/1.4 var(--mono);letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
 tr:hover td{background:var(--panel)}
 .tablewrap{overflow-x:auto;background:transparent;border:1px solid var(--line);border-radius:14px}
-.tablewrap table{min-width:640px}
+.tablewrap{-webkit-overflow-scrolling:touch}
+.tablewrap table{min-width:720px}
+.tablewrap td code,.tablewrap td:first-child,.tablewrap th{white-space:nowrap}
 .tablewrap th{background:var(--panel)}
 /* example */
 .rb{display:grid;grid-template-columns:1.25fr .75fr;gap:18px;align-items:start;margin-bottom:26px}
@@ -237,6 +239,12 @@ tr:hover td{background:var(--panel)}
 .faq details{border:1px solid var(--line);border-radius:12px;background:var(--panel);padding:2px 18px;margin-bottom:10px}
 .faq summary{cursor:pointer;font-weight:700;padding:12px 0;font-size:.98rem}
 .faq p{margin:0 0 14px}
+@media(max-width:720px){
+ nav{flex-wrap:wrap;row-gap:10px}
+ .mark{order:1}
+ .navlinks{order:2;width:100%;justify-content:space-between;gap:2px}
+ .navlinks a.nl{padding:8px 9px;font-size:.86rem}
+}
 @media(max-width:860px){
  .hero{grid-template-columns:1fr;gap:30px;padding:40px 0 8px}
  .claims,.steps{grid-template-columns:1fr}
