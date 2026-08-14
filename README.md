@@ -82,6 +82,27 @@ Then just say "make me a deck with ppt-zen."
 
 **Two things you bring:** your own **image tool / key** (engine-agnostic — write "your image tool"), and any **styles** you want (drop a pack into `styles/`).
 
+## Usage — how to run it, how to pick a style
+
+Once installed, just describe the deck in chat:
+
+```
+Make me a deck about <your topic> with ppt-zen.
+```
+
+That is the whole interface. **Density and skeleton are decided per page — you do not answer questions.** The one thing you can steer is the **material / style**:
+
+- **Let it pick.** Say nothing about looks; it chooses one coherent material for the whole deck.
+- **Name a style.** Pick one from the [gallery](https://rocsgh.github.io/ppt-zen/) and say its name:
+  ```
+  ...in the Portolan sea-chart style.
+  ...cinema, Nolan hand.
+  ...da Vinci copperplate.
+  ```
+- **Coarse or fine (medium -> hand -> world).** A medium ("make it cinematic"), a specific hand ("Villeneuve"), or a whole world — go as detailed as you like.
+
+Rule of thumb: **material is chosen once for the whole deck** (a consistent look); the **device** — what each page *draws* — is decided page by page.
+
 ## Styles & Gallery
 
 Browse every style — each with a reproducible prompt formula — in **[GALLERY.md](GALLERY.md)**. Add your own: copy `styles/_template/` and open a PR (see **[CONTRIBUTING](CONTRIBUTING.md)**). The gallery is auto-generated from the packs, so your contribution shows up automatically.
