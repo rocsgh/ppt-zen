@@ -1,6 +1,6 @@
 <p align="center"><a href="README.md">English</a> · <b>简体中文</b></p>
 
-<p align="center"><img src="assets/logo-wordmark.png" alt="PPT-Zen" width="420"/></p>
+<p align="center"><picture><source media="(prefers-color-scheme: dark)" srcset="assets/logo-wordmark-dark.png"><img src="assets/logo-wordmark.png" alt="PPT-Zen" width="420"/></picture></p>
 
 <p align="center"><b>一层让 AI 做幻灯片时"知道该怎么决定"的判断——不是又一个 PPT 生成器。</b></p>
 

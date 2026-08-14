@@ -1,6 +1,6 @@
 <p align="center"><b>English</b> · <a href="README.zh-CN.md">简体中文</a></p>
 
-<p align="center"><img src="assets/logo-wordmark.png" alt="PPT-Zen" width="420"/></p>
+<p align="center"><picture><source media="(prefers-color-scheme: dark)" srcset="assets/logo-wordmark-dark.png"><img src="assets/logo-wordmark.png" alt="PPT-Zen" width="420"/></picture></p>
 
 <p align="center"><b>A judgment layer for AI-made slides — not another PPT generator.</b></p>
 
