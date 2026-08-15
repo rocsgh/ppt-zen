@@ -2,7 +2,7 @@
 
 <p align="center"><picture><source media="(prefers-color-scheme: dark)" srcset="assets/logo-wordmark-dark.png"><img src="assets/logo-wordmark.png" alt="PPT-Zen" width="420"/></picture></p>
 
-<p align="center"><b>A judgment layer for AI-made slides — not another PPT generator.</b></p>
+<p align="center"><b>One sentence in — a cinematic, full-image deck out.</b></p>
 
 <p align="center">
   <a href="LICENSE"><img src="https://img.shields.io/badge/judgment%20layer-Apache--2.0-blue.svg" alt="Apache-2.0"></a>
@@ -18,66 +18,72 @@
   <img src="assets/hero-davinci.jpg" width="32%"/>
 </p>
 
-<p align="center"><i>One sentence in — "make me a deck." Judged page by page, generated full-image.<br/>Same line, three worlds.</i></p>
+<p align="center"><i>The same sentence — "make me a deck." Three materials, three worlds.<br/>These three frames are real output, untouched.</i></p>
 
 ---
 
-**Two things this project is about:**
-1. **A thinking AI** that decides *how* each page should be — you don't answer questions.
-2. **Output that actually looks good** — full-image, designed, text that isn't garbled. (See the strip above; more in the [Gallery](GALLERY.md).)
-
 ## What it is
 
-Every AI PPT tool solves the same problem: *how to turn content into pages.* PPT-Zen open-sources the part nobody else does:
+PPT-Zen is a **deck-making skill** you install into your AI assistant (Claude Code, Cursor, Codex — seven runtimes supported). Once it's in, you say one sentence:
 
-> **This page — how much should it hold, what should it look like, and on what grounds is it decided that way?**
+> "Make me a 10-page deck about ⟨your project⟩ with ppt-zen, in the sea-chart style."
 
-**North star:** the user says one sentence and the rules run everything else — no template picker, no color questionnaire, no "what goes on each slide?".
+What comes back is not "a template with text boxes." It's ten slides, each **painted as one complete picture** — title, data, illustration and paper grain living in the same image. It reads like a film still or a printed spread, not like office software.
 
-## It's a judgment chain, not a feature list
+And in between, **you answer zero questions**: no template picker, no color questionnaire, no "what goes on each slide?". How much each page holds, how it's composed, what it draws — the skill decides all of it (how, exactly, is below under "It thinks").
 
-The finished deck is copyable — anyone can screenshot one. The **chain of decisions** behind each page is not:
+## Why the output looks this good
+
+**1. Whole pages are painted, not templated.**
+Mainstream AI PPT tools pick a template and pour text into boxes — the bones are still office software, and it shows. PPT-Zen has a text-capable image model paint each page **in one pass**: background texture, typography, illustration and ruled borders are organic parts of a single artwork, with light and grain running through the whole frame. It's the difference between "a designer painted this page" and "software laid it out."
+
+**2. 45 material worlds — and the whole deck holds one of them.**
+The vellum and mineral watercolor of an old sea chart, the iron-gall ink of a da Vinci folio, the cold light of a Nolan frame, the wet-and-dry breath of ink wash, the wax seals and flourished script of an 18th-century founding charter… pick any of the 45 in the [gallery](https://pptzen.xyz). The material is **chosen once per deck** — from cover to closing page it stays one world, so ten pages read as one work instead of ten drifting images.
+
+**3. Text that is actually readable — no pseudo-glyphs.**
+The classic failure of full-image slides is garbled text. PPT-Zen relies on text-capable image models (the gpt-image class), pins the exact characters of every string in the prompt, then **QCs every frame and proofreads every title character by character** — invented glyphs get the page regenerated. A brush-script CJK title on parchment comes out as real calligraphy, not pixel soup.
+
+**4. Every page carries a drawn argument.**
+Fairness gets a balance scale; an automated pipeline gets a geared machine; "asking once is pure luck" gets ink dots scattering and converging into a line. The illustration is not decoration — it's **the page's argument, drawn as a visible thing**: you can guess what the page says just by looking at it. No template will ever give you this layer.
+
+## It thinks: every page is its own decision
+
+You fill in no forms because these calls are made for you — **page by page**:
+
+| What it decides | How |
+|---|---|
+| **How much this page holds** | Sayable in a line → big type and breathing room; only holds up side by side (comparisons, lists, evidence) → laid out dense and scannable |
+| **How it's composed** | Auto-assigned by page role: chapter pull-quote → light-band; evidence grid → grid; cover → flowline… |
+| **What it draws** | The page's argument translated into one object — the hardest and most valuable call |
+| **What material the deck wears** | Yours if you name one; otherwise it picks — then locks it for the whole deck |
+
+A real judgment chain looks like this:
 
 ```
-Page = a chapter pull-quote → sayable in a line → HEADLINE → skeleton: light-band
-Page = competitive evidence → only holds up side by side → DETAIL → skeleton: grid
-       → and the previous page was dense, so this one breathes
+Page = a chapter pull-quote → sayable in a line → HEADLINE → skeleton: light-band → device: the word itself is the picture
+Page = competitive evidence → only holds up side by side → DETAIL → skeleton: grid → device: small checks and crosses replacing verdict sentences
+       → and the previous page was dense, so the next one automatically breathes
 ```
 
-## The four axes
+None of these rules were invented at a desk — they were ground out of dozens of real decks (a 70-page keynote, a 57-page product analysis, a 10-page equity charter), and every rule answers a mistake we actually made. The full architecture — including the models we overturned along the way — lives in **[DESIGN.md](DESIGN.md)**.
 
-| Axis | What it is | Who decides |
-|---|---|---|
-| **Density** | headline ↔ detail | AI, per page |
-| **Skeleton** | how the frame is cut (grid / light-band / flowline / color-field / standoff… or none) | auto by page role |
-| **Device** | **the argument of this page, drawn as a thing** | per page — the most valuable axis |
-| **Material** | what it's made of (ink wash / copperplate / pencil…) | once, whole deck |
+## From one sentence to a finished deck
 
-The one density test: *is this page sayable in a line (→ headline), or does it only hold up when several things sit side by side (→ detail)?* Because **hearing is linear, seeing is simultaneous.**
+1. **Page plan** — it first writes `plan.md`: density, skeleton and device for every page, as a checklist. This is its judgment log; you can edit it before any image is made;
+2. **Material lock** — your named style (or its pick) becomes the prompt formula for the whole deck;
+3. **Page-by-page generation** — one self-contained full-page prompt per slide, painted as a 16:9 image;
+4. **QC** — every frame inspected; pseudo-glyphs, typos and broken compositions get a single-page redo (~2 min per page, never the whole deck);
+5. **Assembly** — `assemble_pptx.py` stitches the images into a presentation-ready `deck.pptx`.
 
-## Why it's built this way
-
-This isn't theory — it was **forced out by making real 70-page decks overnight**, and every layer answers a real problem we hit:
-
-- **Device** was added because a beautiful material on a bare geometric page still felt empty — the missing axis was *what the page draws*.
-- **Hand** (medium → hand → world) was added because "cinematic" is too vague — Nolan and Villeneuve are the same medium, two different hands.
-- **The school system** exists so you don't rebuild a look from scratch every time.
-
-The full architecture, the reasoning, and the models we've overturned along the way live in **[DESIGN.md](DESIGN.md)**.
-
-## Honest about the human gates
-
-> **Note — a tool, not a wishing well.** Full-image work means ~2 min per page to regenerate, screenshot QC, and proofread every character of a title. **These human gates are where the quality comes from** — we write them down instead of promising magic.
+> **Said honestly: a tool, not a wishing well.** Frame-by-frame QC and character-level proofreading are **where the quality comes from** — we write them into the process instead of promising one-click zero-defect magic.
 
 ## What you get
 
-PPT-Zen decides and generates the pages; you end up with:
-
 - `slides/01.jpg … NN.jpg` — one full-image, 16:9 slide per page
-- a short **page plan** — what each page is (headline / detail) and its device: the judgment log
-- `deck.pptx` — assembled from the images with `scripts/assemble_pptx.py`
+- `plan.md` — the page plan: what each page is and why
+- `deck.pptx` — the assembled deck; PDF / Keynote / Google Slides import the same full-bleed images
 
-It is **not** a hosted button. It is a skill your agent runs, plus two small helper scripts. Assembling into `.pptx` is included; PDF / Keynote / Google Slides import the same full-bleed images.
+It is **not** a hosted button — it's a skill your agent runs plus two small scripts, so it rides on your own models and keys, engine-agnostic.
 
 ## Quick start
 
@@ -141,15 +147,9 @@ PPT-Zen ships **no image model** — that is what keeps it engine-agnostic. You 
 
 > A model that renders text well (gpt-image class) matters for readable titles — plain diffusion models garble text. ``.env`` is gitignored; never commit your key.
 
-## Usage — how to run it, how to pick a style
+## Picking a style (the one thing you steer)
 
-Once installed, just describe the deck in chat:
-
-```
-Make me a deck about <your topic> with ppt-zen.
-```
-
-That is the whole interface. **Density and skeleton are decided per page — you do not answer questions.** The one thing you can steer is the **material / style**:
+Once installed, just describe the deck in chat. **Every content-level call is automatic**; the one thing you steer is the **material / style**:
 
 - **Let it pick.** Say nothing about looks; it chooses one coherent material for the whole deck.
 - **Name a style.** Pick one from the [gallery](https://pptzen.xyz) and say its name:
