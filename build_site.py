@@ -627,6 +627,9 @@ def build():
         open(os.path.join(DOCS, fn), "w", encoding="utf-8").write(content)
     for miss in i18n_zh.unused_detail_pairs():
         print("WARN zh pair matched nothing (content drifted?): %s" % miss[:90])
+    for p in packs:
+        if p["slug"] not in i18n_zh.i18n_zh_styles.NAME_ZH:
+            print("WARN style %r has no NAME_ZH entry — its /zh/ page ships mostly English" % p["slug"])
     # sitemap + robots
     urls = ["", "method.html", "example.html", "gallery.html", "install.html"] + \
            ["zh/", "zh/method.html", "zh/example.html", "zh/gallery.html", "zh/install.html"] + \
