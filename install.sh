@@ -1,6 +1,8 @@
 #!/usr/bin/env bash
 # PPT-Zen installer — copies the skill to the right place for your agent runtime.
 #
+#   ./install.sh                   detect the runtimes on this machine and report where PPT-Zen would go
+#   ./install.sh auto              install into every runtime detected (project markers win over global)
 #   ./install.sh <agent> [--global] [--dest DIR]
 #
 #   agent ∈ claude | openclaw | hermes | codex | cursor | windsurf | copilot | all
@@ -16,7 +18,7 @@
 set -euo pipefail
 HERE="$(cd "$(dirname "$0")" && pwd)"
 AGENT="${1:-}"
-[ -z "$AGENT" ] && { grep '^#' "$0" | sed 's/^# \{0,1\}//'; exit 1; }
+usage() { grep '^#' "$0" | sed 's/^# \{0,1\}//'; }
 shift || true
 GLOBAL=0; DEST_OVERRIDE=""
 while [ $# -gt 0 ]; do
@@ -97,4 +99,81 @@ do_agent() {
   esac
 }
 
+DETECTED=""; MISSING_PROJECT=""
+
+have() { command -v "$1" >/dev/null 2>&1; }
+add_detected() { DETECTED="$DETECTED$1|$2|$3|$4
+"; }
+
+detect_runtimes() {
+  # no bash 4 here: DETECTED is a newline-separated list of "agent|scope|evidence|dest"
+  DETECTED=""; MISSING_PROJECT=""
+  if [ -d "./.claude" ]; then add_detected claude project "./.claude/ in this project" ".claude/skills/ppt-zen"
+  elif have claude; then      add_detected claude global "claude on PATH" "$HOME/.claude/skills/ppt-zen"
+  elif [ -d "$HOME/.claude" ]; then add_detected claude global "~/.claude exists" "$HOME/.claude/skills/ppt-zen"; fi
+
+  if [ -d "./.openclaw" ]; then add_detected openclaw project "./.openclaw/ in this project" ".openclaw/skills/ppt-zen"
+  elif have openclaw; then      add_detected openclaw global "openclaw on PATH" "$HOME/.openclaw/skills/ppt-zen"
+  elif [ -d "$HOME/.openclaw" ]; then add_detected openclaw global "~/.openclaw exists" "$HOME/.openclaw/skills/ppt-zen"; fi
+
+  # hermes has no project level — always ${HERMES_HOME:-~/.hermes}/skills/creative/ppt-zen
+  if [ -n "${HERMES_HOME:-}" ]; then   add_detected hermes fixed "HERMES_HOME is set" "${HERMES_HOME}/skills/creative/ppt-zen"
+  elif [ -d "$HOME/.hermes" ]; then    add_detected hermes fixed "~/.hermes exists" "$HOME/.hermes/skills/creative/ppt-zen"
+  elif have hermes; then               add_detected hermes fixed "hermes on PATH" "$HOME/.hermes/skills/creative/ppt-zen"; fi
+
+  if [ -f "./AGENTS.md" ]; then add_detected codex project "./AGENTS.md in this project" "AGENTS.md"
+  elif [ -d "$HOME/.codex" ]; then add_detected codex global "~/.codex exists" "$HOME/.codex/AGENTS.md"
+  elif have codex; then            add_detected codex global "codex on PATH" "$HOME/.codex/AGENTS.md"; fi
+
+  # project-only runtimes: no global location exists, so an absent marker means skip
+  if [ -d "./.cursor" ]; then add_detected cursor project "./.cursor/ in this project" ".cursor/rules/ppt-zen.mdc"
+  else MISSING_PROJECT="$MISSING_PROJECT cursor:./.cursor/"; fi
+  if [ -d "./.windsurf" ]; then add_detected windsurf project "./.windsurf/ in this project" ".windsurf/rules/ppt-zen.md"
+  else MISSING_PROJECT="$MISSING_PROJECT windsurf:./.windsurf/"; fi
+  if [ -d "./.github" ]; then add_detected copilot project "./.github/ in this project" ".github/instructions/ppt-zen.instructions.md"
+  else MISSING_PROJECT="$MISSING_PROJECT copilot:./.github/"; fi
+}
+
+report_detected() {
+  if [ -z "$DETECTED" ]; then
+    echo "PPT-Zen — no agent runtime found on this machine (looked for claude, openclaw, hermes, codex, cursor, windsurf, copilot)."
+    echo "Pick one explicitly:"; echo
+    usage; return 0
+  fi
+  echo "PPT-Zen — runtimes detected here:"; echo
+  while IFS='|' read -r a scope why dest; do
+    [ -z "$a" ] && continue
+    printf '  %-9s %-9s %-30s -> %s\n' "$a" "($scope)" "$why" "$dest"
+  done <<EOF
+$DETECTED
+EOF
+  echo
+  echo "  ./install.sh auto      install into all of the above"
+  echo
+  usage
+}
+
+run_auto() {
+  local installed="" a scope why dest
+  if [ -z "$DETECTED" ]; then
+    echo "no agent runtime detected — nothing installed."; echo
+    usage; exit 1
+  fi
+  while IFS='|' read -r a scope why dest; do
+    [ -z "$a" ] && continue
+    if [ "$scope" = project ]; then GLOBAL=0; else GLOBAL=1; fi
+    do_agent "$a"
+    installed="$installed $a"
+  done <<EOF
+$DETECTED
+EOF
+  for m in $MISSING_PROJECT; do
+    echo "skipped ${m%%:*} — no ${m##*:} here (project-only runtime, it has no global location)"
+  done
+  echo "installed:$installed"
+  case " $installed " in *" hermes "*) echo "reminder: restart your Hermes gateway/process — the skill index is cached in-process" ;; esac
+}
+
+if [ -z "$AGENT" ]; then detect_runtimes; report_detected; exit 0; fi
+if [ "$AGENT" = auto ]; then detect_runtimes; run_auto; exit 0; fi
 do_agent "$AGENT"

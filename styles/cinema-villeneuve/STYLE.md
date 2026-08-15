@@ -19,7 +19,7 @@ prompt_formula: |
   SKELETON: auto (left area hazy-dark reserved for text; monolith to the right)
   DEVICE:   the page's argument as a colossal hazy monolith + a tiny dwarfed silhouette
   END:      Full-bleed 16:9, DEVICE in the warm Villeneuve SURFACE, contemplative composition.
-  CRITICAL: title in clean English serif in the left area; NEVER invent extra words or glyphs;
+  CRITICAL: title = the page's TEXT in its own language, clean serif in the left area; NEVER invent words or glyphs beyond TEXT;
             no other text, no UI, no cards, no captions.
 source: >
   Inspired by the cinematography of Denis Villeneuve (Dune / Blade Runner 2049 / Arrival). Our own artwork.

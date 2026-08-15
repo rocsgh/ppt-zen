@@ -21,7 +21,7 @@ prompt_formula: |
   DEVICE:   the page's argument as an intricate mechanical apparatus (gears/cams/dials) — density
             lives inside the machine, margins stay light
   END:      Full-bleed 16:9, DEVICE in the copperplate SURFACE, manuscript composition.
-  CRITICAL: title in elegant English serif; NEVER invent extra words — decorative marks stay glyph-free
+  CRITICAL: title = the page's TEXT in its own language, elegant serif; NEVER invent words beyond TEXT — decorative marks stay glyph-free
             (numbers and dimension lines only); no UI, no cards, no captions.
 source: >
   Inspired by Leonardo da Vinci's notebooks and Renaissance copperplate engraving. Our own artwork.

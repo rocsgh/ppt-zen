@@ -180,11 +180,11 @@ else if(!pref&&((navigator.language||'').toLowerCase().indexOf('zh')===0)){locat
 <img class="hero-img" src="../img/papercraft.jpg" alt="Paper Sculpture"/>
 <h1>纸雕 <span style="font-size:.55em;color:var(--ink2);font-weight:400">Paper Sculpture</span></h1><div class="chipsrow"><span class="chip">纸艺</span><span class="chip">layered</span><span class="chip">cut-paper</span><span class="chip">shadow</span><span class="chip">tactile</span></div>
 <p>层叠剪纸带真实投影——可触摸的手作纵深。</p><p><i>样张统一渲染同一句话——<code>Signal over noise</code>——因此材质是唯一变量。</i></p>
-<h2>Prompt 配方</h2><p style="color:var(--ink2);font-size:.95rem;margin:4px 0 10px">配方保留英文原文——它是直接喂给图像模型的指令，翻译会破坏可复现性。</p><pre>SURFACE:  Entire scene built from cut and layered colored paper with soft real drop-shadows between layers — 5-6 depth layers. Palette - cream base, dusty blue, sage-free soft teal avoided — use cream, powder blue, blush coral, and one deep indigo layer. The hero is a paper diorama landscape - three paper towers rising from layered paper hills, each tower with one label on a folded paper flag; paper clouds and a paper sun with radiating cut rays. Title cut out as crisp paper letters casting subtle shadow. Handcrafted, tactile, warm gallery-lighting feel.
+<h2>Prompt 配方</h2><p style="color:var(--ink2);font-size:.95rem;margin:4px 0 10px">配方保留英文原文——它是直接喂给图像模型的指令，翻译会破坏可复现性。</p><pre>SURFACE:  Entire scene built from cut and layered colored paper with soft real drop-shadows between layers — 5-6 depth layers. Palette - cream base, dusty blue, sage-free soft teal avoided — use cream, powder blue, blush coral, and one deep indigo layer. The hero is a paper diorama landscape - three paper towers rising from layered paper hills, each tower with a folded paper flag (blank unless the page&#x27;s TEXT supplies that label); paper clouds and a paper sun with radiating cut rays. The page&#x27;s TEXT cut out as crisp paper letters casting subtle shadow. Handcrafted, tactile, warm gallery-lighting feel.
 SKELETON: auto by page role (cover / chapter / list / compare)
 DEVICE:   the page&#x27;s argument drawn as a form native to this material
 END:      Full-bleed 16:9 — render DEVICE on the SURFACE, per the page&#x27;s composition.
-CRITICAL: title in clean legible English; NEVER invent extra words or non-English glyphs;
+CRITICAL: title = the page&#x27;s TEXT in its own language, clean and legible; NEVER invent words or glyphs beyond TEXT;
 annotations only as marks / numbers / dimension lines; no UI, no cards, no captions.</pre><h2>来源</h2><p>材质配方出自 PPT-Zen 32 材质库。画面为我们自绘。</p>
 <p class="kick" style="margin-top:24px">许可证：CC-BY-4.0 &middot; 贡献走 DCO</p>
 <p style="margin-top:18px"><a class="btn" href="gallery.html">&larr; 全部风格</a> <a class="btn solid" href="install.html">用这个风格</a></p>

@@ -92,7 +92,9 @@ git clone https://github.com/rocsgh/ppt-zen
 cd ppt-zen
 
 # 1. install the skill for YOUR runtime (matrix below)
-./install.sh claude --global          # Claude Code -> ~/.claude/skills/ppt-zen/
+./install.sh                          # report which runtimes are on this machine
+./install.sh auto                     # install into every runtime detected
+./install.sh claude --global          # or name one: Claude Code -> ~/.claude/skills/ppt-zen/
 
 # 2. give it an image model (skip if your agent already generates images)
 cp .env.example .env                  # put your key in .env
@@ -109,6 +111,11 @@ python3 scripts/assemble_pptx.py slides/ deck.pptx
 
 ### Install matrix — pick your runtime
 
+Not sure what you have? `./install.sh` with no argument probes this machine (binary on `PATH`,
+`~/.<runtime>/`, or a project marker like `./.claude/`) and prints where PPT-Zen would go for each
+runtime it finds; `./install.sh auto` then installs into all of them — a project marker wins over
+the global location, and Cursor/Windsurf/Copilot are skipped unless their project dir exists.
+
 | Runtime | Command | Installs to | Trigger |
 |---|---|---|---|
 | **Claude Code** | `./install.sh claude [--global]` | `.claude/skills/ppt-zen/` | `/ppt-zen`, or just ask for a deck |
@@ -119,6 +126,7 @@ python3 scripts/assemble_pptx.py slides/ deck.pptx
 | **Windsurf** | `./install.sh windsurf` | `.windsurf/rules/ppt-zen.md` | passive — auto-applied |
 | **GitHub Copilot** | `./install.sh copilot` | `.github/instructions/` | passive — auto-applied |
 | everything | `./install.sh all` | all of the above | — |
+| what you actually have | `./install.sh auto` | every runtime detected on this machine | — |
 
 Skill installs are **self-contained** (SKILL.md + references + styles + scripts + examples +
 `styles.json`, the machine-readable style index, + `requirements.txt`). `AGENTS.md` installs update in place between idempotent markers.

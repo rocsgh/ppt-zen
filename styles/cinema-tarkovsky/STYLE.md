@@ -12,7 +12,7 @@ prompt_formula: |
   SKELETON: auto (a calm dark / negative area reserved for the title)
   DEVICE:   the page's argument as one cinematic hero subject, staged in this director's signature composition
   END:      Full-bleed 16:9 — DEVICE in the SURFACE, cinematic composition.
-  CRITICAL: title in clean English serif in the reserved area; NEVER invent extra words or non-English glyphs;
+  CRITICAL: title = the page's TEXT in its own language, clean serif in the reserved area; NEVER invent words or glyphs beyond TEXT;
             no other text, no UI, no cards, no captions.
 source: >
   Inspired by the cinematography of Andrei Tarkovsky. Our own artwork.

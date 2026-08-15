@@ -22,7 +22,7 @@ prompt_formula: |
   DEVICE:   draw the page's argument as a chart element (a growth curve = a fleet of ships
             climbing a rising sea-lane; scale = a distance measured on the chart)
   END:      Full-bleed 16:9, render DEVICE on the parchment SURFACE, DEVICE composition.
-  CRITICAL: title in clean legible English serif; NEVER invent extra words or glyphs;
+  CRITICAL: title = the page's TEXT in its own language, clean legible serif; NEVER invent words or glyphs beyond TEXT;
             annotations only as compass marks / numbers / dotted rhumb lines; no UI, no cards, no captions.
 source: >
   Inspired by Renaissance portolan navigation charts and ink-wash seascapes. Our own artwork.

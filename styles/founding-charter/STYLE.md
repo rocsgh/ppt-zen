@@ -20,12 +20,12 @@ axes:
 prompt_formula: |
   SURFACE:  An engrossed 18th-century founding charter on aged parchment: warm cream-to-tawny
             vellum, mottled with age, softly worn edges, faint foxing and one old fold line;
-            iron-gall brownish-black ink; formal engrosser's calligraphy with one large
-            flourished opening line; fine double hairline rules framing the page; a deep-red
+            iron-gall brownish-black ink; the page's TEXT set in formal engrosser's calligraphy, its
+            opening line large and flourished; fine double hairline rules framing the page; a deep-red
             wax seal with ribbon; dignified, ceremonial. NO modern elements, NO photographs.
   SKELETON: auto by page role (cover=flourished opening, data=engrossed ledger with leader
-            rules, closing=signature block with wax seal)
-  DEVICE:   the page's argument as a charter element — a ledger line, a seal, a signature
+            rules, closing=blank signature rules with wax seal)
+  DEVICE:   the page's argument as a charter element — a ledger line, a seal, an unsigned signature
             block, a quill; numbers live at the end of thin double leader rules
   END:      Full-bleed 16:9 — render DEVICE on the parchment SURFACE, ceremonial composition.
   CRITICAL: render ONLY the specified text, every glyph correct; decorative marks limited to

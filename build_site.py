@@ -334,7 +334,7 @@ def page_home(packs):
 </div>"""
     steps = """
 <div class="steps">
-<div class="step"><span class="n">STEP 1</span><b>Install the skill</b><p>One command per runtime — Claude Code, Codex, Cursor, Windsurf, Hermes, OpenClaw.</p><pre>./install.sh claude --global</pre></div>
+<div class="step"><span class="n">STEP 1</span><b>Install the skill</b><p>One command per runtime — Claude Code, Codex, Cursor, Windsurf, Hermes, OpenClaw.</p><pre>./install.sh auto   # detects your runtimes; or: claude / hermes / ... --global</pre></div>
 <div class="step"><span class="n">STEP 2</span><b>Say one sentence</b><p>In your agent:</p><pre>"Make me a 10-page pitch deck
  about &lt;project&gt;, Portolan style."</pre></div>
 <div class="step"><span class="n">STEP 3</span><b>Get the deck</b><p>Plan &rarr; one image per page &rarr; proofread &rarr; assembled .pptx.</p><pre>python3 scripts/assemble_pptx.py \\
@@ -382,7 +382,7 @@ def page_home(packs):
 <section class="sec"><div class="shead"><span class="num">05</span><h2>Install</h2></div>
 <p class="lede">One command per runtime. The repo is the product — the site just shows you around.</p>
 <pre>git clone %s
-cd ppt-zen &amp;&amp; ./install.sh claude --global   # or codex / cursor / windsurf / hermes / openclaw / all</pre>
+cd ppt-zen &amp;&amp; ./install.sh auto   # detects your runtimes; or: claude / hermes / ... --global</pre>
 <p style="margin-top:16px"><a class="btn solid" href="install.html">Full install matrix</a> <a class="btn" href="%s">Open GitHub</a></p></section>
 </div>""") % (first, "".join(chips), claims, chain, steps, strip, len(packs), "".join(feat), len(packs), GH, GH)
     js = """
@@ -511,7 +511,7 @@ def page_install():
 <h2><span class="num">1</span>Get the repo, install the skill</h2>
 <pre>git clone https://github.com/rocsgh/ppt-zen
 cd ppt-zen
-./install.sh claude --global      # see the matrix below for your runtime</pre>
+./install.sh auto                 # detects your runtimes; matrix below for one-by-one</pre>
 <div class="tablewrap" style="margin-top:16px"><table>
 <tr><th>Runtime</th><th>Command</th><th>Installs to</th><th>Trigger</th></tr>
 <tr><td><b>Claude Code</b></td><td><code>./install.sh claude [--global]</code></td><td><code>.claude/skills/ppt-zen/</code></td><td><code>/ppt-zen</code> or just ask for a deck</td></tr>
@@ -522,6 +522,7 @@ cd ppt-zen
 <tr><td><b>Windsurf</b></td><td><code>./install.sh windsurf</code></td><td><code>.windsurf/rules/ppt-zen.md</code></td><td>passive — auto-applied</td></tr>
 <tr><td><b>GitHub Copilot</b></td><td><code>./install.sh copilot</code></td><td><code>.github/instructions/</code></td><td>passive — auto-applied</td></tr>
 <tr><td>everything</td><td><code>./install.sh all</code></td><td>all of the above</td><td>—</td></tr>
+<tr><td>auto</td><td><code>./install.sh auto</code></td><td>every runtime detected on this machine</td><td>—</td></tr>
 </table></div>
 <p style="margin-top:12px">Skill installs are self-contained (SKILL.md + references + styles + scripts + examples + <code>styles.json</code> + <code>requirements.txt</code>). No skill system at all? Paste <code>SKILL.md</code> into the session as context.</p>
 <p style="margin-top:12px"><b>Hermes:</b> there is no project-level skill directory — the installer always writes to <code>$HERMES_HOME/skills</code> (default <code>~/.hermes/skills</code>), so <code>--global</code> is a no-op. Restart your Hermes gateway/process afterwards: the skill index is cached in-process. Hermes&rsquo; builtin <code>powerpoint</code> skill (text-box decks) keeps working alongside it; for designed full-image decks ppt-zen supersedes it.</p>

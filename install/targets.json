@@ -1,6 +1,6 @@
 {
   "skill": "ppt-zen",
-  "comment": "agent-id -> where the skill goes. 'bundle' dirs ship with SKILL.md so the install is self-contained. Used by install.sh; the README install matrix mirrors this file.",
+  "comment": "agent-id -> where the skill goes. 'bundle' dirs ship with SKILL.md so the install is self-contained. Used by install.sh; the README install matrix mirrors this file. './install.sh' with no argument probes this machine (binary on PATH, ~/.<runtime> dir, or a project marker like ./.claude) and reports the target for each runtime it finds; './install.sh auto' then installs into all of them — project markers win over the global location, and cursor/windsurf/copilot are skipped when their project dir is absent since they have no global one.",
   "targets": {
     "claude":   { "src": "SKILL.md",                    "dest": ".claude/skills/ppt-zen/SKILL.md",   "global_dest": "~/.claude/skills/ppt-zen/SKILL.md",   "bundle": ["references", "styles", "scripts", "examples", "styles.json", "requirements.txt", ".env.example"] },
     "openclaw": { "src": "SKILL.md",                    "dest": ".openclaw/skills/ppt-zen/SKILL.md", "global_dest": "~/.openclaw/skills/ppt-zen/SKILL.md", "bundle": ["references", "styles", "scripts", "examples", "styles.json", "requirements.txt", ".env.example"] },

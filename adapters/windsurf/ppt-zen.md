@@ -24,9 +24,11 @@ pptxgenjs, HTML/CSS pages, template libraries, or other PPT workflows. The full 
 5. **Generation hard rules** — every page is ONE generated image (never HTML/pptxgenjs/text-box
    layouts); paste the chosen pack's SURFACE formula **verbatim** (improvised material descriptions
    produce themed templates, not the style); density in layers (one hero ~70%, no floating cards /
-   step boxes / diagram shapes); render ONLY the specified text and forbid invented glyphs; suppress
-   prompt-structure words; pin exact text length. Keep key content clear of the top/bottom ~8%
-   (assembly cover-crops to 16:9).
+   step boxes / diagram shapes); render ONLY the specified text and forbid invented glyphs; a pack's
+   labels / cards / plaques / lettering are treatments for words the TEXT already carries, so
+   text-bearing objects stay blank unless TEXT names their words; CJK characters render exactly once
+   (no ghost strokes, no double exposure); suppress prompt-structure words; pin exact text length.
+   Keep key content clear of the top/bottom ~8% (assembly cover-crops to 16:9).
 6. **Workflow** — plan.md (page · role · density · device · exact text · style slug) → one image
    per page into `slides/NN.jpg` (agent image tool, or `scripts/gen_image.py` with `.env` from
    `.env.example`; run `gen_image.py --check` first) → proofread every character → assemble with

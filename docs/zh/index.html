@@ -211,7 +211,7 @@ else if(!pref&&((navigator.language||'').toLowerCase().indexOf('zh')===0)){locat
 <section class="sec"><div class="shead"><span class="num">02</span><h2>怎么用</h2></div>
 <p class="lede">你带一个 agent 和一个图像模型，判断由这个 skill 提供。</p>
 <div class="steps">
-<div class="step"><span class="n">STEP 1</span><b>装技能</b><p>每个运行时一行命令——Claude Code、Codex、Cursor、Windsurf、Hermes、OpenClaw。</p><pre>./install.sh claude --global</pre></div>
+<div class="step"><span class="n">STEP 1</span><b>装技能</b><p>每个运行时一行命令——Claude Code、Codex、Cursor、Windsurf、Hermes、OpenClaw。</p><pre>./install.sh auto   # 探测你装了哪些运行时；或指定：claude / hermes / ... --global</pre></div>
 <div class="step"><span class="n">STEP 2</span><b>说一句话</b><p>在你的 agent 里：</p><pre>"Make me a 10-page pitch deck
  about &lt;project&gt;, Portolan style."</pre></div>
 <div class="step"><span class="n">STEP 3</span><b>拿到成片</b><p>计划 &rarr; 逐页出图 &rarr; 校对 &rarr; 拼装 .pptx。</p><pre>python3 scripts/assemble_pptx.py \
@@ -228,7 +228,7 @@ else if(!pref&&((navigator.language||'').toLowerCase().indexOf('zh')===0)){locat
 <section class="sec"><div class="shead"><span class="num">05</span><h2>Install</h2></div>
 <p class="lede">每个运行时一行命令。仓库才是产品——官网只是带你逛逛。</p>
 <pre>git clone https://github.com/rocsgh/ppt-zen
-cd ppt-zen &amp;&amp; ./install.sh claude --global   # or codex / cursor / windsurf / hermes / openclaw / all</pre>
+cd ppt-zen &amp;&amp; ./install.sh auto   # 探测你装了哪些运行时；或指定：claude / hermes / ... --global</pre>
 <p style="margin-top:16px"><a class="btn solid" href="install.html">完整安装矩阵</a> <a class="btn" href="https://github.com/rocsgh/ppt-zen/blob/master/README.zh-CN.md">打开 GitHub</a></p></section>
 </div><footer><div class="wrap"><div class="cols">
 <div>PPT-Zen &middot; AI 幻灯片的判断层<br/>

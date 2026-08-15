@@ -211,7 +211,7 @@ else if(!pref&&((navigator.language||'').toLowerCase().indexOf('zh')===0)){locat
 <section class="sec"><div class="shead"><span class="num">02</span><h2>How it works</h2></div>
 <p class="lede">You bring an agent and an image model. The skill brings the judgment.</p>
 <div class="steps">
-<div class="step"><span class="n">STEP 1</span><b>Install the skill</b><p>One command per runtime — Claude Code, Codex, Cursor, Windsurf, Hermes, OpenClaw.</p><pre>./install.sh claude --global</pre></div>
+<div class="step"><span class="n">STEP 1</span><b>Install the skill</b><p>One command per runtime — Claude Code, Codex, Cursor, Windsurf, Hermes, OpenClaw.</p><pre>./install.sh auto   # detects your runtimes; or: claude / hermes / ... --global</pre></div>
 <div class="step"><span class="n">STEP 2</span><b>Say one sentence</b><p>In your agent:</p><pre>"Make me a 10-page pitch deck
  about &lt;project&gt;, Portolan style."</pre></div>
 <div class="step"><span class="n">STEP 3</span><b>Get the deck</b><p>Plan &rarr; one image per page &rarr; proofread &rarr; assembled .pptx.</p><pre>python3 scripts/assemble_pptx.py \
@@ -228,7 +228,7 @@ else if(!pref&&((navigator.language||'').toLowerCase().indexOf('zh')===0)){locat
 <section class="sec"><div class="shead"><span class="num">05</span><h2>Install</h2></div>
 <p class="lede">One command per runtime. The repo is the product — the site just shows you around.</p>
 <pre>git clone https://github.com/rocsgh/ppt-zen
-cd ppt-zen &amp;&amp; ./install.sh claude --global   # or codex / cursor / windsurf / hermes / openclaw / all</pre>
+cd ppt-zen &amp;&amp; ./install.sh auto   # detects your runtimes; or: claude / hermes / ... --global</pre>
 <p style="margin-top:16px"><a class="btn solid" href="install.html">Full install matrix</a> <a class="btn" href="https://github.com/rocsgh/ppt-zen">Open GitHub</a></p></section>
 </div><footer><div class="wrap"><div class="cols">
 <div>PPT-Zen &middot; a judgment layer for AI-made slides<br/>

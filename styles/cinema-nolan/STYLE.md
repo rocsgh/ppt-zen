@@ -20,7 +20,7 @@ prompt_formula: |
   SKELETON: auto (left-third dark reserved for text; subject monument to the right)
   DEVICE:   the page's argument as a monumental cold structure/vista + a tiny human for scale
   END:      Full-bleed 16:9, DEVICE in the cold Nolan SURFACE, awe-and-tension composition.
-  CRITICAL: title in clean English serif in the dark left area; NEVER invent extra words or glyphs;
+  CRITICAL: title = the page's TEXT in its own language, clean serif in the dark left area; NEVER invent words or glyphs beyond TEXT;
             no other text, no UI, no cards, no captions.
 source: >
   Inspired by the cinematography of Christopher Nolan (Interstellar / Tenet / Oppenheimer). Our own artwork.

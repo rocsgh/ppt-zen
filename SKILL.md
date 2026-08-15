@@ -164,7 +164,7 @@ presented as true; a beautiful slide with a made-up "$28k MRR" is a liability, n
 The one-sentence promise is about *form* — the user never answers layout questions. It is not a
 license to hallucinate content.
 
-## 6. Full-image generation — four hard rules
+## 6. Full-image generation — five hard rules
 
 Each page is one self-contained prompt. Always:
 1. **Density in layers** — background texture fills but recedes; one hero ~70%; foreground accents
@@ -179,6 +179,13 @@ Each page is one self-contained prompt. Always:
    words (STYLE / SURFACE / DEVICE / VERBATIM / label / caption…) from appearing in the image.
 4. **Pin exact text length** — "render exactly these N words/characters — no additions", or the model
    adds a stray word.
+5. **Formulas style words; TEXT supplies them** — a pack's SURFACE says things like "a label on a
+   small cartouche", "hand-lettered on a specimen card", "inscribed in a plaque", "lettering struck
+   in gold". Those are *treatments* for words the page's TEXT already carries — **never** instructions
+   to add words. If TEXT names no words for a text-bearing object, that object stays **blank** (or is
+   left out): a blank tag is correct, an invented one is a bug — it comes back as smudged pseudo-text.
+   **CJK text:** render each character exactly once in a single clean typeface; no double exposure, no
+   ghost strokes, no half-rendered duplicates — regenerate the page if any character ghosts.
 
 **Compose every page prompt mechanically — do not improvise the material:**
 ```
@@ -189,7 +196,8 @@ SKELETON: <auto by page role; or "plain">
 DEVICE:   <this page's argument as an object; or "none">
 TEXT:     <exact words to render, and where>
 CRITICAL: render ONLY the text above; every letter correct; no invented glyphs; no other language;
-          no structure words; keep key content clear of top/bottom ~8%.
+          no structure words; text-bearing objects from SURFACE stay blank unless TEXT names their
+          words; keep key content clear of top/bottom ~8%.
 ```
 Worked reference: `<skill_dir>/examples/relayboard-portolan/gen.py` shows ten real page prompts built this way.
 Dense/text-heavy pages: generate at higher resolution than single-word pages.
@@ -219,7 +227,10 @@ Dense/text-heavy pages: generate at higher resolution than single-word pages.
    `<skill_dir>` next to the script).
 3. **QC the images** — proofread every character of every title against the plan, confirm no
    invented glyphs and no cross-page contradiction, and check nothing important sits in the
-   top/bottom ~8% that assembly will crop. Then the **style check**: put your page next to
+   top/bottom ~8% that assembly will crop. Two failures to look for by name: **ghost strokes**
+   (a character rendered twice, doubled or smeared — regenerate) and **filled blank tags** (a
+   card / cartouche / plaque the material introduced carrying words the plan never gave it —
+   regenerate; it should be empty). Then the **style check**: put your page next to
    `styles/<slug>/samples/01.jpg` — same world? A business template with the material's texture
    behind it FAILS; regenerate with the pack's SURFACE pasted verbatim. This gate is where the
    quality comes from.
@@ -239,6 +250,6 @@ delivery coaching — currently in Chinese; load them when you need the underlyi
 - [ ] Each page: a device that reads (or a deliberate "none"), one main device only?
 - [ ] Material fixed across the whole deck? Style resolved to a real slug?
 - [ ] **Every factual claim traces to the user's input? No invented numbers/quotes/prices/dates?**
-- [ ] Four hard rules on every prompt? Key content clear of the crop zone?
+- [ ] Five hard rules on every prompt? Key content clear of the crop zone?
 - [ ] Recurring characters/concepts pinned identically in every prompt?
 - [ ] Proofread every character after generation? Assembled and opened the `.pptx`?

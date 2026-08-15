@@ -92,7 +92,9 @@ git clone https://github.com/rocsgh/ppt-zen
 cd ppt-zen
 
 # 1. 按你的运行时装技能（矩阵见下）
-./install.sh claude --global          # Claude Code -> ~/.claude/skills/ppt-zen/
+./install.sh                          # 先看看这台机器上装了哪些运行时
+./install.sh auto                     # 一键装进探测到的每个运行时
+./install.sh claude --global          # 或者指定一个：Claude Code -> ~/.claude/skills/ppt-zen/
 
 # 2. 给它一个图像模型（agent 本身能生图就跳过）
 cp .env.example .env                  # 把你的 key 填进 .env
@@ -109,6 +111,11 @@ python3 scripts/assemble_pptx.py slides/ deck.pptx
 
 ### 安装矩阵——按运行时选
 
+不确定自己装了什么？`./install.sh` 不带参数会探测本机（`PATH` 上的命令、`~/.<运行时>/` 目录、
+或 `./.claude/` 这类项目标记），把每个探测到的运行时会装到哪打印出来；`./install.sh auto` 就按这份
+探测结果一键安装——项目标记优先于全局位置，Cursor/Windsurf/Copilot 没有对应项目目录时直接跳过
+（它们没有全局位置）。
+
 | 运行时 | 命令 | 装到哪 | 触发方式 |
 |---|---|---|---|
 | **Claude Code** | `./install.sh claude [--global]` | `.claude/skills/ppt-zen/` | `/ppt-zen` 或直接说要做 deck |
@@ -119,6 +126,7 @@ python3 scripts/assemble_pptx.py slides/ deck.pptx
 | **Windsurf** | `./install.sh windsurf` | `.windsurf/rules/ppt-zen.md` | 被动——自动生效 |
 | **GitHub Copilot** | `./install.sh copilot` | `.github/instructions/` | 被动——自动生效 |
 | 全部 | `./install.sh all` | 以上全部 | — |
+| 你实际装了的 | `./install.sh auto` | 本机探测到的每个运行时 | — |
 
 技能安装是**自包含**的（SKILL.md + references + styles + scripts + examples + `styles.json` 机器可读风格索引 + `requirements.txt`）；
 `AGENTS.md` 安装带幂等标记、重装原地更新。完整映射见 [`install/targets.json`](install/targets.json)；
