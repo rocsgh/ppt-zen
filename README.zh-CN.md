@@ -113,16 +113,21 @@ python3 scripts/assemble_pptx.py slides/ deck.pptx
 |---|---|---|---|
 | **Claude Code** | `./install.sh claude [--global]` | `.claude/skills/ppt-zen/` | `/ppt-zen` 或直接说要做 deck |
 | **OpenClaw** | `./install.sh openclaw [--global]` | `.openclaw/skills/ppt-zen/` | 直接说要做 deck |
-| **Hermes** | `./install.sh hermes [--global]` | `.hermes/skills/ppt-zen/` | 直接说要做 deck |
+| **Hermes** | `./install.sh hermes` | `~/.hermes/skills/creative/ppt-zen/`（或 `$HERMES_HOME`） | 直接说要做 deck |
 | **Codex CLI** | `./install.sh codex [--global]` | `AGENTS.md` / `~/.codex/AGENTS.md` | 被动——自动读取 |
 | **Cursor** | `./install.sh cursor` | `.cursor/rules/ppt-zen.mdc` | 被动——自动生效 |
 | **Windsurf** | `./install.sh windsurf` | `.windsurf/rules/ppt-zen.md` | 被动——自动生效 |
 | **GitHub Copilot** | `./install.sh copilot` | `.github/instructions/` | 被动——自动生效 |
 | 全部 | `./install.sh all` | 以上全部 | — |
 
-技能安装是**自包含**的（SKILL.md + references + styles + scripts + examples + `styles.json` 机器可读风格索引）；
+技能安装是**自包含**的（SKILL.md + references + styles + scripts + examples + `styles.json` 机器可读风格索引 + `requirements.txt`）；
 `AGENTS.md` 安装带幂等标记、重装原地更新。完整映射见 [`install/targets.json`](install/targets.json)；
 被动运行时的文件由 `scripts/gen_adapters.py` 从 `AGENTS.md` 生成。
+
+**Hermes 特别说明。** Hermes 没有项目级技能目录——它只扫 `$HERMES_HOME/skills`（默认 `~/.hermes/skills`）
+和 `skills.external_dirs`，所以 `hermes` 一律装到那里，`--global` 不起作用。**装完必须重启 Hermes
+网关/进程**——技能索引缓存在进程内，不重启就认不到。Hermes 自带的 `powerpoint` 技能（python-pptx
+文本框式 deck）会继续共存；做设计过的整页出图 deck 时，以 ppt-zen 为准。
 
 **完全没有 skill 系统？** 把 `SKILL.md` 整段贴进会话当上下文。
 **依赖：** 辅助脚本纯标准库；只有 `assemble_pptx.py` 需要 `python-pptx`（自带 Pillow，用于 16:9 裁切）。

@@ -113,7 +113,7 @@ python3 scripts/assemble_pptx.py slides/ deck.pptx
 |---|---|---|---|
 | **Claude Code** | `./install.sh claude [--global]` | `.claude/skills/ppt-zen/` | `/ppt-zen`, or just ask for a deck |
 | **OpenClaw** | `./install.sh openclaw [--global]` | `.openclaw/skills/ppt-zen/` | ask for a deck |
-| **Hermes** | `./install.sh hermes [--global]` | `.hermes/skills/ppt-zen/` | ask for a deck |
+| **Hermes** | `./install.sh hermes` | `~/.hermes/skills/creative/ppt-zen/` (or `$HERMES_HOME`) | ask for a deck |
 | **Codex CLI** | `./install.sh codex [--global]` | `AGENTS.md` / `~/.codex/AGENTS.md` | passive — auto-read |
 | **Cursor** | `./install.sh cursor` | `.cursor/rules/ppt-zen.mdc` | passive — auto-applied |
 | **Windsurf** | `./install.sh windsurf` | `.windsurf/rules/ppt-zen.md` | passive — auto-applied |
@@ -121,9 +121,16 @@ python3 scripts/assemble_pptx.py slides/ deck.pptx
 | everything | `./install.sh all` | all of the above | — |
 
 Skill installs are **self-contained** (SKILL.md + references + styles + scripts + examples +
-`styles.json`, the machine-readable style index). `AGENTS.md` installs update in place between idempotent markers.
+`styles.json`, the machine-readable style index, + `requirements.txt`). `AGENTS.md` installs update in place between idempotent markers.
 The full mapping lives in [`install/targets.json`](install/targets.json); passive-runtime files are
 generated from `AGENTS.md` by `scripts/gen_adapters.py`.
+
+**Hermes note.** Hermes has no project-level skill directory — it only scans `$HERMES_HOME/skills`
+(default `~/.hermes/skills`) plus `skills.external_dirs`, so the `hermes` target always installs
+there and `--global` is a no-op. **Restart your Hermes gateway/process after installing** — the
+skill index is cached in-process and won't pick the skill up otherwise. Hermes' builtin
+`powerpoint` skill (python-pptx text-box decks) keeps working alongside it; for designed
+full-image decks ppt-zen supersedes it.
 
 **No skill system at all?** Paste `SKILL.md` into the session as context.
 **Dependencies:** the helpers are pure standard library; only `assemble_pptx.py` needs

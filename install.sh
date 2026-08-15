@@ -9,6 +9,9 @@
 #   --global       install for the user (~/.claude/skills/..., ~/.codex/AGENTS.md, ...)
 #   --dest DIR     override the destination directory entirely (skill dirs only)
 #
+#   note: hermes has no project-level skills dir — it always installs into
+#         ${HERMES_HOME:-$HOME/.hermes}/skills/creative/ppt-zen (--global is a no-op).
+#
 # The mapping lives in install/targets.json; this script mirrors it (no jq needed).
 set -euo pipefail
 HERE="$(cd "$(dirname "$0")" && pwd)"
@@ -24,9 +27,9 @@ while [ $# -gt 0 ]; do
   esac; shift
 done
 
-BUNDLE="references styles scripts examples styles.json .env.example"
+BUNDLE="references styles scripts examples styles.json requirements.txt .env.example"
 
-install_skill_dir() {  # $1 = base dir that will contain SKILL.md
+install_skill_dir() {  # $1 = base dir that will contain SKILL.md; $2 = "nohint" to skip the image-key line
   local d="$1"
   mkdir -p "$d"
   cp "$HERE/SKILL.md" "$d/"
@@ -35,7 +38,9 @@ install_skill_dir() {  # $1 = base dir that will contain SKILL.md
     if [ -d "$HERE/$b" ]; then rm -rf "$d/$b"; cp -R "$HERE/$b" "$d/"; else cp "$HERE/$b" "$d/"; fi
   done
   echo "installed skill -> $d"
-  echo "  image key: cp $d/.env.example $d/.env  (gen_image.py reads it there for global installs)"
+  if [ "${2:-}" != "nohint" ]; then
+    echo "  image key: cp $d/.env.example $d/.env  (gen_image.py reads it there for global installs)"
+  fi
 }
 
 inject_agents_md() {  # $1 = dest AGENTS.md (idempotent between PPTZEN markers)
@@ -71,9 +76,15 @@ do_agent() {
       [ -n "$DEST_OVERRIDE" ] && base="$DEST_OVERRIDE"
       install_skill_dir "$base" ;;
     hermes)
-      local base=".hermes/skills/ppt-zen"; [ $GLOBAL = 1 ] && base="$HOME/.hermes/skills/ppt-zen"
+      # Hermes only scans $HERMES_HOME/skills (default ~/.hermes) plus skills.external_dirs —
+      # there is no project-level ./.hermes/skills, so --global is a no-op here. Skills nest
+      # as <category>/<name>/; a flat dir would register "ppt-zen" as its own category.
+      local base="${HERMES_HOME:-$HOME/.hermes}/skills/creative/ppt-zen"
       [ -n "$DEST_OVERRIDE" ] && base="$DEST_OVERRIDE"
-      install_skill_dir "$base" ;;
+      install_skill_dir "$base" nohint
+      echo "  1. restart your Hermes gateway/process — the skill index is cached in-process"
+      echo "  2. pip install python-pptx  (needed to assemble the deck)"
+      echo "  3. image endpoint: an agent-native image tool works out of the box; otherwise cp $base/.env.example $base/.env and set IMAGE_API_*" ;;
     codex)
       local dest="AGENTS.md"; [ $GLOBAL = 1 ] && dest="$HOME/.codex/AGENTS.md"
       inject_agents_md "$dest" ;;

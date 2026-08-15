@@ -189,14 +189,15 @@ cd ppt-zen
 <tr><th>Runtime</th><th>Command</th><th>Installs to</th><th>Trigger</th></tr>
 <tr><td><b>Claude Code</b></td><td><code>./install.sh claude [--global]</code></td><td><code>.claude/skills/ppt-zen/</code></td><td><code>/ppt-zen</code> or just ask for a deck</td></tr>
 <tr><td><b>OpenClaw</b></td><td><code>./install.sh openclaw [--global]</code></td><td><code>.openclaw/skills/ppt-zen/</code></td><td>ask for a deck</td></tr>
-<tr><td><b>Hermes</b></td><td><code>./install.sh hermes [--global]</code></td><td><code>.hermes/skills/ppt-zen/</code></td><td>ask for a deck</td></tr>
+<tr><td><b>Hermes</b></td><td><code>./install.sh hermes</code></td><td><code>~/.hermes/skills/creative/ppt-zen/</code></td><td>ask for a deck</td></tr>
 <tr><td><b>Codex CLI</b></td><td><code>./install.sh codex [--global]</code></td><td><code>AGENTS.md</code> / <code>~/.codex/AGENTS.md</code></td><td>passive — auto-read</td></tr>
 <tr><td><b>Cursor</b></td><td><code>./install.sh cursor</code></td><td><code>.cursor/rules/ppt-zen.mdc</code></td><td>passive — auto-applied</td></tr>
 <tr><td><b>Windsurf</b></td><td><code>./install.sh windsurf</code></td><td><code>.windsurf/rules/ppt-zen.md</code></td><td>passive — auto-applied</td></tr>
 <tr><td><b>GitHub Copilot</b></td><td><code>./install.sh copilot</code></td><td><code>.github/instructions/</code></td><td>passive — auto-applied</td></tr>
 <tr><td>everything</td><td><code>./install.sh all</code></td><td>all of the above</td><td>—</td></tr>
 </table></div>
-<p style="margin-top:12px">Skill installs are self-contained (SKILL.md + references + styles + scripts + examples + <code>styles.json</code>). No skill system at all? Paste <code>SKILL.md</code> into the session as context.</p>
+<p style="margin-top:12px">Skill installs are self-contained (SKILL.md + references + styles + scripts + examples + <code>styles.json</code> + <code>requirements.txt</code>). No skill system at all? Paste <code>SKILL.md</code> into the session as context.</p>
+<p style="margin-top:12px"><b>Hermes:</b> there is no project-level skill directory — the installer always writes to <code>$HERMES_HOME/skills</code> (default <code>~/.hermes/skills</code>), so <code>--global</code> is a no-op. Restart your Hermes gateway/process afterwards: the skill index is cached in-process. Hermes&rsquo; builtin <code>powerpoint</code> skill (text-box decks) keeps working alongside it; for designed full-image decks ppt-zen supersedes it.</p>
 <h2><span class="num">2</span>Wire an image model</h2>
 <p>Every page is a generated image. If your agent already has an image tool, there's nothing to do — the skill uses it. Otherwise point the bundled helper at <b>any endpoint that implements the OpenAI <code>/images/generations</code> API</b> (accepts <code>{model, prompt, size, n}</code>, returns <code>b64_json</code> or <code>url</code> — chat-only "compatible" gateways don't count):</p>
 <pre>cp .env.example .env                  # IMAGE_API_BASE_URL / IMAGE_API_KEY / IMAGE_MODEL / IMAGE_SIZE
