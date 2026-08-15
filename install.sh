@@ -99,7 +99,7 @@ do_agent() {
   esac
 }
 
-DETECTED=""; MISSING_PROJECT=""
+DETECTED=""; MISSING_PROJECT=""; IN_REPO=0
 
 have() { command -v "$1" >/dev/null 2>&1; }
 add_detected() { DETECTED="$DETECTED$1|$2|$3|$4
@@ -107,12 +107,15 @@ add_detected() { DETECTED="$DETECTED$1|$2|$3|$4
 
 detect_runtimes() {
   # no bash 4 here: DETECTED is a newline-separated list of "agent|scope|evidence|dest"
-  DETECTED=""; MISSING_PROJECT=""
-  if [ -d "./.claude" ]; then add_detected claude project "./.claude/ in this project" ".claude/skills/ppt-zen"
+  DETECTED=""; MISSING_PROJECT=""; IN_REPO=0
+  # running from inside the ppt-zen checkout itself: its own AGENTS.md / .github / etc. are
+  # sources, not a user project — only global targets make sense here
+  [ "$HERE" = "$(pwd)" ] && IN_REPO=1
+  if [ $IN_REPO = 0 ] && [ -d "./.claude" ]; then add_detected claude project "./.claude/ in this project" ".claude/skills/ppt-zen"
   elif have claude; then      add_detected claude global "claude on PATH" "$HOME/.claude/skills/ppt-zen"
   elif [ -d "$HOME/.claude" ]; then add_detected claude global "~/.claude exists" "$HOME/.claude/skills/ppt-zen"; fi
 
-  if [ -d "./.openclaw" ]; then add_detected openclaw project "./.openclaw/ in this project" ".openclaw/skills/ppt-zen"
+  if [ $IN_REPO = 0 ] && [ -d "./.openclaw" ]; then add_detected openclaw project "./.openclaw/ in this project" ".openclaw/skills/ppt-zen"
   elif have openclaw; then      add_detected openclaw global "openclaw on PATH" "$HOME/.openclaw/skills/ppt-zen"
   elif [ -d "$HOME/.openclaw" ]; then add_detected openclaw global "~/.openclaw exists" "$HOME/.openclaw/skills/ppt-zen"; fi
 
@@ -121,16 +124,16 @@ detect_runtimes() {
   elif [ -d "$HOME/.hermes" ]; then    add_detected hermes fixed "~/.hermes exists" "$HOME/.hermes/skills/creative/ppt-zen"
   elif have hermes; then               add_detected hermes fixed "hermes on PATH" "$HOME/.hermes/skills/creative/ppt-zen"; fi
 
-  if [ -f "./AGENTS.md" ]; then add_detected codex project "./AGENTS.md in this project" "AGENTS.md"
+  if [ $IN_REPO = 0 ] && [ -f "./AGENTS.md" ]; then add_detected codex project "./AGENTS.md in this project" "AGENTS.md"
   elif [ -d "$HOME/.codex" ]; then add_detected codex global "~/.codex exists" "$HOME/.codex/AGENTS.md"
   elif have codex; then            add_detected codex global "codex on PATH" "$HOME/.codex/AGENTS.md"; fi
 
   # project-only runtimes: no global location exists, so an absent marker means skip
-  if [ -d "./.cursor" ]; then add_detected cursor project "./.cursor/ in this project" ".cursor/rules/ppt-zen.mdc"
+  if [ $IN_REPO = 0 ] && [ -d "./.cursor" ]; then add_detected cursor project "./.cursor/ in this project" ".cursor/rules/ppt-zen.mdc"
   else MISSING_PROJECT="$MISSING_PROJECT cursor:./.cursor/"; fi
-  if [ -d "./.windsurf" ]; then add_detected windsurf project "./.windsurf/ in this project" ".windsurf/rules/ppt-zen.md"
+  if [ $IN_REPO = 0 ] && [ -d "./.windsurf" ]; then add_detected windsurf project "./.windsurf/ in this project" ".windsurf/rules/ppt-zen.md"
   else MISSING_PROJECT="$MISSING_PROJECT windsurf:./.windsurf/"; fi
-  if [ -d "./.github" ]; then add_detected copilot project "./.github/ in this project" ".github/instructions/ppt-zen.instructions.md"
+  if [ $IN_REPO = 0 ] && [ -d "./.github" ]; then add_detected copilot project "./.github/ in this project" ".github/instructions/ppt-zen.instructions.md"
   else MISSING_PROJECT="$MISSING_PROJECT copilot:./.github/"; fi
 }
 
@@ -141,6 +144,7 @@ report_detected() {
     usage; return 0
   fi
   echo "PPT-Zen — runtimes detected here:"; echo
+  [ $IN_REPO = 1 ] && echo "  (inside the ppt-zen repo — project-level targets skipped; cd into your project to install there)" && echo
   while IFS='|' read -r a scope why dest; do
     [ -z "$a" ] && continue
     printf '  %-9s %-9s %-30s -> %s\n' "$a" "($scope)" "$why" "$dest"
