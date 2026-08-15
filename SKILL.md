@@ -184,7 +184,8 @@ Each page is one self-contained prompt. Always:
    in gold". Those are *treatments* for words the page's TEXT already carries — **never** instructions
    to add words. If TEXT names no words for a text-bearing object, that object stays **blank** (or is
    left out): a blank tag is correct, an invented one is a bug — it comes back as smudged pseudo-text.
-   **CJK text:** render each character exactly once in a single clean typeface; no double exposure, no
+   **CJK text:** each glyph instance from TEXT renders once, cleanly, in the material's own lettering
+   style — repeated characters (人人, 哈哈) stay repeated exactly as written; no double exposure, no
    ghost strokes, no half-rendered duplicates — regenerate the page if any character ghosts.
 
 **Compose every page prompt mechanically — do not improvise the material:**
