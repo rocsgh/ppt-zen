@@ -525,6 +525,30 @@
    "license": "CC-BY-4.0"
   },
   {
+   "slug": "founding-charter",
+   "name": "Founding Charter",
+   "medium": "Manuscript",
+   "hand": "",
+   "tags": [
+    "parchment",
+    "ceremonial",
+    "calligraphy",
+    "wax-seal",
+    "solemn"
+   ],
+   "aliases": [
+    "Founding Charter",
+    "founding charter",
+    "独立宣言",
+    "建国文书",
+    "羊皮纸契约",
+    "契约"
+   ],
+   "pack": "styles/founding-charter",
+   "prompt_formula": "SURFACE:  An engrossed 18th-century founding charter on aged parchment: warm cream-to-tawny\nvellum, mottled with age, softly worn edges, faint foxing and one old fold line;\niron-gall brownish-black ink; formal engrosser's calligraphy with one large\nflourished opening line; fine double hairline rules framing the page; a deep-red\nwax seal with ribbon; dignified, ceremonial. NO modern elements, NO photographs.\nSKELETON: auto by page role (cover=flourished opening, data=engrossed ledger with leader\nrules, closing=signature block with wax seal)\nDEVICE:   the page's argument as a charter element — a ledger line, a seal, a signature\nblock, a quill; numbers live at the end of thin double leader rules\nEND:      Full-bleed 16:9 — render DEVICE on the parchment SURFACE, ceremonial composition.\nCRITICAL: render ONLY the specified text, every glyph correct; decorative marks limited to\nflourishes, rules and seals; no UI, no cards, no captions.",
+   "license": "CC-BY-4.0"
+  },
+  {
    "slug": "ink-wash",
    "name": "Ink Wash",
    "medium": "Chinese ink",

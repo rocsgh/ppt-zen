@@ -88,7 +88,7 @@ def build():
     import json as _json
     # Chinese aliases so zh style names resolve deterministically (not just via LLM knowledge)
     ALIAS_ZH = {
-        "ink-wash": ["水墨", "水墨画"], "kintsugi": ["金继", "金缮"], "stele-rubbing": ["拓片", "碑拓"],
+        "ink-wash": ["水墨", "水墨画"], "founding-charter": ["独立宣言", "建国文书", "羊皮纸契约", "契约"], "kintsugi": ["金继", "金缮"], "stele-rubbing": ["拓片", "碑拓"],
         "portolan": ["航海图", "海图"], "davinci-copperplate": ["达芬奇铜版", "达芬奇"],
         "swiss-grid": ["瑞士网格", "瑞士极简"], "blue-white-porcelain": ["青花", "青花瓷"],
         "porcelain-indigo": ["瓷白靛青"], "warm-sepia": ["暖棕手绘", "铅笔手绘"],

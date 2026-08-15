@@ -245,6 +245,15 @@ Medium **Islamic tile** · [pack & prompt formula →](styles/zellige-girih/STYL
 Medium **Lacquer** · [pack & prompt formula →](styles/lacquer-mop-inlay/STYLE.md)
 
 
+## Manuscript
+
+### Founding Charter
+
+![Founding Charter](styles/founding-charter/samples/01.jpg)
+
+Medium **Manuscript** · [pack & prompt formula →](styles/founding-charter/STYLE.md)
+
+
 ## Modern
 
 ### Swiss Grid

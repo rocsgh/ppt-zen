@@ -1,12 +1,12 @@
-<!doctype html><html lang="zh-CN"><head><meta charset="utf-8">
+<!doctype html><html lang="en"><head><meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>PPT-Zen — AI 幻灯片的判断层</title>
-<meta name="description" content="One sentence in, many worlds out. An open-source skill that decides how each slide should be, then renders it full-image in the material you choose.">
-<link rel="canonical" href="https://pptzen.xyz/">
+<title>Founding Charter · PPT-Zen</title>
+<meta name="description" content="Manuscript recipe for AI-made slides, with a reproducible prompt formula.">
+<link rel="canonical" href="https://pptzen.xyz/founding-charter.html">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='12' fill='%2316151a'/%3E%3Ctext x='32' y='44' font-family='Georgia,serif' font-size='36' fill='%23f7f5f0' text-anchor='middle'%3E%E7%A6%85%3C/text%3E%3C/svg%3E">
 <meta property="og:type" content="website"><meta property="og:site_name" content="PPT-Zen">
-<meta property="og:title" content="PPT-Zen — AI 幻灯片的判断层"><meta property="og:description" content="One sentence in, many worlds out. An open-source skill that decides how each slide should be, then renders it full-image in the material you choose.">
-<meta property="og:url" content="https://pptzen.xyz/"><meta property="og:image" content="https://pptzen.xyz/img/og-banner.png">
+<meta property="og:title" content="Founding Charter · PPT-Zen"><meta property="og:description" content="Manuscript recipe for AI-made slides, with a reproducible prompt formula.">
+<meta property="og:url" content="https://pptzen.xyz/founding-charter.html"><meta property="og:image" content="https://pptzen.xyz/img/founding-charter.jpg">
 <meta name="twitter:card" content="summary_large_image">
 <style>
 :root{
@@ -162,92 +162,40 @@ tr:hover td{background:var(--panel)}
  .chain .ln{opacity:1;transform:none}
 }
 @media(prefers-contrast:more){:root{--muted:#54525a;--line:#c9c6bf;--line2:#b0ada5}}
-</style><link rel="alternate" hreflang="en" href="https://pptzen.xyz/"><link rel="alternate" hreflang="zh" href="https://pptzen.xyz/zh/"><link rel="alternate" hreflang="x-default" href="https://pptzen.xyz/"></head><body><script>(function(){try{
-var pref=localStorage.getItem('pz-lang');
-var zh=location.pathname.indexOf('/zh/')===0;
-var page='index.html'==='index.html'?'':'index.html';
-if(zh){if(pref==='en'){location.replace('/'+page);}}
-else{if(pref==='zh'){location.replace('/zh/'+page);}
-else if(!pref&&((navigator.language||'').toLowerCase().indexOf('zh')===0)){location.replace('/zh/'+page);}}
-}catch(e){}})();</script><div class="wrap"><nav><a class="mark" href="index.html"><img class="wm" src="../img/logo-wordmark.png" alt="PPT-Zen"/></a>
+</style></head><body><div class="wrap"><nav><a class="mark" href="index.html"><img class="wm" src="img/logo-wordmark.png" alt="PPT-Zen"/></a>
 <div class="navlinks">
-<a class="nl" href="method.html">方法论</a>
-<a class="nl" href="example.html">案例</a>
-<a class="nl" href="gallery.html">画廊</a>
-<a class="nl" href="install.html">安装</a>
-<a class="btn" href="/" onclick="localStorage.setItem('pz-lang','en')">EN</a><a class="btn solid" id="ghbtn" href="https://github.com/rocsgh/ppt-zen/blob/master/README.zh-CN.md">GitHub &#9733; <small id="ghstars"></small></a>
-</div></nav></div><div class="wrap">
-<section class="hero">
-<div>
-<div class="kick">开源判断层 &middot; Apache-2.0</div>
-<h1>一句话进。<br/><em>万千世界</em>出。</h1>
-<p class="lede">你的 agent 自己决定每一页该怎么做——详略、器物、材质——然后把每一页渲染成一整张设计好的图。</p>
-<div class="hero-cta"><a class="btn solid" href="install.html">安装</a><a class="btn" href="example.html">看一套真实成片</a></div>
-</div>
-<div class="switcher">
-<div class="stage"><img id="swimg" src="../img/davinci-copperplate.jpg" alt="The same idea rendered in different materials"/></div>
-<div class="chips" id="swchips"><button data-img="../img/davinci-copperplate.jpg" class="on">Da Vinci Copperplate</button><button data-img="../img/ink-wash.jpg">Ink Wash</button><button data-img="../img/stele-rubbing.jpg">Stele Rubbing</button><button data-img="../img/cinema-nolan.jpg">Cold Monument</button><button data-img="../img/kintsugi.jpg">Kintsugi</button><button data-img="../img/papercraft.jpg">Paper Sculpture</button></div>
-<div class="cap kick">同一个想法 —— 选一种材质，就是另一个世界。</div>
-</div>
-</section>
-
-<div class="claims">
-<div class="claim"><b>它来判断，你不用回答问题</b><span>它逐页决定详略（提纲挈领还是细化）、想出器物——把这页的论点画成一个东西——并且全片只用一种材质。</span></div>
-<div class="claim"><b>整页出图，经得起看</b><span>每一页都是一整张设计好的图——排印、质感、插画都长在你选的材质里。英文与密集数据渲染得干净；每页你都要校对一遍，出错的页一行命令单独重出。</span></div>
-<div class="claim"><b>开源，图像模型你自带</b><span>Apache-2.0 judgment layer + CC-BY styles. Works with any agent that generates images, or any endpoint speaking the OpenAI images API. No key ships in the repo.</span></div>
-</div>
-<section class="sec"><div class="shead"><span class="num">01</span><h2>判断，而不是生成</h2></div>
-<p class="lede">所有 AI PPT 工具都在做同一件事：把内容变成页面。PPT-Zen 开源的是没人做的那一层：<b>这一页——该放多少、长什么样、凭什么这么定？</b>成品谁都能截图；判断链抄不走。</p>
-
-<div class="chain" id="chain">
-<span class="ln"><span class="c1">page 03 &middot;</span> <span class="c3">"23 minutes to refocus"</span></span>
-<span class="ln"><span class="c1">&rarr; sayable in one line?</span> <span class="c2">yes &rarr; HEADLINE</span> <span class="c1">(one giant number)</span></span>
-<span class="ln"><span class="c1">&rarr; device:</span> <span class="c3">a draining hourglass</span> <span class="c1">— the cost of interruption, drawn</span></span>
-<span class="ln"><span class="c1">page 08 &middot;</span> <span class="c3">"where we sit vs. the market"</span></span>
-<span class="ln"><span class="c1">&rarr; only holds up side by side?</span> <span class="c2">yes &rarr; DETAIL</span> <span class="c1">(2&times;2 quadrant)</span></span>
-<span class="ln"><span class="c1">&rarr; previous page was dense &rarr;</span> <span class="c3">this one breathes</span></span>
-</div>
-<p style="margin-top:14px"><a class="morelink" href="method.html">读方法论 &rarr;</a></p></section>
-<section class="sec"><div class="shead"><span class="num">02</span><h2>怎么用</h2></div>
-<p class="lede">你带一个 agent 和一个图像模型，判断由这个 skill 提供。</p>
-<div class="steps">
-<div class="step"><span class="n">STEP 1</span><b>装技能</b><p>每个运行时一行命令——Claude Code、Codex、Cursor、Windsurf、Hermes、OpenClaw。</p><pre>./install.sh claude --global</pre></div>
-<div class="step"><span class="n">STEP 2</span><b>说一句话</b><p>在你的 agent 里：</p><pre>"Make me a 10-page pitch deck
- about &lt;project&gt;, Portolan style."</pre></div>
-<div class="step"><span class="n">STEP 3</span><b>拿到成片</b><p>计划 &rarr; 逐页出图 &rarr; 校对 &rarr; 拼装 .pptx。</p><pre>python3 scripts/assemble_pptx.py \
-  slides/ deck.pptx</pre></div>
-</div></section>
-<section class="sec"><div class="shead"><span class="num">03</span><h2>证据 —— 一整套片子，逐页判断</h2></div>
-<p class="lede">Relayboard：一个虚构产品的 10 页 pitch，由一句话生成、一种材质贯穿 —— 每一页都附判断日志。</p>
-<div class="strip"><a href="example.html"><img loading="lazy" src="../img/rbp/01-cover.jpg" alt=""/></a><a href="example.html"><img loading="lazy" src="../img/rbp/03-cost.jpg" alt=""/></a><a href="example.html"><img loading="lazy" src="../img/rbp/06-traction.jpg" alt=""/></a><a href="example.html"><img loading="lazy" src="../img/rbp/08-competition.jpg" alt=""/></a></div>
-<p style="margin-top:14px"><a class="morelink" href="example.html">看全部 10 页 + 判断日志 &rarr;</a></p></section>
-<section class="sec"><div class="shead"><span class="num">04</span><h2>45 materials, one line each</h2></div>
-<p class="lede">每个风格都带一条可复现的 prompt 配方。想贡献自己的？一个文件夹、一个 PR。</p>
-<div class="grid"><a class="card" href="../davinci-copperplate.html"><div class="ph"><img loading="lazy" src="../img/davinci-copperplate.jpg" alt="Da Vinci Copperplate"/></div><div class="body"><div class="nm">Da Vinci Copperplate</div><div class="sub">达芬奇铜版</div></div></a><a class="card" href="../portolan.html"><div class="ph"><img loading="lazy" src="../img/portolan.jpg" alt="Portolan Sea Chart"/></div><div class="body"><div class="nm">Portolan Sea Chart</div><div class="sub">航海图</div></div></a><a class="card" href="../cinema-wongkarwai.html"><div class="ph"><img loading="lazy" src="../img/cinema-wongkarwai.jpg" alt="Neon Nocturne"/></div><div class="body"><div class="nm">Neon Nocturne</div><div class="sub">电影</div></div></a><a class="card" href="../cinema-nolan.html"><div class="ph"><img loading="lazy" src="../img/cinema-nolan.jpg" alt="Cold Monument"/></div><div class="body"><div class="nm">Cold Monument</div><div class="sub">电影</div></div></a><a class="card" href="../cinema-wesanderson.html"><div class="ph"><img loading="lazy" src="../img/cinema-wesanderson.jpg" alt="Symmetric Pastel"/></div><div class="body"><div class="nm">Symmetric Pastel</div><div class="sub">电影</div></div></a><a class="card" href="../kintsugi.html"><div class="ph"><img loading="lazy" src="../img/kintsugi.jpg" alt="Kintsugi"/></div><div class="body"><div class="nm">Kintsugi</div><div class="sub">陶瓷</div></div></a><a class="card" href="../stele-rubbing.html"><div class="ph"><img loading="lazy" src="../img/stele-rubbing.jpg" alt="Stele Rubbing"/></div><div class="body"><div class="nm">Stele Rubbing</div><div class="sub">拓片</div></div></a><a class="card" href="../swiss-grid.html"><div class="ph"><img loading="lazy" src="../img/swiss-grid.jpg" alt="Swiss Grid"/></div><div class="body"><div class="nm">Swiss Grid</div><div class="sub">现代</div></div></a></div>
-<p><a class="morelink" href="gallery.html">Browse all 45 styles &rarr;</a></p></section>
-<section class="sec"><div class="shead"><span class="num">05</span><h2>Install</h2></div>
-<p class="lede">每个运行时一行命令。仓库才是产品——官网只是带你逛逛。</p>
-<pre>git clone https://github.com/rocsgh/ppt-zen
-cd ppt-zen &amp;&amp; ./install.sh claude --global   # or codex / cursor / windsurf / hermes / openclaw / all</pre>
-<p style="margin-top:16px"><a class="btn solid" href="install.html">完整安装矩阵</a> <a class="btn" href="https://github.com/rocsgh/ppt-zen/blob/master/README.zh-CN.md">打开 GitHub</a></p></section>
+<a class="nl" href="method.html">Method</a>
+<a class="nl" href="example.html">Example</a>
+<a class="nl on" href="gallery.html">Gallery</a>
+<a class="nl" href="install.html">Install</a>
+<a class="btn" href="/zh/gallery.html" onclick="localStorage.setItem('pz-lang','zh')">中文</a><a class="btn solid" id="ghbtn" href="https://github.com/rocsgh/ppt-zen">GitHub &#9733; <small id="ghstars"></small></a>
+</div></nav></div><div class="wrap d">
+<img class="hero-img" src="img/founding-charter.jpg" alt="Founding Charter"/>
+<h1>Founding Charter</h1><div class="chipsrow"><span class="chip">Manuscript</span><span class="chip">parchment</span><span class="chip">ceremonial</span><span class="chip">calligraphy</span><span class="chip">wax-seal</span><span class="chip">solemn</span></div>
+<p class="world">An engrossed founding document awaiting its signatures</p><p><b>A document that expects to be signed.</b> Parchment, iron-gall ink, engrossed calligraphy, a wax seal — the material carries authority before a single word is read. Built for charters, compacts, cap tables, founding agreements: anything where the deck <i>is</i> the ceremony.</p><p>*The signature move: end the deck with a signing page — signature lines, printed names, a wax seal. Non-Latin text renders as brush-serif calligraphy that harmonizes with the charter aesthetic (validated in production with Chinese).*</p>
+<h2>Prompt formula</h2><pre>SURFACE:  An engrossed 18th-century founding charter on aged parchment: warm cream-to-tawny
+vellum, mottled with age, softly worn edges, faint foxing and one old fold line;
+iron-gall brownish-black ink; formal engrosser&#x27;s calligraphy with one large
+flourished opening line; fine double hairline rules framing the page; a deep-red
+wax seal with ribbon; dignified, ceremonial. NO modern elements, NO photographs.
+SKELETON: auto by page role (cover=flourished opening, data=engrossed ledger with leader
+rules, closing=signature block with wax seal)
+DEVICE:   the page&#x27;s argument as a charter element — a ledger line, a seal, a signature
+block, a quill; numbers live at the end of thin double leader rules
+END:      Full-bleed 16:9 — render DEVICE on the parchment SURFACE, ceremonial composition.
+CRITICAL: render ONLY the specified text, every glyph correct; decorative marks limited to
+flourishes, rules and seals; no UI, no cards, no captions.</pre><h2>Source</h2><p>Inspired by 18th-century engrossed founding documents — the U.S. Declaration of Independence and Constitution (public domain). Our own artwork.</p>
+<p class="kick" style="margin-top:24px">License: CC-BY-4.0 &middot; contributions via DCO</p>
+<p style="margin-top:18px"><a class="btn" href="gallery.html">&larr; All styles</a> <a class="btn solid" href="install.html">Use this style</a></p>
 </div><footer><div class="wrap"><div class="cols">
-<div>PPT-Zen &middot; AI 幻灯片的判断层<br/>
-判断层 Apache-2.0 &middot; 风格 CC-BY-4.0 &middot; 受《演说之禅》启发</div>
+<div>PPT-Zen &middot; a judgment layer for AI-made slides<br/>
+Apache-2.0 (judgment layer) &middot; CC-BY-4.0 (styles) &middot; inspired by <i>Presentation Zen</i></div>
 <div style="text-align:right">
-<a href="https://github.com/rocsgh/ppt-zen/blob/master/README.zh-CN.md">GitHub</a> &middot; <a href="https://github.com/rocsgh/ppt-zen/blob/master/CONTRIBUTING.md">贡献风格</a> &middot; <a href="https://github.com/rocsgh/ppt-zen/blob/master/DESIGN.md">设计笔记</a><br/>
-<span class="kick" style="letter-spacing:.1em">托管版 &mdash; 敬请期待</span>
+<a href="https://github.com/rocsgh/ppt-zen">GitHub</a> &middot; <a href="https://github.com/rocsgh/ppt-zen/blob/master/CONTRIBUTING.md">Contribute a style</a> &middot; <a href="https://github.com/rocsgh/ppt-zen/blob/master/DESIGN.md">Design notes</a><br/>
+<span class="kick" style="letter-spacing:.1em">Hosted version &mdash; coming</span>
 </div></div></div></footer><script>
 fetch('https://api.github.com/repos/rocsgh/ppt-zen').then(r=>r.json()).then(d=>{
  if(d && typeof d.stargazers_count==='number'){var e=document.getElementById('ghstars');
  if(e){e.textContent=d.stargazers_count>=1000?(d.stargazers_count/1000).toFixed(1)+'k':d.stargazers_count;}}
 }).catch(()=>{});
-
-var chips=document.querySelectorAll('#swchips button'),img=document.getElementById('swimg');
-chips.forEach(function(b){var pre=new Image();pre.src=b.dataset.img;
- b.onclick=function(){chips.forEach(function(x){x.classList.remove('on')});b.classList.add('on');img.src=b.dataset.img;};});
-var lns=document.querySelectorAll('#chain .ln');
-if(matchMedia('(prefers-reduced-motion: reduce)').matches){lns.forEach(function(l){l.classList.add('show')});}
-else{var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){
- lns.forEach(function(l,i){setTimeout(function(){l.classList.add('show')},i*350)});io.disconnect();}})});
- io.observe(document.getElementById('chain'));}
 </script></body></html>
