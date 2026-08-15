@@ -162,13 +162,20 @@ tr:hover td{background:var(--panel)}
  .chain .ln{opacity:1;transform:none}
 }
 @media(prefers-contrast:more){:root{--muted:#54525a;--line:#c9c6bf;--line2:#b0ada5}}
-</style></head><body><div class="wrap"><nav><a class="mark" href="index.html"><img class="wm" src="img/logo-wordmark.png" alt="PPT-Zen"/></a>
+</style><link rel="alternate" hreflang="en" href="https://pptzen.xyz/broadsheet-news.html"><link rel="alternate" hreflang="zh" href="https://pptzen.xyz/zh/broadsheet-news.html"><link rel="alternate" hreflang="x-default" href="https://pptzen.xyz/broadsheet-news.html"></head><body><script>(function(){try{
+var pref=localStorage.getItem('pz-lang');
+var zh=location.pathname.indexOf('/zh/')===0;
+var page='broadsheet-news.html'==='index.html'?'':'broadsheet-news.html';
+if(zh){if(pref==='en'){location.replace('/'+page);}}
+else{if(pref==='zh'){location.replace('/zh/'+page);}
+else if(!pref&&((navigator.language||'').toLowerCase().indexOf('zh')===0)){location.replace('/zh/'+page);}}
+}catch(e){}})();</script><div class="wrap"><nav><a class="mark" href="index.html"><img class="wm" src="img/logo-wordmark.png" alt="PPT-Zen"/></a>
 <div class="navlinks">
 <a class="nl" href="method.html">Method</a>
 <a class="nl" href="example.html">Example</a>
 <a class="nl on" href="gallery.html">Gallery</a>
 <a class="nl" href="install.html">Install</a>
-<a class="btn" href="/zh/gallery.html" onclick="localStorage.setItem('pz-lang','zh')">中文</a><a class="btn solid" id="ghbtn" href="https://github.com/rocsgh/ppt-zen">GitHub &#9733; <small id="ghstars"></small></a>
+<a class="btn" href="/zh/broadsheet-news.html" onclick="localStorage.setItem('pz-lang','zh')">中文</a><a class="btn solid" id="ghbtn" href="https://github.com/rocsgh/ppt-zen">GitHub &#9733; <small id="ghstars"></small></a>
 </div></nav></div><div class="wrap d">
 <img class="hero-img" src="img/broadsheet-news.jpg" alt="Letterpress Broadsheet"/>
 <h1>Letterpress Broadsheet</h1><div class="chipsrow"><span class="chip">Print</span><span class="chip">newspaper</span><span class="chip">hot-metal</span><span class="chip">columns</span><span class="chip">ink</span></div>

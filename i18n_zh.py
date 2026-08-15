@@ -12,7 +12,7 @@ ZH = [
  ("<title>PPT-Zen — a judgment layer for AI-made slides</title>", "<title>PPT-Zen — AI 幻灯片的判断层</title>"),
  ("<title>Method · PPT-Zen</title>", "<title>方法论 · PPT-Zen</title>"),
  ("<title>Example — a 10-page deck with its judgment log · PPT-Zen</title>", "<title>案例 — 十页成片与判断日志 · PPT-Zen</title>"),
- ("<title>Gallery — 44 styles · PPT-Zen</title>", "<title>画廊 — 44 个风格 · PPT-Zen</title>"),
+ # gallery <title>/og:title handled count-agnostically in ZH_COUNT_RE
  ("<title>Install · PPT-Zen</title>", "<title>安装 · PPT-Zen</title>"),
  # nav
  ('>Method</a>', '>方法论</a>'),
@@ -54,10 +54,10 @@ ZH = [
  ("Relayboard: a fictional 10-page pitch generated from one sentence, in one material — with the judgment log for every page.",
   "Relayboard：一个虚构产品的 10 页 pitch，由一句话生成、一种材质贯穿 —— 每一页都附判断日志。"),
  ("See all 10 pages + the judgment log &rarr;", "看全部 10 页 + 判断日志 &rarr;"),
- ("44 materials, one line each", "44 个风格，每个都带配方"),
+ # "NN materials, one line each" handled in ZH_COUNT_RE
  ("Every style ships a reproducible prompt formula. Contribute your own with a folder and a PR.",
   "每个风格都带一条可复现的 prompt 配方。想贡献自己的？一个文件夹、一个 PR。"),
- ("Browse all 44 styles &rarr;", "浏览全部 44 个风格 &rarr;"),
+ # "Browse all NN styles" handled in ZH_COUNT_RE
  ("One command per runtime. The repo is the product — the site just shows you around.",
   "每个运行时一行命令。仓库才是产品——官网只是带你逛逛。"),
  ("Full install matrix", "完整安装矩阵"),
@@ -82,7 +82,7 @@ ZH = [
  ("<i>Relayboard is fictional; every metric is invented demo content. In real use the skill never invents facts — unknowns become [TO CONFIRM] placeholders.</i>",
   "<i>Relayboard 是虚构产品，所有数字都是演示内容。真实使用中这个 skill 绝不编造事实——缺的数字会显示 [TO CONFIRM] 占位。</i>"),
  # gallery page
- ("44 styles &middot; every card ships a reproducible prompt formula", "44 个风格 &middot; 每张卡都带可复现配方"),
+ # "NN styles · every card ships..." handled in ZH_COUNT_RE
  ("The material library.", "材质库。"),
  ("Material swatches show the same line — <i>Signal over noise</i> — so the surface is the only variable. Cinema hands show one sentence through different eyes. Click any card for the full recipe.",
   "材质样张统一用同一句话——<i>Signal over noise</i>——材质因此成为唯一变量。电影手笔组则是同一句话经过不同导演之眼。点任何一张卡看完整配方。"),
@@ -204,9 +204,11 @@ def inject_en(html_s, page):
     return html_s.replace(GHBTN, sw + GHBTN, 1)
 
 
-def inject_detail(html_s):
-    """EN detail page: switcher only (zh side lands on the zh gallery)."""
-    sw = '<a class="btn" href="/zh/gallery.html" onclick="%s">中文</a>' % (SWITCH_JS % "zh")
+def inject_en_detail(html_s, page):
+    """EN detail page: hreflang + auto-detect + switcher to its zh sibling."""
+    html_s = html_s.replace("</head>", hreflang(page) + "</head>", 1)
+    html_s = html_s.replace("<body>", "<body>" + DETECT.replace("%PAGE%", page), 1)
+    sw = '<a class="btn" href="/zh/%s" onclick="%s">中文</a>' % (page, SWITCH_JS % "zh")
     return html_s.replace(GHBTN, sw + GHBTN, 1)
 
 
@@ -220,11 +222,7 @@ def make_zh(html_s, page):
     html_s = html_s.replace('href="%s/%s">' % (BASE_URL, page), 'href="%s/zh/%s">' % (BASE_URL, page))
     html_s = html_s.replace('content="%s/%s">' % (BASE_URL, page), 'content="%s/zh/%s">' % (BASE_URL, page))
     html_s = html_s.replace('<html lang="en">', '<html lang="zh-CN">', 1)
-    # detail-page links leave the /zh/ subtree
-    def fix_href(m):
-        t = m.group(1)
-        return m.group(0) if t + ".html" in MARKETING else 'href="../%s.html"' % t
-    html_s = re.sub(r'href="([a-z0-9-]+)\.html"', fix_href, html_s)
+    # detail-page links stay in /zh/ — every style has a zh sibling now
     # hreflang + detect + switcher back to EN
     html_s = html_s.replace("</head>", hreflang(page) + "</head>", 1)
     html_s = html_s.replace("<body>", "<body>" + DETECT.replace("%PAGE%", page), 1)
@@ -240,8 +238,8 @@ MEDIUM_ZH = {
  "Da Vinci copperplate": "达芬奇铜版", "Deco": "装饰艺术", "Diagram": "图解", "Enamel": "珐琅",
  "Fresco": "壁画", "Hand-drawn": "手绘", "Industrial": "工业", "Ink rubbing": "拓片",
  "Islamic tile": "伊斯兰瓷砖", "Lacquer": "漆器", "Modern": "现代", "Painterly": "绘画",
- "Paper craft": "纸艺", "Portolan chart": "航海图", "Print": "版画", "Technical": "技术制图",
- "Textile": "织物", "Woodblock": "木刻",
+ "Manuscript": "手稿", "Paper craft": "纸艺", "Portolan chart": "航海图", "Print": "版画",
+ "Technical": "技术制图", "Textile": "织物", "Woodblock": "木刻",
 }
 
 # example page: judgment-log roles + portolan devices
@@ -265,9 +263,19 @@ EXTRA_ZH = [
  ('class="kick">Install<', 'class="kick">安装<'),
 ]
 
+# count-agnostic strings — the style count changes as packs are contributed
+ZH_COUNT_RE = [
+ (r"Gallery — (\d+) styles · PPT-Zen", r"画廊 — \1 个风格 · PPT-Zen"),
+ (r"(\d+) styles &middot; every card ships a reproducible prompt formula", r"\1 个风格 &middot; 每张卡都带可复现配方"),
+ (r"(\d+) materials, one line each", r"\1 个风格，每个都带配方"),
+ (r"Browse all (\d+) styles &rarr;", r"浏览全部 \1 个风格 &rarr;"),
+]
+
 _orig_make_zh = make_zh
 def make_zh(html_s, page):  # noqa: F811 — extend the base translator
     html_s = _orig_make_zh(html_s, page)
+    for pat, rep in ZH_COUNT_RE:
+        html_s = re.sub(pat, rep, html_s)
     for en, zh in EXTRA_ZH:
         html_s = html_s.replace(en, zh)
     for en, zh in MEDIUM_ZH.items():
@@ -282,5 +290,63 @@ def make_zh(html_s, page):  # noqa: F811 — extend the base translator
     # method-term glosses on first-contact labels
     html_s = html_s.replace('>HEADLINE</span>', '>提纲 HEADLINE</span>')
     html_s = html_s.replace('>DETAIL</span>', '>细化 DETAIL</span>')
+    # style display names: home material switcher + gallery card titles
+    for en_name, zh_name in i18n_zh_styles.NAME_ZH.values():
+        esc = _html.escape(en_name)
+        html_s = html_s.replace(">%s</button>" % esc, ">%s</button>" % zh_name)
+        html_s = html_s.replace(
+            '<div class="nm">%s</div>' % esc,
+            '<div class="nm">%s <span style="color:var(--ink2);font-weight:400;font-size:.85em">%s</span></div>'
+            % (zh_name, esc))
     return html_s
+
+
+# ---------------- style detail pages ----------------
+import html as _html  # noqa: E402
+import i18n_zh_styles  # noqa: E402
+
+_detail_text_used = set()
+
+
+def make_zh_detail(html_s, page):
+    """Translate a built EN style-detail page into its /zh/ sibling.
+    Prompt formulas stay English on purpose — they are the reproducible input."""
+    slug = page[:-len(".html")]
+    for en, zh in i18n_zh_styles.TEXT_ZH:
+        if en in html_s:
+            _detail_text_used.add(en)
+            html_s = html_s.replace(en, zh)
+    for en, zh in i18n_zh_styles.DETAIL_CHROME_ZH + i18n_zh_styles.DETAIL_COMMON_ZH:
+        html_s = html_s.replace(en, zh)
+    # display name: <title>/og:title + h1 (EN name kept as the product name)
+    names = i18n_zh_styles.NAME_ZH.get(slug)
+    if names:
+        en_name, zh_name = names
+        esc = _html.escape(en_name)
+        html_s = html_s.replace("%s · PPT-Zen" % esc, "%s · PPT-Zen" % zh_name)
+        html_s = html_s.replace(
+            "<h1>%s</h1>" % esc,
+            '<h1>%s <span style="font-size:.55em;color:var(--ink2);font-weight:400">%s</span></h1>'
+            % (zh_name, esc))
+    # medium: chip + meta-description prefix
+    for en, zh in MEDIUM_ZH.items():
+        esc = _html.escape(en)
+        html_s = html_s.replace('<span class="chip">%s</span>' % esc,
+                                '<span class="chip">%s</span>' % zh)
+        html_s = html_s.replace('content="%s 材质配方' % esc, 'content="%s材质配方' % zh)
+    # asset + canonical/og paths
+    html_s = html_s.replace('src="img/', 'src="../img/')
+    html_s = html_s.replace('href="%s/%s">' % (BASE_URL, page), 'href="%s/zh/%s">' % (BASE_URL, page))
+    html_s = html_s.replace('content="%s/%s">' % (BASE_URL, page), 'content="%s/zh/%s">' % (BASE_URL, page))
+    html_s = html_s.replace('<html lang="en">', '<html lang="zh-CN">', 1)
+    # hreflang + detect + switcher back to EN
+    html_s = html_s.replace("</head>", hreflang(page) + "</head>", 1)
+    html_s = html_s.replace("<body>", "<body>" + DETECT.replace("%PAGE%", page), 1)
+    sw = '<a class="btn" href="/%s" onclick="%s">EN</a>' % (page, SWITCH_JS % "en")
+    return html_s.replace(GHBTN, sw + GHBTN, 1)
+
+
+def unused_detail_pairs():
+    """EN strings from TEXT_ZH that matched no page — content drifted, fix the pair."""
+    return [en for en, _ in i18n_zh_styles.TEXT_ZH if en not in _detail_text_used]
 

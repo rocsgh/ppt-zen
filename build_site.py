@@ -610,24 +610,28 @@ def build():
     }
     for p in packs:
         pages[p["slug"] + ".html"] = page_detail(p)
-    # i18n layer: /zh/ siblings of the marketing pages + switcher + auto-detect
+    # i18n layer: /zh/ siblings of every page + switcher + auto-detect
     import i18n_zh
     i18n_zh.BASE_URL = BASE_URL
     os.makedirs(os.path.join(DOCS, "zh"), exist_ok=True)
     zh_count = 0
     for fn, content in pages.items():
         if fn in i18n_zh.MARKETING:
-            open(os.path.join(DOCS, "zh", fn), "w", encoding="utf-8").write(
-                i18n_zh.make_zh(content, fn))
-            zh_count += 1
+            zh = i18n_zh.make_zh(content, fn)
             content = i18n_zh.inject_en(content, fn)
         else:
-            content = i18n_zh.inject_detail(content)
+            zh = i18n_zh.make_zh_detail(content, fn)
+            content = i18n_zh.inject_en_detail(content, fn)
+        open(os.path.join(DOCS, "zh", fn), "w", encoding="utf-8").write(zh)
+        zh_count += 1
         open(os.path.join(DOCS, fn), "w", encoding="utf-8").write(content)
+    for miss in i18n_zh.unused_detail_pairs():
+        print("WARN zh pair matched nothing (content drifted?): %s" % miss[:90])
     # sitemap + robots
     urls = ["", "method.html", "example.html", "gallery.html", "install.html"] + \
            ["zh/", "zh/method.html", "zh/example.html", "zh/gallery.html", "zh/install.html"] + \
-           [p["slug"] + ".html" for p in packs]
+           [p["slug"] + ".html" for p in packs] + \
+           ["zh/" + p["slug"] + ".html" for p in packs]
     sm = ['<?xml version="1.0" encoding="UTF-8"?>',
           '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">'] + \
          ["<url><loc>%s/%s</loc></url>" % (BASE_URL, u) for u in urls] + ["</urlset>"]

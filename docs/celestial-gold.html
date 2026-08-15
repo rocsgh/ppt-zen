@@ -162,13 +162,20 @@ tr:hover td{background:var(--panel)}
  .chain .ln{opacity:1;transform:none}
 }
 @media(prefers-contrast:more){:root{--muted:#54525a;--line:#c9c6bf;--line2:#b0ada5}}
-</style></head><body><div class="wrap"><nav><a class="mark" href="index.html"><img class="wm" src="img/logo-wordmark.png" alt="PPT-Zen"/></a>
+</style><link rel="alternate" hreflang="en" href="https://pptzen.xyz/celestial-gold.html"><link rel="alternate" hreflang="zh" href="https://pptzen.xyz/zh/celestial-gold.html"><link rel="alternate" hreflang="x-default" href="https://pptzen.xyz/celestial-gold.html"></head><body><script>(function(){try{
+var pref=localStorage.getItem('pz-lang');
+var zh=location.pathname.indexOf('/zh/')===0;
+var page='celestial-gold.html'==='index.html'?'':'celestial-gold.html';
+if(zh){if(pref==='en'){location.replace('/'+page);}}
+else{if(pref==='zh'){location.replace('/zh/'+page);}
+else if(!pref&&((navigator.language||'').toLowerCase().indexOf('zh')===0)){location.replace('/zh/'+page);}}
+}catch(e){}})();</script><div class="wrap"><nav><a class="mark" href="index.html"><img class="wm" src="img/logo-wordmark.png" alt="PPT-Zen"/></a>
 <div class="navlinks">
 <a class="nl" href="method.html">Method</a>
 <a class="nl" href="example.html">Example</a>
 <a class="nl on" href="gallery.html">Gallery</a>
 <a class="nl" href="install.html">Install</a>
-<a class="btn" href="/zh/gallery.html" onclick="localStorage.setItem('pz-lang','zh')">中文</a><a class="btn solid" id="ghbtn" href="https://github.com/rocsgh/ppt-zen">GitHub &#9733; <small id="ghstars"></small></a>
+<a class="btn" href="/zh/celestial-gold.html" onclick="localStorage.setItem('pz-lang','zh')">中文</a><a class="btn solid" id="ghbtn" href="https://github.com/rocsgh/ppt-zen">GitHub &#9733; <small id="ghstars"></small></a>
 </div></nav></div><div class="wrap d">
 <img class="hero-img" src="img/celestial-gold.jpg" alt="Celestial Gold"/>
 <h1>Celestial Gold</h1><div class="chipsrow"><span class="chip">Astronomical</span><span class="chip">deep-space</span><span class="chip">gilt</span><span class="chip">planetarium</span><span class="chip">dark</span></div>
