@@ -93,7 +93,7 @@ def parse_plan(path):
         if head.startswith("prompt:"):
             rest = line.split(":", 1)[1].strip()
             in_prompt = True
-            if rest and rest != "|":
+            if rest and not rest.startswith("|"):   # accept the |, |- and |+ block markers
                 cur["prompt"].append(rest)
         else:
             for k in ("density", "device", "text"):
@@ -106,8 +106,12 @@ def parse_plan(path):
 
 
 def image_name(i, name):
-    return (name if re.match(r"^\d+-", name) else
-            "%02d-%s" % (i, re.sub(r"[^\w-]+", "-", name).strip("-").lower() or "page")) + ".jpg"
+    # Stanza names come from a hand-edited file — slugify unconditionally so a stray
+    # path ("01-/../../x") can never write outside the slides directory.
+    name = os.path.basename(name.strip())
+    m = re.match(r"^(\d+)-(.*)$", name)
+    num, rest = (m.group(1), m.group(2)) if m else ("%02d" % i, name)
+    return "%s-%s.jpg" % (num, re.sub(r"[^\w-]+", "-", rest).strip("-").lower() or "page")
 
 
 def pack(d, pptx):
@@ -129,6 +133,12 @@ def pack(d, pptx):
         print("page %d/%d — placeholder %s" % (i, len(pages), os.path.basename(out)))
         made += 1
     print("%d placeholder(s) rendered, %d page(s) already had an image" % (made, skipped))
+    unfilled = [p["name"] for p in pages
+                if not p["prompt"] or "<" in (p["density"] + p["device"] + p["text"]) or p["prompt"].lstrip().startswith("<")]
+    if unfilled:
+        print("⚠ %d page(s) still carry the skeleton's <angle-bracket> placeholders: %s\n"
+              "  draft.pptx will assemble, but it is a smoke test, not a deliverable — fill PLAN.md first."
+              % (len(unfilled), ", ".join(unfilled)))
     sys.stdout.flush()   # assemble_pptx.py writes to the same stdout; keep the order readable
     r = subprocess.call([sys.executable, os.path.join(HERE, "assemble_pptx.py"), d, pptx])
     if r:

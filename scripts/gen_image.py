@@ -254,14 +254,17 @@ def generate(prompt, out):
 
 
 if __name__ == "__main__":
-    arg = sys.argv[1] if len(sys.argv) > 1 else "--help"
-    if arg in ("--help", "-h"):
-        print(HELP)
-        sys.exit(0)
-    if arg == "--check":
-        sys.exit(check())
-    if arg == "--check-config":
-        sys.exit(check_config())
-    if len(sys.argv) < 3:
+    # Flags only dispatch alone, so a literal prompt that happens to start with "--" still generates.
+    if len(sys.argv) <= 2:
+        arg = sys.argv[1] if len(sys.argv) == 2 else "--help"
+        if arg in ("--help", "-h"):
+            print(HELP)
+            sys.exit(0)
+        if arg == "--check":
+            sys.exit(check())
+        if arg == "--check-config":
+            sys.exit(check_config())
+    if len(sys.argv) != 3 or sys.argv[1].startswith("--"):
+        # A "--check extra" typo must not fall through to generation — that would bill an image.
         sys.exit("usage: gen_image.py \"<prompt>\" <out.jpg>   |   --check   |   --check-config   |   --help")
     generate(sys.argv[1], sys.argv[2])
