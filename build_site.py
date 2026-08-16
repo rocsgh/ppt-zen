@@ -332,6 +332,19 @@ def page_home(packs):
 <span class="ln"><span class="c1">&rarr; only holds up side by side?</span> <span class="c2">yes &rarr; DETAIL</span> <span class="c1">(2&times;2 quadrant)</span></span>
 <span class="ln"><span class="c1">&rarr; previous page was dense &rarr;</span> <span class="c3">this one breathes</span></span>
 </div>"""
+    # plain-language band under the hero — quiet on purpose: paper ground, thin rules,
+    # existing .sec/.steps/.lede chrome, no new CSS
+    mini = ('<div style="border:1px solid var(--line);border-radius:12px;padding:11px 15px;'
+            'color:var(--ink2);font-size:.92rem;line-height:1.55">'
+            '<span style="font:700 .78rem var(--mono);color:var(--acc);margin-right:8px">%s</span>%s</div>')
+    whatis = ("""
+<section class="sec" style="margin-top:40px;padding-bottom:24px;border-bottom:1px solid var(--line)">
+<div class="kick">What it is</div>
+<p class="lede" style="max-width:78ch;margin:10px 0 18px">PPT-Zen is a taste skill you install into your AI agent. You say one sentence; it decides how much each page holds, what it looks like and in which material — then renders every page as one designed image and assembles the .pptx.</p>
+<div class="steps">%s%s%s</div>
+</section>""") % (mini % ("1", "<b>Install</b> — one command"),
+                  mini % ("2", "<b>Say one sentence</b> in your agent"),
+                  mini % ("3", "<b>Get the deck</b> — designed pages, assembled .pptx"))
     steps = """
 <div class="steps">
 <div class="step"><span class="n">STEP 1</span><b>Install the skill</b><p>One command per runtime — Claude Code, Codex, Cursor, Windsurf, Hermes, OpenClaw.</p><pre>./install.sh auto   # detects your runtimes; or: claude / hermes / ... --global</pre></div>
@@ -365,6 +378,7 @@ def page_home(packs):
 </div>
 </section>
 %s
+%s
 <section class="sec"><div class="shead"><span class="num">01</span><h2>Judgment, not generation</h2></div>
 <p class="lede">Every AI PPT tool turns content into pages. PPT-Zen open-sources the part nobody else does: <b>for each page — how much should it hold, what should it look like, and on what grounds?</b> The finished deck is copyable; the chain of decisions is not.</p>
 %s
@@ -384,7 +398,7 @@ def page_home(packs):
 <pre>git clone %s
 cd ppt-zen &amp;&amp; ./install.sh auto   # detects your runtimes; or: claude / hermes / ... --global</pre>
 <p style="margin-top:16px"><a class="btn solid" href="install.html">Full install matrix</a> <a class="btn" href="%s">Open GitHub</a></p></section>
-</div>""") % (first, "".join(chips), claims, chain, steps, strip, len(packs), "".join(feat), len(packs), GH, GH)
+</div>""") % (first, "".join(chips), whatis, claims, chain, steps, strip, len(packs), "".join(feat), len(packs), GH, GH)
     js = """
 var chips=document.querySelectorAll('#swchips button'),img=document.getElementById('swimg');
 chips.forEach(function(b){var pre=new Image();pre.src=b.dataset.img;

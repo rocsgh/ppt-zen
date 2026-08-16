@@ -10,22 +10,32 @@ MARKETING = ["index.html", "method.html", "example.html", "gallery.html", "insta
 ZH = [
  # titles + meta
  ("<title>PPT-Zen — a judgment layer for AI-made slides</title>", "<title>PPT-Zen — AI 幻灯片的判断层</title>"),
- ("<title>Method · PPT-Zen</title>", "<title>方法论 · PPT-Zen</title>"),
- ("<title>Example — a 10-page deck with its judgment log · PPT-Zen</title>", "<title>案例 — 十页成片与判断日志 · PPT-Zen</title>"),
+ ("<title>Method · PPT-Zen</title>", "<title>原理 · PPT-Zen</title>"),
+ ("<title>Example — a 10-page deck with its judgment log · PPT-Zen</title>", "<title>成片 — 十页与逐页判断日志 · PPT-Zen</title>"),
  # gallery <title>/og:title handled count-agnostically in ZH_COUNT_RE
- ("<title>Install · PPT-Zen</title>", "<title>安装 · PPT-Zen</title>"),
+ ("<title>Install · PPT-Zen</title>", "<title>上手 · PPT-Zen</title>"),
  # nav
- ('>Method</a>', '>方法论</a>'),
- ('>Example</a>', '>案例</a>'),
- ('>Gallery</a>', '>画廊</a>'),
- ('>Install</a>', '>安装</a>'),
+ ('>Method</a>', '>原理</a>'),
+ ('>Example</a>', '>成片</a>'),
+ ('>Gallery</a>', '>风格库</a>'),
+ ('>Install</a>', '>上手</a>'),
+ # home section-05 heading + method-page inline link to the gallery (page references, not nav)
+ ("<h2>Install</h2>", "<h2>上手</h2>"),
+ (">gallery</a>", ">风格库</a>"),
  # home hero
  ("Open-source judgment layer &middot; Apache-2.0", "开源判断层 &middot; Apache-2.0"),
  ("One sentence in.<br/><em>Many worlds</em> out.", "一句话进。<br/><em>万千世界</em>出。"),
  ("Your agent decides how each page should be — density, device, material — then renders every slide as one designed image.",
   "你的 agent 自己决定每一页该怎么做——详略、器物、材质——然后把每一页渲染成一整张设计好的图。"),
- ('>Install</a><a class="btn" href="example.html">See a real deck</a>', '>安装</a><a class="btn" href="example.html">看一套真实成片</a>'),
+ ('>Install</a><a class="btn" href="example.html">See a real deck</a>', '>上手</a><a class="btn" href="example.html">看一套真实成片</a>'),
  ("The same idea &mdash; pick a material. Each one is a different world.", "同一个想法 —— 选一种材质，就是另一个世界。"),
+ # home "what it is" band
+ ('<div class="kick">What it is</div>', '<div class="kick">这是什么</div>'),
+ ("PPT-Zen is a taste skill you install into your AI agent. You say one sentence; it decides how much each page holds, what it looks like and in which material — then renders every page as one designed image and assembles the .pptx.",
+  "PPT-Zen 是装进你 AI agent 里的一个审美技能。你说一句话，它决定每页放多少内容、长什么样、用什么材质——然后把每一页画成一整张设计图，拼装成 .pptx 交给你。"),
+ ('<b>Install</b> — one command', '<b>装上</b>——一行命令'),
+ ('<b>Say one sentence</b> in your agent', '<b>对你的 agent 说一句话</b>'),
+ ('<b>Get the deck</b> — designed pages, assembled .pptx', '<b>拿到成片</b>——设计过的整页图，拼好的 .pptx'),
  # home claims
  ("It decides, you don't answer questions", "它来判断，你不用回答问题"),
  ("Per page it sets the density (headline vs. detail), picks the device — the argument drawn as a thing — and holds one material across the whole deck.",
@@ -34,20 +44,26 @@ ZH = [
  ("Every slide is one designed image — typography, texture and illustration in the material you chose. English and dense data render clean; you proofread each page, and a miss regenerates in one command.",
   "每一页都是一整张设计好的图——排印、质感、插画都长在你选的材质里。英文与密集数据渲染得干净；每页你都要校对一遍，出错的页一行命令单独重出。"),
  ("Open source, your image model", "开源，图像模型你自带"),
- ("Apache-2.0 judgment layer + CC-BY styles. Works with any agent that generates images, or any OpenAI-compatible endpoint. No key ships in the repo.",
+ ("Apache-2.0 judgment layer + CC-BY styles. Works with any agent that generates images, or any endpoint speaking the OpenAI images API. No key ships in the repo.",
   "判断层 Apache-2.0 + 风格 CC-BY。任何能生图的 agent，或任何实现 OpenAI 图像接口的端点都能用。仓库不带任何 key。"),
  # home sections
  ("Judgment, not generation", "判断，而不是生成"),
  ("Every AI PPT tool turns content into pages. PPT-Zen open-sources the part nobody else does: <b>for each page — how much should it hold, what should it look like, and on what grounds?</b> The finished deck is copyable; the chain of decisions is not.",
   "所有 AI PPT 工具都在做同一件事：把内容变成页面。PPT-Zen 开源的是没人做的那一层：<b>这一页——该放多少、长什么样、凭什么这么定？</b>成品谁都能截图；判断链抄不走。"),
- ("Read the method &rarr;", "读方法论 &rarr;"),
+ ("Read the method &rarr;", "看原理 &rarr;"),
  ("How it works", "怎么用"),
  ("You bring an agent and an image model. The skill brings the judgment.", "你带一个 agent 和一个图像模型，判断由这个 skill 提供。"),
  ("Install the skill</b><p>One command per runtime — Claude Code, Codex, Cursor, Windsurf, Hermes, OpenClaw.</p>",
   "装技能</b><p>每个运行时一行命令——Claude Code、Codex、Cursor、Windsurf、Hermes、OpenClaw。</p>"),
  ("./install.sh auto   # detects your runtimes; or: claude / hermes / ... --global",
   "./install.sh auto   # 探测你装了哪些运行时；或指定：claude / hermes / ... --global"),
+ # command stays a command; only the trailing comment is Chinese (matches the home page)
+ ("./install.sh auto                 # detects your runtimes; matrix below for one-by-one",
+  "./install.sh auto                 # 探测你装了哪些运行时；想逐个装看下面的矩阵"),
  ("Say one sentence</b><p>In your agent:</p>", "说一句话</b><p>在你的 agent 里：</p>"),
+ # the ask itself — Chinese is a first-class input to the skill, so these are real commands
+ ('<pre>"Make me a 10-page pitch deck\n about &lt;project&gt;, Portolan style."</pre>',
+  '<pre>「用航海图（Portolan）风格，\n 给〈你的项目〉做一套 10 页 pitch。」</pre>'),
  ("Get the deck</b><p>Plan &rarr; one image per page &rarr; proofread &rarr; assembled .pptx.</p>",
   "拿到成片</b><p>计划 &rarr; 逐页出图 &rarr; 校对 &rarr; 拼装 .pptx。</p>"),
  ("Proof — a full deck, judged page by page", "证据 —— 一整套片子，逐页判断"),
@@ -65,7 +81,7 @@ ZH = [
  ("Full install matrix", "完整安装矩阵"),
  ("Open GitHub", "打开 GitHub"),
  # example page
- ("Worked example &middot; fictional product, invented demo numbers", "完整案例 &middot; 虚构产品，数字为演示内容"),
+ ("Worked example &middot; fictional product, invented demo numbers", "完整成片 &middot; 虚构产品，数字为演示内容"),
  ("Relayboard —<br/>ten pages, one sentence.", "Relayboard ——<br/>十页，一句话。"),
  ("<b>In:</b> \"Make me a 10-page pitch deck for Relayboard, an async-standup tool, in the Portolan sea-chart style.\"",
   "<b>输入：</b>「用航海图（Portolan）风格，给异步站会工具 Relayboard 做一套 10 页 pitch。」"),
@@ -97,11 +113,11 @@ ZH = [
  ("<tr><th>Scenario</th><th>Default material</th><th>What you say</th></tr>",
   "<tr><th>场景</th><th>默认材质</th><th>你就这么说</th></tr>"),
  ("<tr><td>Fundraise / pitch</td><td>Portolan Sea Chart</td><td><code>\"Make me a 10-page pitch deck about &lt;project&gt;, Portolan style.\"</code></td></tr>",
-  "<tr><td>融资 / 路演</td><td>航海图 Portolan</td><td><code>「用航海图（Portolan）风格，给 &lt;项目&gt; 做一套 10 页 pitch。」</code></td></tr>"),
+  "<tr><td>融资 / 路演</td><td>航海图 Portolan</td><td><code>「用航海图（Portolan）风格，给〈项目〉做一套 10 页 pitch。」</code></td></tr>"),
  ("<tr><td>Consulting / quarterly review</td><td>Swiss Grid</td><td><code>\"Make me a 12-page Q3 review for &lt;team&gt;, Swiss Grid style.\"</code></td></tr>",
-  "<tr><td>咨询 / 季度复盘</td><td>瑞士网格 Swiss Grid</td><td><code>「用瑞士网格风格，给 &lt;团队&gt; 做一套 12 页 Q3 复盘。」</code></td></tr>"),
+  "<tr><td>咨询 / 季度复盘</td><td>瑞士网格 Swiss Grid</td><td><code>「用瑞士网格风格，给〈团队〉做一套 12 页 Q3 复盘。」</code></td></tr>"),
  ("<tr><td>Internal share</td><td>Letterpress Broadsheet</td><td><code>\"Make me an 8-page internal share about &lt;topic&gt;, Letterpress Broadsheet style.\"</code></td></tr>",
-  "<tr><td>内部分享</td><td>活版报纸 Letterpress Broadsheet</td><td><code>「用活版报纸风格，做一套 8 页 &lt;主题&gt; 内部分享。」</code></td></tr>"),
+  "<tr><td>内部分享</td><td>活版报纸 Letterpress Broadsheet</td><td><code>「用活版报纸风格，做一套 8 页〈主题〉内部分享。」</code></td></tr>"),
  ("Contribute a style — one folder, one PR &rarr;", "贡献一个风格——一个文件夹、一个 PR &rarr;"),
  (">All</button>", ">全部</button>"),
  ("View details &rarr;", "看详情 &rarr;"),
@@ -109,7 +125,7 @@ ZH = [
  ("One command,<br/>your runtime.", "一行命令，<br/>装进你的运行时。"),
  ("Get the repo, install the skill", "拿仓库、装技能"),
  ("<th>Runtime</th><th>Command</th><th>Installs to</th><th>Trigger</th>", "<th>运行时</th><th>命令</th><th>装到哪</th><th>触发方式</th>"),
- ("<code>/ppt-zen</code>, or just ask for a deck", "<code>/ppt-zen</code>，或直接说要做 deck"),
+ ("<code>/ppt-zen</code> or just ask for a deck", "<code>/ppt-zen</code>，或直接说要做 deck"),
  ("<td>ask for a deck</td>", "<td>直接说要做 deck</td>"),
  ("passive — auto-read", "被动——自动读取"),
  ("passive — auto-applied", "被动——自动生效"),
@@ -151,12 +167,22 @@ ZH = [
   "agent 会先写 <code>plan.md</code>（页 &middot; 详略 &middot; 器物 &middot; 逐字文案 &middot; 风格）——想过目就过目——然后逐页出图到 <code>slides/</code>。之后对着页迭代："),
  ("<b>Feed it your facts.</b> Attach an outline / metrics / links — real numbers land on the slides; anything missing shows as <code>[TO CONFIRM]</code> rather than an invented figure. When the pages read clean:",
   "<b>把真实数据喂给它。</b>附上提纲 / 指标 / 链接——真数字会上片；缺的只会显示 <code>[TO CONFIRM]</code> 占位，绝不编造。页面都校对干净之后："),
- ("# it chooses", "# 它自己选"),
- ("# single page", "# 单页也行"),
- ("# same plan, new world", "# 同一计划，换个世界"),
+ # the two ask blocks: whole <pre> swapped so the examples are Chinese sentences you can paste as-is
+ ('<pre>"Make me a 10-page pitch deck about &lt;your project&gt; with ppt-zen, in the Portolan style."\n'
+  '"Design a keynote about our Q3 results — pick a material that fits."   <span style="color:#8f8d97"># it chooses</span>\n'
+  '"One slide only: \'23 minutes to refocus\', make it land."               <span style="color:#8f8d97"># single page</span></pre>',
+  '<pre>「用航海图（Portolan）风格，给〈你的项目〉做一套 10 页 pitch。」\n'
+  '「把我们 Q3 业绩做成一套 keynote——材质你来选。」                <span style="color:#8f8d97">＃ 材质它自己选</span>\n'
+  '「就一页：『23 分钟才能重新专注』，把它做得掷地有声。」           <span style="color:#8f8d97">＃ 单页也行</span></pre>'),
+ ('<pre>"Regenerate page 6 — the numbers feel cramped."\n'
+  '"Swap the whole deck to the Kintsugi material."      <span style="color:#8f8d97"># same plan, new world</span>\n'
+  '"Page 4\'s device isn\'t readable, try a funnel."</pre>',
+  '<pre>「第 6 页重出——数字挤在一起了。」\n'
+  '「整套片换成金缮（Kintsugi）材质。」        <span style="color:#8f8d97">＃ 同一计划，换个世界</span>\n'
+  '「第 4 页的器物看不明白，换成漏斗试试。」</pre>'),
  ("Which image models work?", "哪些图像模型能用？"),
  ("Anything behind an OpenAI-compatible <code>/images/generations</code> route — OpenAI's gpt-image models, relays, gateways. The gallery samples were generated with gpt-image class models at 1536&times;1024. Non-16:9 output is center cover-cropped at assembly, so prompts keep key content clear of the top/bottom ~8%.",
-  "任何走 OpenAI 兼容 <code>/images/generations</code> 路由的——OpenAI 的 gpt-image 系、各类中转、网关。画廊样张用 gpt-image 级模型在 1536&times;1024 生成。非 16:9 的输出会在拼装时居中裁切，所以 prompt 会让关键内容避开上下约 8%。"),
+  "任何走 OpenAI 兼容 <code>/images/generations</code> 路由的——OpenAI 的 gpt-image 系、各类中转、网关。风格库里的样张用 gpt-image 级模型在 1536&times;1024 生成。非 16:9 的输出会在拼装时居中裁切，所以 prompt 会让关键内容避开上下约 8%。"),
  ("Is the .pptx editable?", "拼出来的 .pptx 能编辑吗？"),
  ("It's image-based: each slide is one full-bleed image. Present it, export PDF, or import into Keynote/Google Slides — but text isn't editable. Fixing a typo means regenerating that one page (the skill supports single-page regeneration).",
   "它是图片型的：每页一整张满幅图。放映、导 PDF、导入 Keynote/Google Slides 都行——但文字不可编辑。改错字 = 重出那一页（skill 支持单页重出）。"),
@@ -165,13 +191,13 @@ ZH = [
   "不会——这是硬规则。事实只来自你的输入；缺的会显示成 <code>[TO CONFIRM]</code> 占位。skill 只定版式，绝不编事实。"),
  ("Can I add my own style?", "我能加自己的风格吗？"),
  ("Yes — copy <code>styles/_template/</code>, fill in the STYLE.md (material recipe + a sample), open a PR. The gallery and <code>styles.json</code> regenerate automatically. Styles are CC-BY-4.0, contributions via DCO.",
-  "能——复制 <code>styles/_template/</code>，填好 STYLE.md（材质配方 + 一张样张），提 PR。画廊和 <code>styles.json</code> 自动重建。风格是 CC-BY-4.0，贡献走 DCO。"),
+  "能——复制 <code>styles/_template/</code>，填好 STYLE.md（材质配方 + 一张样张），提 PR。风格库和 <code>styles.json</code> 自动重建。风格是 CC-BY-4.0，贡献走 DCO。"),
  ("What does it cost to run?", "跑一次要花多少钱？"),
  ("Whatever your image endpoint charges — a 10-page deck is 10 images plus any single-page retries. Order of magnitude (OpenAI gpt-image list prices, mid-2026): roughly $0.06–0.25 per 1536&times;1024 image depending on quality tier, so a first pass is about $1–3; budget 20–40 minutes including proofreading. Check your own endpoint's pricing.",
   "取决于你的图像端点收费——10 页 = 10 张图，外加你选择的单页重试。量级参考（OpenAI gpt-image 官方价，2026 年中）：1536&times;1024 每张约 $0.06–0.25（看质量档），首轮 10 页约 $1–3；含逐页校对预留 20–40 分钟。以你自己端点的价格为准。"),
  ("See a finished deck first", "先看一套成片"),
  # method page
- (">The method<", ">方法论<"),
+ (">The method<", ">原理<"),
  ("A judgment layer,<br/>in five rules.", "一个判断层，<br/>五条规则讲完。"),
  ("This page is the condensed method the skill executes. The full version — with the reasoning and the models we overturned — lives in",
   "这页是 skill 实际执行的方法的浓缩版。完整版——包括推导过程和被我们推翻过的旧模型——在"),
@@ -298,12 +324,12 @@ EXTRA_ZH = [
  ("2×2 chart quadrant, one red dot", "羊皮纸上的 2×2 象限，一枚红点"),
  ("a coastline route, three harbors", "海岸线航路，三个港口"),
  ("one red route to the sunrise", "一条冲向日出的红色航线"),
- ('class="kick">Install<', 'class="kick">安装<'),
+ ('class="kick">Install<', 'class="kick">上手<'),
 ]
 
 # count-agnostic strings — the style count changes as packs are contributed
 ZH_COUNT_RE = [
- (r"Gallery — (\d+) styles · PPT-Zen", r"画廊 — \1 个风格 · PPT-Zen"),
+ (r"Gallery — (\d+) styles · PPT-Zen", r"风格库 — \1 个风格 · PPT-Zen"),
  (r"(\d+) styles &middot; every card ships a reproducible prompt formula", r"\1 个风格 &middot; 每张卡都带可复现配方"),
  (r"(\d+) materials, one line each", r"\1 个风格，每个都带配方"),
  (r"Browse all (\d+) styles &rarr;", r"浏览全部 \1 个风格 &rarr;"),

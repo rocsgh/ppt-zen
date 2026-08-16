@@ -1,6 +1,6 @@
 <!doctype html><html lang="zh-CN"><head><meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>安装 · PPT-Zen</title>
+<title>上手 · PPT-Zen</title>
 <meta name="description" content="Install the PPT-Zen skill in Claude Code, Codex CLI, Cursor, Windsurf, Hermes, OpenClaw or Copilot — one command each — and wire any OpenAI-compatible image model.">
 <link rel="canonical" href="https://pptzen.xyz/zh/install.html">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='12' fill='%2316151a'/%3E%3Ctext x='32' y='44' font-family='Georgia,serif' font-size='36' fill='%23f7f5f0' text-anchor='middle'%3E%E7%A6%85%3C/text%3E%3C/svg%3E">
@@ -171,23 +171,23 @@ else{if(pref==='zh'){location.replace('/zh/'+page);}
 else if(!pref&&((navigator.language||'').toLowerCase().indexOf('zh')===0)){location.replace('/zh/'+page);}}
 }catch(e){}})();</script><div class="wrap"><nav><a class="mark" href="index.html"><img class="wm" src="../img/logo-wordmark.png" alt="PPT-Zen"/></a>
 <div class="navlinks">
-<a class="nl" href="method.html">方法论</a>
-<a class="nl" href="example.html">案例</a>
-<a class="nl" href="gallery.html">画廊</a>
-<a class="nl on" href="install.html">安装</a>
+<a class="nl" href="method.html">原理</a>
+<a class="nl" href="example.html">成片</a>
+<a class="nl" href="gallery.html">风格库</a>
+<a class="nl on" href="install.html">上手</a>
 <a class="btn" href="/install.html" onclick="localStorage.setItem('pz-lang','en')">EN</a><a class="btn solid" id="ghbtn" href="https://github.com/rocsgh/ppt-zen/blob/master/README.zh-CN.md">GitHub &#9733; <small id="ghstars"></small></a>
 </div></nav></div><div class="wrap prose">
 <section class="hero" style="display:block;padding-bottom:0">
-<div class="kick">安装</div>
+<div class="kick">上手</div>
 <h1 style="font-size:clamp(2.2rem,5vw,3.4rem);letter-spacing:-.035em;margin:12px 0 0">一行命令，<br/>装进你的运行时。</h1>
 </section>
 <h2><span class="num">1</span>拿仓库、装技能</h2>
 <pre>git clone https://github.com/rocsgh/ppt-zen
 cd ppt-zen
-./install.sh auto                 # detects your runtimes; matrix below for one-by-one</pre>
+./install.sh auto                 # 探测你装了哪些运行时；想逐个装看下面的矩阵</pre>
 <div class="tablewrap" style="margin-top:16px"><table>
 <tr><th>运行时</th><th>命令</th><th>装到哪</th><th>触发方式</th></tr>
-<tr><td><b>Claude Code</b></td><td><code>./install.sh claude [--global]</code></td><td><code>.claude/skills/ppt-zen/</code></td><td><code>/ppt-zen</code> or just ask for a deck</td></tr>
+<tr><td><b>Claude Code</b></td><td><code>./install.sh claude [--global]</code></td><td><code>.claude/skills/ppt-zen/</code></td><td><code>/ppt-zen</code>，或直接说要做 deck</td></tr>
 <tr><td><b>OpenClaw</b></td><td><code>./install.sh openclaw [--global]</code></td><td><code>.openclaw/skills/ppt-zen/</code></td><td>直接说要做 deck</td></tr>
 <tr><td><b>Hermes</b></td><td><code>./install.sh hermes</code></td><td><code>~/.hermes/skills/creative/ppt-zen/</code></td><td>直接说要做 deck</td></tr>
 <tr><td><b>Codex CLI</b></td><td><code>./install.sh codex [--global]</code></td><td><code>AGENTS.md</code> / <code>~/.codex/AGENTS.md</code></td><td>被动——自动读取</td></tr>
@@ -216,22 +216,22 @@ python3 scripts/gen_image.py --check  # 体检：读你的配置，试生成一�
 <p><b>今天没有 key？</b>照样让它做。你会拿到一份判断包：逐页计划 + 每页一段可直接粘贴的 prompt、占位页、以及拼好的 <code>draft.pptx</code>。把任意一段 prompt 贴进你已有的出图工具，把图放回 <code>slides/</code>，重拼一次即可。key 从此只是可选的最后一步。</p>
 <h2><span class="num">3</span>做一套片——你实际要说的话</h2>
 <p>在任何项目里打开你的 agent，直接说话。一句话就能开始；剩下的它来判断，绝不会反问你版式问题：</p>
-<pre>"Make me a 10-page pitch deck about &lt;your project&gt; with ppt-zen, in the Portolan style."
-"Design a keynote about our Q3 results — pick a material that fits."   <span style="color:#8f8d97"># 它自己选</span>
-"One slide only: '23 minutes to refocus', make it land."               <span style="color:#8f8d97"># 单页也行</span></pre>
+<pre>「用航海图（Portolan）风格，给〈你的项目〉做一套 10 页 pitch。」
+「把我们 Q3 业绩做成一套 keynote——材质你来选。」                <span style="color:#8f8d97">＃ 材质它自己选</span>
+「就一页：『23 分钟才能重新专注』，把它做得掷地有声。」           <span style="color:#8f8d97">＃ 单页也行</span></pre>
 <p>agent 会先写 <code>plan.md</code>（页 &middot; 详略 &middot; 器物 &middot; 逐字文案 &middot; 风格）——想过目就过目——然后逐页出图到 <code>slides/</code>。之后对着页迭代：</p>
-<pre>"Regenerate page 6 — the numbers feel cramped."
-"Swap the whole deck to the Kintsugi material."      <span style="color:#8f8d97"># 同一计划，换个世界</span>
-"Page 4's device isn't readable, try a funnel."</pre>
+<pre>「第 6 页重出——数字挤在一起了。」
+「整套片换成金缮（Kintsugi）材质。」        <span style="color:#8f8d97">＃ 同一计划，换个世界</span>
+「第 4 页的器物看不明白，换成漏斗试试。」</pre>
 <p><b>把真实数据喂给它。</b>附上提纲 / 指标 / 链接——真数字会上片；缺的只会显示 <code>[TO CONFIRM]</code> 占位，绝不编造。页面都校对干净之后：</p>
 <pre>pip install python-pptx
 python3 scripts/assemble_pptx.py slides/ deck.pptx</pre>
 <h2><span class="num">?</span>FAQ</h2>
 <div class="faq">
-<details><summary>哪些图像模型能用？</summary><p>任何走 OpenAI 兼容 <code>/images/generations</code> 路由的——OpenAI 的 gpt-image 系、各类中转、网关。画廊样张用 gpt-image 级模型在 1536&times;1024 生成。非 16:9 的输出会在拼装时居中裁切，所以 prompt 会让关键内容避开上下约 8%。</p></details>
+<details><summary>哪些图像模型能用？</summary><p>任何走 OpenAI 兼容 <code>/images/generations</code> 路由的——OpenAI 的 gpt-image 系、各类中转、网关。风格库里的样张用 gpt-image 级模型在 1536&times;1024 生成。非 16:9 的输出会在拼装时居中裁切，所以 prompt 会让关键内容避开上下约 8%。</p></details>
 <details><summary>拼出来的 .pptx 能编辑吗？</summary><p>它是图片型的：每页一整张满幅图。放映、导 PDF、导入 Keynote/Google Slides 都行——但文字不可编辑。改错字 = 重出那一页（skill 支持单页重出）。</p></details>
 <details><summary>它会替我编数字吗？</summary><p>不会——这是硬规则。事实只来自你的输入；缺的会显示成 <code>[TO CONFIRM]</code> 占位。skill 只定版式，绝不编事实。</p></details>
-<details><summary>我能加自己的风格吗？</summary><p>能——复制 <code>styles/_template/</code>，填好 STYLE.md（材质配方 + 一张样张），提 PR。画廊和 <code>styles.json</code> 自动重建。风格是 CC-BY-4.0，贡献走 DCO。</p></details>
+<details><summary>我能加自己的风格吗？</summary><p>能——复制 <code>styles/_template/</code>，填好 STYLE.md（材质配方 + 一张样张），提 PR。风格库和 <code>styles.json</code> 自动重建。风格是 CC-BY-4.0，贡献走 DCO。</p></details>
 <details><summary>跑一次要花多少钱？</summary><p>取决于你的图像端点收费——10 页 = 10 张图，外加你选择的单页重试。量级参考（OpenAI gpt-image 官方价，2026 年中）：1536&times;1024 每张约 $0.06–0.25（看质量档），首轮 10 页约 $1–3；含逐页校对预留 20–40 分钟。以你自己端点的价格为准。</p></details>
 </div>
 <p style="margin-top:26px"><a class="btn solid" href="https://github.com/rocsgh/ppt-zen/blob/master/README.zh-CN.md">打开 GitHub</a> <a class="btn" href="example.html">先看一套成片</a></p>

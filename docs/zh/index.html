@@ -171,10 +171,10 @@ else{if(pref==='zh'){location.replace('/zh/'+page);}
 else if(!pref&&((navigator.language||'').toLowerCase().indexOf('zh')===0)){location.replace('/zh/'+page);}}
 }catch(e){}})();</script><div class="wrap"><nav><a class="mark" href="index.html"><img class="wm" src="../img/logo-wordmark.png" alt="PPT-Zen"/></a>
 <div class="navlinks">
-<a class="nl" href="method.html">方法论</a>
-<a class="nl" href="example.html">案例</a>
-<a class="nl" href="gallery.html">画廊</a>
-<a class="nl" href="install.html">安装</a>
+<a class="nl" href="method.html">原理</a>
+<a class="nl" href="example.html">成片</a>
+<a class="nl" href="gallery.html">风格库</a>
+<a class="nl" href="install.html">上手</a>
 <a class="btn" href="/" onclick="localStorage.setItem('pz-lang','en')">EN</a><a class="btn solid" id="ghbtn" href="https://github.com/rocsgh/ppt-zen/blob/master/README.zh-CN.md">GitHub &#9733; <small id="ghstars"></small></a>
 </div></nav></div><div class="wrap">
 <section class="hero">
@@ -182,7 +182,7 @@ else if(!pref&&((navigator.language||'').toLowerCase().indexOf('zh')===0)){locat
 <div class="kick">开源判断层 &middot; Apache-2.0</div>
 <h1>一句话进。<br/><em>万千世界</em>出。</h1>
 <p class="lede">你的 agent 自己决定每一页该怎么做——详略、器物、材质——然后把每一页渲染成一整张设计好的图。</p>
-<div class="hero-cta"><a class="btn solid" href="install.html">安装</a><a class="btn" href="example.html">看一套真实成片</a></div>
+<div class="hero-cta"><a class="btn solid" href="install.html">上手</a><a class="btn" href="example.html">看一套真实成片</a></div>
 </div>
 <div class="switcher">
 <div class="stage"><img id="swimg" src="../img/davinci-copperplate.jpg" alt="The same idea rendered in different materials"/></div>
@@ -191,10 +191,16 @@ else if(!pref&&((navigator.language||'').toLowerCase().indexOf('zh')===0)){locat
 </div>
 </section>
 
+<section class="sec" style="margin-top:40px;padding-bottom:24px;border-bottom:1px solid var(--line)">
+<div class="kick">这是什么</div>
+<p class="lede" style="max-width:78ch;margin:10px 0 18px">PPT-Zen 是装进你 AI agent 里的一个审美技能。你说一句话，它决定每页放多少内容、长什么样、用什么材质——然后把每一页画成一整张设计图，拼装成 .pptx 交给你。</p>
+<div class="steps"><div style="border:1px solid var(--line);border-radius:12px;padding:11px 15px;color:var(--ink2);font-size:.92rem;line-height:1.55"><span style="font:700 .78rem var(--mono);color:var(--acc);margin-right:8px">1</span><b>装上</b>——一行命令</div><div style="border:1px solid var(--line);border-radius:12px;padding:11px 15px;color:var(--ink2);font-size:.92rem;line-height:1.55"><span style="font:700 .78rem var(--mono);color:var(--acc);margin-right:8px">2</span><b>对你的 agent 说一句话</b></div><div style="border:1px solid var(--line);border-radius:12px;padding:11px 15px;color:var(--ink2);font-size:.92rem;line-height:1.55"><span style="font:700 .78rem var(--mono);color:var(--acc);margin-right:8px">3</span><b>拿到成片</b>——设计过的整页图，拼好的 .pptx</div></div>
+</section>
+
 <div class="claims">
 <div class="claim"><b>它来判断，你不用回答问题</b><span>它逐页决定详略（提纲挈领还是细化）、想出器物——把这页的论点画成一个东西——并且全片只用一种材质。</span></div>
 <div class="claim"><b>整页出图，经得起看</b><span>每一页都是一整张设计好的图——排印、质感、插画都长在你选的材质里。英文与密集数据渲染得干净；每页你都要校对一遍，出错的页一行命令单独重出。</span></div>
-<div class="claim"><b>开源，图像模型你自带</b><span>Apache-2.0 judgment layer + CC-BY styles. Works with any agent that generates images, or any endpoint speaking the OpenAI images API. No key ships in the repo.</span></div>
+<div class="claim"><b>开源，图像模型你自带</b><span>判断层 Apache-2.0 + 风格 CC-BY。任何能生图的 agent，或任何实现 OpenAI 图像接口的端点都能用。仓库不带任何 key。</span></div>
 </div>
 <section class="sec"><div class="shead"><span class="num">01</span><h2>判断，而不是生成</h2></div>
 <p class="lede">所有 AI PPT 工具都在做同一件事：把内容变成页面。PPT-Zen 开源的是没人做的那一层：<b>这一页——该放多少、长什么样、凭什么这么定？</b>成品谁都能截图；判断链抄不走。</p>
@@ -207,13 +213,13 @@ else if(!pref&&((navigator.language||'').toLowerCase().indexOf('zh')===0)){locat
 <span class="ln"><span class="c1">&rarr; only holds up side by side?</span> <span class="c2">yes &rarr; DETAIL</span> <span class="c1">(2&times;2 quadrant)</span></span>
 <span class="ln"><span class="c1">&rarr; previous page was dense &rarr;</span> <span class="c3">this one breathes</span></span>
 </div>
-<p style="margin-top:14px"><a class="morelink" href="method.html">读方法论 &rarr;</a></p></section>
+<p style="margin-top:14px"><a class="morelink" href="method.html">看原理 &rarr;</a></p></section>
 <section class="sec"><div class="shead"><span class="num">02</span><h2>怎么用</h2></div>
 <p class="lede">你带一个 agent 和一个图像模型，判断由这个 skill 提供。</p>
 <div class="steps">
 <div class="step"><span class="n">STEP 1</span><b>装技能</b><p>每个运行时一行命令——Claude Code、Codex、Cursor、Windsurf、Hermes、OpenClaw。</p><pre>./install.sh auto   # 探测你装了哪些运行时；或指定：claude / hermes / ... --global</pre></div>
-<div class="step"><span class="n">STEP 2</span><b>说一句话</b><p>在你的 agent 里：</p><pre>"Make me a 10-page pitch deck
- about &lt;project&gt;, Portolan style."</pre></div>
+<div class="step"><span class="n">STEP 2</span><b>说一句话</b><p>在你的 agent 里：</p><pre>「用航海图（Portolan）风格，
+ 给〈你的项目〉做一套 10 页 pitch。」</pre></div>
 <div class="step"><span class="n">STEP 3</span><b>拿到成片</b><p>计划 &rarr; 逐页出图 &rarr; 校对 &rarr; 拼装 .pptx。</p><pre>python3 scripts/assemble_pptx.py \
   slides/ deck.pptx</pre></div>
 </div></section>
@@ -225,7 +231,7 @@ else if(!pref&&((navigator.language||'').toLowerCase().indexOf('zh')===0)){locat
 <p class="lede">每个风格都带一条可复现的 prompt 配方。想贡献自己的？一个文件夹、一个 PR。</p>
 <div class="grid"><a class="card" href="davinci-copperplate.html"><div class="ph"><img loading="lazy" src="../img/davinci-copperplate.jpg" alt="Da Vinci Copperplate"/></div><div class="body"><div class="nm">达芬奇铜版 <span style="color:var(--ink2);font-weight:400;font-size:.85em">Da Vinci Copperplate</span></div><div class="sub">达芬奇铜版</div></div></a><a class="card" href="portolan.html"><div class="ph"><img loading="lazy" src="../img/portolan.jpg" alt="Portolan Sea Chart"/></div><div class="body"><div class="nm">波特兰航海图 <span style="color:var(--ink2);font-weight:400;font-size:.85em">Portolan Sea Chart</span></div><div class="sub">航海图</div></div></a><a class="card" href="cinema-wongkarwai.html"><div class="ph"><img loading="lazy" src="../img/cinema-wongkarwai.jpg" alt="Neon Nocturne"/></div><div class="body"><div class="nm">霓虹夜曲 <span style="color:var(--ink2);font-weight:400;font-size:.85em">Neon Nocturne</span></div><div class="sub">电影</div></div></a><a class="card" href="cinema-nolan.html"><div class="ph"><img loading="lazy" src="../img/cinema-nolan.jpg" alt="Cold Monument"/></div><div class="body"><div class="nm">冷峻纪念碑 <span style="color:var(--ink2);font-weight:400;font-size:.85em">Cold Monument</span></div><div class="sub">电影</div></div></a><a class="card" href="cinema-wesanderson.html"><div class="ph"><img loading="lazy" src="../img/cinema-wesanderson.jpg" alt="Symmetric Pastel"/></div><div class="body"><div class="nm">对称粉彩 <span style="color:var(--ink2);font-weight:400;font-size:.85em">Symmetric Pastel</span></div><div class="sub">电影</div></div></a><a class="card" href="kintsugi.html"><div class="ph"><img loading="lazy" src="../img/kintsugi.jpg" alt="Kintsugi"/></div><div class="body"><div class="nm">金缮 <span style="color:var(--ink2);font-weight:400;font-size:.85em">Kintsugi</span></div><div class="sub">陶瓷</div></div></a><a class="card" href="stele-rubbing.html"><div class="ph"><img loading="lazy" src="../img/stele-rubbing.jpg" alt="Stele Rubbing"/></div><div class="body"><div class="nm">碑拓 <span style="color:var(--ink2);font-weight:400;font-size:.85em">Stele Rubbing</span></div><div class="sub">拓片</div></div></a><a class="card" href="swiss-grid.html"><div class="ph"><img loading="lazy" src="../img/swiss-grid.jpg" alt="Swiss Grid"/></div><div class="body"><div class="nm">瑞士网格 <span style="color:var(--ink2);font-weight:400;font-size:.85em">Swiss Grid</span></div><div class="sub">现代</div></div></a></div>
 <p><a class="morelink" href="gallery.html">浏览全部 45 个风格 &rarr;</a></p></section>
-<section class="sec"><div class="shead"><span class="num">05</span><h2>Install</h2></div>
+<section class="sec"><div class="shead"><span class="num">05</span><h2>上手</h2></div>
 <p class="lede">每个运行时一行命令。仓库才是产品——官网只是带你逛逛。</p>
 <pre>git clone https://github.com/rocsgh/ppt-zen
 cd ppt-zen &amp;&amp; ./install.sh auto   # 探测你装了哪些运行时；或指定：claude / hermes / ... --global</pre>

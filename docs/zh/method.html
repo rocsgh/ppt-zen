@@ -1,6 +1,6 @@
 <!doctype html><html lang="zh-CN"><head><meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>方法论 · PPT-Zen</title>
+<title>原理 · PPT-Zen</title>
 <meta name="description" content="The condensed judgment method: one density test, four axes, the device, one material per deck, form never facts.">
 <link rel="canonical" href="https://pptzen.xyz/zh/method.html">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='12' fill='%2316151a'/%3E%3Ctext x='32' y='44' font-family='Georgia,serif' font-size='36' fill='%23f7f5f0' text-anchor='middle'%3E%E7%A6%85%3C/text%3E%3C/svg%3E">
@@ -171,14 +171,14 @@ else{if(pref==='zh'){location.replace('/zh/'+page);}
 else if(!pref&&((navigator.language||'').toLowerCase().indexOf('zh')===0)){location.replace('/zh/'+page);}}
 }catch(e){}})();</script><div class="wrap"><nav><a class="mark" href="index.html"><img class="wm" src="../img/logo-wordmark.png" alt="PPT-Zen"/></a>
 <div class="navlinks">
-<a class="nl on" href="method.html">方法论</a>
-<a class="nl" href="example.html">案例</a>
-<a class="nl" href="gallery.html">画廊</a>
-<a class="nl" href="install.html">安装</a>
+<a class="nl on" href="method.html">原理</a>
+<a class="nl" href="example.html">成片</a>
+<a class="nl" href="gallery.html">风格库</a>
+<a class="nl" href="install.html">上手</a>
 <a class="btn" href="/method.html" onclick="localStorage.setItem('pz-lang','en')">EN</a><a class="btn solid" id="ghbtn" href="https://github.com/rocsgh/ppt-zen/blob/master/README.zh-CN.md">GitHub &#9733; <small id="ghstars"></small></a>
 </div></nav></div><div class="wrap prose">
 <section class="hero" style="display:block;padding-bottom:0">
-<div class="kick">方法论</div>
+<div class="kick">原理</div>
 <h1 style="font-size:clamp(2.2rem,5vw,3.4rem);letter-spacing:-.035em;line-height:1.02;margin:12px 0 0">一个判断层，<br/>五条规则讲完。</h1>
 <p class="lede" style="max-width:60ch;font-size:1.1rem;color:var(--ink2);margin-top:16px">这页是 skill 实际执行的方法的浓缩版。完整版——包括推导过程和被我们推翻过的旧模型——在 <a href="https://github.com/rocsgh/ppt-zen/blob/master/SKILL.md" style="text-decoration:underline">SKILL.md</a> and <a href="https://github.com/rocsgh/ppt-zen/blob/master/DESIGN.md" style="text-decoration:underline">DESIGN.md</a>.</p>
 </section>
@@ -195,7 +195,7 @@ else if(!pref&&((navigator.language||'').toLowerCase().indexOf('zh')===0)){locat
 <h2><span class="num">3</span>器物——把论点画出来</h2>
 <p>材质管「用什么做的」，骨架管「画面怎么切」——它们都不管<i>画什么</i>。器物补上这个空档：「一个分数」画成一把刻度尺；「只问一次靠运气」画成散开又收敛的点阵；「AI 只报两个名字」画成一个漏斗。判据：<b>看着这个东西，能不能猜出这页在说什么？</b>一页只有一件主器物——两件互相抢就等于没有。而且插画是量级不是开关：边饰习作、排印即画面、替代一句话的小记号、整页主器物，可以叠。</p>
 <h2><span class="num">4</span>材质——一套片一个世界</h2>
-<p>材质是一套片的身份：骨架和器物逐页变，材质不动。选材质分三层——<b>介质</b>（工艺本身）、<b>手笔</b>（谁的处理方式）、<b>世界</b>（整套片住在什么场景里）。 <a href="gallery.html" style="text-decoration:underline">gallery</a> 里每个风格都带可复现配方，<code>styles.json</code> 让 agent 能把风格名确定性解析到配方。</p>
+<p>材质是一套片的身份：骨架和器物逐页变，材质不动。选材质分三层——<b>介质</b>（工艺本身）、<b>手笔</b>（谁的处理方式）、<b>世界</b>（整套片住在什么场景里）。 <a href="gallery.html" style="text-decoration:underline">风格库</a> 里每个风格都带可复现配方，<code>styles.json</code> 让 agent 能把风格名确定性解析到配方。</p>
 <h2><span class="num">5</span>只定版式，绝不编事实</h2>
 <p>判断层只管页面长什么样——绝不管它声称什么。skill 的硬规则：<b>不编造任何指标、引语、价格、日期、名字。</b>事实只来自你的输入；缺的变成可见的 <code>[TO CONFIRM]</code> 占位。一页配着编造数字的漂亮幻灯片是负债，不是功能。</p>
 <p style="margin-top:30px"><a class="btn solid" href="install.html">装技能</a> <a class="btn" href="example.html">看它的成品</a></p>

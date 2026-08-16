@@ -224,10 +224,10 @@ DETAIL_CHROME_ZH = [
 # this subset; the full marketing ZH list must not run on detail pages, where
 # loose phrases could collide with recipe text)
 DETAIL_COMMON_ZH = [
- (">Method</a>", ">方法论</a>"),
- (">Example</a>", ">案例</a>"),
- (">Gallery</a>", ">画廊</a>"),
- (">Install</a>", ">安装</a>"),
+ (">Method</a>", ">原理</a>"),
+ (">Example</a>", ">成片</a>"),
+ (">Gallery</a>", ">风格库</a>"),
+ (">Install</a>", ">上手</a>"),
  ("a judgment layer for AI-made slides", "AI 幻灯片的判断层"),
  ("Apache-2.0 (judgment layer) &middot; CC-BY-4.0 (styles) &middot; inspired by <i>Presentation Zen</i>",
   "判断层 Apache-2.0 &middot; 风格 CC-BY-4.0 &middot; 受《演说之禅》启发"),
