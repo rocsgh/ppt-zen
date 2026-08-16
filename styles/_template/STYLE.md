@@ -6,7 +6,7 @@ slug: example-style              # 文件夹名(小写-连字符)，须与目录
 medium: 介质名                    # 介质(what it's made of): 电影 / 航海图 / 达芬奇铜版 / 青花瓷 …
 hand: ""                         # 手笔(可选, master hand): e.g. Christopher Nolan / Denis Villeneuve
 world: ""                        # 世界(可选, the setting the audience enters)
-tags: [dark, cinematic]          # 标签，用于画廊筛选
+tags: [dark, cinematic]          # 标签，用于风格库筛选
 author: your-handle              # 贡献者
 license: CC-BY-4.0               # 内容许可(固定 CC-BY-4.0)
 axes:                            # 四轴里"这个风格"固定的两轴(详略/器物逐页由判断层跑)

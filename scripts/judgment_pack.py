@@ -2,8 +2,9 @@
 # -*- coding: utf-8 -*-
 """The dry-run judgment pack, in one command — the no-key path, end to end.
 
-PLAN.md is the deliverable: one stanza per page carrying the judgment (density,
-device, verbatim text) plus a complete ready-to-paste image prompt. This script
+PLAN.md is the deliverable — and the deck's only plan file: one stanza per page
+carrying the judgment (why, density, device, verbatim text) plus a complete
+ready-to-paste image prompt. This script
 writes the skeleton and turns a filled-in PLAN.md into placeholder pages and a
 draft.pptx you can walk through today. The agent still authors the content; this
 only moves the files.
@@ -22,7 +23,8 @@ sys.path.insert(0, HERE)
 HEADER = """# Judgment pack — %(n)d pages
 style: %(style)s
 
-One stanza per page, in reading order. `density` is HEADLINE or DETAIL; `device` is
+One stanza per page, in reading order. `why` is the one-line grounds for the page's
+call (optional — this is the judgment log); `density` is HEADLINE or DETAIL; `device` is
 the page's argument drawn as a thing (or `none`); `text` is the verbatim on-slide
 copy; `prompt` is the complete image prompt, indented, ready to paste into any image
 tool as-is. The `##` line names the file the page renders to (`NN-slug.jpg`) — keep
@@ -37,6 +39,7 @@ images are left alone.
 
 STANZA = """
 ## %(name)s
+why: <one line — the grounds for this page's density/device>
 density: HEADLINE
 device: <this page's argument, drawn as one thing — or: none>
 text: <the exact words to render on this page, verbatim>
@@ -72,12 +75,15 @@ def init(n, style, out, self_path):
 
 
 def parse_plan(path):
-    """Stanzas are `## name` + key: value lines + an indented `prompt: |` block."""
+    """Stanzas are `## name` + key: value lines + an indented `prompt: |` block.
+
+    `why` is the optional judgment-log line: parsed so it never leaks into another
+    field, not used for rendering."""
     pages, cur, in_prompt = [], None, False
     for raw in open(path, encoding="utf-8"):
         line = raw.rstrip("\n")
         if line.startswith("## "):
-            cur = {"name": line[3:].strip(), "density": "", "device": "", "text": "", "prompt": []}
+            cur = {"name": line[3:].strip(), "why": "", "density": "", "device": "", "text": "", "prompt": []}
             pages.append(cur)
             in_prompt = False
             continue
@@ -96,7 +102,7 @@ def parse_plan(path):
             if rest and not rest.startswith("|"):   # accept the |, |- and |+ block markers
                 cur["prompt"].append(rest)
         else:
-            for k in ("density", "device", "text"):
+            for k in ("why", "density", "device", "text"):
                 if head.startswith(k + ":"):
                     cur[k] = line.split(":", 1)[1].strip()
                     break
@@ -134,7 +140,7 @@ def pack(d, pptx):
         made += 1
     print("%d placeholder(s) rendered, %d page(s) already had an image" % (made, skipped))
     unfilled = [p["name"] for p in pages
-                if not p["prompt"] or "<" in (p["density"] + p["device"] + p["text"]) or p["prompt"].lstrip().startswith("<")]
+                if not p["prompt"] or "<" in (p["why"] + p["density"] + p["device"] + p["text"]) or p["prompt"].lstrip().startswith("<")]
     if unfilled:
         print("⚠ %d page(s) still carry the skeleton's <angle-bracket> placeholders: %s\n"
               "  draft.pptx will assemble, but it is a smoke test, not a deliverable — fill PLAN.md first."

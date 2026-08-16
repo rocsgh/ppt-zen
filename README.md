@@ -69,7 +69,7 @@ None of these rules were invented at a desk — they were ground out of dozens o
 
 ## From one sentence to a finished deck
 
-1. **Page plan** — it first writes `plan.md`: density, skeleton and device for every page, as a checklist. This is its judgment log; you can edit it before any image is made;
+1. **Page plan** — it first writes `slides/PLAN.md`: one stanza per page with density, skeleton, device, the verbatim text and the full image prompt. This is its judgment log; you can edit it before any image is made;
 2. **Material lock** — your named style (or its pick) becomes the prompt formula for the whole deck;
 3. **Page-by-page generation** — one self-contained full-page prompt per slide, painted as a 16:9 image;
 4. **QC** — every frame inspected; pseudo-glyphs, typos and broken compositions get a single-page redo (~2 min per page, never the whole deck);
@@ -80,7 +80,7 @@ None of these rules were invented at a desk — they were ground out of dozens o
 ## What you get
 
 - `slides/01.jpg … NN.jpg` — one full-image, 16:9 slide per page
-- `plan.md` — the page plan: what each page is and why
+- `slides/PLAN.md` — the page plan: what each page is and why
 - `deck.pptx` — the assembled deck; PDF / Keynote / Google Slides import the same full-bleed images
 
 It is **not** a hosted button — it's a skill your agent runs plus two small scripts, so it rides on your own models and keys, engine-agnostic.
@@ -104,7 +104,7 @@ python3 scripts/gen_image.py --check  # doctor: config + one test image, before 
 
 # 3. in your agent, one sentence:
 #    "Make me a 10-page pitch deck about <your project> with ppt-zen, in the Portolan style."
-#    -> it plans the pages (plan.md), then generates one image per page into slides/
+#    -> it plans the pages (slides/PLAN.md), then generates one image per page into slides/
 
 # 4. assemble into an image-based .pptx (non-16:9 images are center cover-cropped)
 pip install python-pptx

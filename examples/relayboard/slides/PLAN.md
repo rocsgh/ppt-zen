@@ -1,10 +1,11 @@
 # Judgment pack — Relayboard, dark editorial edition (10 pages)
 style: bespoke — the dark-editorial material below is the deck's own; the gallery packs in styles.json work the same way
 
-One stanza per page, in reading order. `density` is HEADLINE or DETAIL; `device` is the
-page's argument drawn as a thing; `text` is the verbatim on-slide copy; `prompt` is the
-complete image prompt — exactly what produced the image of the same name in this folder,
-ready to paste into any image tool. The `##` line names the page's file.
+One stanza per page, in reading order. `why` is the grounds for the density call; `density`
+is HEADLINE or DETAIL; `device` is the page's argument drawn as a thing; `text` is the
+verbatim on-slide copy; `prompt` is the complete image prompt — exactly what produced the
+image of the same name in this folder, ready to paste into any image tool. The `##` line
+names the page's file.
 
 This is the artifact PPT-Zen hands you when there's no image endpoint: the judgment ships
 first, the pixels follow. Re-render or extend it with
@@ -17,6 +18,7 @@ The same prompts live in `gen.py`, which regenerates the images against your own
 > Relayboard is fictional; every metric below is invented demo content.
 
 ## 01-cover
+why: a name is sayable in a line
 density: HEADLINE
 device: a single glowing coral signal node with soft concentric rings radiating outward, lower-right
 text: large title 'Relayboard' top-left; below it, smaller 'Async standup that respects deep work.'
@@ -34,6 +36,7 @@ prompt: |
             correctly spelled.
 
 ## 02-problem
+why: one claim
 density: HEADLINE
 device: one clean thin horizontal focus line that shatters/breaks at a single point mid-frame
 text: a single centered line 'Standups interrupt the people doing the work.'
@@ -49,6 +52,7 @@ prompt: |
             correctly spelled.
 
 ## 03-cost
+why: one number
 density: HEADLINE
 device: a huge coral-and-white number as the hero, with a thin line-art hourglass at the side
 text: enormous '23 min' centered; below it, smaller 'to refocus after a single interruption.'
@@ -64,6 +68,7 @@ prompt: |
             correctly spelled.
 
 ## 04-product
+why: one promise
 density: HEADLINE
 device: a clean minimalist card/tile catching an incoming signal line from the side
 text: large 'The standup comes to you.' left; small 'Relayboard' as a mark top-left.
@@ -79,6 +84,7 @@ prompt: |
             correctly spelled.
 
 ## 05-how
+why: three steps only mean something side by side
 density: DETAIL
 device: three simple line-art nodes connected left-to-right by a thin coral line (a 3-step flow)
 text: three short labels under the nodes: '1 Post async' '2 Blockers surface' '3 Only who's needed syncs'. A small heading top-left 'How it works'.
@@ -96,6 +102,7 @@ prompt: |
             correctly spelled.
 
 ## 06-traction
+why: three metrics read together
 density: DETAIL
 device: a thin coral line rising steadily from lower-left to upper-right
 text: heading top-left 'Traction'; three numbers along the top: '340 teams', '$28k MRR', '+22% MoM'.
@@ -112,6 +119,7 @@ prompt: |
             correctly spelled.
 
 ## 07-pricing
+why: tiers exist to be compared
 density: DETAIL
 device: three stacked minimalist tiers/blocks ascending in height
 text: heading 'Pricing'; three tier labels: 'Free', 'Team $6 / seat', 'Scale $12 / seat'.
@@ -127,6 +135,7 @@ prompt: |
             correctly spelled.
 
 ## 08-competition
+why: a position only means something against the axes
 density: DETAIL
 device: a clean 2x2 quadrant, thin white axes, one coral dot in the top-right cell
 text: axis ends labeled 'sync' (left) 'async' (right) and 'heavy' (bottom) 'lightweight' (top); the coral dot labeled 'Relayboard'. Small heading top-left 'Where we sit'.
@@ -143,6 +152,7 @@ prompt: |
             correctly spelled.
 
 ## 09-roadmap
+why: a sequence you scan
 density: DETAIL
 device: a thin horizontal timeline with three small coral milestone dots
 text: heading 'Roadmap'; three milestone labels: 'Now Async standup', 'Q3 Blocker routing', 'Q4 Integrations'.
@@ -159,6 +169,7 @@ prompt: |
             correctly spelled.
 
 ## 10-ask
+why: one line to land on
 density: HEADLINE
 device: a single thin coral arrow sweeping toward a bright horizon line, right side
 text: large centered-left 'Raising $1.5M to give every team its focus back.'

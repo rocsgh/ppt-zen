@@ -37,7 +37,9 @@ pptxgenjs, HTML/CSS pages, template libraries, or other PPT workflows. The full 
    tool, or `scripts/gen_image.py --check`, which generates **one billable image** on the user's
    endpoint — say so; `--check-config` checks config alone for free. Never open a ten-page run on
    an unverified endpoint)
-   → plan.md (page · role · density · device · exact text · style slug) → one image per page into
+   → `slides/PLAN.md` — the deck's **only** plan file: one `## NN-slug` stanza per page carrying
+   optional `why` · density · device · verbatim text · the complete ready-to-paste image prompt,
+   under a header naming the style slug and the language → one image per page into
    `slides/NN.jpg` (agent image tool, or `scripts/gen_image.py` with `.env` from `.env.example`)
    → proofread every character → assemble with `scripts/assemble_pptx.py slides/ deck.pptx`
    (image-based .pptx; text not editable afterwards).
@@ -49,9 +51,10 @@ pptxgenjs, HTML/CSS pages, template libraries, or other PPT workflows. The full 
    the full plan first, and only when page 1 is about to render ask once: paste a key (+ base URL
    if it's a relay — templates in `references/providers.md`), or say "placeholders". A pasted key:
    *you* write `<skill_dir>/.env`, run `--check`, continue — never send the user to edit files.
-   "Placeholders" → the **dry-run judgment pack** — do NOT abort. It is one command:
-   `scripts/judgment_pack.py --init <N> --style <slug>` writes the `slides/PLAN.md` skeleton, you
-   fill in every stanza (density · device · verbatim text · the complete ready-to-paste prompt),
+   "Placeholders" → the **dry-run judgment pack** — do NOT abort. The plan you already wrote **is**
+   the pack, and one command drives it: `scripts/judgment_pack.py --init <N> --style <slug>`
+   writes that same `slides/PLAN.md` skeleton if you haven't written it yet, you
+   fill in every stanza (why · density · device · verbatim text · the complete ready-to-paste prompt),
    and `scripts/judgment_pack.py slides` renders the placeholders and assembles `draft.pptx`,
    skipping any page that already has an image. Then tell the user to paste any prompt card into
    any image tool and drop the result into `slides/` over the matching placeholder. The `.env`

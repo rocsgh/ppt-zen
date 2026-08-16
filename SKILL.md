@@ -95,7 +95,8 @@ The key ask should feel like a step inside the work, not a gate in front of it. 
 
 If they'd rather not configure anything now → the **dry-run judgment pack** (§8, step 2b), which
 has one command: `python3 <skill_dir>/scripts/judgment_pack.py --init <N> --style <slug>` writes
-the `slides/PLAN.md` skeleton, you fill in every stanza (that authoring *is* the judgment), and
+the `slides/PLAN.md` skeleton (the same one plan file step 1 writes — there is no second plan
+file), you fill in every stanza (that authoring *is* the judgment), and
 `python3 <skill_dir>/scripts/judgment_pack.py slides` renders the placeholders and assembles
 `draft.pptx`. The deck's judgment still gets made; only the pixels wait.
 
@@ -194,7 +195,8 @@ presented as true; a beautiful slide with a made-up "$28k MRR" is a liability, n
   user attached or the conversation already contains. If a data page has no source, it ships with
   placeholders — a complete *structural* draft the user fills in, not a fact-ready deck.
 - **Research mode (only if your runtime can browse and the user asked for it):** you may gather
-  facts, but every claim gets its source recorded in `plan.md` next to the page that uses it.
+  facts, but every claim gets its source recorded in `slides/PLAN.md`, in the stanza of the page
+  that uses it (the `why:` line is the place for it).
 The one-sentence promise is about *form* — the user never answers layout questions. It is not a
 license to hallucinate content.
 
@@ -257,10 +259,17 @@ Dense/text-heavy pages: generate at higher resolution than single-word pages.
    it silently (`--check-config` checks the config alone and costs nothing).
    If it fails: **stop** and walk the user through the fix (§0.1 — the 30-second `.env` setup, the
    provider templates, or the dry-run pack). Do not start generating and hope.
-1. **Plan** — write `plan.md`: one row per page with `role · density · device · exact text · style_slug`,
-   plus a header `language:` line. **On-slide text defaults to the language the user is working in** —
+1. **Plan** — write `slides/PLAN.md`. **This is the deck's one and only plan file** — never write a
+   second plan anywhere: one `## NN-slug` stanza per page, in reading order, each carrying
+   `why:` (optional — the grounds for this page's density/device call) · `density:` (HEADLINE or
+   DETAIL) · `device:` · `text:` (the verbatim on-slide copy) · `prompt:` (the complete
+   ready-to-paste image prompt, indented under `prompt: |`, composed per §6), plus a header naming
+   the resolved `style:` slug and a `language:` line. Want the skeleton written for you:
+   `python3 <skill_dir>/scripts/judgment_pack.py --init <N> --style <slug>`.
+   **On-slide text defaults to the language the user is working in** —
    a Chinese conversation gets a Chinese deck unless they ask otherwise (the demo decks being English
-   does not make English the default). This is the judgment log (the part nobody can screenshot).
+   does not make English the default). This file is the judgment log (the part nobody can
+   screenshot) **and** the prompt pack step 2b renders from — one file, both jobs.
    Decide material once, up front.
 2. **Generate** — one image per page into `slides/NN.jpg`, using the agent's image tool or
    `python3 <skill_dir>/scripts/gen_image.py`. Use deterministic filenames; regenerate a single
@@ -278,9 +287,9 @@ Dense/text-heavy pages: generate at higher resolution than single-word pages.
      ("pages 1–4 already generated, resuming at 5"). Only regenerate an existing page when the
      user asked for that page.
 2b. **No image path? Ship the judgment pack instead** (§0.1 — do *not* abort the task).
-   One command drives it; you still write every word of the judgment:
-   - `python3 <skill_dir>/scripts/judgment_pack.py --init <N> --style <slug>` writes the
-     `slides/PLAN.md` skeleton. **Fill in every stanza** — density, device, verbatim text, and
+   The plan from step 1 **is** the pack — same `slides/PLAN.md`, nothing to convert:
+   - Not written yet? `python3 <skill_dir>/scripts/judgment_pack.py --init <N> --style <slug>`
+     writes the skeleton. **Fill in every stanza** — density, device, verbatim text, and
      the **complete ready-to-paste image prompt** (the chosen pack's SURFACE block verbatim, plus
      SKELETON / DEVICE / TEXT / CRITICAL). A skeleton left as-is is not a deliverable.
    - `python3 <skill_dir>/scripts/judgment_pack.py slides` then renders one placeholder per page

@@ -10,7 +10,7 @@
   <a href="https://github.com/rocsgh/ppt-zen/stargazers"><img src="https://img.shields.io/github/stars/rocsgh/ppt-zen?style=social" alt="stars"></a>
 </p>
 
-<p align="center"><b>🖼 <a href="https://pptzen.xyz">在线画廊 →</a></b></p>
+<p align="center"><b>🖼 <a href="https://pptzen.xyz">在线风格库 →</a></b></p>
 
 <p align="center">
   <img src="assets/hero-portolan.jpg" width="32%"/>
@@ -38,7 +38,7 @@ PPT-Zen 是一个装进你 AI 助手里的**做 PPT 技能**（支持 Claude Cod
 市面上的 AI PPT 是"选个模板、往文字框里填字"——底子还是办公软件，一眼看出来。PPT-Zen 每一页由会画字的图像模型**一次画成**：背景质感、文字排印、插画、装饰边框是同一幅画的有机部分，光影和纹理贯穿整页。这是"设计师画了一页"和"软件排了一页"的差别。
 
 **2. 45 种材质世界，整套统一得像一部片子。**
-古航海图的羊皮纸与矿物水彩、达芬奇手稿的铁胆墨水、诺兰电影的冷峻光影、水墨的浓淡枯润、18 世纪建国文书的蜡封与花体字……[画廊](https://pptzen.xyz)里 45 种任选。材质**全片只选一次**，从封面到尾页都是同一个世界——翻十页，观众始终认得这是同一部作品，而不是十张风格漂移的图。
+古航海图的羊皮纸与矿物水彩、达芬奇手稿的铁胆墨水、诺兰电影的冷峻光影、水墨的浓淡枯润、18 世纪建国文书的蜡封与花体字……[风格库](https://pptzen.xyz)里 45 种任选。材质**全片只选一次**，从封面到尾页都是同一个世界——翻十页，观众始终认得这是同一部作品，而不是十张风格漂移的图。
 
 **3. 中文真实可读，不出"伪汉字"。**
 全图 PPT 最常见的翻车是文字画糊。PPT-Zen 依赖会写字的图像模型（gpt-image 系），prompt 里写死每一处文字的确切字符，出图后**逐张质检、标题逐字校对**——伪汉字、自创字直接重出。中文楷书标题在羊皮纸上是真的楷书，不是像素浆糊。
@@ -69,7 +69,7 @@ PPT-Zen 是一个装进你 AI 助手里的**做 PPT 技能**（支持 Claude Cod
 
 ## 从一句话到成片，中间发生了什么
 
-1. **页面计划**：先产出 `plan.md`——每页的详略、构图、插画写成清单，这是它的"判断日志"，你可以在出图前改；
+1. **页面计划**：先产出 `slides/PLAN.md`——每页一段，写清详略、构图、插画、逐字文案和完整出图 prompt，这是它的"判断日志"，你可以在出图前改；
 2. **选材质**：按你点名的（或它选的）材质，锁定全片的 prompt 配方；
 3. **逐页出图**：每页一条自含的整页 prompt，交给图像模型画成 16:9 整图；
 4. **质检**：逐张检查——伪汉字、错字、构图崩坏的页面单页重出（约 2 分钟一张，不用整套重来）；
@@ -80,7 +80,7 @@ PPT-Zen 是一个装进你 AI 助手里的**做 PPT 技能**（支持 Claude Cod
 ## 你会得到什么
 
 - `slides/01.jpg … NN.jpg` —— 每页一张 16:9 整图
-- `plan.md` —— 页面计划：每页是什么、为什么这么定
+- `slides/PLAN.md` —— 页面计划：每页是什么、为什么这么定
 - `deck.pptx` —— 拼好的成片；PDF / Keynote / Google Slides 用同一批图导入即可
 
 它**不是**一个托管按钮，是你的 agent 加载的一个技能 + 两个小脚本——所以它跑在你自己的模型和 key 上，引擎无关。
@@ -104,7 +104,7 @@ python3 scripts/gen_image.py --check  # 体检：读配置 + 试生成一张图�
 
 # 3. 在你的 agent 里，一句话：
 #    "用 ppt-zen 帮我做一个关于 <你的项目> 的 10 页 pitch，用航海图风格。"
-#    -> 它先出页面计划（plan.md），再逐页把图生成到 slides/
+#    -> 它先出页面计划（slides/PLAN.md），再逐页把图生成到 slides/
 
 # 4. 拼成图片型 .pptx（非 16:9 的图会居中裁切到 16:9）
 pip install python-pptx
@@ -208,7 +208,7 @@ python3 scripts/judgment_pack.py slides                       # -> 占位页 + d
 装好后，直接在对话里描述你要的 deck。**内容层面的判断全部自动**；你唯一能主导的是**材质 / 风格**：
 
 - **让它自己选。** 什么都不说，它给全片选一个统一的材质。
-- **点名一个风格。** 从[画廊](https://pptzen.xyz)挑一个，说它的名字：
+- **点名一个风格。** 从[风格库](https://pptzen.xyz)挑一个，说它的名字：
   ```
   ……用航海图风格。
   ……电影，诺兰手笔。
@@ -218,9 +218,9 @@ python3 scripts/judgment_pack.py slides                       # -> 占位页 + d
 
 口诀：**材质全片选一次**（统一的观感）；而**插画**——每页*画什么*——逐页决定。
 
-## 风格与画廊
+## 风格库
 
-在 **[GALLERY.md](GALLERY.md)** 翻每个风格——都带一条可复现的 prompt 配方。贡献你自己的：复制 `styles/_template/` 提 PR（见 **[CONTRIBUTING](CONTRIBUTING.md)**）。画廊从风格包自动生成，你的贡献自动出现。
+在 **[GALLERY.md](GALLERY.md)** 翻每个风格——都带一条可复现的 prompt 配方。贡献你自己的：复制 `styles/_template/` 提 PR（见 **[CONTRIBUTING](CONTRIBUTING.md)**）。风格库从风格包自动生成，你的贡献自动出现。
 
 ## 想让它替你做？
 
@@ -230,8 +230,8 @@ python3 scripts/judgment_pack.py slides                       # -> 占位页 + d
 
 | | |
 |---|---|
-| 🖼 [在线画廊](https://pptzen.xyz) | 翻每个风格 + 它的 prompt 配方 |
-| 🎨 [GALLERY.md](GALLERY.md) | 同一个画廊，仓库内 |
+| 🖼 [在线风格库](https://pptzen.xyz) | 翻每个风格 + 它的 prompt 配方 |
+| 🎨 [GALLERY.md](GALLERY.md) | 同一个风格库，仓库内 |
 | 🏗️ [DESIGN.zh-CN.md](DESIGN.zh-CN.md) | 架构、由来、被推翻的模型 |
 | 🤝 [CONTRIBUTING.zh-CN.md](CONTRIBUTING.zh-CN.md) | 用一个文件夹贡献你的风格 |
 | 🔒 [BOUNDARY.zh-CN.md](BOUNDARY.zh-CN.md) | 哪些开源、哪些私有 |
@@ -239,7 +239,7 @@ python3 scripts/judgment_pack.py slides                       # -> 占位页 + d
 ## 许可（两层）
 
 - **判断层**（SKILL / 文档 / 代码）：**[Apache-2.0](LICENSE)**
-- **风格包与画廊内容**（`styles/`、图片）：**[CC-BY-4.0](LICENSE-STYLES)**，贡献走 DCO
+- **风格包与风格库内容**（`styles/`、图片）：**[CC-BY-4.0](LICENSE-STYLES)**，贡献走 DCO
 
 哪些开源、哪些私有：**[BOUNDARY.md](BOUNDARY.md)**。
 

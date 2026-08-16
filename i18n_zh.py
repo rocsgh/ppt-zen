@@ -163,8 +163,8 @@ ZH = [
  ("Make a deck — what you actually say", "做一套片——你实际要说的话"),
  ("Open your agent in any project and talk. One sentence starts it; the skill decides the rest and never quizzes you about layout:",
   "在任何项目里打开你的 agent，直接说话。一句话就能开始；剩下的它来判断，绝不会反问你版式问题："),
- ("The agent writes <code>plan.md</code> (page &middot; density &middot; device &middot; exact text &middot; style) — review it if you like — then generates one image per page into <code>slides/</code>. Iterate by pointing at pages:",
-  "agent 会先写 <code>plan.md</code>（页 &middot; 详略 &middot; 器物 &middot; 逐字文案 &middot; 风格）——想过目就过目——然后逐页出图到 <code>slides/</code>。之后对着页迭代："),
+ ("The agent writes <code>slides/PLAN.md</code> (page &middot; density &middot; device &middot; exact text &middot; style) — review it if you like — then generates one image per page into <code>slides/</code>. Iterate by pointing at pages:",
+  "agent 会先写 <code>slides/PLAN.md</code>（页 &middot; 详略 &middot; 器物 &middot; 逐字文案 &middot; 风格）——想过目就过目——然后逐页出图到 <code>slides/</code>。之后对着页迭代："),
  ("<b>Feed it your facts.</b> Attach an outline / metrics / links — real numbers land on the slides; anything missing shows as <code>[TO CONFIRM]</code> rather than an invented figure. When the pages read clean:",
   "<b>把真实数据喂给它。</b>附上提纲 / 指标 / 链接——真数字会上片；缺的只会显示 <code>[TO CONFIRM]</code> 占位，绝不编造。页面都校对干净之后："),
  # the two ask blocks: whole <pre> swapped so the examples are Chinese sentences you can paste as-is

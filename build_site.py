@@ -572,7 +572,7 @@ python3 scripts/gen_image.py --check  # doctor: reads your config, generates one
 <pre>"Make me a 10-page pitch deck about &lt;your project&gt; with ppt-zen, in the Portolan style."
 "Design a keynote about our Q3 results — pick a material that fits."   <span style="color:#8f8d97"># it chooses</span>
 "One slide only: '23 minutes to refocus', make it land."               <span style="color:#8f8d97"># single page</span></pre>
-<p>The agent writes <code>plan.md</code> (page &middot; density &middot; device &middot; exact text &middot; style) — review it if you like — then generates one image per page into <code>slides/</code>. Iterate by pointing at pages:</p>
+<p>The agent writes <code>slides/PLAN.md</code> (page &middot; density &middot; device &middot; exact text &middot; style) — review it if you like — then generates one image per page into <code>slides/</code>. Iterate by pointing at pages:</p>
 <pre>"Regenerate page 6 — the numbers feel cramped."
 "Swap the whole deck to the Kintsugi material."      <span style="color:#8f8d97"># same plan, new world</span>
 "Page 4's device isn't readable, try a funnel."</pre>

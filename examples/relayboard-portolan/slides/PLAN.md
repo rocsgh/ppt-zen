@@ -1,10 +1,11 @@
 # Judgment pack — Relayboard, Portolan edition (10 pages)
 style: portolan  (Portolan Sea Chart — styles/portolan/STYLE.md)
 
-One stanza per page, in reading order. `density` is HEADLINE or DETAIL; `device` is the
-page's argument drawn as a thing; `text` is the verbatim on-slide copy; `prompt` is the
-complete image prompt — exactly what produced the image of the same name in this folder,
-ready to paste into any image tool. The `##` line names the page's file.
+One stanza per page, in reading order. `why` is the grounds for the density call; `density`
+is HEADLINE or DETAIL; `device` is the page's argument drawn as a thing; `text` is the
+verbatim on-slide copy; `prompt` is the complete image prompt — exactly what produced the
+image of the same name in this folder, ready to paste into any image tool. The `##` line
+names the page's file.
 
 This is the artifact PPT-Zen hands you when there's no image endpoint: the judgment ships
 first, the pixels follow. Re-render or extend it with
@@ -17,6 +18,7 @@ The same prompts live in `gen.py`, which regenerates the images against your own
 > Relayboard is fictional; every metric below is invented demo content.
 
 ## 01-cover
+why: a name is sayable in a line
 density: HEADLINE
 device: a small fleet of sailing ships departing lower-left along a curved route toward a red destination dot upper-right; a compass rose lower-right
 text: large title 'Relayboard' upper-left; beneath it smaller 'Async standup that respects deep work.'
@@ -36,6 +38,7 @@ prompt: |
             edges.
 
 ## 02-problem
+why: one claim
 density: HEADLINE
 device: one long inked voyage route across open sea that SNAPS mid-frame — broken at a single point, the two ends drifting apart
 text: a single centered line 'Standups interrupt the people doing the work.'
@@ -54,6 +57,7 @@ prompt: |
             edges.
 
 ## 03-cost
+why: one number
 density: HEADLINE
 device: an enormous '23 min' lettered in dark ink as the hero, with a pair of navigator's dividers (compass tool) measuring a distance beside it
 text: enormous '23 min'; below it, smaller 'to refocus after a single interruption.'
@@ -72,6 +76,7 @@ prompt: |
             edges.
 
 ## 04-product
+why: one promise
 density: HEADLINE
 device: a small courier boat drawing alongside a large anchored ship, a dotted line connecting them
 text: large 'The standup comes to you.' left; small 'Relayboard' as an ink mark top-left.
@@ -90,6 +95,7 @@ prompt: |
             edges.
 
 ## 05-how
+why: three steps only mean something side by side
 density: DETAIL
 device: three small inked islands connected left-to-right by a dotted sailing route
 text: heading top-left 'How it works'; three short labels under the islands: '1 Post async' '2 Blockers surface' '3 Only who's needed syncs'.
@@ -108,6 +114,7 @@ prompt: |
             edges.
 
 ## 06-traction
+why: three metrics read together
 density: DETAIL
 device: a rising sea-lane climbing from lower-left to upper-right drawn as a fleet of small ships ascending a curved route
 text: heading top-left 'Traction'; three ink annotations along the top: '340 teams', '$28k MRR', '+22% MoM'.
@@ -127,6 +134,7 @@ prompt: |
             edges.
 
 ## 07-pricing
+why: tiers exist to be compared
 density: DETAIL
 device: three sailing ships of ascending size in a row (small sloop, mid galleon, grand galleon)
 text: heading 'Pricing'; labels under the ships: 'Free', 'Team $6 / seat', 'Scale $12 / seat'.
@@ -145,6 +153,7 @@ prompt: |
             edges.
 
 ## 08-competition
+why: a position only means something against the axes
 density: DETAIL
 device: a clean 2x2 chart quadrant inked on the parchment, thin lines, one red dot in the top-right cell
 text: axis ends labeled 'sync' (left) 'async' (right) and 'heavy' (bottom) 'lightweight' (top); the red dot labeled 'Relayboard'. Small heading top-left 'Where we sit'.
@@ -164,6 +173,7 @@ prompt: |
             edges.
 
 ## 09-roadmap
+why: a sequence you scan
 density: DETAIL
 device: a coastline with a dotted route passing three small harbors, each marked with a tiny flag
 text: heading 'Roadmap'; three harbor labels: 'Now Async standup', 'Q3 Blocker routing', 'Q4 Integrations'.
@@ -183,6 +193,7 @@ prompt: |
             edges.
 
 ## 10-ask
+why: one line to land on
 density: HEADLINE
 device: one bold red route arrow sweeping toward a sunrise horizon at the chart's edge, a lone ship on it
 text: large 'Raising $1.5M to give every team its focus back.'
