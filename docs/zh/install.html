@@ -205,6 +205,7 @@ cd ppt-zen
 <tr><th>你的运行时</th><th>你要做什么</th></tr>
 <tr><td><b>Claude Code &middot; Codex &middot; Cursor &middot; Windsurf &middot; Copilot</b></td><td>你需要一个图像 key——照下面 30 秒配好 <code>.env</code>。</td></tr>
 <tr><td><b>Hermes</b>（或任何自带图像工具的 agent）</td><td>什么都不用配，skill 直接用 agent 已有的工具。</td></tr>
+<tr><td><b>已经 export 过 <code>OPENAI_API_KEY</code>？</b></td><td>也什么都不用配——脚本会自动复用它。</td></tr>
 </table></div>
 <p style="margin-top:16px">自备 key：<b>实现了 OpenAI <code>/images/generations</code> 接口的任意端点</b>都行（接受 <code>{model, prompt, size, n}</code>、返回 <code>b64_json</code> 或 <code>url</code>——只兼容 chat 的"兼容"网关不算）：</p>
 <pre>cp .env.example .env                  # IMAGE_API_BASE_URL / IMAGE_API_KEY / IMAGE_MODEL / IMAGE_SIZE

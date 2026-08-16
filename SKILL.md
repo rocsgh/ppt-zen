@@ -70,18 +70,28 @@ Every page is a generated image. You need exactly one way to make images. In ord
 **This skill ships NO image key and NO model.** It is the judgment + prompts; the pixels come from
 your model.
 
-### 0.1 No image path works — offer three choices, then keep going
+### 0.1 No image path works — get the key without breaking stride
 
-Don't dead-end the user and don't make them guess. Say plainly that every page is a generated
-image and that this skill ships no key, then put the three options on the table:
+The key ask should feel like a step inside the work, not a gate in front of it. Four rules:
 
-1. **Bring your own key** (default, works today) — any endpoint implementing the OpenAI
-   `/images/generations` API. `cp .env.example .env`, fill in `IMAGE_API_KEY`, run `--check`.
-   Ready-to-paste blocks for OpenAI, generic relays and 火山方舟/豆包 Seedream are in
-   `<skill_dir>/references/providers.md`. Thirty seconds, and `--check` confirms it.
-2. **PPT-Zen Cloud trial** — *coming soon*. Don't promise a date and don't invent a URL.
-3. **Neither right now** → run the **dry-run judgment pack** (§8, step 2b). The deck's judgment
-   still gets made; only the pixels wait.
+1. **Reuse silently.** `gen_image.py` picks up an exported `OPENAI_API_KEY` on its own (when no
+   base URL points elsewhere) and `--check` says so. If that probe passes, mention it in one line
+   and continue — ask nothing.
+2. **Work first, ask at render time.** Never open with the key question. Build the full plan —
+   densities, devices, verbatim text, complete image prompts — and show it. Only when page 1 is
+   about to render, ask once, in one message: *"To render I need an image key — paste it here
+   (plus the base URL if it's a relay/gateway). Or say 'placeholders' and I'll assemble a draft
+   you can look at first."* The user has just seen their deck take shape; this reads as the last
+   step, not a wall.
+3. **Paste is all they do.** When the user pastes a key (and optionally a URL/model), *you* write
+   `<skill_dir>/.env` from it, run `--check`, and keep going. Never send the user off to edit
+   files or read docs mid-flow; `references/providers.md` has ready-to-paste blocks (OpenAI,
+   generic relays, 火山方舟/豆包 Seedream) for when they only know their provider's name.
+4. **Configured once, never asked again.** The `.env` persists in the skill directory; every
+   future deck inherits it. If a later `--check` fails, lead with its verdict, not the setup speech.
+
+If they'd rather not configure anything now → the **dry-run judgment pack** (§8, step 2b). The
+deck's judgment still gets made; only the pixels wait.
 
 Chat-only gateways are the classic trap: many "OpenAI-compatible" relays proxy
 `/chat/completions` and nothing else. `--check` names that case specifically.
@@ -259,7 +269,7 @@ Dense/text-heavy pages: generate at higher resolution than single-word pages.
      **skips every page whose `slides/NN-*.jpg` already exists** and says so
      ("pages 1–4 already generated, resuming at 5"). Only regenerate an existing page when the
      user asked for that page.
-2b. **No image path? Ship the judgment pack instead** (§0.1 option 3 — do *not* abort the task):
+2b. **No image path? Ship the judgment pack instead** (§0.1 — do *not* abort the task):
    - `slides/PLAN.md` — every page's density, device, verbatim text, and the **complete
      ready-to-paste image prompt** (the chosen pack's SURFACE block verbatim, plus SKELETON /
      DEVICE / TEXT / CRITICAL). One prompt card per page, copyable as-is.

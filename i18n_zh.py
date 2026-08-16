@@ -129,6 +129,8 @@ ZH = [
   "<td>你需要一个图像 key——照下面 30 秒配好 <code>.env</code>。</td>"),
  ("<tr><td><b>Hermes</b> (or any agent with its own image tool)</td><td>Nothing to configure. The skill uses the tool the agent already has.</td></tr>",
   "<tr><td><b>Hermes</b>（或任何自带图像工具的 agent）</td><td>什么都不用配，skill 直接用 agent 已有的工具。</td></tr>"),
+ ("<tr><td><b>Already export <code>OPENAI_API_KEY</code>?</b></td><td>Nothing to configure either — the helper reuses it silently.</td></tr>",
+  "<tr><td><b>已经 export 过 <code>OPENAI_API_KEY</code>？</b></td><td>也什么都不用配——脚本会自动复用它。</td></tr>"),
  ("Bring your own key: <b>any endpoint that implements the OpenAI <code>/images/generations</code> API</b> (accepts <code>{model, prompt, size, n}</code>, returns <code>b64_json</code> or <code>url</code> — chat-only \"compatible\" gateways don't count):",
   "自备 key：<b>实现了 OpenAI <code>/images/generations</code> 接口的任意端点</b>都行（接受 <code>{model, prompt, size, n}</code>、返回 <code>b64_json</code> 或 <code>url</code>——只兼容 chat 的\"兼容\"网关不算）："),
  ("python3 scripts/gen_image.py --check  # doctor: reads your config, generates one test image",

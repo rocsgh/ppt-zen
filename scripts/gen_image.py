@@ -40,10 +40,15 @@ def load_env():
 
 
 def config():
-    cfg, files = load_env()   # -> base, key, model, size, .env files read
-    return (cfg.get("IMAGE_API_BASE_URL", "https://api.openai.com/v1").rstrip("/"),
-            cfg.get("IMAGE_API_KEY", ""), cfg.get("IMAGE_MODEL", "gpt-image-1"),
-            cfg.get("IMAGE_SIZE", "1536x1024"), files)
+    cfg, files = load_env()   # -> base, key, model, size, .env files read, note
+    base = cfg.get("IMAGE_API_BASE_URL", "").rstrip("/")
+    key, note = cfg.get("IMAGE_API_KEY", ""), ""
+    # Zero-question path: an exported OPENAI_API_KEY is reused as-is — but only when the
+    # base URL still points at OpenAI, so a foreign relay key is never sent to the wrong host.
+    if not usable(key) and usable(cfg.get("OPENAI_API_KEY", "")) and base in ("", "https://api.openai.com/v1"):
+        key, note = cfg["OPENAI_API_KEY"], "reusing your exported OPENAI_API_KEY"
+    return (base or "https://api.openai.com/v1", key, cfg.get("IMAGE_MODEL", "gpt-image-1"),
+            cfg.get("IMAGE_SIZE", "1536x1024"), files, note)
 
 
 def usable(key):
@@ -89,11 +94,11 @@ def http_verdict(code, body, base):
 
 
 def check():
-    base, key, model, size, files = config()
+    base, key, model, size, files, note = config()
     print("PPT-Zen image doctor\n  .env read : %s\n  endpoint  : %s/images/generations\n"
           "  model     : %s   (IMAGE_MODEL)\n  size      : %s   (IMAGE_SIZE; assembly cover-crops to 16:9)\n"
-          "  api key   : %s\n" % (" , ".join(files) if files else "none found — using environment variables only",
-                                base, model, size, key_line(key)))
+          "  api key   : %s%s\n" % (" , ".join(files) if files else "none found — using environment variables only",
+                                base, model, size, key_line(key), ("   (%s)" % note) if note else ""))
     if not usable(key):
         return fail("no usable key, so nothing can be generated yet.",
                     "cp .env.example .env and put your own key in IMAGE_API_KEY — PPT-Zen ships\n"
@@ -123,7 +128,7 @@ def check():
 
 
 def generate(prompt, out):
-    base, key, model, size, _ = config()
+    base, key, model, size, _, _ = config()
     if not usable(key):
         sys.exit("gen_image: no usable IMAGE_API_KEY — run `python3 %s --check` for the fix." % sys.argv[0])
     for attempt in range(3):

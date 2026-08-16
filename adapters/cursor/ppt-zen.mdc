@@ -43,12 +43,16 @@ pptxgenjs, HTML/CSS pages, template libraries, or other PPT workflows. The full 
 7. **When generating** — announce progress per page ("page 3/10"); retry a failed page up to 2 more
    times, then surface `--check`'s verdict rather than a traceback; on a re-run after an
    interruption **skip pages whose `slides/NN-*.jpg` already exists** and say so.
-8. **No image path at all** — offer three choices: bring your own key (any OpenAI
-   `/images/generations` endpoint; templates in `references/providers.md`), PPT-Zen Cloud
-   (*coming soon*), or the **dry-run judgment pack** — do NOT abort: write `slides/PLAN.md` with a
+8. **No image path at all** — get the key without breaking stride: an exported `OPENAI_API_KEY`
+   is reused silently (`gen_image.py` picks it up; say so in one line). Otherwise build and show
+   the full plan first, and only when page 1 is about to render ask once: paste a key (+ base URL
+   if it's a relay — templates in `references/providers.md`), or say "placeholders". A pasted key:
+   *you* write `<skill_dir>/.env`, run `--check`, continue — never send the user to edit files.
+   "Placeholders" → the **dry-run judgment pack** — do NOT abort: write `slides/PLAN.md` with a
    complete ready-to-paste prompt per page, render placeholders with `scripts/placeholder_page.py`,
    assemble them into `draft.pptx`, and tell the user to paste any prompt card into any image tool
-   and drop the result into `slides/` over the matching placeholder.
+   and drop the result into `slides/` over the matching placeholder. The `.env` persists — never
+   ask twice across decks.
 
 A complete worked example (10 pages + judgment log) is in `examples/relayboard/`.
 

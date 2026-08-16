@@ -205,6 +205,7 @@ cd ppt-zen
 <tr><th>Your runtime</th><th>What you do</th></tr>
 <tr><td><b>Claude Code &middot; Codex &middot; Cursor &middot; Windsurf &middot; Copilot</b></td><td>You need an image key — the 30-second <code>.env</code> setup below.</td></tr>
 <tr><td><b>Hermes</b> (or any agent with its own image tool)</td><td>Nothing to configure. The skill uses the tool the agent already has.</td></tr>
+<tr><td><b>Already export <code>OPENAI_API_KEY</code>?</b></td><td>Nothing to configure either — the helper reuses it silently.</td></tr>
 </table></div>
 <p style="margin-top:16px">Bring your own key: <b>any endpoint that implements the OpenAI <code>/images/generations</code> API</b> (accepts <code>{model, prompt, size, n}</code>, returns <code>b64_json</code> or <code>url</code> — chat-only "compatible" gateways don't count):</p>
 <pre>cp .env.example .env                  # IMAGE_API_BASE_URL / IMAGE_API_KEY / IMAGE_MODEL / IMAGE_SIZE
