@@ -103,14 +103,17 @@ def check():
         return fail("no usable key, so nothing can be generated yet.",
                     "cp .env.example .env and put your own key in IMAGE_API_KEY — PPT-Zen ships\n"
                     "         no key and no model, the pixels come from your endpoint.\n" + PROVIDERS)
-    for probe in ("1024x1024", size):
+    # Probe the configured size first — that's what the deck will use; a cheaper size passing
+    # while the real one fails would green-light a run that dies on page 1.
+    probes = [size] + (["1024x1024"] if size != "1024x1024" else [])
+    for probe in probes:
         print("  probing the endpoint (1 test image, %s) ..." % probe)
         try:
             fetch_image(base, key, model, "test swatch, plain gray", probe, 90)
         except urllib.error.HTTPError as e:
             body = e.read()[:200].decode("utf-8", "replace").replace("\n", " ").strip()
-            if e.code == 400 and probe != size and "size" in body.lower():
-                print("  · %s not supported here — retrying at your IMAGE_SIZE" % probe)
+            if e.code == 400 and probe == size and len(probes) > 1 and "size" in body.lower():
+                print("  · your IMAGE_SIZE %s was rejected — testing 1024x1024 to see if the endpoint works at all" % size)
                 continue
             return http_verdict(e.code, body, base)
         except NotJSON as e:
@@ -123,6 +126,9 @@ def check():
         except (urllib.error.URLError, OSError) as e:
             return fail("could not reach the endpoint: %s" % e,
                         "unreachable, slow or blocked here — check IMAGE_API_BASE_URL, network, proxy.")
+        if probe != size:
+            return fail("the endpoint works, but your IMAGE_SIZE %s is not supported (1024x1024 is)." % size,
+                        "set IMAGE_SIZE in .env to a size this endpoint serves — 1024x1024 just verified.")
         print("  ✓ endpoint OK, 1 test image generated (%s). You're ready to make a deck." % probe)
         return 0
 
@@ -143,6 +149,9 @@ def generate(prompt, out):
             err = "HTTP %d %s" % (e.code, body)
         except NotJSON as e:
             sys.exit("gen_image: endpoint returned a non-JSON page (%s)\n  run `python3 %s --check`." % (e, sys.argv[0]))
+        except (KeyError, IndexError, TypeError, ValueError) as e:
+            sys.exit("gen_image: endpoint answered in the wrong shape (%s) — no usable data[0].b64_json / url.\n"
+                     "  run `python3 %s --check` for a diagnosis." % (e, sys.argv[0]))
         except (urllib.error.URLError, OSError) as e:
             err = str(e)
         else:

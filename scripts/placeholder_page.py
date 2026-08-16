@@ -22,11 +22,23 @@ FONTS = ("/System/Library/Fonts/Supplemental/Arial.ttf", "/Library/Fonts/Arial.t
          "/usr/share/fonts/truetype/dejavu/DejaVuSans.ttf",
          "/usr/share/fonts/truetype/liberation/LiberationSans-Regular.ttf",
          "C:\\Windows\\Fonts\\arial.ttf")
+# CJK-capable fonts, tried first when the text needs them — the Latin list above renders 中文 as tofu.
+FONTS_CJK = ("/System/Library/Fonts/PingFang.ttc", "/System/Library/Fonts/Hiragino Sans GB.ttc",
+             "/System/Library/Fonts/STHeiti Light.ttc",
+             "/usr/share/fonts/opentype/noto/NotoSansCJK-Regular.ttc",
+             "/usr/share/fonts/truetype/wqy/wqy-microhei.ttc",
+             "C:\\Windows\\Fonts\\msyh.ttc")
 
 
-def font(size):
+def needs_cjk(text):
+    return any("\u2e80" <= ch <= "\u9fff" or "\u3000" <= ch <= "\u30ff" or "\uac00" <= ch <= "\ud7af"
+               or "\uf900" <= ch <= "\ufaff" or "\uff00" <= ch <= "\uffef" for ch in text)
+
+
+def font(size, text=""):
     from PIL import ImageFont
-    for path in FONTS:
+    paths = (FONTS_CJK + FONTS) if needs_cjk(text) else FONTS
+    for path in paths:
         try:
             return ImageFont.truetype(path, size)
         except OSError:
@@ -38,14 +50,21 @@ def font(size):
 
 
 def wrap(draw, text, f, width):
+    """Word-wrap, with a per-character fallback so CJK and unbroken tokens still break."""
     lines, line = [], ""
-    for word in text.split():
+    for word in text.split() or [text]:
         trial = (line + " " + word).strip()
         if line and draw.textlength(trial, font=f) > width:
             lines.append(line)
             line = word
         else:
             line = trial
+        while draw.textlength(line, font=f) > width and len(line) > 1:
+            cut = len(line)
+            while cut > 1 and draw.textlength(line[:cut], font=f) > width:
+                cut -= 1
+            lines.append(line[:cut])
+            line = line[cut:]
     if line:
         lines.append(line)
     return lines
@@ -68,7 +87,9 @@ def main():
     d = ImageDraw.Draw(im)
     d.rectangle((48, 48, W - 48, H - 48), outline=RULE, width=2)
 
-    f_small, f_tag, f_title, f_dev = font(30), font(34), font(76), font(38)
+    cjk_probe = (a.title or "") + (a.device or "")
+    f_small, f_tag = font(30), font(34)
+    f_title, f_dev = font(76, cjk_probe), font(38, cjk_probe)
     if a.page:
         d.text((92, 92), "PAGE " + a.page.upper(), font=f_small, fill=DIM)
     if a.density:
