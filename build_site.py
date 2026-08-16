@@ -340,7 +340,7 @@ def page_home(packs):
     whatis = ("""
 <section class="sec" style="margin-top:40px;padding-bottom:24px;border-bottom:1px solid var(--line)">
 <div class="kick">What it is</div>
-<p class="lede" style="max-width:78ch;margin:10px 0 18px">PPT-Zen is a taste skill you install into your AI agent. You say one sentence; it decides how much each page holds, what it looks like and in which material — then renders every page as one designed image and assembles the .pptx.</p>
+<p class="lede" style="max-width:78ch;margin:10px 0 18px">PPT-Zen makes full-image PPT decks with your AI: every page is one designed image, not a text-box template. You say one sentence; it decides how much each page holds, what it looks like and in which material, then assembles the finished .pptx.</p>
 <div class="steps">%s%s%s</div>
 </section>""") % (mini % ("1", "<b>Install</b> — one command"),
                   mini % ("2", "<b>Say one sentence</b> in your agent"),

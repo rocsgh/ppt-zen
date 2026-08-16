@@ -31,8 +31,8 @@ ZH = [
  ("The same idea &mdash; pick a material. Each one is a different world.", "同一个想法 —— 选一种材质，就是另一个世界。"),
  # home "what it is" band
  ('<div class="kick">What it is</div>', '<div class="kick">这是什么</div>'),
- ("PPT-Zen is a taste skill you install into your AI agent. You say one sentence; it decides how much each page holds, what it looks like and in which material — then renders every page as one designed image and assembles the .pptx.",
-  "PPT-Zen 是装进你 AI agent 里的一个审美技能。你说一句话，它决定每页放多少内容、长什么样、用什么材质——然后把每一页画成一整张设计图，拼装成 .pptx 交给你。"),
+ ("PPT-Zen makes full-image PPT decks with your AI: every page is one designed image, not a text-box template. You say one sentence; it decides how much each page holds, what it looks like and in which material, then assembles the finished .pptx.",
+  "PPT-Zen 帮你用 AI 做「全图 PPT」：每一页都是一整张设计好的图，不是文本框模板。你说一句话，它决定每页放多少内容、长什么样、用什么材质，最后拼装成 .pptx 交给你。"),
  ('<b>Install</b> — one command', '<b>装上</b>——一行命令'),
  ('<b>Say one sentence</b> in your agent', '<b>对你的 agent 说一句话</b>'),
  ('<b>Get the deck</b> — designed pages, assembled .pptx', '<b>拿到成片</b>——设计过的整页图，拼好的 .pptx'),
