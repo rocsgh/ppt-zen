@@ -33,8 +33,10 @@ pptxgenjs, HTML/CSS pages, template libraries, or other PPT workflows. The full 
    renders once cleanly (repeats stay repeated; no ghost strokes, no double exposure); suppress
    prompt-structure words; pin exact text length.
    Keep key content clear of the top/bottom ~8% (assembly cover-crops to 16:9).
-6. **Workflow** — **preflight the image path before page 1** (one tiny test image with the agent's
-   own tool, or `scripts/gen_image.py --check`; never open a ten-page run on an unverified endpoint)
+6. **Workflow** — **preflight the image path before page 1** (one test image with the agent's own
+   tool, or `scripts/gen_image.py --check`, which generates **one billable image** on the user's
+   endpoint — say so; `--check-config` checks config alone for free. Never open a ten-page run on
+   an unverified endpoint)
    → plan.md (page · role · density · device · exact text · style slug) → one image per page into
    `slides/NN.jpg` (agent image tool, or `scripts/gen_image.py` with `.env` from `.env.example`)
    → proofread every character → assemble with `scripts/assemble_pptx.py slides/ deck.pptx`
@@ -47,11 +49,13 @@ pptxgenjs, HTML/CSS pages, template libraries, or other PPT workflows. The full 
    the full plan first, and only when page 1 is about to render ask once: paste a key (+ base URL
    if it's a relay — templates in `references/providers.md`), or say "placeholders". A pasted key:
    *you* write `<skill_dir>/.env`, run `--check`, continue — never send the user to edit files.
-   "Placeholders" → the **dry-run judgment pack** — do NOT abort: write `slides/PLAN.md` with a
-   complete ready-to-paste prompt per page, render placeholders with `scripts/placeholder_page.py`,
-   assemble them into `draft.pptx`, and tell the user to paste any prompt card into any image tool
-   and drop the result into `slides/` over the matching placeholder. The `.env` persists — never
-   ask twice across decks.
+   "Placeholders" → the **dry-run judgment pack** — do NOT abort. It is one command:
+   `scripts/judgment_pack.py --init <N> --style <slug>` writes the `slides/PLAN.md` skeleton, you
+   fill in every stanza (density · device · verbatim text · the complete ready-to-paste prompt),
+   and `scripts/judgment_pack.py slides` renders the placeholders and assembles `draft.pptx`,
+   skipping any page that already has an image. Then tell the user to paste any prompt card into
+   any image tool and drop the result into `slides/` over the matching placeholder. The `.env`
+   persists — never ask twice across decks.
 
 A complete worked example (10 pages + judgment log) is in `examples/relayboard/`.
 

@@ -70,14 +70,8 @@ def wrap(draw, text, f, width):
     return lines
 
 
-def main():
-    ap = argparse.ArgumentParser(description="Render one PPT-Zen placeholder page.")
-    ap.add_argument("out")
-    ap.add_argument("--page", default="", help='e.g. "3/10"')
-    ap.add_argument("--density", default="", help="HEADLINE or DETAIL")
-    ap.add_argument("--device", default="", help="the page's device, one line")
-    ap.add_argument("--title", default="", help="the page's verbatim title text")
-    a = ap.parse_args()
+def render(out, page="", density="", device="", title=""):
+    """Write one placeholder page. Also the entry point judgment_pack.py imports."""
     try:
         from PIL import Image, ImageDraw
     except ImportError:
@@ -87,35 +81,45 @@ def main():
     d = ImageDraw.Draw(im)
     d.rectangle((48, 48, W - 48, H - 48), outline=RULE, width=2)
 
-    cjk_probe = (a.title or "") + (a.device or "")
+    cjk_probe = (title or "") + (device or "")
     f_small, f_tag = font(30), font(34)
     f_title, f_dev = font(76, cjk_probe), font(38, cjk_probe)
-    if a.page:
-        d.text((92, 92), "PAGE " + a.page.upper(), font=f_small, fill=DIM)
-    if a.density:
-        tag = a.density.upper()
+    if page:
+        d.text((92, 92), "PAGE " + page.upper(), font=f_small, fill=DIM)
+    if density:
+        tag = density.upper()
         w = d.textlength(tag, font=f_tag)
         d.rectangle((W - 112 - w - 28, 84, W - 112 + 14, 84 + 52), outline=INK, width=2)
         d.text((W - 112 - w - 14, 96), tag, font=f_tag, fill=INK)
 
-    title = a.title or "[ page title goes here ]"
-    lines = wrap(d, title, f_title, W - 260)[:4]
+    lines = wrap(d, title or "[ page title goes here ]", f_title, W - 260)[:4]
     y = H // 2 - (len(lines) * 96) // 2 - 40
     for ln in lines:
         d.text((128, y), ln, font=f_title, fill=INK)
         y += 96
-    if a.device:
+    if device:
         y += 26
         d.line((128, y, 228, y), fill=RULE, width=3)
         y += 26
-        for ln in wrap(d, "device: " + a.device, f_dev, W - 260)[:2]:
+        for ln in wrap(d, "device: " + device, f_dev, W - 260)[:2]:
             d.text((128, y), ln, font=f_dev, fill=DIM)
             y += 50
 
     foot = "PLACEHOLDER — no image model configured. Prompt for this page: slides/PLAN.md"
     d.text((92, H - 128), foot, font=f_small, fill=DIM)
-    im.save(a.out, "JPEG", quality=88)
-    print("wrote", a.out)
+    im.save(out, "JPEG", quality=88)
+    return out
+
+
+def main():
+    ap = argparse.ArgumentParser(description="Render one PPT-Zen placeholder page.")
+    ap.add_argument("out")
+    ap.add_argument("--page", default="", help='e.g. "3/10"')
+    ap.add_argument("--density", default="", help="HEADLINE or DETAIL")
+    ap.add_argument("--device", default="", help="the page's device, one line")
+    ap.add_argument("--title", default="", help="the page's verbatim title text")
+    a = ap.parse_args()
+    print("wrote", render(a.out, a.page, a.density, a.device, a.title))
 
 
 if __name__ == "__main__":

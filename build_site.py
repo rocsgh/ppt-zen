@@ -536,6 +536,7 @@ cd ppt-zen
 <tr><td>everything</td><td><code>./install.sh all</code></td><td>all of the above</td><td>—</td></tr>
 <tr><td>auto</td><td><code>./install.sh auto</code></td><td>every runtime detected on this machine</td><td>—</td></tr>
 </table></div>
+<p style="margin-top:12px"><b>Project-level rows install into the current directory</b> — Codex, Cursor, Windsurf and Copilot all write beside whatever project you are standing in, so run the installer <i>from your project</i>, not from inside the clone: <code>cd my-project &amp;&amp; /path/to/ppt-zen/install.sh codex</code>. It rewrites the skill's file references to absolute paths so they still resolve from over there.</p>
 <p style="margin-top:12px">Skill installs are self-contained (SKILL.md + references + styles + scripts + examples + <code>styles.json</code> + <code>requirements.txt</code>). No skill system at all? Paste <code>SKILL.md</code> into the session as context.</p>
 <p style="margin-top:12px"><b>Hermes:</b> there is no project-level skill directory — the installer always writes to <code>$HERMES_HOME/skills</code> (default <code>~/.hermes/skills</code>), so <code>--global</code> is a no-op. Restart your Hermes gateway/process afterwards: the skill index is cached in-process. Hermes&rsquo; builtin <code>powerpoint</code> skill (text-box decks) keeps working alongside it; for designed full-image decks ppt-zen supersedes it.</p>
 <h2><span class="num">2</span>Wire an image model</h2>

@@ -117,6 +117,8 @@ ZH = [
  ("<td>all of the above</td>", "<td>以上全部</td>"),
  ("<tr><td>auto</td><td><code>./install.sh auto</code></td><td>every runtime detected on this machine</td><td>—</td></tr>",
   "<tr><td>自动探测</td><td><code>./install.sh auto</code></td><td>本机探测到的每个运行时</td><td>—</td></tr>"),
+ ("<b>Project-level rows install into the current directory</b> — Codex, Cursor, Windsurf and Copilot all write beside whatever project you are standing in, so run the installer <i>from your project</i>, not from inside the clone: <code>cd my-project &amp;&amp; /path/to/ppt-zen/install.sh codex</code>. It rewrites the skill's file references to absolute paths so they still resolve from over there.",
+  "<b>项目级的那几行装在「当前目录」</b>——Codex、Cursor、Windsurf、Copilot 都是往你此刻所在的项目里写，所以要<i>在你的项目里</i>跑安装脚本，而不是在克隆下来的仓库里跑：<code>cd my-project &amp;&amp; /path/to/ppt-zen/install.sh codex</code>。脚本会把技能里引用的文件路径改写成绝对路径，换个目录也照样能找到。"),
  ("Skill installs are self-contained (SKILL.md + references + styles + scripts + examples + <code>styles.json</code> + <code>requirements.txt</code>). No skill system at all? Paste <code>SKILL.md</code> into the session as context.",
   "技能安装是自包含的（SKILL.md + references + styles + scripts + examples + <code>styles.json</code> + <code>requirements.txt</code>）。完全没有 skill 系统？把 <code>SKILL.md</code> 整段贴进会话当上下文即可。"),
  ("<b>Hermes:</b> there is no project-level skill directory — the installer always writes to <code>$HERMES_HOME/skills</code> (default <code>~/.hermes/skills</code>), so <code>--global</code> is a no-op. Restart your Hermes gateway/process afterwards: the skill index is cached in-process. Hermes&rsquo; builtin <code>powerpoint</code> skill (text-box decks) keeps working alongside it; for designed full-image decks ppt-zen supersedes it.",

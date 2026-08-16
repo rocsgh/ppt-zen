@@ -46,14 +46,53 @@ install_skill_dir() {  # $1 = base dir that will contain SKILL.md; $2 = "nohint"
   fi
 }
 
+# --- absolute paths for installs that live outside this checkout -------------
+# AGENTS.md and the adapters name PPT-Zen's own files relatively (SKILL.md,
+# scripts/…, styles.json, .env.example). Those resolve only inside the repo —
+# injected into someone's project they dangle. So when the destination sits
+# outside the checkout, rewrite the resource tokens to absolute paths and
+# reframe the opening line. Every rewrite reads the pristine repo file, and each
+# pattern is anchored on a backtick that the rewrite itself consumes, so running
+# install twice writes the same bytes.
+BT='`'
+HERE_SED="$(printf '%s' "$HERE" | sed 's/[&|\\]/\\&/g')"
+
+outside_repo() {  # $1 = destination path; true when it is NOT inside this checkout
+  local d; d="$(cd "$(dirname "$1")" 2>/dev/null && pwd)" || return 0
+  case "$d/" in "$HERE"/*) return 1 ;; esac
+  return 0
+}
+
+absolutize() {  # stdin -> stdout
+  sed -e "s|^This repository is \*\*PPT-Zen\*\*, a judgment layer for AI-made slides (https://pptzen.xyz)\.\$|PPT-Zen is installed at ${BT}${HERE_SED}${BT} — a judgment layer for AI-made slides (https://pptzen.xyz). Its files are named below by absolute path; you work in the user's project, not in that directory.|" \
+      -e "s|${BT}SKILL\.md|${BT}${HERE_SED}/SKILL.md|g" \
+      -e "s|${BT}styles\.json|${BT}${HERE_SED}/styles.json|g" \
+      -e "s|${BT}styles/|${BT}${HERE_SED}/styles/|g" \
+      -e "s|${BT}scripts/|${BT}${HERE_SED}/scripts/|g" \
+      -e "s|${BT}references/|${BT}${HERE_SED}/references/|g" \
+      -e "s|${BT}examples/|${BT}${HERE_SED}/examples/|g" \
+      -e "s|${BT}\.env\.example|${BT}${HERE_SED}/.env.example|g" \
+      -e "s|${BT}python3 build_|${BT}python3 ${HERE_SED}/build_|g" \
+      -e "s|${BT}build_gallery\.py|${BT}${HERE_SED}/build_gallery.py|g"
+}
+
 inject_agents_md() {  # $1 = dest AGENTS.md (idempotent between PPTZEN markers)
   local dest="$1"; mkdir -p "$(dirname "$dest")"
   local block; block="$(cat "$HERE/AGENTS.md")"
+  if outside_repo "$dest"; then
+    block="$(printf '%s\n' "$block" | absolutize)"
+    case "$block" in *"This repository is"*)
+      echo "warning: AGENTS.md's opening line changed — absolutize() no longer reframes it (install.sh)" >&2 ;;
+    esac
+  fi
   if [ -f "$dest" ] && grep -q "PPTZEN:START" "$dest"; then
-    awk -v repl="$block" 'BEGIN{inblk=0}
-      /PPTZEN:START/{print repl; inblk=1; next}
+    # the block goes through a file, not -v: awk on macOS warns on multi-line -v values
+    local blockfile; blockfile="$dest.pptzen.tmp"; printf '%s\n' "$block" > "$blockfile"
+    awk -v bf="$blockfile" 'BEGIN{inblk=0}
+      /PPTZEN:START/{while ((getline l < bf) > 0) print l; inblk=1; next}
       /PPTZEN:END/{inblk=0; next}
       !inblk{print}' "$dest" > "$dest.tmp" && mv "$dest.tmp" "$dest"
+    rm -f "$blockfile"
     echo "updated PPT-Zen block in $dest"
   elif [ -f "$dest" ]; then
     printf '\n%s\n' "$block" >> "$dest"; echo "appended PPT-Zen block to $dest"
@@ -64,7 +103,11 @@ inject_agents_md() {  # $1 = dest AGENTS.md (idempotent between PPTZEN markers)
 
 copy_one() {  # $1 src (relative), $2 dest (relative/absolute)
   local src="$HERE/$1" dest="$2"
-  mkdir -p "$(dirname "$dest")"; cp "$src" "$dest"; echo "installed $1 -> $dest"
+  mkdir -p "$(dirname "$dest")"; cp "$src" "$dest"
+  if outside_repo "$dest"; then
+    absolutize < "$dest" > "$dest.tmp" && mv "$dest.tmp" "$dest"
+  fi
+  echo "installed $1 -> $dest"
 }
 
 do_agent() {

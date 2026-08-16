@@ -62,10 +62,13 @@ Every page is a generated image. You need exactly one way to make images. In ord
    image out."
 2. **No image tool? Use the bundled helper.** `python3 <skill_dir>/scripts/gen_image.py "<full-page prompt>" out.jpg`
    calls any OpenAI-compatible images endpoint. Copy `.env.example` to `.env`, set
-   `IMAGE_API_BASE_URL`, `IMAGE_API_KEY`, `IMAGE_MODEL`, `IMAGE_SIZE`. It POSTs
-   `{model, prompt, size, n:1}` to `{BASE}/images/generations` and reads `data[0].b64_json`
-   (or `data[0].url`). Run `python3 <skill_dir>/scripts/gen_image.py --check` first — it reports the
-   config, probes the endpoint, and turns any failure into a plain verdict with the fix.
+   `IMAGE_API_BASE_URL`, `IMAGE_API_KEY`, `IMAGE_MODEL`, `IMAGE_SIZE` (and `IMAGE_MAX_ATTEMPTS`,
+   the per-page retry budget — default 3). It POSTs `{model, prompt, size, n:1}` to
+   `{BASE}/images/generations` and reads `data[0].b64_json` (or `data[0].url`). Run
+   `python3 <skill_dir>/scripts/gen_image.py --check` first — it reports the config, probes the
+   endpoint, and turns any failure into a plain verdict with the fix. The probe **generates one
+   billable image** on the user's endpoint; `--check-config` reports the same config and spends
+   nothing, so use it when you only need to know whether a key is present.
 
 **This skill ships NO image key and NO model.** It is the judgment + prompts; the pixels come from
 your model.
@@ -90,8 +93,11 @@ The key ask should feel like a step inside the work, not a gate in front of it. 
 4. **Configured once, never asked again.** The `.env` persists in the skill directory; every
    future deck inherits it. If a later `--check` fails, lead with its verdict, not the setup speech.
 
-If they'd rather not configure anything now → the **dry-run judgment pack** (§8, step 2b). The
-deck's judgment still gets made; only the pixels wait.
+If they'd rather not configure anything now → the **dry-run judgment pack** (§8, step 2b), which
+has one command: `python3 <skill_dir>/scripts/judgment_pack.py --init <N> --style <slug>` writes
+the `slides/PLAN.md` skeleton, you fill in every stanza (that authoring *is* the judgment), and
+`python3 <skill_dir>/scripts/judgment_pack.py slides` renders the placeholders and assembles
+`draft.pptx`. The deck's judgment still gets made; only the pixels wait.
 
 Chat-only gateways are the classic trap: many "OpenAI-compatible" relays proxy
 `/chat/completions` and nothing else. `--check` names that case specifically.
@@ -245,8 +251,10 @@ Dense/text-heavy pages: generate at higher resolution than single-word pages.
 ## 8. Workflow (one sentence in → a deck out)
 
 0. **Preflight — prove the image path before page 1.** Never open a ten-page run on an unverified
-   endpoint; the failure lands after the user has waited. Either generate **one tiny test image**
-   with the agent's own image tool, or run `python3 <skill_dir>/scripts/gen_image.py --check`.
+   endpoint; the failure lands after the user has waited. Either generate **one test image**
+   with the agent's own image tool, or run `python3 <skill_dir>/scripts/gen_image.py --check`
+   — which **generates one billable image** on their endpoint, so say so rather than spending
+   it silently (`--check-config` checks the config alone and costs nothing).
    If it fails: **stop** and walk the user through the fix (§0.1 — the 30-second `.env` setup, the
    provider templates, or the dry-run pack). Do not start generating and hope.
 1. **Plan** — write `plan.md`: one row per page with `role · density · device · exact text · style_slug`,
@@ -269,14 +277,19 @@ Dense/text-heavy pages: generate at higher resolution than single-word pages.
      **skips every page whose `slides/NN-*.jpg` already exists** and says so
      ("pages 1–4 already generated, resuming at 5"). Only regenerate an existing page when the
      user asked for that page.
-2b. **No image path? Ship the judgment pack instead** (§0.1 — do *not* abort the task):
-   - `slides/PLAN.md` — every page's density, device, verbatim text, and the **complete
-     ready-to-paste image prompt** (the chosen pack's SURFACE block verbatim, plus SKELETON /
-     DEVICE / TEXT / CRITICAL). One prompt card per page, copyable as-is.
-   - Placeholder pages — `python3 <skill_dir>/scripts/placeholder_page.py slides/NN-role.jpg
-     --page 3/10 --density DETAIL --device "<one line>" --title "<verbatim title>"`, one per page.
-   - `draft.pptx` — assemble the placeholders with `assemble_pptx.py` as usual, so the structure
-     can be reviewed and walked through today.
+2b. **No image path? Ship the judgment pack instead** (§0.1 — do *not* abort the task).
+   One command drives it; you still write every word of the judgment:
+   - `python3 <skill_dir>/scripts/judgment_pack.py --init <N> --style <slug>` writes the
+     `slides/PLAN.md` skeleton. **Fill in every stanza** — density, device, verbatim text, and
+     the **complete ready-to-paste image prompt** (the chosen pack's SURFACE block verbatim, plus
+     SKELETON / DEVICE / TEXT / CRITICAL). A skeleton left as-is is not a deliverable.
+   - `python3 <skill_dir>/scripts/judgment_pack.py slides` then renders one placeholder per page
+     and assembles `draft.pptx`, so the structure can be reviewed and walked through today. It
+     **skips any page whose image already exists** — the same resume rule as a real run, which is
+     how a user drops real images in one at a time and re-runs.
+   - Rendering a single page by hand stays available:
+     `python3 <skill_dir>/scripts/placeholder_page.py slides/NN-role.jpg --page 3/10
+     --density DETAIL --device "<one line>" --title "<verbatim title>"`.
    Then tell the user the exit: hand any prompt card to any image tool they already have
    (Midjourney, 即梦, Doubao, a web UI), drop the result into `slides/` over the placeholder of the
    same name, reassemble. The key becomes an optional last step instead of a wall.

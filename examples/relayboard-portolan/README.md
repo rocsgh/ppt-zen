@@ -13,7 +13,9 @@ ascending size, a red route to the sunrise.
 That swap is the whole product: **the judgment didn't change, the world did.**
 The per-page judgment log lives in the dark edition's [README](../relayboard/README.md);
 only the device translations differ (hourglass → navigator's dividers, quadrant → chart
-quadrant, timeline → a coastline with harbors).
+quadrant, timeline → a coastline with harbors). Put this edition's
+[`slides/PLAN.md`](slides/PLAN.md) beside [the dark one](../relayboard/slides/PLAN.md) and the
+swap is legible line by line: same density, same text, a different SURFACE and device.
 
 > Relayboard is fictional; every metric is invented demo content.
 
@@ -24,3 +26,6 @@ cp ../../.env.example .env      # your image-model key
 python3 gen.py                  # 10 pages -> slides/
 python3 ../../scripts/assemble_pptx.py slides deck.pptx
 ```
+
+No key? `python3 ../../scripts/judgment_pack.py slides` rebuilds the deck straight from
+`slides/PLAN.md`, which carries all ten prompts ready to paste anywhere.

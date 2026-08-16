@@ -2,7 +2,7 @@
 
 **One sentence in:** *"Make me a 10-page pitch deck for Relayboard, an async-standup tool, in one premium dark-editorial material."*
 
-**Out:** the ten slides in [`slides/`](slides/), assembled into [`deck.pptx`](deck.pptx) (image-based — text isn't editable afterwards).
+**Out:** the ten slides in [`slides/`](slides/), assembled into [`deck.pptx`](deck.pptx) (image-based — text isn't editable afterwards), with the judgment pack that produced them in [`slides/PLAN.md`](slides/PLAN.md) — density, device, verbatim text and the complete ready-to-paste prompt, one stanza per page.
 
 > **Relayboard is fictional, and every metric on these slides (340 teams, $28k MRR, the prices, the ask) is invented demo content** — this example only demonstrates form. In real use the skill's hard rule applies: it decides the FORM and never invents FACTS; numbers come from your input or become `[TO CONFIRM]` placeholders (see SKILL.md §5).
 
@@ -42,4 +42,6 @@ python3 gen.py                  # generates slides/01…10 with your image model
 python3 ../../scripts/assemble_pptx.py slides deck.pptx
 ```
 
-`gen.py` holds the exact per-page prompts (material + device + verbatim text + the anti-garble tail). Read it to see how the judgment above becomes ten prompts.
+`gen.py` holds the exact per-page prompts (material + device + verbatim text + the anti-garble tail); [`slides/PLAN.md`](slides/PLAN.md) holds the same ten prompts in copy-paste form, for an image tool that isn't an API. Read either to see how the judgment above becomes ten prompts.
+
+**No key at all?** That's the judgment pack, and this folder is one: `python3 ../../scripts/judgment_pack.py slides` rebuilds the deck from `PLAN.md`, leaving every image that's already there alone.

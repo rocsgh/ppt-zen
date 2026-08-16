@@ -197,6 +197,7 @@ cd ppt-zen
 <tr><td>全部</td><td><code>./install.sh all</code></td><td>以上全部</td><td>—</td></tr>
 <tr><td>自动探测</td><td><code>./install.sh auto</code></td><td>本机探测到的每个运行时</td><td>—</td></tr>
 </table></div>
+<p style="margin-top:12px"><b>项目级的那几行装在「当前目录」</b>——Codex、Cursor、Windsurf、Copilot 都是往你此刻所在的项目里写，所以要<i>在你的项目里</i>跑安装脚本，而不是在克隆下来的仓库里跑：<code>cd my-project &amp;&amp; /path/to/ppt-zen/install.sh codex</code>。脚本会把技能里引用的文件路径改写成绝对路径，换个目录也照样能找到。</p>
 <p style="margin-top:12px">技能安装是自包含的（SKILL.md + references + styles + scripts + examples + <code>styles.json</code> + <code>requirements.txt</code>）。完全没有 skill 系统？把 <code>SKILL.md</code> 整段贴进会话当上下文即可。</p>
 <p style="margin-top:12px"><b>Hermes：</b>它没有项目级技能目录——安装脚本一律写入 <code>$HERMES_HOME/skills</code>（默认 <code>~/.hermes/skills</code>），<code>--global</code> 不起作用。装完请重启 Hermes 网关/进程：技能索引缓存在进程内。Hermes 自带的 <code>powerpoint</code> 技能（文本框式 deck）会继续共存；做设计过的整页出图 deck 时，以 ppt-zen 为准。</p>
 <h2><span class="num">2</span>接上图像模型</h2>

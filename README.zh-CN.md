@@ -162,7 +162,8 @@ IMAGE_MODEL=gpt-image-1
 OpenAI、通用中转、火山方舟 / 豆包 Seedream 的模板可直接粘贴：[`references/providers.md`](references/providers.md)。然后：
 
 ```
-python3 scripts/gen_image.py --check                        # 体检：读配置 + 试生成一张图
+python3 scripts/gen_image.py --check-config                 # 体检：只读配置，一个字节都不发
+python3 scripts/gen_image.py --check                        # 再加一次真探测：真生成一张图、真计费
 python3 scripts/gen_image.py "你的整页 prompt" out.jpg
 ```
 
@@ -170,7 +171,7 @@ python3 scripts/gen_image.py "你的整页 prompt" out.jpg
 
 ### 卡在出图这一步？
 
-`python3 scripts/gen_image.py --check` 是唯一要跑的命令：它会打印读到的 `.env`、遮掩后的 key，试生成一张图，并把失败翻译成人话：
+`python3 scripts/gen_image.py --check` 是唯一要跑的命令：它会打印读到的 `.env`、遮掩后的 key，在你的端点上真生成一张图（探测前会先提示这一点；只想看配置就用 `--check-config`），并把失败翻译成人话：
 
 | 结论 | 意思 |
 |---|---|
@@ -179,9 +180,18 @@ python3 scripts/gen_image.py "你的整页 prompt" out.jpg
 | `HTTP 404 / 405`，或返回的不是 JSON | 这个 base URL 根本没有实现图像接口——通常是只兼容 chat 的网关。 |
 | `could not reach the endpoint` | 连不上、太慢或被拦：检查 `IMAGE_API_BASE_URL`、网络和代理。 |
 
-长任务不再像卡死：脚本每页打印 `gen_image: requesting slides/03.jpg (attempt 1/3)`，5xx / 超时自己重试两次（4xx 绝不重试——那是配置问题，等也没用）。中断后再跑会**续跑**：`slides/` 里已有的页直接跳过。
+长任务不再像卡死：脚本每页打印 `gen_image: requesting slides/03.jpg (attempt 1/3)`，5xx / 超时自己重试（4xx 绝不重试——那是配置问题，等也没用）。重试次数由 `IMAGE_MAX_ATTEMPTS` 控制（默认 3，取值限定 1–5）。中断后再跑会**续跑**：`slides/` 里已有的页直接跳过。
 
-**没有 key，或今天不想配？** 照样让它做。你拿到的不是报错，而是一份判断包：`slides/PLAN.md`（每页的详略、器物、逐字文案，以及一段完整可粘贴的出图 prompt）、由 `scripts/placeholder_page.py` 渲染的占位页、以及拼好的 `draft.pptx`。把任意一段 prompt 交给你已有的出图工具（Midjourney、即梦、豆包…），把图放回 `slides/` 覆盖同名占位页，重拼一次即可。key 从此只是可选的最后一步。
+`--check` 会在你的端点上真生成一张图、真计费——它探测前会先说明这一点。只想看配置就用 `python3 scripts/gen_image.py --check-config`：同样的体检报告，一个字节都不发；`--help` 列出全部变量。
+
+**没有 key，或今天不想配？** 照样让它做。你拿到的不是报错，而是一份判断包：`slides/PLAN.md`（每页的详略、器物、逐字文案，以及一段完整可粘贴的出图 prompt）、占位页、以及拼好的 `draft.pptx`。这份判断包就是一条命令——agent 会替你跑，你也可以自己跑：
+
+```bash
+python3 scripts/judgment_pack.py --init 10 --style portolan   # -> slides/PLAN.md 骨架
+python3 scripts/judgment_pack.py slides                       # -> 占位页 + draft.pptx
+```
+
+把任意一段 prompt 交给你已有的出图工具（Midjourney、即梦、豆包…），把图放回 `slides/` 覆盖同名占位页，再跑一次第二条命令——已经有图的页不会被动。key 从此只是可选的最后一步。一份做完的判断包见 [`examples/relayboard/slides/PLAN.md`](examples/relayboard/slides/PLAN.md)。
 
 ## 从场景开始
 

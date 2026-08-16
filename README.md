@@ -166,7 +166,8 @@ IMAGE_MODEL=gpt-image-1
 Ready-to-paste blocks for OpenAI, generic relays and 火山方舟 / 豆包 Seedream: [`references/providers.md`](references/providers.md). Then:
 
 ```
-python3 scripts/gen_image.py --check                        # doctor: config + one test image
+python3 scripts/gen_image.py --check-config                 # doctor, config only — nothing sent
+python3 scripts/gen_image.py --check                        # + a live probe: one billable test image
 python3 scripts/gen_image.py "your full-page prompt" out.jpg
 ```
 
@@ -174,7 +175,7 @@ python3 scripts/gen_image.py "your full-page prompt" out.jpg
 
 ### Stuck at image generation?
 
-`python3 scripts/gen_image.py --check` is the one command to run. It prints which `.env` it read, masks your key, generates one test image, and names the failure in plain language:
+`python3 scripts/gen_image.py --check` is the one command to run. It prints which `.env` it read, masks your key, generates one billable test image on your endpoint (it warns before doing so — `--check-config` stops short of the probe), and names the failure in plain language:
 
 | Verdict | What it means |
 |---|---|
@@ -183,9 +184,18 @@ python3 scripts/gen_image.py "your full-page prompt" out.jpg
 | `HTTP 404 / 405`, or a non-JSON page | That base URL doesn't implement the images API — a chat-only gateway is the usual culprit. |
 | `could not reach the endpoint` | Unreachable, slow or blocked: check `IMAGE_API_BASE_URL`, your network, any proxy. |
 
-A long run no longer looks frozen: the helper prints `gen_image: requesting slides/03.jpg (attempt 1/3)` per page and retries 5xx/timeouts twice by itself (never a 4xx — that's config, and waiting won't fix it). An interrupted run **resumes**: pages already present in `slides/` are skipped.
+A long run no longer looks frozen: the helper prints `gen_image: requesting slides/03.jpg (attempt 1/3)` per page and retries 5xx/timeouts by itself (never a 4xx — that's config, and waiting won't fix it). Set `IMAGE_MAX_ATTEMPTS` to change the budget (default 3, clamped to 1–5). An interrupted run **resumes**: pages already present in `slides/` are skipped.
 
-**No key — or don't want one today?** Ask for the deck anyway. You get the judgment pack instead of an error: `slides/PLAN.md` with every page's density, device, verbatim text and a complete ready-to-paste image prompt; placeholder pages rendered by `scripts/placeholder_page.py`; and an assembled `draft.pptx`. Hand any prompt card to any image tool you already have (Midjourney, 即梦, Doubao…), drop the result into `slides/` over the matching placeholder, reassemble. The key becomes an optional last step.
+`--check` bills one image on your endpoint — it says so before probing. `python3 scripts/gen_image.py --check-config` gives the same config report with nothing sent, and `--help` lists every variable.
+
+**No key — or don't want one today?** Ask for the deck anyway. You get the judgment pack instead of an error: `slides/PLAN.md` with every page's density, device, verbatim text and a complete ready-to-paste image prompt; placeholder pages; and an assembled `draft.pptx`. That pack is one command — the agent runs it for you, and you can run it yourself:
+
+```bash
+python3 scripts/judgment_pack.py --init 10 --style portolan   # -> slides/PLAN.md skeleton
+python3 scripts/judgment_pack.py slides                       # -> placeholders + draft.pptx
+```
+
+Hand any prompt card to any image tool you already have (Midjourney, 即梦, Doubao…), drop the result into `slides/` over the matching placeholder, run the second command again — pages that already have an image are left alone. The key becomes an optional last step. A finished pack ships in [`examples/relayboard/slides/PLAN.md`](examples/relayboard/slides/PLAN.md).
 
 ## Start from a scenario
 
