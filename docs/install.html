@@ -200,10 +200,18 @@ cd ppt-zen
 <p style="margin-top:12px">Skill installs are self-contained (SKILL.md + references + styles + scripts + examples + <code>styles.json</code> + <code>requirements.txt</code>). No skill system at all? Paste <code>SKILL.md</code> into the session as context.</p>
 <p style="margin-top:12px"><b>Hermes:</b> there is no project-level skill directory — the installer always writes to <code>$HERMES_HOME/skills</code> (default <code>~/.hermes/skills</code>), so <code>--global</code> is a no-op. Restart your Hermes gateway/process afterwards: the skill index is cached in-process. Hermes&rsquo; builtin <code>powerpoint</code> skill (text-box decks) keeps working alongside it; for designed full-image decks ppt-zen supersedes it.</p>
 <h2><span class="num">2</span>Wire an image model</h2>
-<p>Every page is a generated image. If your agent already has an image tool, there's nothing to do — the skill uses it. Otherwise point the bundled helper at <b>any endpoint that implements the OpenAI <code>/images/generations</code> API</b> (accepts <code>{model, prompt, size, n}</code>, returns <code>b64_json</code> or <code>url</code> — chat-only "compatible" gateways don't count):</p>
+<p>Every page is a generated image, and PPT-Zen ships none. Which half applies to you:</p>
+<div class="tablewrap"><table>
+<tr><th>Your runtime</th><th>What you do</th></tr>
+<tr><td><b>Claude Code &middot; Codex &middot; Cursor &middot; Windsurf &middot; Copilot</b></td><td>You need an image key — the 30-second <code>.env</code> setup below.</td></tr>
+<tr><td><b>Hermes</b> (or any agent with its own image tool)</td><td>Nothing to configure. The skill uses the tool the agent already has.</td></tr>
+</table></div>
+<p style="margin-top:16px">Bring your own key: <b>any endpoint that implements the OpenAI <code>/images/generations</code> API</b> (accepts <code>{model, prompt, size, n}</code>, returns <code>b64_json</code> or <code>url</code> — chat-only "compatible" gateways don't count):</p>
 <pre>cp .env.example .env                  # IMAGE_API_BASE_URL / IMAGE_API_KEY / IMAGE_MODEL / IMAGE_SIZE
-python3 scripts/gen_image.py --check  # verify before a long run</pre>
-<p>PPT-Zen ships <b>no key and no model</b> — the judgment is open source, the pixels are yours.</p>
+python3 scripts/gen_image.py --check  # doctor: reads your config, generates one test image</pre>
+<p><code>--check</code> is the support story: it masks your key, probes the endpoint, and turns whatever went wrong into one plain verdict with the fix — bad key, chat-only gateway, unreachable host. Ready-to-paste <code>.env</code> blocks for OpenAI, generic relays and 火山方舟 / 豆包 Seedream: <a href="https://github.com/rocsgh/ppt-zen/blob/master/references/providers.md" style="text-decoration:underline">references/providers.md</a>.</p>
+<p>PPT-Zen ships <b>no key and no model</b> — the judgment is open source, the pixels are yours. A hosted trial that skips this step is coming.</p>
+<p><b>No key today?</b> Ask for the deck anyway. You get the judgment pack: the per-page plan with a ready-to-paste prompt for every page, placeholder pages, and an assembled <code>draft.pptx</code>. Paste any prompt into an image tool you already have, drop the result into <code>slides/</code>, reassemble. The key becomes an optional last step.</p>
 <h2><span class="num">3</span>Make a deck — what you actually say</h2>
 <p>Open your agent in any project and talk. One sentence starts it; the skill decides the rest and never quizzes you about layout:</p>
 <pre>"Make me a 10-page pitch deck about &lt;your project&gt; with ppt-zen, in the Portolan style."

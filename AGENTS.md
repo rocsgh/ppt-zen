@@ -30,10 +30,21 @@ pptxgenjs, HTML/CSS pages, template libraries, or other PPT workflows. The full 
    renders once cleanly (repeats stay repeated; no ghost strokes, no double exposure); suppress
    prompt-structure words; pin exact text length.
    Keep key content clear of the top/bottom ~8% (assembly cover-crops to 16:9).
-6. **Workflow** — plan.md (page · role · density · device · exact text · style slug) → one image
-   per page into `slides/NN.jpg` (agent image tool, or `scripts/gen_image.py` with `.env` from
-   `.env.example`; run `gen_image.py --check` first) → proofread every character → assemble with
-   `scripts/assemble_pptx.py slides/ deck.pptx` (image-based .pptx; text not editable afterwards).
+6. **Workflow** — **preflight the image path before page 1** (one tiny test image with the agent's
+   own tool, or `scripts/gen_image.py --check`; never open a ten-page run on an unverified endpoint)
+   → plan.md (page · role · density · device · exact text · style slug) → one image per page into
+   `slides/NN.jpg` (agent image tool, or `scripts/gen_image.py` with `.env` from `.env.example`)
+   → proofread every character → assemble with `scripts/assemble_pptx.py slides/ deck.pptx`
+   (image-based .pptx; text not editable afterwards).
+7. **When generating** — announce progress per page ("page 3/10"); retry a failed page up to 2 more
+   times, then surface `--check`'s verdict rather than a traceback; on a re-run after an
+   interruption **skip pages whose `slides/NN-*.jpg` already exists** and say so.
+8. **No image path at all** — offer three choices: bring your own key (any OpenAI
+   `/images/generations` endpoint; templates in `references/providers.md`), PPT-Zen Cloud
+   (*coming soon*), or the **dry-run judgment pack** — do NOT abort: write `slides/PLAN.md` with a
+   complete ready-to-paste prompt per page, render placeholders with `scripts/placeholder_page.py`,
+   assemble them into `draft.pptx`, and tell the user to paste any prompt card into any image tool
+   and drop the result into `slides/` over the matching placeholder.
 
 A complete worked example (10 pages + judgment log) is in `examples/relayboard/`.
 

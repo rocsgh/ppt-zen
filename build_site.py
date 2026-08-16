@@ -372,7 +372,7 @@ def page_home(packs):
 <section class="sec"><div class="shead"><span class="num">02</span><h2>How it works</h2></div>
 <p class="lede">You bring an agent and an image model. The skill brings the judgment.</p>%s</section>
 <section class="sec"><div class="shead"><span class="num">03</span><h2>Proof — a full deck, judged page by page</h2></div>
-<p class="lede">Relayboard: a fictional 10-page pitch generated from one sentence, in one material — with the judgment log for every page.</p>
+<p class="lede">Relayboard: a fictional 10-page pitch generated from one sentence, in one material — with the judgment log for every page. The finished <code>deck.pptx</code> and all ten JPGs ship in the repo under <code>examples/</code> — clone and open them, no key needed.</p>
 <div class="strip">%s</div>
 <p style="margin-top:14px"><a class="morelink" href="example.html">See all 10 pages + the judgment log &rarr;</a></p></section>
 <section class="sec"><div class="shead"><span class="num">04</span><h2>%d materials, one line each</h2></div>
@@ -445,7 +445,8 @@ def page_example():
 <b>In:</b> "Make me a 10-page pitch deck for Relayboard, an async-standup tool, in the Portolan sea-chart style."
 <b>Out:</b> the pages below — a growth story told as a voyage across a 16th-century chart.
 The labels are the judgment log, the part you can't screenshot. Notice the rhythm: headline &rarr; a dense
-evidence block &rarr; one line to land on. Every number is rendered inside the image and comes out clean.</p>
+evidence block &rarr; one line to land on. Every number is rendered inside the image and comes out clean.<br/>
+The finished <code>deck.pptx</code> and all ten JPGs ship in <a href="__GH_EX__" style="text-decoration:underline">examples/</a> &mdash; clone the repo and open them, no key needed.</p>
 </section>
 <section class="sec" style="border-top:none;margin-top:36px;padding-top:0">%s</section>
 <section class="sec"><div class="shead"><span class="num">&#8646;</span><h2>Same judgment, another world</h2></div>
@@ -460,11 +461,15 @@ python3 gen.py                           # 10 pages -> slides/
 python3 ../../scripts/assemble_pptx.py slides deck.pptx</pre>
 <p style="margin-top:14px"><i>Relayboard is fictional; every metric is invented demo content. In real use the skill never invents facts — unknowns become [TO CONFIRM] placeholders.</i></p>
 </section></div>""") % ("".join(rows), dark)
+    inner = inner.replace("__GH_EX__", GH + "/tree/master/examples")
     return shell("Example — a 10-page deck with its judgment log · PPT-Zen",
                  "A complete worked deck: ten full-image pages from one sentence, with the per-page judgment log (density, device, exact text).",
                  "example.html", "rbp/01-cover.jpg", inner, active="example")
 
 
+# Scenario block: pitch -> portolan, review -> swiss-grid (both already the site's own examples).
+# Internal share -> broadsheet-news: mid-weight, print-plain, reads as a memo rather than a
+# performance — the other clean candidate (stele-rubbing) is too ceremonial for a Tuesday update.
 def page_gallery(packs):
     mediums = sorted(set(p.get("medium", "Other") for p in packs))
     cards = []
@@ -489,6 +494,13 @@ def page_gallery(packs):
 <h1 style="font-size:clamp(2.2rem,5vw,3.4rem);letter-spacing:-.035em;margin:12px 0 0">The material library.</h1>
 <p class="lede" style="max-width:60ch;font-size:1.08rem;color:var(--ink2);margin-top:14px">Material swatches show the same line — <i>Signal over noise</i> — so the surface is the only variable. Cinema hands show one sentence through different eyes. Click any card for the full recipe.</p>
 </section>
+<div class="kick" style="margin-top:30px">Start from a scenario</div>
+<div class="tablewrap" style="margin-top:10px"><table>
+<tr><th>Scenario</th><th>Default material</th><th>What you say</th></tr>
+<tr><td>Fundraise / pitch</td><td>Portolan Sea Chart</td><td><code>"Make me a 10-page pitch deck about &lt;project&gt;, Portolan style."</code></td></tr>
+<tr><td>Consulting / quarterly review</td><td>Swiss Grid</td><td><code>"Make me a 12-page Q3 review for &lt;team&gt;, Swiss Grid style."</code></td></tr>
+<tr><td>Internal share</td><td>Letterpress Broadsheet</td><td><code>"Make me an 8-page internal share about &lt;topic&gt;, Letterpress Broadsheet style."</code></td></tr>
+</table></div>
 <div class="filters">%s</div><div class="grid">%s</div>
 <p><a class="morelink" href="https://github.com/rocsgh/ppt-zen/blob/master/CONTRIBUTING.md">Contribute a style — one folder, one PR &rarr;</a></p>
 </div>""") % (len(packs), "".join(filt), "".join(cards))
@@ -527,10 +539,18 @@ cd ppt-zen
 <p style="margin-top:12px">Skill installs are self-contained (SKILL.md + references + styles + scripts + examples + <code>styles.json</code> + <code>requirements.txt</code>). No skill system at all? Paste <code>SKILL.md</code> into the session as context.</p>
 <p style="margin-top:12px"><b>Hermes:</b> there is no project-level skill directory — the installer always writes to <code>$HERMES_HOME/skills</code> (default <code>~/.hermes/skills</code>), so <code>--global</code> is a no-op. Restart your Hermes gateway/process afterwards: the skill index is cached in-process. Hermes&rsquo; builtin <code>powerpoint</code> skill (text-box decks) keeps working alongside it; for designed full-image decks ppt-zen supersedes it.</p>
 <h2><span class="num">2</span>Wire an image model</h2>
-<p>Every page is a generated image. If your agent already has an image tool, there's nothing to do — the skill uses it. Otherwise point the bundled helper at <b>any endpoint that implements the OpenAI <code>/images/generations</code> API</b> (accepts <code>{model, prompt, size, n}</code>, returns <code>b64_json</code> or <code>url</code> — chat-only "compatible" gateways don't count):</p>
+<p>Every page is a generated image, and PPT-Zen ships none. Which half applies to you:</p>
+<div class="tablewrap"><table>
+<tr><th>Your runtime</th><th>What you do</th></tr>
+<tr><td><b>Claude Code &middot; Codex &middot; Cursor &middot; Windsurf &middot; Copilot</b></td><td>You need an image key — the 30-second <code>.env</code> setup below.</td></tr>
+<tr><td><b>Hermes</b> (or any agent with its own image tool)</td><td>Nothing to configure. The skill uses the tool the agent already has.</td></tr>
+</table></div>
+<p style="margin-top:16px">Bring your own key: <b>any endpoint that implements the OpenAI <code>/images/generations</code> API</b> (accepts <code>{model, prompt, size, n}</code>, returns <code>b64_json</code> or <code>url</code> — chat-only "compatible" gateways don't count):</p>
 <pre>cp .env.example .env                  # IMAGE_API_BASE_URL / IMAGE_API_KEY / IMAGE_MODEL / IMAGE_SIZE
-python3 scripts/gen_image.py --check  # verify before a long run</pre>
-<p>PPT-Zen ships <b>no key and no model</b> — the judgment is open source, the pixels are yours.</p>
+python3 scripts/gen_image.py --check  # doctor: reads your config, generates one test image</pre>
+<p><code>--check</code> is the support story: it masks your key, probes the endpoint, and turns whatever went wrong into one plain verdict with the fix — bad key, chat-only gateway, unreachable host. Ready-to-paste <code>.env</code> blocks for OpenAI, generic relays and 火山方舟 / 豆包 Seedream: <a href="__GH__/blob/master/references/providers.md" style="text-decoration:underline">references/providers.md</a>.</p>
+<p>PPT-Zen ships <b>no key and no model</b> — the judgment is open source, the pixels are yours. A hosted trial that skips this step is coming.</p>
+<p><b>No key today?</b> Ask for the deck anyway. You get the judgment pack: the per-page plan with a ready-to-paste prompt for every page, placeholder pages, and an assembled <code>draft.pptx</code>. Paste any prompt into an image tool you already have, drop the result into <code>slides/</code>, reassemble. The key becomes an optional last step.</p>
 <h2><span class="num">3</span>Make a deck — what you actually say</h2>
 <p>Open your agent in any project and talk. One sentence starts it; the skill decides the rest and never quizzes you about layout:</p>
 <pre>"Make me a 10-page pitch deck about &lt;your project&gt; with ppt-zen, in the Portolan style."

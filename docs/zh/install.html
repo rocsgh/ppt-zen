@@ -200,10 +200,18 @@ cd ppt-zen
 <p style="margin-top:12px">技能安装是自包含的（SKILL.md + references + styles + scripts + examples + <code>styles.json</code> + <code>requirements.txt</code>）。完全没有 skill 系统？把 <code>SKILL.md</code> 整段贴进会话当上下文即可。</p>
 <p style="margin-top:12px"><b>Hermes：</b>它没有项目级技能目录——安装脚本一律写入 <code>$HERMES_HOME/skills</code>（默认 <code>~/.hermes/skills</code>），<code>--global</code> 不起作用。装完请重启 Hermes 网关/进程：技能索引缓存在进程内。Hermes 自带的 <code>powerpoint</code> 技能（文本框式 deck）会继续共存；做设计过的整页出图 deck 时，以 ppt-zen 为准。</p>
 <h2><span class="num">2</span>接上图像模型</h2>
-<p>每一页都是生成的图。如果你的 agent 本身带图像工具，什么都不用配——skill 直接用它。否则把内置脚本指向<b>实现了 OpenAI <code>/images/generations</code> 接口的任意端点</b>（接受 <code>{model, prompt, size, n}</code>、返回 <code>b64_json</code> 或 <code>url</code>——只兼容 chat 的"兼容"网关不算）：</p>
+<p>每一页都是生成的图，而 PPT-Zen 不带图像模型。看你属于哪一半：</p>
+<div class="tablewrap"><table>
+<tr><th>你的运行时</th><th>你要做什么</th></tr>
+<tr><td><b>Claude Code &middot; Codex &middot; Cursor &middot; Windsurf &middot; Copilot</b></td><td>你需要一个图像 key——照下面 30 秒配好 <code>.env</code>。</td></tr>
+<tr><td><b>Hermes</b>（或任何自带图像工具的 agent）</td><td>什么都不用配，skill 直接用 agent 已有的工具。</td></tr>
+</table></div>
+<p style="margin-top:16px">自备 key：<b>实现了 OpenAI <code>/images/generations</code> 接口的任意端点</b>都行（接受 <code>{model, prompt, size, n}</code>、返回 <code>b64_json</code> 或 <code>url</code>——只兼容 chat 的"兼容"网关不算）：</p>
 <pre>cp .env.example .env                  # IMAGE_API_BASE_URL / IMAGE_API_KEY / IMAGE_MODEL / IMAGE_SIZE
-python3 scripts/gen_image.py --check  # verify before a long run</pre>
-<p>PPT-Zen <b>不带任何 key、不绑定任何模型</b>——判断是开源的，像素是你自己的。</p>
+python3 scripts/gen_image.py --check  # 体检：读你的配置，试生成一张图</pre>
+<p><code>--check</code> 就是全部的排障入口：它遮掉你的 key、探一次端点，把任何失败翻译成一句人话结论 + 怎么修——key 不对、只兼容 chat 的网关、连不上。OpenAI、通用中转、火山方舟 / 豆包 Seedream 的 <code>.env</code> 模板可直接粘贴： <a href="https://github.com/rocsgh/ppt-zen/blob/master/references/providers.md" style="text-decoration:underline">references/providers.md</a>。</p>
+<p>PPT-Zen <b>不带任何 key、不绑定任何模型</b>——判断是开源的，像素是你自己的。省掉这一步的托管版试用，正在做。</p>
+<p><b>今天没有 key？</b>照样让它做。你会拿到一份判断包：逐页计划 + 每页一段可直接粘贴的 prompt、占位页、以及拼好的 <code>draft.pptx</code>。把任意一段 prompt 贴进你已有的出图工具，把图放回 <code>slides/</code>，重拼一次即可。key 从此只是可选的最后一步。</p>
 <h2><span class="num">3</span>做一套片——你实际要说的话</h2>
 <p>在任何项目里打开你的 agent，直接说话。一句话就能开始；剩下的它来判断，绝不会反问你版式问题：</p>
 <pre>"Make me a 10-page pitch deck about &lt;your project&gt; with ppt-zen, in the Portolan style."

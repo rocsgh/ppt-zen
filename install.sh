@@ -42,6 +42,7 @@ install_skill_dir() {  # $1 = base dir that will contain SKILL.md; $2 = "nohint"
   echo "installed skill -> $d"
   if [ "${2:-}" != "nohint" ]; then
     echo "  image key: cp $d/.env.example $d/.env  (gen_image.py reads it there for global installs)"
+    echo "  verify   : python3 $d/scripts/gen_image.py --check   (templates: $d/references/providers.md)"
   fi
 }
 

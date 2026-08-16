@@ -64,14 +64,32 @@ Every page is a generated image. You need exactly one way to make images. In ord
    calls any OpenAI-compatible images endpoint. Copy `.env.example` to `.env`, set
    `IMAGE_API_BASE_URL`, `IMAGE_API_KEY`, `IMAGE_MODEL`, `IMAGE_SIZE`. It POSTs
    `{model, prompt, size, n:1}` to `{BASE}/images/generations` and reads `data[0].b64_json`
-   (or `data[0].url`). Run `python3 <skill_dir>/scripts/gen_image.py --check` first to verify the endpoint.
+   (or `data[0].url`). Run `python3 <skill_dir>/scripts/gen_image.py --check` first — it reports the
+   config, probes the endpoint, and turns any failure into a plain verdict with the fix.
 
 **This skill ships NO image key and NO model.** It is the judgment + prompts; the pixels come from
 your model.
 
+### 0.1 No image path works — offer three choices, then keep going
+
+Don't dead-end the user and don't make them guess. Say plainly that every page is a generated
+image and that this skill ships no key, then put the three options on the table:
+
+1. **Bring your own key** (default, works today) — any endpoint implementing the OpenAI
+   `/images/generations` API. `cp .env.example .env`, fill in `IMAGE_API_KEY`, run `--check`.
+   Ready-to-paste blocks for OpenAI, generic relays and 火山方舟/豆包 Seedream are in
+   `<skill_dir>/references/providers.md`. Thirty seconds, and `--check` confirms it.
+2. **PPT-Zen Cloud trial** — *coming soon*. Don't promise a date and don't invent a URL.
+3. **Neither right now** → run the **dry-run judgment pack** (§8, step 2b). The deck's judgment
+   still gets made; only the pixels wait.
+
+Chat-only gateways are the classic trap: many "OpenAI-compatible" relays proxy
+`/chat/completions` and nothing else. `--check` names that case specifically.
+
 > **Never build slides any other way.** No HTML/CSS pages, no pptxgenjs/text-box layouts, no
 > "themed template" tools — every page is ONE generated image, or it isn't a ppt-zen deck.
-> If no image path exists, stop and tell the user what to configure; don't silently fall back.
+> The dry-run judgment pack is the *only* sanctioned fallback: it produces placeholders that are
+> visibly placeholders, never a different kind of slide dressed up as a deck.
 
 > Aspect ratio: image models rarely emit native 16:9. Generate landscape (e.g. `1536x1024`, 3:2)
 > and let assembly **cover-crop to 16:9** — so keep every title and key element clear of the top
@@ -216,6 +234,11 @@ Dense/text-heavy pages: generate at higher resolution than single-word pages.
 
 ## 8. Workflow (one sentence in → a deck out)
 
+0. **Preflight — prove the image path before page 1.** Never open a ten-page run on an unverified
+   endpoint; the failure lands after the user has waited. Either generate **one tiny test image**
+   with the agent's own image tool, or run `python3 <skill_dir>/scripts/gen_image.py --check`.
+   If it fails: **stop** and walk the user through the fix (§0.1 — the 30-second `.env` setup, the
+   provider templates, or the dry-run pack). Do not start generating and hope.
 1. **Plan** — write `plan.md`: one row per page with `role · density · device · exact text · style_slug`,
    plus a header `language:` line. **On-slide text defaults to the language the user is working in** —
    a Chinese conversation gets a Chinese deck unless they ask otherwise (the demo decks being English
@@ -226,6 +249,27 @@ Dense/text-heavy pages: generate at higher resolution than single-word pages.
    page in isolation. Work in the user's project directory and call the helper by its full
    `<skill_dir>` path (`gen_image.py` reads `.env` from the current directory first, then from
    `<skill_dir>` next to the script).
+   - **Say where you are** — a page takes tens of seconds and ten of them look like a hang.
+     Announce every page as you start it (`page 3/10 — evidence grid`), and confirm when it lands.
+   - **Retry the page, not the deck** — on a single-page failure try that page up to 2 more times
+     before surfacing anything; if it still fails, run `--check` and give the user its verdict,
+     not a traceback. (`gen_image.py` already retries 5xx/timeouts twice itself; a 4xx is config
+     and won't fix itself.)
+   - **Resume, never restart** — filenames are deterministic, so a re-run after an interruption
+     **skips every page whose `slides/NN-*.jpg` already exists** and says so
+     ("pages 1–4 already generated, resuming at 5"). Only regenerate an existing page when the
+     user asked for that page.
+2b. **No image path? Ship the judgment pack instead** (§0.1 option 3 — do *not* abort the task):
+   - `slides/PLAN.md` — every page's density, device, verbatim text, and the **complete
+     ready-to-paste image prompt** (the chosen pack's SURFACE block verbatim, plus SKELETON /
+     DEVICE / TEXT / CRITICAL). One prompt card per page, copyable as-is.
+   - Placeholder pages — `python3 <skill_dir>/scripts/placeholder_page.py slides/NN-role.jpg
+     --page 3/10 --density DETAIL --device "<one line>" --title "<verbatim title>"`, one per page.
+   - `draft.pptx` — assemble the placeholders with `assemble_pptx.py` as usual, so the structure
+     can be reviewed and walked through today.
+   Then tell the user the exit: hand any prompt card to any image tool they already have
+   (Midjourney, 即梦, Doubao, a web UI), drop the result into `slides/` over the placeholder of the
+   same name, reassemble. The key becomes an optional last step instead of a wall.
 3. **QC the images** — proofread every character of every title against the plan, confirm no
    invented glyphs and no cross-page contradiction, and check nothing important sits in the
    top/bottom ~8% that assembly will crop. Two failures to look for by name: **ghost strokes**
@@ -244,9 +288,12 @@ Dense/text-heavy pages: generate at higher resolution than single-word pages.
 See `examples/relayboard/` for a full ten-page worked deck plus its judgment log.
 Optional deep-dives ship in `references/` (design laws, skeleton library, visual patterns,
 delivery coaching — currently in Chinese; load them when you need the underlying reasoning).
+`references/providers.md` is the exception: English, and the one to open when the image endpoint
+is the problem.
 
 ## Delivery self-check
 
+- [ ] Image path proven **before** page 1 (a test image, or `gen_image.py --check`)?
 - [ ] Density set per page? Evidence pages detailed, dense blocks landing on a breathing page?
 - [ ] Each page: a device that reads (or a deliberate "none"), one main device only?
 - [ ] Material fixed across the whole deck? Style resolved to a real slug?

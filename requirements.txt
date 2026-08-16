@@ -1,3 +1,5 @@
 # Only scripts/assemble_pptx.py needs a dependency.
 # gen_image.py, build_gallery.py, build_site.py are pure standard library.
 python-pptx>=0.6.23
+# scripts/placeholder_page.py (the dry-run fallback) draws with Pillow — already pulled in
+# by python-pptx, so it is deliberately not a requirement of its own.

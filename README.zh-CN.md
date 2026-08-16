@@ -85,6 +85,8 @@ PPT-Zen 是一个装进你 AI 助手里的**做 PPT 技能**（支持 Claude Cod
 
 它**不是**一个托管按钮，是你的 agent 加载的一个技能 + 两个小脚本——所以它跑在你自己的模型和 key 上，引擎无关。
 
+想先看一套再决定装不装？完整的 `deck.pptx` 和全部十张 JPG 都随仓库发布，就在 [`examples/`](examples/) 下——克隆下来直接打开，不需要任何 key。
+
 ## 快速开始
 
 ```bash
@@ -96,9 +98,9 @@ cd ppt-zen
 ./install.sh auto                     # 一键装进探测到的每个运行时
 ./install.sh claude --global          # 或者指定一个：Claude Code -> ~/.claude/skills/ppt-zen/
 
-# 2. 给它一个图像模型（agent 本身能生图就跳过）
+# 2. 给它一个图像模型（agent 本身能生图就跳过，例如 Hermes）
 cp .env.example .env                  # 把你的 key 填进 .env
-python3 scripts/gen_image.py --check  # 跑长任务前先验证
+python3 scripts/gen_image.py --check  # 体检：读配置 + 试生成一张图，跑长任务前先验证
 
 # 3. 在你的 agent 里，一句话：
 #    "用 ppt-zen 帮我做一个关于 <你的项目> 的 10 页 pitch，用航海图风格。"
@@ -142,21 +144,54 @@ python3 scripts/assemble_pptx.py slides/ deck.pptx
 
 ## 图像生成（自备模型）
 
-PPT-Zen **不带任何图像模型**——这正是它引擎无关的原因。你自己接，两条路任选：
+PPT-Zen **不带任何图像模型**——这正是它引擎无关的原因。看你属于哪一半：
 
-- **你的 agent 本身能生图**（带图像工具的 Claude Code、Hermes 等）——什么都不用配，技能用 agent 现有的能力。
-- **指向你自己的图像 API。** 复制 ``.env.example`` 为 ``.env`` 填入你的 key——任意 **OpenAI 兼容的图像接口**都行（OpenAI ``gpt-image``、中转、或兼容网关）：
-  ```
-  IMAGE_API_BASE_URL=https://api.openai.com/v1
-  IMAGE_API_KEY=sk-...
-  IMAGE_MODEL=gpt-image-1
-  ```
-  仓库自带的 ``scripts/gen_image.py`` 读 ``.env`` 出一页图：
-  ```
-  python3 scripts/gen_image.py "你的整页 prompt" out.jpg
-  ```
+| 你的运行时 | 你要做什么 |
+|---|---|
+| **Claude Code · Codex · Cursor · Windsurf · Copilot** | 你需要一个图像 key——照下面 30 秒配好 `.env`。 |
+| **Hermes**（或任何自带图像工具的 agent） | 什么都不用配，技能直接用 agent 已有的工具。 |
+
+**自备 key。** 复制 ``.env.example`` 为 ``.env`` 填进去——任意 **OpenAI 兼容的图像接口**都行（OpenAI ``gpt-image``、中转、或兼容网关；只兼容 chat 的网关不算）：
+
+```
+IMAGE_API_BASE_URL=https://api.openai.com/v1
+IMAGE_API_KEY=sk-...
+IMAGE_MODEL=gpt-image-1
+```
+
+OpenAI、通用中转、火山方舟 / 豆包 Seedream 的模板可直接粘贴：[`references/providers.md`](references/providers.md)。然后：
+
+```
+python3 scripts/gen_image.py --check                        # 体检：读配置 + 试生成一张图
+python3 scripts/gen_image.py "你的整页 prompt" out.jpg
+```
 
 > 会画字的模型（gpt-image 这类）对中文标题很关键——普通扩散模型会把字画糊。``.env`` 已被 gitignore，切勿提交 key。
+
+### 卡在出图这一步？
+
+`python3 scripts/gen_image.py --check` 是唯一要跑的命令：它会打印读到的 `.env`、遮掩后的 key，试生成一张图，并把失败翻译成人话：
+
+| 结论 | 意思 |
+|---|---|
+| `no usable key` | 没有 `.env`，或 `IMAGE_API_KEY` 还是 `.env.example` 里的占位值。 |
+| `HTTP 401 / 403` | key 不对、已过期，或这个端点上没有图像额度。 |
+| `HTTP 404 / 405`，或返回的不是 JSON | 这个 base URL 根本没有实现图像接口——通常是只兼容 chat 的网关。 |
+| `could not reach the endpoint` | 连不上、太慢或被拦：检查 `IMAGE_API_BASE_URL`、网络和代理。 |
+
+长任务不再像卡死：脚本每页打印 `gen_image: requesting slides/03.jpg (attempt 1/3)`，5xx / 超时自己重试两次（4xx 绝不重试——那是配置问题，等也没用）。中断后再跑会**续跑**：`slides/` 里已有的页直接跳过。
+
+**没有 key，或今天不想配？** 照样让它做。你拿到的不是报错，而是一份判断包：`slides/PLAN.md`（每页的详略、器物、逐字文案，以及一段完整可粘贴的出图 prompt）、由 `scripts/placeholder_page.py` 渲染的占位页、以及拼好的 `draft.pptx`。把任意一段 prompt 交给你已有的出图工具（Midjourney、即梦、豆包…），把图放回 `slides/` 覆盖同名占位页，重拼一次即可。key 从此只是可选的最后一步。
+
+## 从场景开始
+
+45 种材质不知道点哪个？按你的场景取默认值，把这句话说出去：
+
+| 场景 | 默认材质 | 你就这么说 |
+|---|---|---|
+| 融资 / 路演 | 航海图 Portolan | `「用航海图（Portolan）风格，给 <项目> 做一套 10 页 pitch。」` |
+| 咨询 / 季度复盘 | 瑞士网格 Swiss Grid | `「用瑞士网格风格，给 <团队> 做一套 12 页 Q3 复盘。」` |
+| 内部分享 | 活版报纸 Letterpress Broadsheet | `「用活版报纸风格，做一套 8 页 <主题> 内部分享。」` |
 
 ## 怎么选风格（唯一由你主导的事）
 

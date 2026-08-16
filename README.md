@@ -85,6 +85,8 @@ None of these rules were invented at a desk — they were ground out of dozens o
 
 It is **not** a hosted button — it's a skill your agent runs plus two small scripts, so it rides on your own models and keys, engine-agnostic.
 
+Want to see one before you install anything? The finished `deck.pptx` and all ten JPGs ship in [`examples/`](examples/) — clone the repo and open them, no key needed.
+
 ## Quick start
 
 ```bash
@@ -96,9 +98,9 @@ cd ppt-zen
 ./install.sh auto                     # install into every runtime detected
 ./install.sh claude --global          # or name one: Claude Code -> ~/.claude/skills/ppt-zen/
 
-# 2. give it an image model (skip if your agent already generates images)
+# 2. give it an image model (skip if your agent already generates images — e.g. Hermes)
 cp .env.example .env                  # put your key in .env
-python3 scripts/gen_image.py --check  # verify before a long run
+python3 scripts/gen_image.py --check  # doctor: config + one test image, before a long run
 
 # 3. in your agent, one sentence:
 #    "Make me a 10-page pitch deck about <your project> with ppt-zen, in the Portolan style."
@@ -146,21 +148,54 @@ full-image decks ppt-zen supersedes it.
 
 ## Image generation (bring your own model)
 
-PPT-Zen ships **no image model** — that is what keeps it engine-agnostic. You wire up your own, one of two ways:
+PPT-Zen ships **no image model** — that is what keeps it engine-agnostic. Which half applies to you:
 
-- **Your agent already generates images** (Claude Code with an image tool, Hermes, etc.) — nothing to configure; the skill uses whatever the agent has.
-- **Point at your own image API.** Copy `.env.example` to `.env` and fill your key — any **OpenAI-compatible images endpoint** works (OpenAI ``gpt-image``, a relay, or a compatible gateway):
-  ```
-  IMAGE_API_BASE_URL=https://api.openai.com/v1
-  IMAGE_API_KEY=sk-...
-  IMAGE_MODEL=gpt-image-1
-  ```
-  The included ``scripts/gen_image.py`` reads ``.env`` and generates a page:
-  ```
-  python3 scripts/gen_image.py "your full-page prompt" out.jpg
-  ```
+| Your runtime | What you do |
+|---|---|
+| **Claude Code · Codex · Cursor · Windsurf · Copilot** | You need an image key — the 30-second `.env` setup below. |
+| **Hermes** (or any agent with its own image tool) | Nothing to configure; the skill uses the tool the agent already has. |
+
+**Bring your own key.** Copy `.env.example` to `.env` and fill it in — any **OpenAI-compatible images endpoint** works (OpenAI ``gpt-image``, a relay, or a compatible gateway; chat-only gateways don't count):
+
+```
+IMAGE_API_BASE_URL=https://api.openai.com/v1
+IMAGE_API_KEY=sk-...
+IMAGE_MODEL=gpt-image-1
+```
+
+Ready-to-paste blocks for OpenAI, generic relays and 火山方舟 / 豆包 Seedream: [`references/providers.md`](references/providers.md). Then:
+
+```
+python3 scripts/gen_image.py --check                        # doctor: config + one test image
+python3 scripts/gen_image.py "your full-page prompt" out.jpg
+```
 
 > A model that renders text well (gpt-image class) matters for readable titles — plain diffusion models garble text. ``.env`` is gitignored; never commit your key.
+
+### Stuck at image generation?
+
+`python3 scripts/gen_image.py --check` is the one command to run. It prints which `.env` it read, masks your key, generates one test image, and names the failure in plain language:
+
+| Verdict | What it means |
+|---|---|
+| `no usable key` | `.env` is missing, or `IMAGE_API_KEY` still holds the `.env.example` placeholder. |
+| `HTTP 401 / 403` | The key is wrong, expired, or has no image quota on that endpoint. |
+| `HTTP 404 / 405`, or a non-JSON page | That base URL doesn't implement the images API — a chat-only gateway is the usual culprit. |
+| `could not reach the endpoint` | Unreachable, slow or blocked: check `IMAGE_API_BASE_URL`, your network, any proxy. |
+
+A long run no longer looks frozen: the helper prints `gen_image: requesting slides/03.jpg (attempt 1/3)` per page and retries 5xx/timeouts twice by itself (never a 4xx — that's config, and waiting won't fix it). An interrupted run **resumes**: pages already present in `slides/` are skipped.
+
+**No key — or don't want one today?** Ask for the deck anyway. You get the judgment pack instead of an error: `slides/PLAN.md` with every page's density, device, verbatim text and a complete ready-to-paste image prompt; placeholder pages rendered by `scripts/placeholder_page.py`; and an assembled `draft.pptx`. Hand any prompt card to any image tool you already have (Midjourney, 即梦, Doubao…), drop the result into `slides/` over the matching placeholder, reassemble. The key becomes an optional last step.
+
+## Start from a scenario
+
+Don't know which of the 45 materials to name? Take the default for your situation and say the sentence:
+
+| Scenario | Default material | What you say |
+|---|---|---|
+| Fundraise / pitch | Portolan Sea Chart | `"Make me a 10-page pitch deck about <project>, Portolan style."` |
+| Consulting / quarterly review | Swiss Grid | `"Make me a 12-page Q3 review for <team>, Swiss Grid style."` |
+| Internal share | Letterpress Broadsheet | `"Make me an 8-page internal share about <topic>, Letterpress Broadsheet style."` |
 
 ## Picking a style (the one thing you steer)
 
